@@ -1,12 +1,11 @@
 Package: chemdiv
-Title: Analyse phytochemical data
+Title: Analysing Phytochemical Diversity
 Version: 0.0.0.9000
 Authors@R: 
-    person("Hampus", "Petren", , "hampus.petren@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Provides functions to analyse phytochemial data.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Hampus", "Petrén", email = "hampus.petren@gmail.com",
+    role = c("aut", "cre"))
+Description: Provides functions to analyse data on phytochemial diversity.
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
