@@ -25,7 +25,8 @@ superclass and class for each compound.
 Connects to \url{https://npclassifier.ucsd.edu/}
 }
 \examples{
-Some example
+data(minimalCompData)
+NPCTable(minimalCompData)
 }
 \references{
 Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,

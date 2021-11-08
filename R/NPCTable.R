@@ -27,7 +27,8 @@
 #' UPDATE WITH FULL REF WHEN AVAILABLE
 #'
 #' @examples
-#' Some example
+#' data(minimalCompData)
+#' NPCTable(minimalCompData)
 NPCTable <- function(compoundData) {
 
 
@@ -70,7 +71,7 @@ NPCTable <- function(compoundData) {
       # fromJSON() throws an error and loop stops)
       if(substring(npcclass_real, 1, 1) == "{") {
 
-        print(paste0("Classifying compound: ", i))
+        #print(paste0("Classifying compound: ", i))
 
         # Parsing the long character string, which is formatted as json,
         # into a list
@@ -114,7 +115,7 @@ NPCTable <- function(compoundData) {
         }
 
         # If something went wrong
-      } else { print(paste0("Compound ", i, " could not be classified at all. Is the SMILES correct?")) }
+      } else { warning(paste0("Compound ", i, " could not be classified at all. Is the SMILES correct?")) }
     }
 
   }
