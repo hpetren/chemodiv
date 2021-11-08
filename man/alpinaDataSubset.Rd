@@ -3,7 +3,7 @@
 \docType{data}
 \name{alpinaDataSubset}
 \alias{alpinaDataSubset}
-\title{Arabis alpina floral scent data.}
+\title{Arabis alpina floral scent data}
 \format{
 A data frame with 87 rows and 16 columns. Each row is a sample,
 first column is population, the other columns are scent compounds.
