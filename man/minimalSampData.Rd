@@ -12,6 +12,6 @@ first column is group, the other columns are scent compounds.
 minimalSampData
 }
 \description{
-A tiny made up dataset with floral scent data.
+A minimal made up dataset with floral scent data.
 }
 \keyword{datasets}

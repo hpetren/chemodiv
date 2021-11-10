@@ -14,6 +14,6 @@ third column is the InChIKey (International Chemical Identifier).
 minimalCompData
 }
 \description{
-A dataset with three floral scent compounds.
+A minimal dataset with three floral scent compounds.
 }
 \keyword{datasets}

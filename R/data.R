@@ -23,7 +23,7 @@
 
 #' Minimal sample dataset
 #'
-#' A tiny made up dataset with floral scent data.
+#' A minimal made up dataset with floral scent data.
 #'
 #' @format A data frame with 4 rows and 4 columns. Each row is a sample,
 #' first column is group, the other columns are scent compounds.
@@ -32,7 +32,7 @@
 
 #' Minimal compound dataset
 #'
-#' A dataset with three floral scent compounds.
+#' A minimal dataset with three floral scent compounds.
 #'
 #' @format A data frame with 3 rows and 3 columns. Each row is a compound.
 #' First column is a common name of the compound, second column is the
@@ -40,3 +40,22 @@
 #' third column is the InChIKey (International Chemical Identifier).
 #'
 "minimalCompData"
+
+#' Minimal compound dissimilarity matrix
+#'
+#' A minimal matrix with compound dissimilarities calculated from
+#' PubChem Fingerprints for the compounds in "minimalCompData"
+#'
+#' @format A 3x3 compound dissimilarity matrix
+#'
+"minimalCompDis"
+
+#' Minimal sample dissimilarity matrix
+#'
+#' A minimal matrix with sample dissimilarities calculated from
+#' "minimalSampData" and minimalCompDis
+#' using UniFracs with alpha = 0.5
+#'
+#' @format A 4x4 sample dissimilarity matrix
+#'
+"minimalSampDis"
