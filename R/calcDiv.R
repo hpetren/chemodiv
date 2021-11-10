@@ -72,9 +72,10 @@ calcDiv <- function(sampleData,
 
     # My functions needs a loop to work on dataframe.
     for (i in 1:nrow(sampleData)) {
-      # Function in utils.R
-      # Don't think chemdiv:: is actually needed
-      divData$FuncHillDiv[i] <- chemdiv::funcHillDiv(data = sampleData[i,],
+      # Function in utils.R. The chemdiv:: is not needed, in fact this
+      # causes all kinds of problems with check(). No idea how R knows
+      # how to get funcHillDiv though (but it works)...
+      divData$FuncHillDiv[i] <- funcHillDiv(data = sampleData[i,],
                                             Dij = compDisMat,
                                             q = q)
     }
@@ -111,7 +112,7 @@ calcDiv <- function(sampleData,
 
     for (i in 1:nrow(sampleData)) {
       # function in utils.R
-      divData$RaoQ[i] <- chemdiv::calculateQ(data = sampleData[i,],
+      divData$RaoQ[i] <- calculateQ(data = sampleData[i,],
                                     Dij = compDisMat)
 
     }
