@@ -26,7 +26,7 @@
 calcBetaDiv <- function(sampleData,
                         compDisMat = NULL,
                         q = 1) {
-  if(q < 0) stop("q must be > 0")
+  if(q < 0) stop("q must be >= 0")
 
   if (is.null(compDisMat)) { # If no compound matrix, normal Hill beta
 

@@ -68,7 +68,7 @@ calcDiv <- function(sampleData,
 
   if ("FuncHillDiv" %in% type) {
 
-    if(q < 0) stop("q must be > 0")
+    if(q < 0) stop("q must be >= 0")
 
     # My functions needs a loop to work on dataframe.
     for (i in 1:nrow(sampleData)) {

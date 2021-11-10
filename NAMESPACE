@@ -3,5 +3,6 @@
 export(NPCTable)
 export(calcBetaDiv)
 export(calcDiv)
+export(calcDivProf)
 export(compDis)
 export(test_function)
