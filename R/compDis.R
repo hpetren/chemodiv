@@ -33,15 +33,14 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{Add minimal executable example when PubChem PUG works}
+#' data(minimalCompData)
+#' compDis(minimalCompData, type = "PubChemFingerprint")
 compDis <- function(compoundData,
                     type = c("NPClassifier", "PubChemFingerprint", "fMCS"),
                     npcTable = NULL,
                     unknownCompoundsMean = FALSE) {
 
-  if(!("NPClassifier" %in% type) &
-     !("PubChemFingerprint" %in% type) &
-     !("fMCS" %in% type)) {
+  if(!(any(c("NPClassifier", "PubChemFingerprint", "fMCS") %in% type))) {
     stop("Provide at least one type of compound dissimilarity to calculate:
          NPClassifier, PubChemFingerprint or fMCS")
   }
@@ -85,7 +84,7 @@ compDis <- function(compoundData,
 
           if(substring(npcclass_real, 1, 1) == "{") {
 
-            print(paste0("Classifying compound: ", i))
+            #print(paste0("Classifying compound: ", i))
 
             npcclass_real_correct <- jsonlite::fromJSON(npcclass_real)
 
@@ -273,8 +272,7 @@ compDis <- function(compoundData,
       # Get all not NA cid and get their fingerprints
       cidNoNA <- compoundCID$cid[!is.na(compoundCID$cid)]
 
-      # DEPRECATED. PROBABLY CHANGE TO pubchemCidToSDF()
-      compoundSDF <- ChemmineR::getIds(as.numeric(cidNoNA))
+      compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(cidNoNA))
 
       compoundbit <- ChemmineR::fp2bit(compoundSDF)
       compoundFinger <- as.data.frame(compoundbit@fpma)
@@ -321,8 +319,7 @@ compDis <- function(compoundData,
       }
 
     } else { # If no NA
-      # Replace getIds() (see above)
-      compoundSDF <- ChemmineR::getIds(as.numeric(compoundCID$cid))
+      compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
 
       # Extracting fingerprints
       compoundbit <- ChemmineR::fp2bit(compoundSDF)
@@ -382,15 +379,14 @@ compDis <- function(compoundData,
     if (any(is.na(compoundCID$cid))) {
 
       # This must be done without NA
-      # Replace getIds()
-      compoundSDF <- ChemmineR::getIds(as.numeric(compoundCID$cid[!is.na(compoundCID$cid)]))
+      compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid[!is.na(compoundCID$cid)]))
 
       rowWithNA <- which(is.na(compoundCID$cid))
 
       # Doing with 1 atom and 1 bond mismatch for now. I think there is a motivation
       # for this in some earlier R-script. Note that this is similarity matrix
       # as it's Tanimoto coefficient (Jaccard similarity)
-      fmcsSimMat <- sapply(cid(compoundSDF),
+      fmcsSimMat <- sapply(ChemmineR::cid(compoundSDF),
                            function(x) fmcsR::fmcsBatch(compoundSDF[x],
                                                  compoundSDF,
                                                  au=1,
@@ -452,10 +448,10 @@ compDis <- function(compoundData,
 
 
     } else {
-      # Replace getIds()
-      compoundSDF <- ChemmineR::getIds(as.numeric(compoundCID$cid))
 
-      fmcsSimMat <- sapply(cid(compoundSDF),
+      compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
+
+      fmcsSimMat <- sapply(ChemmineR::cid(compoundSDF),
                            function(x) fmcsR::fmcsBatch(compoundSDF[x],
                                                  compoundSDF,
                                                  au=1,

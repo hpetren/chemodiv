@@ -5,8 +5,8 @@
 \alias{minimalSampData}
 \title{Minimal sample dataset}
 \format{
-A data frame with 4 rows and 4 columns. Each row is a sample,
-first column is group, the other columns are scent compounds.
+A data frame with 4 rows and 3 columns. Each row is a sample,
+each column is a scent compound.
 }
 \usage{
 minimalSampData

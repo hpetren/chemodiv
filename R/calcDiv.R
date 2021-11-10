@@ -26,16 +26,31 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{Add minimal executable example when PubChem PUG works}
+#' data(minimalSampData)
+#' data(minimalCompDis)
+#' calcDiv(sampleData = minimalSampData)
+#' calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
+#' type = "FuncHillDiv", q = 2)
+#'
 calcDiv <- function(sampleData,
                     compDisMat = NULL,
                     type = "HillDiv",
                     q = 1) {
 
+  if(length(type) > 1) {
+    stop("Provide only one type of diveristy/evenness to calculate")
+  }
+  if (!(any(c("HillDiv", "FuncHillDiv", "Shannon", "Simpson",
+              "PielouEven", "HillEven", "RaoQ") %in% type))) {
+    stop("Provide one type of diversity/evenness to calculate:
+         HillDiv, FuncHillDiv, Shannon, Simpson, PielouEven, HillEven or RaoQ")
+  }
   if(is.null(compDisMat) & ("FuncHillDiv" %in% type | "RaoQ" %in% type)) {
     stop("A compound dissimilarity matrix must be supplied
          when calculating Functional Hill diversity or Rao's Q")
   }
+
+
 
   divData <- as.data.frame(matrix(data = NA,
                                   nrow = nrow(sampleData),
@@ -44,6 +59,7 @@ calcDiv <- function(sampleData,
 
 
   if ("HillDiv" %in% type) {
+    if(q < 0) stop("q must be > 0")
 
     # This function works row-wise without loop
     divData$HillDiv <- hillR::hill_taxa(comm = sampleData, q = q)
@@ -51,61 +67,17 @@ calcDiv <- function(sampleData,
   }
 
   if ("FuncHillDiv" %in% type) {
-    # Probably move this function into a separate (hidden) one when
-    # making this into R-package. See section 6.5 in R-package book.
-    # Or put it separately with in the same script as the main
-    # functions that use this. Section 7.1. Or in utils.R. Same section.
 
-    # My new function to calculate functional Hill diversity.
-    # See "FUNCTION DEVELOPMENT" in v.4 for comments on code.
-    # (I don't have to make this into a separate function, but I wrote
-    # it that way, so keeping it like this now)
-    funcHillDiv <- function(data, Dij, q) {
+    if(q < 0) stop("q must be > 0")
 
-      # First we calculate Rao's Q
-      pAbs <- data[data!=0]
-      p <- pAbs/sum(pAbs)
-      dij <- Dij[data!=0, data!=0]
-      Q = sum(dij*(p %*% t(p)))
-
-      temp <- 0
-
-
-      if(length(p) > 1) { # If we have more than one compound
-
-        # FD for q!=1
-        if (q != 1) {
-          for (i in 1:length(p)) {
-            for (j in 1:length(p)) {
-              temp <- temp + dij[i,j]*(p[i]*p[j]/Q)^q
-            }
-          }
-          FD <- temp^(1/(1-q))
-
-        } else { # FD for q==1
-          for (i in 1:length(p)) {
-            for (j in 1:length(p)) {
-              temp <- temp + dij[i,j] * p[i]*p[j]/Q * log(p[i]*p[j]/Q)
-            }
-          }
-          FD <- exp(-temp)
-        }
-
-      } else {FD <- NA} # FD is mathematically not defined for one compound
-      # so setting NA as that for now, but maybe one could define it to
-      # be = 1, which would match normal Hill diversity
-
-      return(FD)
-    }
-
-    # My functions needs a loop to work on dataframe
+    # My functions needs a loop to work on dataframe.
     for (i in 1:nrow(sampleData)) {
-
-      divData$FuncHillDiv[i] <- funcHillDiv(data = sampleData[i,],
+      # Function in utils.R
+      # Don't think chemdiv:: is actually needed
+      divData$FuncHillDiv[i] <- chemdiv::funcHillDiv(data = sampleData[i,],
                                             Dij = compDisMat,
                                             q = q)
     }
-
   }
 
   if ("Shannon" %in% type) {
@@ -136,21 +108,10 @@ calcDiv <- function(sampleData,
 
   if ("RaoQ" %in% type) {
 
-    # Function for calculating Raos Q is from DivAnalysesSimulated.R.
-    # Not 100% sure how it needs to be, so might have to edit this
-    calculateQ = function(data, Dij) {
-
-      Xi <- data[data!=0]
-      distance <- Dij[data!=0, data!=0]
-      a <- Xi/sum(Xi)
-      Q = sum(distance*(a %*% t(a)))
-
-      return(Q)
-    }
 
     for (i in 1:nrow(sampleData)) {
-
-      divData$RaoQ[i] <- calculateQ(data = sampleData[i,],
+      # function in utils.R
+      divData$RaoQ[i] <- chemdiv::calculateQ(data = sampleData[i,],
                                     Dij = compDisMat)
 
     }
@@ -159,3 +120,4 @@ calcDiv <- function(sampleData,
   return(divData)
 
 }
+

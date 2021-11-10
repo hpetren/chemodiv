@@ -50,5 +50,6 @@ values directly (allowing for one atom and one bond mismatch).
 }
 }
 \examples{
-\dontrun{Add minimal executable example when PubChem PUG works}
+data(minimalCompData)
+compDis(minimalCompData, type = "PubChemFingerprint")
 }

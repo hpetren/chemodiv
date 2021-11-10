@@ -37,5 +37,10 @@ Hill evenness:
 Rao's Q:
 }
 \examples{
-\dontrun{Add minimal executable example when PubChem PUG works}
+data(minimalSampData)
+data(minimalCompDis)
+calcDiv(sampleData = minimalSampData)
+calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
+type = "FuncHillDiv", q = 2)
+
 }
