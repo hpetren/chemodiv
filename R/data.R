@@ -53,8 +53,8 @@
 #' Minimal sample dissimilarity matrix
 #'
 #' A minimal matrix with sample dissimilarities calculated from
-#' "minimalSampData" and minimalCompDis
-#' using UniFracs with alpha = 0.5
+#' "minimalSampData" and minimalCompDis using UniFracs with alpha = 0.5
+#' (and UPGMA clustering)
 #'
 #' @format A 4x4 sample dissimilarity matrix
 #'

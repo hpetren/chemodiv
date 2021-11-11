@@ -12,7 +12,7 @@ minimalSampDis
 }
 \description{
 A minimal matrix with sample dissimilarities calculated from
-"minimalSampData" and minimalCompDis
-using UniFracs with alpha = 0.5
+"minimalSampData" and minimalCompDis using UniFracs with alpha = 0.5
+(and UPGMA clustering)
 }
 \keyword{datasets}

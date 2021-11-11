@@ -22,4 +22,6 @@ Imports:
     webchem,
     fmcsR,
     ChemmineR,
-    hillR
+    hillR,
+    ape,
+    GUniFrac
