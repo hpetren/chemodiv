@@ -9,7 +9,7 @@ calcDiv(sampleData, compDisMat = NULL, type = "HillDiv", q = 1)
 \arguments{
 \item{sampleData}{Dataframe with samples as rows and compounds as columns.}
 
-\item{compDisMat}{Compound distance matrix. Has to be supplied for
+\item{compDisMat}{Compound dissimilarity matrix. Has to be supplied for
 calculations of Functional Hill diversity or Rao's Q.}
 
 \item{type}{Type of diversity or evenness to calculate. Any of

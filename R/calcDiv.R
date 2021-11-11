@@ -14,7 +14,7 @@
 #' Rao's Q:
 #'
 #' @param sampleData Dataframe with samples as rows and compounds as columns.
-#' @param compDisMat Compound distance matrix. Has to be supplied for
+#' @param compDisMat Compound dissimilarity matrix. Has to be supplied for
 #' calculations of Functional Hill diversity or Rao's Q.
 #' @param type Type of diversity or evenness to calculate. Any of
 #' \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",

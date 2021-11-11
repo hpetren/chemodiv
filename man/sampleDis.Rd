@@ -9,7 +9,7 @@ sampleDis(sampleData, compDisMat = NULL, alpha = 1)
 \arguments{
 \item{sampleData}{Dataframe with samples as rows and compounds as columns.}
 
-\item{compDisMat}{Compound distance matrix. If this is supplied UniFrac
+\item{compDisMat}{Compound dissimilarity matrix. If this is supplied UniFrac
 dissimilarities are calcualted, otherwise Bray-Curtis distances
 are calculated}
 

@@ -6,7 +6,7 @@
 #' dissimilarities are calculated.
 #'
 #' @param sampleData Dataframe with samples as rows and compounds as columns.
-#' @param compDisMat Compound distance matrix. If this is supplied UniFrac
+#' @param compDisMat Compound dissimilarity matrix. If this is supplied UniFrac
 #' dissimilarities are calcualted, otherwise Bray-Curtis distances
 #' are calculated
 #' @param alpha Alpha value used to calculate UniFracs
