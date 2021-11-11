@@ -26,4 +26,7 @@ Imports:
     ape,
     GUniFrac,
     tidygraph,
-    igraph
+    igraph,
+    ggraph,
+    ggplot2,
+    gridExtra
