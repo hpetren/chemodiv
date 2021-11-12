@@ -133,5 +133,15 @@ molNetPlot <- function(sampleData,
       })
     }
   }
-  gridExtra::grid.arrange(grobs = networkList, nrow = ceiling(sqrt(length(networkList))))
+
+  # Can't figure out how to get this to behave as ggplot plot, i.e.
+  # you can save output into variable and when that variable is run the
+  # plot is shown. arrangeGrob makes it so that nothing is plotted when
+  # function is run, but you can see the plot then running a.
+  #a <- gridExtra::arrangeGrob(grobs = networkList, nrow = ceiling(sqrt(length(networkList))))
+  #return(a)
+  # So sticking with the normal grid.arrange, which always make so a plot
+  # is made, even if function output is saved as variable (so function
+  # behaves more like plot() does).
+  return(gridExtra::grid.arrange(grobs = networkList, nrow = ceiling(sqrt(length(networkList)))))
 }
