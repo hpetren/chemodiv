@@ -51,5 +51,5 @@ values directly (allowing for one atom and one bond mismatch).
 }
 \examples{
 data(minimalCompData)
-compDis(minimalCompData, type = "PubChemFingerprint")
+compDis(minimalCompData)
 }

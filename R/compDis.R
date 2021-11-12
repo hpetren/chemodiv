@@ -34,7 +34,7 @@
 #'
 #' @examples
 #' data(minimalCompData)
-#' compDis(minimalCompData, type = "PubChemFingerprint")
+#' compDis(minimalCompData)
 compDis <- function(compoundData,
                     type = c("NPClassifier", "PubChemFingerprint", "fMCS"),
                     npcTable = NULL,
@@ -45,11 +45,16 @@ compDis <- function(compoundData,
          NPClassifier, PubChemFingerprint or fMCS")
   }
 
+
   compoundDisMatList <- list()
 
   if ("NPClassifier" %in% type) { # Dissimilarities from NPClassifier
 
     print("Calculating compound dissimilarity matrix using NPClassifier...")
+
+    if(any(is.na(compoundData$smiles))){
+      warning("There are compounds with missing smiles")
+    }
 
     if (is.null(npcTable)) { # If we don't already have the table
       # Copied from npcTable()
@@ -155,7 +160,7 @@ compDis <- function(compoundData,
     }
 
 
-    # Fixing greek letters in class names. Included all, even
+    # Fixing Greek letters in class names. Included all, even
     # though it's probably not needed
     # THIS MUST BE POSSIBLE TO BE MADE MORE SIMPLE???
 
@@ -228,8 +233,16 @@ compDis <- function(compoundData,
     # other in vegdist. Setting these manually to 1.
     npcDis[is.nan(npcDis)] <- 1
 
+    # Print warning if there are NA's in pathway (either because compound
+    # was unknow, or not classified by NPC)
+    pathwayNA <- any(is.na(npcTable$pathway))
+    if(pathwayNA){
+      warning("There were compounds not classfied by NPClassifier")
+    }
+
+
     # If one decides to set unknown compounds to mean values
-    if (unknownCompoundsMean) {
+    if (unknownCompoundsMean & pathwayNA) {
 
       # Subsetting only known compounds
       npcKnown <- npcDis[-which(is.na(npcTable$pathway)),
@@ -255,6 +268,10 @@ compDis <- function(compoundData,
 
     print("Calculating compound dissimilarity matrix using Fingerprints...")
 
+    if(any(is.na(compoundData$inchikey))){
+      warning("There are compounds with missing inchikey")
+    }
+
     # Getting CID from inchikey (It was here that smiles didn't work).
     # Match is first, because it seems PubChem has some duplicates,
     # or strange variants, e.g. WPYMKLBDIGXBTP-UHFFFAOYSA-N
@@ -263,7 +280,7 @@ compDis <- function(compoundData,
                            match = "first")
 
     # If there are NA cid (due to NA inchikey)
-    # getIis can't handle NAs
+    # getIds can't handle NAs
     if(any(is.na(compoundCID$cid))) { # if at least 1 NA
 
       # Get cid
@@ -343,8 +360,10 @@ compDis <- function(compoundData,
     fingerDisMat[is.nan(fingerDisMat)] <- 1
 
 
-    # If one decides to set unknown compounds to mean values
-    if (unknownCompoundsMean) {
+    # If there are unknown compound and one decides to set
+    # unknown compounds to mean values
+
+    if (unknownCompoundsMean & any(is.na(compoundCID$cid))) {
 
       # Subsetting only known compounds
       fingerKnown <- fingerDisMat[-rowWithNA, -rowWithNA]
@@ -368,6 +387,10 @@ compDis <- function(compoundData,
   if ("fMCS" %in% type) { # Dissimilarities from fMCS
 
     print("Calculating compound dissimilarity matrix using fMCS...")
+
+    if(any(is.na(compoundData$inchikey))){
+      warning("There are compounds with missing inchikey")
+    }
 
     if(!exists("compoundCID")) {
       compoundCID <- webchem::get_cid(query = compoundData$inchikey,
