@@ -269,7 +269,7 @@ compDis <- function(compoundData,
     print("Calculating compound dissimilarity matrix using Fingerprints...")
 
     if(any(is.na(compoundData$inchikey))){
-      warning("There are compounds with missing inchikey")
+      warning("Fingerprint calculations: There are compounds with missing inchikey")
     }
 
     # Getting CID from inchikey (It was here that smiles didn't work).
@@ -389,7 +389,7 @@ compDis <- function(compoundData,
     print("Calculating compound dissimilarity matrix using fMCS...")
 
     if(any(is.na(compoundData$inchikey))){
-      warning("There are compounds with missing inchikey")
+      warning("fMCS calculations: There are compounds with missing inchikey")
     }
 
     if(!exists("compoundCID")) {
