@@ -29,4 +29,6 @@ Imports:
     igraph,
     ggraph,
     ggplot2,
-    gridExtra
+    gridExtra,
+    ggdendro,
+    tidyr
