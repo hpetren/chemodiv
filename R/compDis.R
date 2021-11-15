@@ -50,10 +50,10 @@ compDis <- function(compoundData,
 
   if ("NPClassifier" %in% type) { # Dissimilarities from NPClassifier
 
-    print("Calculating compound dissimilarity matrix using NPClassifier...")
+    message("Calculating compound dissimilarity matrix using NPClassifier...")
 
     if(any(is.na(compoundData$smiles))){
-      warning("There are compounds with missing smiles")
+      message("There are compounds with missing smiles")
     }
 
     if (is.null(npcTable)) { # If we don't already have the table
@@ -100,7 +100,7 @@ compDis <- function(compoundData,
               npcTable$pathway2[i] <- npcclass_real_correct$pathway_results[2]
               npcTable$pathway3[i] <- npcclass_real_correct$pathway_results[3]
 
-            } else { print(paste0("NPClassifier has no classification for compound ", i)) }
+            } else { message(paste0("NPClassifier has no classification for compound ", i)) }
 
 
             if (is.character(npcclass_real_correct$superclass_results)) {
@@ -120,7 +120,7 @@ compDis <- function(compoundData,
             }
 
             # If something went wrong
-          } else { print(paste0("Compound ", i, " could not be classified
+          } else { message(paste0("Compound ", i, " could not be classified
                                 at all. Is the SMILES correct?")) }
         }
       }
@@ -237,7 +237,7 @@ compDis <- function(compoundData,
     # was unknow, or not classified by NPC)
     pathwayNA <- any(is.na(npcTable$pathway))
     if(pathwayNA){
-      warning("There were compounds not classfied by NPClassifier")
+      message("There were compounds not classfied by NPClassifier")
     }
 
 
@@ -266,10 +266,10 @@ compDis <- function(compoundData,
 
   if ("PubChemFingerprint" %in% type) { # Dissimilarities from Fingerprints
 
-    print("Calculating compound dissimilarity matrix using Fingerprints...")
+    message("Calculating compound dissimilarity matrix using Fingerprints...")
 
     if(any(is.na(compoundData$inchikey))){
-      warning("Fingerprint calculations: There are compounds with missing inchikey")
+      message("Fingerprint calculations: There are compounds with missing inchikey")
     }
 
     # Getting CID from inchikey (It was here that smiles didn't work).
@@ -386,10 +386,10 @@ compDis <- function(compoundData,
 
   if ("fMCS" %in% type) { # Dissimilarities from fMCS
 
-    print("Calculating compound dissimilarity matrix using fMCS...")
+    message("Calculating compound dissimilarity matrix using fMCS...")
 
     if(any(is.na(compoundData$inchikey))){
-      warning("fMCS calculations: There are compounds with missing inchikey")
+      message("fMCS calculations: There are compounds with missing inchikey")
     }
 
     if(!exists("compoundCID")) {
@@ -500,7 +500,9 @@ compDis <- function(compoundData,
       length(compoundDisMatList)
 
   }
-  print("Done")
+  message("Done")
+  on.exit(closeAllConnections()) # Makes connection warning print direclty,
+  # rather than randomly afterwards
   return(compoundDisMatList)
 }
 

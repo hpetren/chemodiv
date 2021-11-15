@@ -53,11 +53,11 @@ sampleDis <- function(sampleData,
 
     # GUniFrac() returns a list with an array. Seem unnecessarily complicated,
     # so syntax becomes a bit strange (but I think it's correct)
-    # Doesn't seem to warn about the NaNs produced for d_VAW anymore.
+    # Suppressing the warnings about NaNs produced for d_VAW
 
-    uniFracs <- GUniFrac::GUniFrac(sampleData, disClustPhylo, alpha = alpha)
+    uniFracs <- suppressWarnings(GUniFrac::GUniFrac(sampleData, disClustPhylo, alpha = alpha))
 
-    sampleDisUniFrac <- uniFracs$unifracs[, , paste("d_",alpha,sep="")]
+    sampleDisUniFrac <- uniFracs$unifracs[, , paste0("d_",alpha)]
 
     colnames(sampleDisUniFrac) <- 1:ncol(sampleDisUniFrac)
     rownames(sampleDisUniFrac) <- 1:nrow(sampleDisUniFrac)

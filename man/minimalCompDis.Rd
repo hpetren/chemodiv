@@ -12,6 +12,6 @@ minimalCompDis
 }
 \description{
 A minimal matrix with compound dissimilarities calculated from
-PubChem Fingerprints for the compounds in "minimalCompData"
+PubChem Fingerprints for the compounds in \code{\link{minimalCompData}}
 }
 \keyword{datasets}
