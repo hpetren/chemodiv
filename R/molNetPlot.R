@@ -18,6 +18,8 @@
 #' @param networkObject tidygraph network object, as created by molNet function
 #' @param npcTable An NPCTable can optionally be supplied. This will result
 #' in network nodes being coloured by their NPC pathway classification
+#' @param plotNames Indicates if compounds names should be included
+#' in the molecular network plot.
 #'
 #' @return Molecular network(s) created with ggraph
 #'
@@ -28,16 +30,20 @@
 #' data(minimalMolNet)
 #' data(minimalNPCTable)
 #' groups <- c("A", "A", "B", "B")
+#' molNetPlot(minimalSampData, minimalMolNet)
+#' molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 #' molNetPlot(minimalSampData, minimalMolNet, groups)
 #' molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable)
+#' molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable, plotNames = TRUE)
 #' molNetPlot(minimalSampData, minimalMolNet, groups, minimalNPCTable)
 molNetPlot <- function(sampleData,
                        networkObject,
                        groupData = NULL,
-                       npcTable = NULL) {
+                       npcTable = NULL,
+                       plotNames = FALSE) {
 
   # If one does not use groupData = , or npcTable = , in function input
-  # then these can become mixed as you onle have to supply one.
+  # then these can become mixed as you only have to supply one.
   # I.e. third input could be either the grouping data or the NPC,
   # and if not specific, this will be assigned to groupData
   # This checks what kind was inputted, and makes it correct. Although
@@ -49,10 +55,38 @@ molNetPlot <- function(sampleData,
     }
   }
 
-  if (is.null(groupData) & is.null(npcTable)) { # Not making network here
-    stop("Provide groupData and/or npcTable")
+  if (is.null(groupData) & is.null(npcTable) & !plotNames) { # Only network
 
-  } else if (is.null(groupData) & !is.null(npcTable)) { # One network
+    compoundMean <- colMeans(sampleData)
+
+    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+      ggraph::geom_edge_link(ggplot2::aes(width = networkObject$weight), edge_color = "grey40") +
+      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
+      ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 8) +
+      ggplot2::scale_colour_viridis_c() +
+      ggplot2::labs(color = "Proportion", width = "Molecular similarity")
+
+    networkList <- list(p1)
+
+  } else if (is.null(groupData) & is.null(npcTable) & plotNames) {
+    # Network without only names
+
+    compoundMean <- colMeans(sampleData)
+
+    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+      ggraph::geom_edge_link(ggplot2::aes(width = networkObject$weight), edge_color = "grey40") +
+      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
+      ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 8) +
+      ggplot2::scale_colour_viridis_c() +
+      ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
+      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.1)
+
+    networkList <- list(p1)
+
+
+
+  } else if (is.null(groupData) & !is.null(npcTable) & !plotNames) {
+    # One network without names with NPC
 
     # One of these is probably the best one
     # ggraph(graph = networkObject, layout = "stress")
@@ -69,6 +103,18 @@ molNetPlot <- function(sampleData,
     networkList <- list(p1)
 
 
+
+  } else if (is.null(groupData) & !is.null(npcTable) & plotNames) {
+    # One network with names and NPC
+
+    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+      ggraph::geom_edge_link(ggplot2::aes(width = networkObject$weight), edge_color = "grey40") +
+      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
+      ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway), size = 8) +
+      ggplot2::labs(color = "Pathway", width = "Molecular similarity") +
+      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.1)
+
+    networkList <- list(p1)
 
   } else if (!is.null(groupData) & !is.null(npcTable)) { # Both group and NPC
 

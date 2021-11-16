@@ -4,7 +4,13 @@
 \alias{molNetPlot}
 \title{Plot molecular network}
 \usage{
-molNetPlot(sampleData, networkObject, groupData = NULL, npcTable = NULL)
+molNetPlot(
+  sampleData,
+  networkObject,
+  groupData = NULL,
+  npcTable = NULL,
+  plotNames = FALSE
+)
 }
 \arguments{
 \item{sampleData}{Dataframe with samples as rows and compounds as columns.}
@@ -16,6 +22,9 @@ created for each group}
 
 \item{npcTable}{An NPCTable can optionally be supplied. This will result
 in network nodes being coloured by their NPC pathway classification}
+
+\item{plotNames}{Indicates if compounds names should be included
+in the molecular network plot.}
 }
 \value{
 Molecular network(s) created with ggraph
@@ -39,7 +48,10 @@ data(minimalSampData)
 data(minimalMolNet)
 data(minimalNPCTable)
 groups <- c("A", "A", "B", "B")
+molNetPlot(minimalSampData, minimalMolNet)
+molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 molNetPlot(minimalSampData, minimalMolNet, groups)
 molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable)
+molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable, plotNames = TRUE)
 molNetPlot(minimalSampData, minimalMolNet, groups, minimalNPCTable)
 }

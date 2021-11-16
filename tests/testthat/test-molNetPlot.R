@@ -17,8 +17,5 @@ test_that("network plot is generated", {
                "list")
 })
 
-test_that("error is generated", {
-  expect_error(molNetPlot(testSampData, testMolNet$networkObject))
-})
 
 

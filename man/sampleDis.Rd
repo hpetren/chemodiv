@@ -7,13 +7,16 @@
 sampleDis(sampleData, compDisMat = NULL, alpha = 1)
 }
 \arguments{
-\item{sampleData}{Dataframe with samples as rows and compounds as columns.}
+\item{sampleData}{Data frame with samples as rows and compounds as columns.}
 
 \item{compDisMat}{Compound dissimilarity matrix. If this is supplied UniFrac
 dissimilarities are calcualted, otherwise Bray-Curtis distances
 are calculated}
 
-\item{alpha}{Alpha value used to calculate UniFracs}
+\item{alpha}{Alpha value used to calculate UniFracs. alpha can be set
+between 0 and 1. With alpha = 0 equal emphasis is put on every branch,
+With values closer to 1, more emphasis is put on high abundance branches.
+alpha = 0.5 strikes a balance. alpha 0.5 or 1 is recommended}
 }
 \value{
 Sample dissimilarity matrix with Bray-Curtis or
