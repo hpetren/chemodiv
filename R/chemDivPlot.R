@@ -170,7 +170,12 @@ chemDivPlot <- function(compDisMat = NULL,
       groupData <- rep("NoGroup",nrow(sampleDisMat))
     }
 
-    NMDS <- vegan::metaMDS(sampleDisMat, autotransform = FALSE)
+    # Suppressing iteration output here requires capture.output() rather
+    # than suppressMessage() as metaMDSiter() prints output with cat()
+    # rather than with message() (which is more correct)
+    # https://stackoverflow.com/questions/8797314/suppress-messages-displayed-by-print-instead-of-message-or-warning-in-r
+
+    utils::capture.output(NMDS <- vegan::metaMDS(sampleDisMat, autotransform = FALSE))
     NMDSCoords <- as.data.frame(NMDS$points)
 
     NMDSCoords$Group <- groupData

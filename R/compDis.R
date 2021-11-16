@@ -45,6 +45,7 @@ compDis <- function(compoundData,
          NPClassifier, PubChemFingerprint or fMCS")
   }
 
+  colnames(compoundData) <- tolower(colnames(compoundData))
 
   compoundDisMatList <- list()
 

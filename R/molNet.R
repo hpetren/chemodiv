@@ -57,13 +57,13 @@ molNet <- function(compDisMat,
     medianSim <- stats::median(compSimMat[lower.tri(compSimMat)])
     compSimMat[compSimMat < medianSim] <- 0
 
-    print("Using median similarity as cut-off")
+    message("Using median similarity as cut-off")
 
   } else if (is.numeric(cutOff)) { # Should maybe test if 0 <= cutOff <= 1
 
     compSimMat[compSimMat < cutOff] <- 0
 
-    print(paste0("Using cut-off value = ", cutOff))
+    message(paste0("Using cut-off value = ", cutOff))
 
   } else if (cutOff == "minPathway" & !is.null(npcTable)) {
 
@@ -95,7 +95,7 @@ molNet <- function(compDisMat,
 
     compSimMat[compSimMat < minIntraPath] <- 0
 
-    print("Using lowest within-pathway similarity as cut-off")
+    message("Using lowest within-pathway similarity as cut-off")
   } else if (cutOff == "minPathway" & is.null(npcTable)) {
     # If trying to use minPathway but not having npcTable
     stop("Using minPathway as cut-off requires npcTable")

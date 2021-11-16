@@ -46,7 +46,7 @@ sampleDis <- function(sampleData,
 
   if(!is.null(compDisMat)) {
 
-    print("Calculating UniFrac dissimilarities")
+    message("Calculating UniFrac dissimilarities")
 
     # Note method is now "average" (UPGMA). This is used in Chemoecology paper
     disClust <- stats::hclust(stats::as.dist(compDisMat), method="average")
@@ -69,7 +69,7 @@ sampleDis <- function(sampleData,
 
   } else {
 
-    print("Calculating Bray-Curtis dissimilarities")
+    message("Calculating Bray-Curtis dissimilarities")
 
     sampleDisBrayCurtis <- as.matrix(vegan::vegdist(sampleData, method = "bray"))
 

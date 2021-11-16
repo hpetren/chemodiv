@@ -15,7 +15,9 @@ molNetPlot(
 \arguments{
 \item{sampleData}{Dataframe with samples as rows and compounds as columns.}
 
-\item{networkObject}{tidygraph network object, as created by molNet function}
+\item{networkObject}{tidygraph network object, as created by molNet function..
+Note that this is only the network object, which has to be taken
+from the list.}
 
 \item{groupData}{Grouping data. If supplied, a separate network will be
 created for each group}

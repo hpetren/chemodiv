@@ -31,6 +31,7 @@
 #' NPCTable(minimalCompData)
 NPCTable <- function(compoundData) {
 
+  colnames(compoundData) <- tolower(colnames(compoundData))
 
   npcTable <- compoundData
 
@@ -71,7 +72,6 @@ NPCTable <- function(compoundData) {
       # fromJSON() throws an error and loop stops)
       if(substring(npcclass_real, 1, 1) == "{") {
 
-        #print(paste0("Classifying compound: ", i))
 
         # Parsing the long character string, which is formatted as json,
         # into a list
@@ -94,7 +94,7 @@ NPCTable <- function(compoundData) {
 
           # If the compound is not classified, but there is nothing wrong
           # (i.e. the pathway is NA)
-        } else { print(paste0("NPClassifier has no classification for compound ", i)) }
+        } else { message(paste0("NPClassifier has no classification for compound ", i)) }
 
 
         if (is.character(npcclass_real_correct$superclass_results)) {

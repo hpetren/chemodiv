@@ -59,7 +59,6 @@ calcDivProf <- function(sampleData,
       }
 
     }
-    #print(c)
   }
 
   diversityProfile <- list("divHillProf" = divHillProf, "qMin" = qMin, "qMax" = qMax, "step" = step)
