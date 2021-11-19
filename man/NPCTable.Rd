@@ -9,12 +9,12 @@ NPCTable(compoundData)
 \arguments{
 \item{compoundData}{Data frame with the chemical compounds of interest.
 Should have a column named "compound" with common names, and a column named
-"smiles" with SMILES IDs for the compounds.}
+"smiles" with isomeric or canonical SMILES IDs for the compounds.}
 }
 \value{
 Data frame with the NPClassifier classification for each compound
-as pathways, superclass and class. Compounds may be classified in more than
-one group, or no group, at each level of classification.
+as pathways, superclass and class. Note that compounds may be classified
+in more than one group, or no group, at each level of classification.
 }
 \description{
 This function classifies compounds with NPClassifier,

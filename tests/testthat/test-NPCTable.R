@@ -1,12 +1,11 @@
-testCompData1 <- data.frame(compounds = c("limonene"),
-                            smiles = c("CC1=CCC(CC1)C(=C)C"),
-                            inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N"))
+testCompData <- data.frame(compounds = c("limonene", "unknown"),
+                           smiles = c("CC1=CCC(CC1)C(=C)C", "NOTSMILES"),
+                           inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N",
+                                        "NOTINCHIKEY"))
 
-testCompData2 <- data.frame(compounds = c("limonene"),
-                            smiles = c("NOTASMILES"),
-                            inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N"))
 
 test_that("NPCTable works", {
-  expect_equal(nrow(NPCTable(testCompData1)), nrow(testCompData1))
-  expect_warning(NPCTable(testCompData2), "Is the SMILES correct?")
+  expect_equal(nrow(NPCTable(testCompData[1,])), nrow(testCompData[1,]))
+  expect_error(NPCTable(testCompData[2,]))
+  expect_message(NPCTable(testCompData), "Is the SMILES correct?")
 })
