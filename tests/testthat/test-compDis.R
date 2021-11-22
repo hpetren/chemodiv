@@ -22,7 +22,6 @@ test_that("function stopped if no type is correct", {
 })
 
 
-
 # So vegan throws a warning with empty compounds. This is no problem
 # since I add 1 or mean values. But it makes it so that the test_that
 # below (currently not commented) throws it's own warning. I still think
