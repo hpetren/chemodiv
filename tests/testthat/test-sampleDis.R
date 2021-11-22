@@ -19,8 +19,8 @@ test_that("Bray-Curtis and UniFracs work", {
 })
 
 
-test_that("warnings and errors work", {
-  expect_warning(sampleDis(testSampData*2))
+test_that("warnings and messages work", {
+  expect_message(sampleDis(testSampData*2))
   expect_error(sampleDis(testSampData, testCompDis2))
   expect_error(sampleDis(testSampData, testCompDis3))
 })

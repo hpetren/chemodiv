@@ -9,7 +9,8 @@
 #' The gamma- and alpha-diversity values used to calculate beta are also output
 #'
 #' @param sampleData Dataframe with samples as rows and compounds as columns.
-#' @param compDisMat Compound distance matrix. Has to be supplied for
+#' @param compDisMat Compound distance matrix, as calculated by
+#' \code{\link{NPCTable}}. Has to be supplied for
 #' calculations of Functional Hill beta-diversity.
 #' @param q Diversity order to use for (Functional) Hill diversity
 #'
@@ -29,23 +30,15 @@ calcBetaDiv <- function(sampleData,
   if(q < 0) stop("q must be >= 0")
 
   if (is.null(compDisMat)) { # If no compound matrix, normal Hill beta
-
     betaDiv <- hillR::hill_taxa_parti(comm = sampleData, q = q)
-
     betaDivOut <- betaDiv[,2:4]
     colnames(betaDivOut) <- c("gamma", "alpha", "beta")
-
     return(betaDivOut)
-
   } else { # If compound matrix, functional Hill beta
-
-    # hill_func_parti() can be used if traits_as_is = TRUE
     betaDiv <- hillR::hill_func_parti(comm = sampleData, traits = compDisMat,
                                       traits_as_is = TRUE, q = q)
-
     betaDivOut <- betaDiv[,3:5]
     colnames(betaDivOut) <- c("gamma", "alpha", "beta")
-
     return(betaDivOut)
   }
 }

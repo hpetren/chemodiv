@@ -9,7 +9,8 @@ calcBetaDiv(sampleData, compDisMat = NULL, q = 1)
 \arguments{
 \item{sampleData}{Dataframe with samples as rows and compounds as columns.}
 
-\item{compDisMat}{Compound distance matrix. Has to be supplied for
+\item{compDisMat}{Compound distance matrix, as calculated by
+\code{\link{NPCTable}}. Has to be supplied for
 calculations of Functional Hill beta-diversity.}
 
 \item{q}{Diversity order to use for (Functional) Hill diversity}

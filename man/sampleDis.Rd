@@ -9,9 +9,9 @@ sampleDis(sampleData, compDisMat = NULL, alpha = 1)
 \arguments{
 \item{sampleData}{Data frame with samples as rows and compounds as columns.}
 
-\item{compDisMat}{Compound dissimilarity matrix. If this is supplied UniFrac
-dissimilarities are calcualted, otherwise Bray-Curtis distances
-are calculated}
+\item{compDisMat}{Compound dissimilarity matrix, as calculated by
+\code{\link{compDis}}. If this is supplied UniFrac dissimilarities are
+calculated, otherwise Bray-Curtis distances are calculated}
 
 \item{alpha}{Alpha value used to calculate UniFracs. alpha can be set
 between 0 and 1. With alpha = 0 equal emphasis is put on every branch,
