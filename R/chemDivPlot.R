@@ -9,7 +9,7 @@
 #' which compounds are structurally/biosynthethically similar to each other.
 #' Diversity/evenness, \code{divData}, is plotted as a boxplot.
 #' A diversity profile, showing (Functional) Hill diversity at different
-#' value of q will be plotted with \code{divProfData} (NB! This is
+#' values of q will be plotted with \code{divProfData} (NB! This is
 #' the whole list outputted by calcDivProf, as qMin and qMax are used too).
 #' A sample dissimilarity matrix, \code{sampleDisMat}, will be plotted
 #' as an NMDS plot. Grouping data, \code{groupData}, may be supplied.
@@ -46,15 +46,13 @@ chemDivPlot <- function(compDisMat = NULL,
                         sampleDisMat = NULL,
                         groupData = NULL) {
 
+  allPlots <- list()
 
-  allPlots <- list() # Initiating empty list to store plots
+  if (!is.null(compDisMat)) { # Compound tree
 
-  if (!is.null(compDisMat)) { # Compound tree from NPC or fingerprint matrix
-
-    compDisMatClust <- stats::hclust(stats::as.dist(compDisMat), method = "average")
-
+    compDisMatClust <- stats::hclust(stats::as.dist(compDisMat),
+                                     method = "average")
     compDisMatClustDend <- stats::as.dendrogram(compDisMatClust)
-
     compDisMatClustDendData <- ggdendro::dendro_data(compDisMatClustDend)
 
     # Note the use of aes_(x = ~x). This is required for check() to not
@@ -63,13 +61,12 @@ chemDivPlot <- function(compDisMat = NULL,
     # (I don't understand what aes_ actually does, and it is "soft-deprecated"
     # (see manual) but not other solutions seemed optimal either). See
     # https://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when#comment20826625_12429344
-
     compDisMatTreePlot <- ggplot() +
       geom_segment(data = compDisMatClustDendData$segments,
-                            aes_(x = ~x, y = ~y, xend = ~xend, yend = ~yend)) +
+                   aes_(x = ~x, y = ~y, xend = ~xend, yend = ~yend)) +
       geom_text(data = compDisMatClustDendData$labels,
-                         aes_(x = ~x, y = ~y, label = ~label),
-                         hjust = -0.1, angle = 0) +
+                aes_(x = ~x, y = ~y, label = ~label),
+                hjust = -0.1, angle = 0) +
       scale_y_reverse(limits = c(1,-0.5), breaks = c(1,0.75,0.5,0.25,0)) +
       ylab("Dissimilarity") +
       ggtitle("") +
@@ -84,9 +81,7 @@ chemDivPlot <- function(compDisMat = NULL,
       coord_flip()
 
     allPlots[["compDisMatTreePlot"]] <- compDisMatTreePlot
-
   }
-
 
   if (!is.null(divData)) { # Boxplot of diversity/evenness
 
@@ -94,63 +89,62 @@ chemDivPlot <- function(compDisMat = NULL,
     # as that is not the case if only one column is input
 
     if (is.null(groupData)) {
-      warning("No grouping data provided")
-      groupData <- rep("NoGroup",nrow(divDatadf))
+      message("No grouping data provided")
+      groupData <- rep("NoGroup", nrow(divDatadf))
     }
-
     divDatadf$Group <- groupData
 
-
-
-    # The strange local() thing again
     for (i in 1:(ncol(divDatadf)-1)) {
-
       allPlots[[paste0("divPlot", colnames(divDatadf)[i])]] <- local({
-
         i <- i
 
         divPlot <- ggplot(data = divDatadf,
-                                   aes_(x = ~Group, y = ~divDatadf[,i], fill = ~Group)) +
+                          aes_(x = ~Group, y = ~divDatadf[,i], fill = ~Group)) +
           geom_boxplot(outlier.shape = NA) +
           geom_jitter(height = 0, width = 0.1, shape = 21) +
           ylab(colnames(divDatadf)[i]) +
           theme(text = element_text(size=15))
-
       })
     }
-
-
   }
 
   if (!is.null(divProfData)) { # Diversity profile
 
     if (is.null(groupData)) {
-      warning("No grouping data provided")
-      groupData <- rep("NoGroup",nrow(divProfData$divProf))
+      message("No grouping data provided")
+      groupData <- rep("NoGroup", nrow(divProfData$divProf))
     }
-
     divProf <- divProfData$divProf # Extract the df from the list
 
     # Get mean data in order
     divProfMean1 <- stats::aggregate(divProf,
-                                  by = list(Group = groupData), mean)
+                                     by = list(Group = groupData), mean)
     divProfMean2 <- as.data.frame(t(divProfMean1[,2:ncol(divProfMean1)]))
     colnames(divProfMean2) <- divProfMean1$Group
-    qAll <- seq(from = divProfData$qMin, to = divProfData$qMax, by = divProfData$step)
+    qAll <- seq(from = divProfData$qMin,
+                to = divProfData$qMax,
+                by = divProfData$step)
     divProfMean2$q <- qAll
-    divHillLong <- tidyr::pivot_longer(divProfMean2, 1:(ncol(divProfMean2)-1),
-                                names_to = "Group", values_to = "Diversity")
+    divHillLong <- tidyr::pivot_longer(divProfMean2,
+                                       1:(ncol(divProfMean2)-1),
+                                       names_to = "Group",
+                                       values_to = "Diversity")
 
     # Get individual sample data in order
     divProfInd <- as.data.frame(t(divProf))
     divProfInd$q <- qAll
-    divHillLongInd <- tidyr::pivot_longer(divProfInd, 1:(ncol(divProfInd)-1),
-                                   names_to = "Individual", values_to = "Diversity")
+    divHillLongInd <- tidyr::pivot_longer(divProfInd,
+                                          1:(ncol(divProfInd)-1),
+                                          names_to = "Individual",
+                                          values_to = "Diversity")
     divHillLongInd$Group <- rep(groupData, length(unique(divProfInd$q)))
 
-    divProfrofPlot <- ggplot() +
+    divProfPlot <- ggplot() +
       geom_line(data = divHillLongInd, # Note use of both group and color nicely
-                         aes_(x = ~q, y = ~Diversity, group = ~Individual, color = ~Group),
+                         aes_(x = ~q,
+                              y = ~Diversity,
+                              group = ~Individual,
+                              color = ~Group),
                 size = 0.5, alpha = 0.15) +
       geom_line(data = divHillLong,
                          aes_(x = ~q, y = ~Diversity, color = ~Group),
@@ -159,14 +153,13 @@ chemDivPlot <- function(compDisMat = NULL,
       ylab("(Functional) Hill Diversity") +
       theme(text = element_text(size=15))
 
-    allPlots[["divProfrofPlot"]] <- divProfrofPlot
-
+    allPlots[["divProfPlot"]] <- divProfPlot
   }
 
   if (!is.null(sampleDisMat)) { # NMDS
 
     if (is.null(groupData)) {
-      warning("No grouping data provided")
+      message("No grouping data provided")
       groupData <- rep("NoGroup",nrow(sampleDisMat))
     }
 
@@ -177,21 +170,16 @@ chemDivPlot <- function(compDisMat = NULL,
 
     utils::capture.output(NMDS <- vegan::metaMDS(sampleDisMat, autotransform = FALSE))
     NMDSCoords <- as.data.frame(NMDS$points)
-
     NMDSCoords$Group <- groupData
 
     NMDSPlot <- ggplot(data = NMDSCoords,
-                                aes_(x = ~MDS1, y = ~MDS2, color = ~Group)) +
+                       aes_(x = ~MDS1, y = ~MDS2, color = ~Group)) +
       geom_point(size = 4, alpha = 0.5) +
       theme(text = element_text(size=15))
 
-    NMDSPlot
-
     allPlots[["NMDSPlot"]] <- NMDSPlot
-
   }
-
   # Arranging plots
-  gridExtra::grid.arrange(grobs = allPlots, ncol = ceiling(sqrt(length(allPlots))))
-
+  gridExtra::grid.arrange(grobs = allPlots,
+                          ncol = ceiling(sqrt(length(allPlots))))
 }

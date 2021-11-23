@@ -41,7 +41,7 @@ matrix, \code{compDisMat}, will be plotted as a dendrogram visualizing
 which compounds are structurally/biosynthethically similar to each other.
 Diversity/evenness, \code{divData}, is plotted as a boxplot.
 A diversity profile, showing (Functional) Hill diversity at different
-value of q will be plotted with \code{divProfData} (NB! This is
+values of q will be plotted with \code{divProfData} (NB! This is
 the whole list outputted by calcDivProf, as qMin and qMax are used too).
 A sample dissimilarity matrix, \code{sampleDisMat}, will be plotted
 as an NMDS plot. Grouping data, \code{groupData}, may be supplied.
