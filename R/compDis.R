@@ -61,9 +61,9 @@ compDis <- function(compoundData,
 
       npcTable <- compoundData
 
-      npcTable[c("pathway1", "pathway2", "pathway3",
-               "superclass1", "superclass2", "superclass3",
-               "class1", "class2", "class3")] <- NA
+      npcTable[c("pathway", "pathway2", "pathway3",
+               "superclass", "superclass2", "superclass3",
+               "class", "class2", "class3")] <- NA
 
       for (i in 1:nrow(npcTable)) {
 
@@ -94,7 +94,7 @@ compDis <- function(compoundData,
               # Adding pathway. In cases there is only 1 pathway, trying to
               # take an index that is higher then what is in the vector
               # just returns NA, which is appropriate
-              npcTable$pathway1[i] <- npcClass3$pathway_results[1]
+              npcTable$pathway[i] <- npcClass3$pathway_results[1]
               npcTable$pathway2[i] <- npcClass3$pathway_results[2]
               npcTable$pathway3[i] <- npcClass3$pathway_results[3]
 
@@ -105,13 +105,13 @@ compDis <- function(compoundData,
             }
 
             if (is.character(npcClass3$superclass_results)) {
-              npcTable$superclass1[i] <- npcClass3$superclass_results[1]
+              npcTable$superclass[i] <- npcClass3$superclass_results[1]
               npcTable$superclass2[i] <- npcClass3$superclass_results[2]
               npcTable$superclass3[i] <- npcClass3$superclass_results[3]
             }
 
             if (is.character(npcClass3$class_results)) {
-              npcTable$class1[i] <- npcClass3$class_results[1]
+              npcTable$class[i] <- npcClass3$class_results[1]
               npcTable$class2[i] <- npcClass3$class_results[2]
               npcTable$class3[i] <- npcClass3$class_results[3]
             }
@@ -128,8 +128,8 @@ compDis <- function(compoundData,
     npcTableW <- data.frame(compound = npcTable$compound)
 
     for (i in 1:nrow(npcTable)) { # For each compound
-      for (j in which(colnames(npcTable) == "pathway1"):ncol(npcTable)) {
-        # For each classification (from pathway1 and onwards)
+      for (j in which(colnames(npcTable) == "pathway"):ncol(npcTable)) {
+        # For each classification (from pathway and onwards)
 
         if (npcTable[i,j] %in% colnames(npcTableW)) {
           # If the name already exist as column in npcTableW
@@ -223,25 +223,25 @@ compDis <- function(compoundData,
     npcDisMat[is.nan(npcDisMat)] <- 1
 
     # Print warning if there are NA's in pathway
-    pathway1NA <- any(is.na(npcTable$pathway1))
-    if(pathway1NA){
+    pathwayNA <- any(is.na(npcTable$pathway))
+    if(pathwayNA){
       message("There were compounds not classfied by NPClassifier")
     }
 
     # If one decides to set unknown compounds to mean values.
     # Done for both known-unknown and unknown-unknown pairs
-    if (unknownCompoundsMean & pathway1NA) {
+    if (unknownCompoundsMean & pathwayNA) {
 
       # Subsetting only known compounds
-      npcKnown <- npcDisMat[-which(is.na(npcTable$pathway1)),
-                         -which(is.na(npcTable$pathway1))]
+      npcKnown <- npcDisMat[-which(is.na(npcTable$pathway)),
+                         -which(is.na(npcTable$pathway))]
 
       # mean compound dissimilarity of known compounds
       meanDis <- mean(npcKnown[lower.tri(npcKnown)], na.rm = TRUE)
 
       # We replace those rows and columns (can't do both at once) with mean values
-      npcDisMat[which(is.na(npcTable$pathway1)),] <- meanDis
-      npcDisMat[,which(is.na(npcTable$pathway1))] <- meanDis
+      npcDisMat[which(is.na(npcTable$pathway)),] <- meanDis
+      npcDisMat[,which(is.na(npcTable$pathway))] <- meanDis
 
       # And the make sure diagonal is all 0 again
       diag(npcDisMat) <- 0

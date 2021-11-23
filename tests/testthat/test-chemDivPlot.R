@@ -12,7 +12,7 @@ testDiv <- calcDiv(testSampData)
 
 testDivProf <- calcDivProf(testSampData)
 
-groups <- c("A","A","B","B")
+groups <- c("I","I","II","II")
 
 testChemDivPlot <- chemDivPlot(compDisMat = testCompDis,
                                divData = testDiv,

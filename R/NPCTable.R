@@ -36,9 +36,9 @@ NPCTable <- function(compoundData) {
 
   # Assuming for now that a compound never has more than 3 belongings
   # in a pathway/superclass/class
-  npcTab[c("pathway1", "pathway2", "pathway3",
-           "superclass1", "superclass2", "superclass3",
-           "class1", "class2", "class3")] <- NA
+  npcTab[c("pathway", "pathway2", "pathway3",
+           "superclass", "superclass2", "superclass3",
+           "class", "class2", "class3")] <- NA
 
   for (i in 1:nrow(npcTab)) {
 
@@ -69,7 +69,7 @@ NPCTable <- function(compoundData) {
           # Adding pathway. In cases there is only 1 pathway, trying to
           # take an index that is higher then what is in the vector
           # just returns NA, which is appropriate
-          npcTab$pathway1[i] <- npcClass3$pathway_results[1]
+          npcTab$pathway[i] <- npcClass3$pathway_results[1]
           npcTab$pathway2[i] <- npcClass3$pathway_results[2]
           npcTab$pathway3[i] <- npcClass3$pathway_results[3]
 
@@ -80,13 +80,13 @@ NPCTable <- function(compoundData) {
         }
 
         if (is.character(npcClass3$superclass_results)) {
-          npcTab$superclass1[i] <- npcClass3$superclass_results[1]
+          npcTab$superclass[i] <- npcClass3$superclass_results[1]
           npcTab$superclass2[i] <- npcClass3$superclass_results[2]
           npcTab$superclass3[i] <- npcClass3$superclass_results[3]
         }
 
         if (is.character(npcClass3$class_results)) {
-          npcTab$class1[i] <- npcClass3$class_results[1]
+          npcTab$class[i] <- npcClass3$class_results[1]
           npcTab$class2[i] <- npcClass3$class_results[2]
           npcTab$class3[i] <- npcClass3$class_results[3]
         }
@@ -98,7 +98,7 @@ NPCTable <- function(compoundData) {
     }
   }
   # If no compounds were classified
-  if(all(is.na(npcTab$pathway1))) {
+  if(all(is.na(npcTab$pathway))) {
     stop("No compounds could be classified")
   }
   # Removes columns that are only NA

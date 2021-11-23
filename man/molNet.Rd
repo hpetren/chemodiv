@@ -7,17 +7,18 @@
 molNet(compDisMat, npcTable = NULL, cutOff = "median")
 }
 \arguments{
-\item{compDisMat}{Compound dissimilarity matrix.}
+\item{compDisMat}{Compound dissimilarity matrix, as calculated by
+\code{\link{compDis}}.}
 
-\item{npcTable}{An NPCTable can optionally be supplied generate the
-number of NPC pathways and calculate network modularity}
+\item{npcTable}{An already generated \code{\link{NPCTable}} can be supplied
+for calculations of the number of NPC pathways and network modularity}
 
 \item{cutOff}{Cut-off value for compound similarities. Any similarity
 lower than this value will be set to zero when the network is generated,
 which strongly affects the look of the network. The value can be set
 manually 0 <= cutOff <= 1 (maybe mention that others use 0.6 for another
 kind of molecular similarity measure), to the \code{median} dissimilarity
-value in the compDisMat, or to \code{minPathway} the lowest within-pathway
+value in the compDisMat, or to \code{minPathway}, the lowest within-pathway
 similarity (which allows all within-NPC-pathway to be kept) if an NPCTable
 is supplied.}
 }

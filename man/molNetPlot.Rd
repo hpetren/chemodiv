@@ -13,17 +13,18 @@ molNetPlot(
 )
 }
 \arguments{
-\item{sampleData}{Dataframe with samples as rows and compounds as columns.}
+\item{sampleData}{Data frame with samples as rows and compounds as columns.}
 
-\item{networkObject}{tidygraph network object, as created by molNet function..
-Note that this is only the network object, which has to be taken
-from the list.}
+\item{networkObject}{tidygraph network object, as created by the
+\code{\link{molNet}} function. Note that this is only the network object,
+which has to be taken from the list.}
 
 \item{groupData}{Grouping data. If supplied, a separate network will be
 created for each group}
 
-\item{npcTable}{An NPCTable can optionally be supplied. This will result
-in network nodes being coloured by their NPC pathway classification}
+\item{npcTable}{An \code{\link{NPCTable}} can optionally be supplied.
+This will result in network nodes being coloured by their
+NPC pathway classification}
 
 \item{plotNames}{Indicates if compounds names should be included
 in the molecular network plot.}
@@ -32,18 +33,21 @@ in the molecular network plot.}
 Molecular network(s) created with ggraph
 }
 \description{
-Function to conveniently create a basic plot of the molecular network created
-by the molNet function (based on the compound dissimilarity matrix).
+Function to conveniently create a basic plot of the molecular network
+created by the \code{\link{molNet}} function
+(based on the compound dissimilarity matrix). Nodes represent compounds,
+with size proportional to proportions, and edge widths represent
+compound similarity.
 }
 \details{
-The network object and sample dataset have to be supplied. In addition,
-groupData and/or NPCTable must be supplied. If groupData is supplied,
-one network will be created for each group, with node colours represtnging
-the proportional concentration of the compounds. If and NPCTable is supplied,
+The network object from \code{\link{molNet}}  and sample dataset have to
+be supplied. In addition, groupData and/or \code{\link{NPCTable}} can
+be supplied. If groupData is supplied,
+one network will be created for each group. If and NPCTable is supplied,
 node colours will represent NPC pathways, and node size the proportional
 concentration of the compounds. Edge widths represent compound similarity,
-and only edges with similarity values above the molNet function's cut-off
-will be plotted
+and only edges with similarity values above the \code{\link{molNet}}
+function's cut-off will be plotted.
 }
 \examples{
 data(minimalSampData)
@@ -51,9 +55,7 @@ data(minimalMolNet)
 data(minimalNPCTable)
 groups <- c("A", "A", "B", "B")
 molNetPlot(minimalSampData, minimalMolNet)
-molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 molNetPlot(minimalSampData, minimalMolNet, groups)
 molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable)
-molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable, plotNames = TRUE)
-molNetPlot(minimalSampData, minimalMolNet, groups, minimalNPCTable)
+molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 }
