@@ -7,12 +7,13 @@
 calcDivProf(sampleData, compDisMat = NULL, qMin = 0, qMax = 3, step = 0.1)
 }
 \arguments{
-\item{sampleData}{Dataframe with samples as rows and compounds as columns.}
+\item{sampleData}{Data frame with samples as rows and compounds as columns.}
 
-\item{compDisMat}{Compound distance matrix. Has to be supplied for
-calculations of Functional Hill diversity or Rao's Q.}
+\item{compDisMat}{Compound distance matrix, as calculated by
+\code{\link{compDis}}. Has to be supplied for calculations of
+Functional Hill diversity.}
 
-\item{qMin}{Minimume value of q}
+\item{qMin}{Minimum value of q}
 
 \item{qMax}{Maximum value of q}
 
@@ -25,7 +26,7 @@ and values for qMin, qMax and step.
 }
 \description{
 Function to calculate a "diversity profile", i.e. calculate (Functional)
-Hill diveristy for multiple values of q.
+Hill diversity for multiple values of q.
 }
 \examples{
 data(minimalSampData)

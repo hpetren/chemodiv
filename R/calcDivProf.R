@@ -1,12 +1,13 @@
 #' Calculate diversity profile
 #'
 #' Function to calculate a "diversity profile", i.e. calculate (Functional)
-#' Hill diveristy for multiple values of q.
+#' Hill diversity for multiple values of q.
 #'
-#' @param sampleData Dataframe with samples as rows and compounds as columns.
-#' @param compDisMat Compound distance matrix. Has to be supplied for
-#' calculations of Functional Hill diversity or Rao's Q.
-#' @param qMin Minimume value of q
+#' @param sampleData Data frame with samples as rows and compounds as columns.
+#' @param compDisMat Compound distance matrix, as calculated by
+#' \code{\link{compDis}}. Has to be supplied for calculations of
+#' Functional Hill diversity.
+#' @param qMin Minimum value of q
 #' @param qMax Maximum value of q
 #' @param step Step by which q will be calculated between qMin and qMax
 #'
@@ -29,41 +30,34 @@ calcDivProf <- function(sampleData,
                         step = 0.1) {
 
   if(qMin < 0) stop("qMin should be >= 0")
-
   if(qMin > qMax) stop("qMin should be smaller than qMax")
-
   if((step <= 0) | (step > (qMax - qMin)))
     stop("step must be > 0 and less than qMax - qMin")
 
-
-
   # Creating datasets to store diversity values
   qAll <- seq(from = qMin, to = qMax, by = step)
+  divProf <- as.data.frame(matrix(data = NA,
+                                  nrow = nrow(sampleData),
+                                  ncol = length(qAll)))
+  colnames(divProf) <- paste0("q", qAll)
 
-  divHillProf <- as.data.frame(matrix(data = NA,
-                                      nrow = nrow(sampleData),
-                                      ncol = length(qAll)))
-
-  colnames(divHillProf) <- paste0("q", qAll)
-
-
-  for (c in 1:length(qAll)) {
-
-    # Calculate diversity for each row (each sample) in that column
-    for (r in 1:nrow(divHillProf)) {
-
+  for (c in 1:length(qAll)) { # For each column
+    for (r in 1:nrow(divProf)) { # For each row
       if (!is.null(compDisMat)) {
-        divHillProf[r,c] <- funcHillDiv(data = sampleData[r,], Dij = compDisMat, q = qAll[c])
+        divProf[r,c] <- funcHillDiv(data = sampleData[r,],
+                                    Dij = compDisMat,
+                                    q = qAll[c])
       } else {
-        divHillProf[r,c] <- hillR::hill_taxa(sampleData[r,], q = qAll[c])
+        divProf[r,c] <- hillR::hill_taxa(sampleData[r,],
+                                         q = qAll[c])
       }
-
     }
   }
 
-  diversityProfile <- list("divHillProf" = divHillProf, "qMin" = qMin, "qMax" = qMax, "step" = step)
-
+  diversityProfile <- list("divProf" = divProf,
+                           "qMin" = qMin,
+                           "qMax" = qMax,
+                           "step" = step)
   return(diversityProfile)
-
 }
 

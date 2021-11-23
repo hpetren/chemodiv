@@ -11,14 +11,14 @@ test_that("a diversity profile with correct dim and no NA is generated", {
   expect_output(str(calcDivProf(sampleData = testSampData,
                                 compDisMat = testCompDis)), "List of 4")
   expect_equal(nrow(calcDivProf(sampleData = testSampData,
-                                compDisMat = testCompDis)$divHillProf),
+                                compDisMat = testCompDis)$divProf),
                nrow(testSampData))
   expect_equal(ncol(calcDivProf(sampleData = testSampData,
                                 compDisMat = testCompDis,
-                                qMin = 0, qMax = 3, step = 0.1)$divHillProf),
+                                qMin = 0, qMax = 3, step = 0.1)$divProf),
                length(seq(0, 3, by = 0.1)))
   expect_false(any(is.na(calcDivProf(sampleData = testSampData,
-                                     compDisMat = testCompDis)$divHillProf)))
+                                     compDisMat = testCompDis)$divProf)))
 
 })
 

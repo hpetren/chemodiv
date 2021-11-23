@@ -126,29 +126,29 @@ chemDivPlot <- function(compDisMat = NULL,
 
     if (is.null(groupData)) {
       warning("No grouping data provided")
-      groupData <- rep("NoGroup",nrow(divProfData$divHillProf))
+      groupData <- rep("NoGroup",nrow(divProfData$divProf))
     }
 
-    divHillProf <- divProfData$divHillProf # Extract the df from the list
+    divProf <- divProfData$divProf # Extract the df from the list
 
     # Get mean data in order
-    divHillProfMean1 <- stats::aggregate(divHillProf,
+    divProfMean1 <- stats::aggregate(divProf,
                                   by = list(Group = groupData), mean)
-    divHillProfMean2 <- as.data.frame(t(divHillProfMean1[,2:ncol(divHillProfMean1)]))
-    colnames(divHillProfMean2) <- divHillProfMean1$Group
+    divProfMean2 <- as.data.frame(t(divProfMean1[,2:ncol(divProfMean1)]))
+    colnames(divProfMean2) <- divProfMean1$Group
     qAll <- seq(from = divProfData$qMin, to = divProfData$qMax, by = divProfData$step)
-    divHillProfMean2$q <- qAll
-    divHillLong <- tidyr::pivot_longer(divHillProfMean2, 1:(ncol(divHillProfMean2)-1),
+    divProfMean2$q <- qAll
+    divHillLong <- tidyr::pivot_longer(divProfMean2, 1:(ncol(divProfMean2)-1),
                                 names_to = "Group", values_to = "Diversity")
 
     # Get individual sample data in order
-    divHillProfInd <- as.data.frame(t(divHillProf))
-    divHillProfInd$q <- qAll
-    divHillLongInd <- tidyr::pivot_longer(divHillProfInd, 1:(ncol(divHillProfInd)-1),
+    divProfInd <- as.data.frame(t(divProf))
+    divProfInd$q <- qAll
+    divHillLongInd <- tidyr::pivot_longer(divProfInd, 1:(ncol(divProfInd)-1),
                                    names_to = "Individual", values_to = "Diversity")
-    divHillLongInd$Group <- rep(groupData, length(unique(divHillProfInd$q)))
+    divHillLongInd$Group <- rep(groupData, length(unique(divProfInd$q)))
 
-    divHillProfrofPlot <- ggplot() +
+    divProfrofPlot <- ggplot() +
       geom_line(data = divHillLongInd, # Note use of both group and color nicely
                          aes_(x = ~q, y = ~Diversity, group = ~Individual, color = ~Group),
                 size = 0.5, alpha = 0.15) +
@@ -159,7 +159,7 @@ chemDivPlot <- function(compDisMat = NULL,
       ylab("(Functional) Hill Diversity") +
       theme(text = element_text(size=15))
 
-    allPlots[["divHillProfrofPlot"]] <- divHillProfrofPlot
+    allPlots[["divProfrofPlot"]] <- divProfrofPlot
 
   }
 
