@@ -18,20 +18,20 @@ Should have a column named "compound" with common names, and a column named
 
 \item{type}{Type of dissimilarity to calculate, NPClassifier,
 PubChemFingerprint or fMCS. If more than one is choosen, a mean of
-the included types will also be calculated}
+the included types will also be calculated.}
 
 \item{npcTable}{An already generated \code{\link{NPCTable}}
-can optionally be supplied}
+can optionally be supplied.}
 
 \item{unknownCompoundsMean}{If unknown compound should be given
 mean dissimilarity values. If not, these will have dissimilarity 1 to
-all other compounds}
+all other compounds.}
 }
 \value{
-List with compound dissimilarity matrices
+List with compound dissimilarity matrices.
 }
 \description{
-Function to calculate dissimilarities between compounds
+Function to calculate dissimilarities between compounds.
 }
 \details{
 This function calculates compound dissimilarities in three different ways:

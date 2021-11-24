@@ -5,13 +5,13 @@
 \alias{minimalCompDis}
 \title{Minimal compound dissimilarity matrix}
 \format{
-A 3x3 compound dissimilarity matrix
+A 3x3 compound dissimilarity matrix.
 }
 \usage{
 minimalCompDis
 }
 \description{
 A minimal matrix with compound dissimilarities calculated from
-PubChem Fingerprints for the compounds in \code{\link{minimalCompData}}
+PubChem Fingerprints for the compounds in \code{\link{minimalCompData}}.
 }
 \keyword{datasets}

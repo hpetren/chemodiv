@@ -11,16 +11,17 @@ sampleDis(sampleData, compDisMat = NULL, alpha = 1)
 
 \item{compDisMat}{Compound dissimilarity matrix, as calculated by
 \code{\link{compDis}}. If this is supplied UniFrac dissimilarities are
-calculated, otherwise Bray-Curtis distances are calculated}
+calculated, otherwise Bray-Curtis distances are calculated.}
 
 \item{alpha}{Alpha value used to calculate UniFracs. alpha can be set
 between 0 and 1. With alpha = 0 equal emphasis is put on every branch,
 With values closer to 1, more emphasis is put on high abundance branches.
-alpha = 0.5 strikes a balance. alpha 0.5 or 1 is recommended}
+alpha = 0.5 strikes a balance. alpha 0.5 or 1 is recommended,
+with alpha = 1 as default.}
 }
 \value{
 Sample dissimilarity matrix with Bray-Curtis or
-UniFrac dissimilarities
+UniFrac dissimilarities.
 }
 \description{
 Function to calculate dissimilarities between samples.

@@ -13,11 +13,11 @@ calcDivProf(sampleData, compDisMat = NULL, qMin = 0, qMax = 3, step = 0.1)
 \code{\link{compDis}}. Has to be supplied for calculations of
 Functional Hill diversity.}
 
-\item{qMin}{Minimum value of q}
+\item{qMin}{Minimum value of q.}
 
-\item{qMax}{Maximum value of q}
+\item{qMax}{Maximum value of q.}
 
-\item{step}{Step by which q will be calculated between qMin and qMax}
+\item{step}{Step by which q will be calculated between qMin and qMax.}
 }
 \value{
 List with a diversity profile data frame with samples as rows

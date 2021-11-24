@@ -1,6 +1,6 @@
 #' Calculate compound dissimilarities
 #'
-#' Function to calculate dissimilarities between compounds
+#' Function to calculate dissimilarities between compounds.
 #'
 #' This function calculates compound dissimilarities in three different ways:
 #' 1. Using the classification from NPClassifier, which largely correspond
@@ -21,14 +21,14 @@
 #' "smiles" with SMILES IDs for the compounds.
 #' @param type Type of dissimilarity to calculate, NPClassifier,
 #' PubChemFingerprint or fMCS. If more than one is choosen, a mean of
-#' the included types will also be calculated
+#' the included types will also be calculated.
 #' @param npcTable An already generated \code{\link{NPCTable}}
-#' can optionally be supplied
+#' can optionally be supplied.
 #' @param unknownCompoundsMean If unknown compound should be given
 #' mean dissimilarity values. If not, these will have dissimilarity 1 to
-#' all other compounds
+#' all other compounds.
 #'
-#' @return List with compound dissimilarity matrices
+#' @return List with compound dissimilarity matrices.
 #'
 #' @export
 #'
@@ -55,7 +55,7 @@ compDis <- function(compoundData,
 
     if (is.null(npcTable)) { # If we don't already have the table
 
-      if(any(is.na(compoundData$inchikey))){
+      if(any(is.na(compoundData$inchikey))) {
         message("NPClassifier calculations: There are compounds with missing SMILES")
       }
 
@@ -131,11 +131,11 @@ compDis <- function(compoundData,
       for (j in which(colnames(npcTable) == "pathway"):ncol(npcTable)) {
         # For each classification (from pathway and onwards)
 
-        if (npcTable[i,j] %in% colnames(npcTableW)) {
+        if (npcTable[i, j] %in% colnames(npcTableW)) {
           # If the name already exist as column in npcTableW
 
           # Get column number and then add 1 in correct column
-          colNumber <- match(npcTable[i,j], colnames(npcTableW))
+          colNumber <- match(npcTable[i, j], colnames(npcTableW))
           npcTableW[i, colNumber] <- 1
 
         } else if (!is.na(npcTable[i,j])) {
@@ -210,8 +210,8 @@ compDis <- function(compoundData,
     npcTableW[is.na(npcTableW)] <- 0
 
     # Making distance matrix out of it
-    npcDisMat <- as.matrix(vegan::vegdist(npcTableW[,2:ncol(npcTableW)],
-                                       method = "jaccard"))
+    npcDisMat <- as.matrix(vegan::vegdist(npcTableW[, 2:ncol(npcTableW)],
+                                          method = "jaccard"))
 
     colnames(npcDisMat) <- npcTableW$compound
     rownames(npcDisMat) <- npcTableW$compound
@@ -230,11 +230,11 @@ compDis <- function(compoundData,
 
     # If one decides to set unknown compounds to mean values.
     # Done for both known-unknown and unknown-unknown pairs
-    if (unknownCompoundsMean & pathwayNA) {
+    if (unknownCompoundsMean && pathwayNA) {
 
       # Subsetting only known compounds
       npcKnown <- npcDisMat[-which(is.na(npcTable$pathway)),
-                         -which(is.na(npcTable$pathway))]
+                            -which(is.na(npcTable$pathway))]
 
       # mean compound dissimilarity of known compounds
       meanDis <- mean(npcKnown[lower.tri(npcKnown)], na.rm = TRUE)
@@ -260,8 +260,8 @@ compDis <- function(compoundData,
 
     # Getting CID from inchikey
     compoundCID <- webchem::get_cid(query = compoundData$inchikey,
-                           from = "inchikey",
-                           match = "first")
+                                    from = "inchikey",
+                                    match = "first")
 
     # If there are NA cid (due to NA inchikey) pubchemCidToSDF can't handle NAs
     if(any(is.na(compoundCID$cid))) { # if at least 1 NA
@@ -373,8 +373,8 @@ compDis <- function(compoundData,
       fmcsSimMat <- sapply(ChemmineR::cid(compoundSDF),
                            function(x) fmcsR::fmcsBatch(compoundSDF[x],
                                                  compoundSDF,
-                                                 au=1,
-                                                 bu=1)[,"Tanimoto_Coefficient"])
+                                                 au = 1,
+                                                 bu = 1)[,"Tanimoto_Coefficient"])
 
       meanSim <- mean(fmcsSimMat[lower.tri(fmcsSimMat)])
 
@@ -429,8 +429,8 @@ compDis <- function(compoundData,
       fmcsSimMat <- sapply(ChemmineR::cid(compoundSDF),
                            function(x) fmcsR::fmcsBatch(compoundSDF[x],
                                                  compoundSDF,
-                                                 au=1,
-                                                 bu=1)[,"Tanimoto_Coefficient"])
+                                                 au = 1,
+                                                 bu = 1)[,"Tanimoto_Coefficient"])
     }
 
     fmcsDisMat <- 1 - fmcsSimMat

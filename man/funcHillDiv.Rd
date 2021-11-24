@@ -7,17 +7,17 @@
 funcHillDiv(data, Dij, q)
 }
 \arguments{
-\item{data}{Dataset. Can be proportional or absolute data}
+\item{data}{Dataset. Can be proportional or absolute data.}
 
-\item{Dij}{Dissimilarity matrix}
+\item{Dij}{Dissimilarity matrix.}
 
-\item{q}{Diversity order}
+\item{q}{Diversity order.}
 }
 \value{
-Functional Hill diversity (FD)
+Functional Hill diversity (FD).
 }
 \description{
 Function to calculate Functional Hill diversity, as in equations
 4b and 6b (for alpha, not gamma) in Chiu & Chao 2014 Plos One.
-Note that this is done for one sample (row)
+Note that this is done for one sample (row).
 }

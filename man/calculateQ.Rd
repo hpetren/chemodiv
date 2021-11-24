@@ -7,14 +7,14 @@
 calculateQ(data, Dij)
 }
 \arguments{
-\item{data}{Dataset. Can be proportional or absolute data}
+\item{data}{Dataset. Can be proportional or absolute data.}
 
-\item{Dij}{Dissimilarity matrix}
+\item{Dij}{Dissimilarity matrix.}
 }
 \value{
-Value of Rao's Q
+Value of Rao's Q.
 }
 \description{
 Function to calculate Rao's Q.
-Note that this is done for one sample (row)
+Note that this is done for one sample (row).
 }

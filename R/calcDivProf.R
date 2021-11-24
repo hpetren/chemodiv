@@ -7,9 +7,9 @@
 #' @param compDisMat Compound distance matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
 #' Functional Hill diversity.
-#' @param qMin Minimum value of q
-#' @param qMax Maximum value of q
-#' @param step Step by which q will be calculated between qMin and qMax
+#' @param qMin Minimum value of q.
+#' @param qMax Maximum value of q.
+#' @param step Step by which q will be calculated between qMin and qMax.
 #'
 #' @return List with a diversity profile data frame with samples as rows
 #' and the (Functional) Hill diversity at different q values as columns;
@@ -29,10 +29,15 @@ calcDivProf <- function(sampleData,
                         qMax = 3,
                         step = 0.1) {
 
-  if(qMin < 0) stop("qMin should be >= 0")
-  if(qMin > qMax) stop("qMin should be smaller than qMax")
-  if((step <= 0) | (step > (qMax - qMin)))
+  if(qMin < 0) {
+    stop("qMin should be >= 0")
+  }
+  if(qMin > qMax) {
+    stop("qMin should be smaller than qMax")
+  }
+  if((step <= 0) || (step > (qMax - qMin))) {
     stop("step must be > 0 and less than qMax - qMin")
+  }
 
   # Creating datasets to store diversity values
   qAll <- seq(from = qMin, to = qMax, by = step)
@@ -44,12 +49,12 @@ calcDivProf <- function(sampleData,
   for (c in 1:length(qAll)) { # For each column
     for (r in 1:nrow(divProf)) { # For each row
       if (!is.null(compDisMat)) {
-        divProf[r,c] <- funcHillDiv(data = sampleData[r,],
-                                    Dij = compDisMat,
-                                    q = qAll[c])
+        divProf[r, c] <- funcHillDiv(data = sampleData[r,],
+                                     Dij = compDisMat,
+                                     q = qAll[c])
       } else {
-        divProf[r,c] <- hillR::hill_taxa(sampleData[r,],
-                                         q = qAll[c])
+        divProf[r, c] <- hillR::hill_taxa(sampleData[r,],
+                                          q = qAll[c])
       }
     }
   }

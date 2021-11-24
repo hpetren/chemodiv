@@ -17,6 +17,6 @@ third column is the InChIKey (International Chemical Identifier).
 alpinaCompSubset
 }
 \description{
-A dataset listing the compounds found in \code{\link{alpinaDataSubset}}
+A dataset listing the compounds found in \code{\link{alpinaDataSubset}}.
 }
 \keyword{datasets}

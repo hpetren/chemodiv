@@ -8,14 +8,15 @@
 #' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. If this is supplied UniFrac dissimilarities are
-#' calculated, otherwise Bray-Curtis distances are calculated
+#' calculated, otherwise Bray-Curtis distances are calculated.
 #' @param alpha Alpha value used to calculate UniFracs. alpha can be set
 #' between 0 and 1. With alpha = 0 equal emphasis is put on every branch,
 #' With values closer to 1, more emphasis is put on high abundance branches.
-#' alpha = 0.5 strikes a balance. alpha 0.5 or 1 is recommended
+#' alpha = 0.5 strikes a balance. alpha 0.5 or 1 is recommended,
+#' with alpha = 1 as default.
 #'
 #' @return Sample dissimilarity matrix with Bray-Curtis or
-#' UniFrac dissimilarities
+#' UniFrac dissimilarities.
 #'
 #' @export
 #'
@@ -29,8 +30,8 @@ sampleDis <- function(sampleData,
                       alpha = 1) {
 
   if(!is.null(compDisMat)) {
-    if(!(all(colnames(sampleData) == colnames(compDisMat)) &
-        all(colnames(sampleData) == rownames(compDisMat)))){
+    if(!(all(colnames(sampleData) == colnames(compDisMat)) &&
+        all(colnames(sampleData) == rownames(compDisMat)))) {
       stop("The sampleData column names, compDisMat column names and
            compDisMat row names must all be identical.")
     }
@@ -47,7 +48,6 @@ sampleDis <- function(sampleData,
     # GUniFrac() returns a list with an array. Seem unnecessarily complicated,
     # so syntax becomes a bit strange
     # Suppressing the warnings about NaNs produced for d_VAW
-
     uniFracs <- suppressWarnings(GUniFrac::GUniFrac(otu.tab = sampleData,
                                                     tree = disClustPhylo,
                                                     alpha = alpha))

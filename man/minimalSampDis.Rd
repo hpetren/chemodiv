@@ -5,7 +5,7 @@
 \alias{minimalSampDis}
 \title{Minimal sample dissimilarity matrix}
 \format{
-A 4x4 sample dissimilarity matrix
+A 4x4 sample dissimilarity matrix.
 }
 \usage{
 minimalSampDis
@@ -13,7 +13,6 @@ minimalSampDis
 \description{
 A minimal matrix with sample dissimilarities calculated from
 \code{\link{minimalSampData}} and \code{\link{minimalCompDis}}
-using UniFracs with alpha = 0.5
-(and UPGMA clustering)
+using UniFracs with alpha = 0.5 (and UPGMA clustering).
 }
 \keyword{datasets}

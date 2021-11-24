@@ -17,10 +17,10 @@ calculations of Functional Hill diversity or Rao's Q.}
 \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
 "HillEven", "RaoQ"}.}
 
-\item{q}{Diversity order to use for (Functional) Hill diversity}
+\item{q}{Diversity order to use for (Functional) Hill diversity.}
 }
 \value{
-Data frame with calculated diversity/evenness for each sample
+Data frame with calculated diversity/evenness for each sample.
 }
 \description{
 Function to calculate Hill diveristy, Functional Hill diversity,

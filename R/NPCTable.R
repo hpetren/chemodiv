@@ -6,8 +6,6 @@
 #'
 #' Connects to \url{https://npclassifier.ucsd.edu/}
 #'
-#' @usage NPCTable(compoundData)
-#'
 #' @param compoundData Data frame with the chemical compounds of interest.
 #' Should have a column named "compound" with common names, and a column named
 #' "smiles" with isomeric or canonical SMILES IDs for the compounds.
@@ -102,6 +100,6 @@ NPCTable <- function(compoundData) {
     stop("No compounds could be classified")
   }
   # Removes columns that are only NA
-  npcTab <- npcTab[,colSums(is.na(npcTab)) < nrow(npcTab)]
+  npcTab <- npcTab[, colSums(is.na(npcTab)) < nrow(npcTab)]
   return(npcTab)
 }

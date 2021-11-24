@@ -13,20 +13,20 @@ calcBetaDiv(sampleData, compDisMat = NULL, q = 1)
 \code{\link{NPCTable}}. Has to be supplied for
 calculations of Functional Hill beta-diversity.}
 
-\item{q}{Diversity order to use for (Functional) Hill diversity}
+\item{q}{Diversity order to use for (Functional) Hill diversity.}
 }
 \value{
-Data frame with alpha-, beta- and gamma-diversity
+Data frame with alpha-, beta- and gamma-diversity.
 }
 \description{
 Function to calculate Hill beta-diversity or Functional Hill beta-diversity.
 Done with hillR:hill_taxa_parti, see that for details. In essence,
-beta = gamma/alpha, and one value is generated for the whole data set
+beta = gamma/alpha, and one value is generated for the whole data set.
 }
 \details{
 Hill beta-diversity is calculated if compDisMat is not supplied,
 Functional Hill beta-diversity is calculated if compDisMat is supplied.
-The gamma- and alpha-diversity values used to calculate beta are also output
+The gamma- and alpha-diversity values used to calculate beta are also output.
 }
 \examples{
 data(minimalSampData)

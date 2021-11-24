@@ -20,17 +20,17 @@ molNetPlot(
 which has to be taken from the list.}
 
 \item{groupData}{Grouping data. If supplied, a separate network will be
-created for each group}
+created for each group.}
 
 \item{npcTable}{An \code{\link{NPCTable}} can optionally be supplied.
 This will result in network nodes being coloured by their
-NPC pathway classification}
+NPC pathway classification.}
 
 \item{plotNames}{Indicates if compounds names should be included
 in the molecular network plot.}
 }
 \value{
-Molecular network(s) created with ggraph
+Molecular network(s) created with ggraph.
 }
 \description{
 Function to conveniently create a basic plot of the molecular network

@@ -1,7 +1,7 @@
 #' Generate molecular network with properties
 #'
 #' Function which generates a molecular network object, and some
-#' basic properties of the network/dissimilarity matrix
+#' basic properties of the network/dissimilarity matrix.
 #'
 #' Note that the supplied dissimilarity matrix is translated to a
 #' similarity matrix, and this is what cutOff values are set for.
@@ -9,7 +9,7 @@
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}.
 #' @param npcTable An already generated \code{\link{NPCTable}} can be supplied
-#' for calculations of the number of NPC pathways and network modularity
+#' for calculations of the number of NPC pathways and network modularity.
 #' @param cutOff Cut-off value for compound similarities. Any similarity
 #' lower than this value will be set to zero when the network is generated,
 #' which strongly affects the look of the network. The value can be set
@@ -33,10 +33,10 @@ molNet <- function(compDisMat,
                    npcTable = NULL,
                    cutOff = "median") {
 
-  if (is.numeric(cutOff) & ((cutOff < 0) | (cutOff > 1))){
+  if (is.numeric(cutOff) & ((cutOff < 0) | (cutOff > 1))) {
     stop("Numeric values for cutOff must be between 0 and 1")
   }
-  if (is.character(cutOff) & !(cutOff == "median" | cutOff == "minPathway")){
+  if (is.character(cutOff) & !(cutOff == "median" | cutOff == "minPathway")) {
     stop("cutOff must be a value between 0 and 1, median or minPathway")
   }
 
@@ -61,7 +61,7 @@ molNet <- function(compDisMat,
     message(paste("Using cut-off value =", cutOff))
     compSimMat[compSimMat < cutOff] <- 0
 
-  } else if (cutOff == "minPathway" & !is.null(npcTable)) {
+  } else if (cutOff == "minPathway" && !is.null(npcTable)) {
 
     message("Using lowest within-pathway similarity as cut-off")
     minIntraPath <- max(compSimMat)
@@ -70,7 +70,7 @@ molNet <- function(compDisMat,
     for (col in 1:(ncol(compSimMat)-1)) {
       for (row in (col+1):nrow(compSimMat)) {
         # Lower triangle
-        if (!is.na(npcTable$pathway[col]) & !is.na(npcTable$pathway[row]) &
+        if (!is.na(npcTable$pathway[col]) && !is.na(npcTable$pathway[row]) &&
             npcTable$pathway[col] == npcTable$pathway[row]) {
           # If both are not NA and compounds are from the same pathway
           simValue <- compSimMat[row,col]
@@ -83,7 +83,7 @@ molNet <- function(compDisMat,
     }
     compSimMat[compSimMat < minIntraPath] <- 0
 
-  } else if (cutOff == "minPathway" & is.null(npcTable)) {
+  } else if (cutOff == "minPathway" && is.null(npcTable)) {
     stop("Using minPathway as cut-off requires npcTable")
   }
 

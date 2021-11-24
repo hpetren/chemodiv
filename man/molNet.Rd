@@ -11,7 +11,7 @@ molNet(compDisMat, npcTable = NULL, cutOff = "median")
 \code{\link{compDis}}.}
 
 \item{npcTable}{An already generated \code{\link{NPCTable}} can be supplied
-for calculations of the number of NPC pathways and network modularity}
+for calculations of the number of NPC pathways and network modularity.}
 
 \item{cutOff}{Cut-off value for compound similarities. Any similarity
 lower than this value will be set to zero when the network is generated,
@@ -28,7 +28,7 @@ the mean similarity of the compounds, number of NPC pathways and modularity.
 }
 \description{
 Function which generates a molecular network object, and some
-basic properties of the network/dissimilarity matrix
+basic properties of the network/dissimilarity matrix.
 }
 \details{
 Note that the supplied dissimilarity matrix is translated to a

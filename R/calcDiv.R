@@ -20,9 +20,9 @@
 #' @param type Type of diversity or evenness to calculate. Any of
 #' \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
 #' "HillEven", "RaoQ"}.
-#' @param q Diversity order to use for (Functional) Hill diversity
+#' @param q Diversity order to use for (Functional) Hill diversity.
 #'
-#' @return Data frame with calculated diversity/evenness for each sample
+#' @return Data frame with calculated diversity/evenness for each sample.
 #'
 #' @references Chao's and other papers
 #'
@@ -47,11 +47,13 @@ calcDiv <- function(sampleData,
     stop("Provide one type of diversity/evenness to calculate:
          HillDiv, FuncHillDiv, Shannon, Simpson, PielouEven, HillEven or RaoQ")
   }
-  if(is.null(compDisMat) & ("FuncHillDiv" %in% type | "RaoQ" %in% type)) {
+  if(is.null(compDisMat) && ("FuncHillDiv" %in% type || "RaoQ" %in% type)) {
     stop("A compound dissimilarity matrix must be supplied
          when calculating Functional Hill diversity or Rao's Q")
   }
-  if(q < 0) stop("q must be >= 0")
+  if(q < 0) {
+    stop("q must be >= 0")
+  }
 
   divData <- as.data.frame(matrix(data = NA,
                                   nrow = nrow(sampleData),

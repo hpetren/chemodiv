@@ -17,17 +17,17 @@
 #'
 #' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param groupData Grouping data. If supplied, a separate network will be
-#' created for each group
+#' created for each group.
 #' @param networkObject tidygraph network object, as created by the
 #' \code{\link{molNet}} function. Note that this is only the network object,
 #' which has to be taken from the list.
 #' @param npcTable An \code{\link{NPCTable}} can optionally be supplied.
 #' This will result in network nodes being coloured by their
-#' NPC pathway classification
+#' NPC pathway classification.
 #' @param plotNames Indicates if compounds names should be included
 #' in the molecular network plot.
 #'
-#' @return Molecular network(s) created with ggraph
+#' @return Molecular network(s) created with ggraph.
 #'
 #' @export
 #'
@@ -52,17 +52,17 @@ molNetPlot <- function(sampleData,
   # and if not specific, this will be assigned to groupData
   # This checks what kind was inputted, and makes it correct. Although
   # there should be a better solution for this.
-  if((is.null(groupData) | is.null(npcTable)) &
+  if((is.null(groupData) || is.null(npcTable)) &&
      "pathway" %in% colnames(groupData)) {
     npcTable <- groupData
     groupData <- NULL
   }
 
-  if (!is.null(groupData) & plotNames) {
+  if (!is.null(groupData) && plotNames) {
     stop("Names can only be plotted without grouping data")
   }
 
-  if (is.null(groupData) & is.null(npcTable) & !plotNames) {
+  if (is.null(groupData) && is.null(npcTable) && !plotNames) {
     # One network
 
     compoundMean <- colMeans(sampleData)
@@ -76,7 +76,7 @@ molNetPlot <- function(sampleData,
 
     networkList <- list(p1)
 
-  } else if (is.null(groupData) & is.null(npcTable) & plotNames) {
+  } else if (is.null(groupData) && is.null(npcTable) && plotNames) {
     # One network with names
 
     compoundMean <- colMeans(sampleData)
@@ -91,7 +91,7 @@ molNetPlot <- function(sampleData,
 
     networkList <- list(p1)
 
-  } else if (is.null(groupData) & !is.null(npcTable) & !plotNames) {
+  } else if (is.null(groupData) && !is.null(npcTable) && !plotNames) {
     # One network with NPC
 
     # One of these is probably the best one
@@ -107,7 +107,7 @@ molNetPlot <- function(sampleData,
 
     networkList <- list(p1)
 
-  } else if (is.null(groupData) & !is.null(npcTable) & plotNames) {
+  } else if (is.null(groupData) && !is.null(npcTable) && plotNames) {
     # One network with names and NPC
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
@@ -119,7 +119,7 @@ molNetPlot <- function(sampleData,
 
     networkList <- list(p1)
 
-  } else if (!is.null(groupData) & !is.null(npcTable)) {
+  } else if (!is.null(groupData) && !is.null(npcTable)) {
     # Both group and NPC
 
     # Calculating average per compound per group. Note that this is
@@ -127,7 +127,7 @@ molNetPlot <- function(sampleData,
     compoundMean <- stats::aggregate(sampleData,
                                      by = list(Group = groupData),
                                      mean)
-    compoundMeanTrans <- t(compoundMean[,2:ncol(compoundMean)])
+    compoundMeanTrans <- t(compoundMean[, 2:ncol(compoundMean)])
     colnames(compoundMeanTrans) <- compoundMean$Group
     compoundMeanTrans <- as.data.frame(compoundMeanTrans)
 
@@ -154,7 +154,7 @@ molNetPlot <- function(sampleData,
     # Only group data
 
     compoundMean <- stats::aggregate(sampleData, by = list(Group = groupData), mean)
-    compoundMeanTrans <- t(compoundMean[,2:ncol(compoundMean)])
+    compoundMeanTrans <- t(compoundMean[, 2:ncol(compoundMean)])
     colnames(compoundMeanTrans) <- compoundMean$Group
     compoundMeanTrans <- as.data.frame(compoundMeanTrans)
 
@@ -187,5 +187,6 @@ molNetPlot <- function(sampleData,
   # Sticking with the normal grid.arrange, which always make so a plot
   # is made, even if function output is saved as variable (so function
   # behaves like plot() does).
-  return(gridExtra::grid.arrange(grobs = networkList, nrow = ceiling(sqrt(length(networkList)))))
+  return(gridExtra::grid.arrange(grobs = networkList,
+                                 nrow = ceiling(sqrt(length(networkList)))))
 }
