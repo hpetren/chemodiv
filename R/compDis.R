@@ -23,14 +23,29 @@
 #' PubChemFingerprint or fMCS. If more than one is choosen, a mean of
 #' the included types will also be calculated.
 #' @param npcTable An already generated \code{\link{NPCTable}}
-#' can optionally be supplied.
-#' @param unknownCompoundsMean If unknown compound should be given
-#' mean dissimilarity values. If not, these will have dissimilarity 1 to
-#' all other compounds.
+#' can optionally be supplied. If compound distances are to be calculated using
+#' the NPC-classification and NPClassifier is unable to fully classify
+#' all compounds, it might be beneficial to run \code{\link{NPCTable}},
+#' manually edit the resulting data frame with probable classifications if
+#' possible (from the SI in Kim et al. 2021), and then supply this
+#' classification to \code{compDis()} with the npcTable argument. This will ensure
+#' that compound dissimilarities are computed optimally.
+#'
+#' @param unknownCompoundsMean If unknown compounds, i.e. ones without SMILES,
+#' should be given mean dissimilarity values. If not, these will have
+#' dissimilarity 1 to all other compounds.
 #'
 #' @return List with compound dissimilarity matrices.
 #'
 #' @export
+#'
+#' @references
+#' Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,
+#' J. J. J. van der Hooft, P. C. Dorrestein, W. H. Gerwick,
+#' and G. W. Cottrell. 2021. NPClassifier: A Deep Neural Network-Based
+#' Structural Classification Tool for Natural Products.
+#' Journal of Natural Products:acs.jnatprod.1c00399.
+#' UPDATE WITH FULL REF WHEN AVAILABLE
 #'
 #' @examples
 #' data(minimalCompData)
@@ -54,10 +69,6 @@ compDis <- function(compoundData,
     message("Calculating compound dissimilarity matrix using NPClassifier...")
 
     if (is.null(npcTable)) { # If we don't already have the table
-
-      if(any(is.na(compoundData$inchikey))) {
-        message("NPClassifier calculations: There are compounds with missing SMILES")
-      }
 
       npcTable <- compoundData
 
@@ -117,10 +128,36 @@ compDis <- function(compoundData,
             }
             # If the output from NPClassifier API is not as expected
           } else {
-            message(paste("Compound", i, "could not be classified at all
-                      for NPClassifier. Is the SMILES correct?"))
+            message(paste("NPClassifier produced error output for Compound", i,
+                          "Is the SMILES correct?"))
           }
         }
+      }
+    }
+
+    # If there are NAs, then inform about this
+    if (any(is.na(npcTable$pathway)) ||
+        any(is.na(npcTable$superclass)) ||
+        any(is.na(npcTable$class))) {
+      message("NPClassifier calculations:
+              There are compounds completely or partially not classified by
+              NPClassifier due to missing SMILES and/or NPClassifier not
+              producing full classifications for all compounds.
+              If possible, consider adding classifications manually for these
+              before running compDis() for optimal results.
+              See ?compDis for details.")
+    }
+
+    # Replace all superclass and class NA with pseudo-variables.
+    # Note that we're not replacing things for compounds with missing pathways.
+    # These compounds with missing SMILES or with SMILES but without pathway
+    # are treated equally and below given 1 or mean dissim to other comps)
+    for (i in 1:nrow(npcTable)) {
+      if (is.na(npcTable$superclass[i]) && !is.na(npcTable$pathway[i])) {
+        npcTable$superclass[i] <- paste("superclass", npcTable$compound[i], sep = "_")
+      }
+      if (is.na(npcTable$class[i]) && !is.na(npcTable$pathway[i])) {
+        npcTable$class[i] <- paste("class", npcTable$compound[i], sep = "_")
       }
     }
 
@@ -222,15 +259,9 @@ compDis <- function(compoundData,
     # known compounds)
     npcDisMat[is.nan(npcDisMat)] <- 1
 
-    # Print warning if there are NA's in pathway
-    pathwayNA <- any(is.na(npcTable$pathway))
-    if(pathwayNA){
-      message("There were compounds not classfied by NPClassifier")
-    }
-
     # If one decides to set unknown compounds to mean values.
     # Done for both known-unknown and unknown-unknown pairs
-    if (unknownCompoundsMean && pathwayNA) {
+    if (unknownCompoundsMean && any(is.na(npcTable$pathway))) {
 
       # Subsetting only known compounds
       npcKnown <- npcDisMat[-which(is.na(npcTable$pathway)),

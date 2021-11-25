@@ -21,11 +21,17 @@ PubChemFingerprint or fMCS. If more than one is choosen, a mean of
 the included types will also be calculated.}
 
 \item{npcTable}{An already generated \code{\link{NPCTable}}
-can optionally be supplied.}
+can optionally be supplied. If compound distances are to be calculated using
+the NPC-classification and NPClassifier is unable to fully classify
+all compounds, it might be beneficial to run \code{\link{NPCTable}},
+manually edit the resulting data frame with probable classifications if
+possible (from the SI in Kim et al. 2021), and then supply this
+classification to \code{compDis()} with the npcTable argument. This will ensure
+that compound dissimilarities are computed optimally.}
 
-\item{unknownCompoundsMean}{If unknown compound should be given
-mean dissimilarity values. If not, these will have dissimilarity 1 to
-all other compounds.}
+\item{unknownCompoundsMean}{If unknown compounds, i.e. ones without SMILES,
+should be given mean dissimilarity values. If not, these will have
+dissimilarity 1 to all other compounds.}
 }
 \value{
 List with compound dissimilarity matrices.
@@ -52,4 +58,12 @@ values directly (allowing for one atom and one bond mismatch).
 \examples{
 data(minimalCompData)
 compDis(minimalCompData)
+}
+\references{
+Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,
+J. J. J. van der Hooft, P. C. Dorrestein, W. H. Gerwick,
+and G. W. Cottrell. 2021. NPClassifier: A Deep Neural Network-Based
+Structural Classification Tool for Natural Products.
+Journal of Natural Products:acs.jnatprod.1c00399.
+UPDATE WITH FULL REF WHEN AVAILABLE
 }

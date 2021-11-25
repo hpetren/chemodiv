@@ -90,8 +90,8 @@ NPCTable <- function(compoundData) {
         }
         # If the output from NPClassifier API is not as expected
       } else {
-        message(paste("Compound", i, "could not be classified at all.
-                      Is the SMILES correct?"))
+        message(paste("NPClassifier produced error output for Compound", i,
+                      "Is the SMILES correct?"))
       }
     }
   }
