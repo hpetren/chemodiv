@@ -13,7 +13,7 @@ calcDiv(sampleData, compDisMat = NULL, type = "HillDiv", q = 1)
 \code{\link{compDis}}. Has to be supplied for
 calculations of Functional Hill diversity or Rao's Q.}
 
-\item{type}{Type of diversity or evenness to calculate. Any of
+\item{type}{Type(s) of diversity or evenness to calculate. Any of
 \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
 "HillEven", "RaoQ"}.}
 
@@ -41,6 +41,7 @@ Rao's Q:
 data(minimalSampData)
 data(minimalCompDis)
 calcDiv(sampleData = minimalSampData)
+calcDiv(sampleData = minimalSampData, type = c("HillDiv", "HillEven"))
 calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
 type = "FuncHillDiv", q = 2)
 }

@@ -38,25 +38,13 @@
 #' groups <- c("A", "A", "B", "B")
 #' molNetPlot(minimalSampData, minimalMolNet)
 #' molNetPlot(minimalSampData, minimalMolNet, groups)
-#' molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable)
+#' molNetPlot(minimalSampData, minimalMolNet, npcTable = minimalNPCTable)
 #' molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 molNetPlot <- function(sampleData,
                        networkObject,
                        groupData = NULL,
                        npcTable = NULL,
                        plotNames = FALSE) {
-
-  # If one does not use groupData = , or npcTable = , in function input
-  # then these can become mixed as you only have to supply one.
-  # I.e. third input could be either the grouping data or the NPC,
-  # and if not specific, this will be assigned to groupData
-  # This checks what kind was inputted, and makes it correct. Although
-  # there should be a better solution for this.
-  if((is.null(groupData) || is.null(npcTable)) &&
-     "pathway" %in% colnames(groupData)) {
-    npcTable <- groupData
-    groupData <- NULL
-  }
 
   if (!is.null(groupData) && plotNames) {
     stop("Names can only be plotted without grouping data")
@@ -69,8 +57,8 @@ molNetPlot <- function(sampleData,
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
       ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
-      ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 8) +
+      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+      ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion", width = "Molecular similarity")
 
@@ -83,11 +71,11 @@ molNetPlot <- function(sampleData,
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
       ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
-      ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 8) +
+      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+      ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
-      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.1)
+      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
 
     networkList <- list(p1)
 
@@ -99,10 +87,14 @@ molNetPlot <- function(sampleData,
     # ggraph(graph = networkObject, layout = "igraph", algorithm = "kk")
     # ggraph(graph = networkObject, layout = "igraph", algorithm = "nicely")
 
+    compoundMean <- colMeans(sampleData)
+
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
       ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
-      ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway), size = 8) +
+      ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
+                                           size = compoundMean)) +
+      ggplot2::scale_size(range = c(6, 16)) +
       ggplot2::labs(color = "Pathway", width = "Molecular similarity")
 
     networkList <- list(p1)
@@ -110,12 +102,16 @@ molNetPlot <- function(sampleData,
   } else if (is.null(groupData) && !is.null(npcTable) && plotNames) {
     # One network with names and NPC
 
+    compoundMean <- colMeans(sampleData)
+
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
       ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
-      ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway), size = 8) +
+      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+      ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
+                                           size = compoundMean)) +
+      ggplot2::scale_size(range = c(6, 16)) +
       ggplot2::labs(color = "Pathway", width = "Molecular similarity") +
-      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.1)
+      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
 
     networkList <- list(p1)
 
@@ -139,10 +135,10 @@ molNetPlot <- function(sampleData,
 
         p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
           ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
-          ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
+          ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                               size = compoundMeanTrans[,j])) +
-          ggplot2::scale_size(range = c(2, 10)) +
+          ggplot2::scale_size(range = c(2, 12)) +
           ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j])
 
@@ -166,8 +162,8 @@ molNetPlot <- function(sampleData,
 
         p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
           ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
-          ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
-          ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 8) +
+          ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+          ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 12) +
           ggplot2::scale_colour_viridis_c() +
           ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j])

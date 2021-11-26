@@ -17,7 +17,7 @@
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for
 #' calculations of Functional Hill diversity or Rao's Q.
-#' @param type Type of diversity or evenness to calculate. Any of
+#' @param type Type(s) of diversity or evenness to calculate. Any of
 #' \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
 #' "HillEven", "RaoQ"}.
 #' @param q Diversity order to use for (Functional) Hill diversity.
@@ -32,6 +32,7 @@
 #' data(minimalSampData)
 #' data(minimalCompDis)
 #' calcDiv(sampleData = minimalSampData)
+#' calcDiv(sampleData = minimalSampData, type = c("HillDiv", "HillEven"))
 #' calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
 #' type = "FuncHillDiv", q = 2)
 calcDiv <- function(sampleData,
@@ -39,12 +40,9 @@ calcDiv <- function(sampleData,
                     type = "HillDiv",
                     q = 1) {
 
-  if(length(type) > 1) {
-    stop("Provide only one type of diveristy/evenness to calculate")
-  }
   if (!(any(c("HillDiv", "FuncHillDiv", "Shannon", "Simpson",
               "PielouEven", "HillEven", "RaoQ") %in% type))) {
-    stop("Provide one type of diversity/evenness to calculate:
+    stop("Provide at least one type of diversity/evenness to calculate:
          HillDiv, FuncHillDiv, Shannon, Simpson, PielouEven, HillEven or RaoQ")
   }
   if(is.null(compDisMat) && ("FuncHillDiv" %in% type || "RaoQ" %in% type)) {

@@ -94,6 +94,10 @@ chemDivPlot <- function(compDisMat = NULL,
     }
     divDatadf$Group <- groupData
 
+    # Plot(s). Note that if a single column from df with multiple columns
+    # is indata, then y-axis is not specified. I don't think this can be solved
+    # as then it's only a vector, but it's not a big problem, so keeping it
+    # like this
     for (i in 1:(ncol(divDatadf)-1)) {
       allPlots[[paste0("divPlot", colnames(divDatadf)[i])]] <- local({
         i <- i

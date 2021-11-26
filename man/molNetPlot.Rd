@@ -56,6 +56,6 @@ data(minimalNPCTable)
 groups <- c("A", "A", "B", "B")
 molNetPlot(minimalSampData, minimalMolNet)
 molNetPlot(minimalSampData, minimalMolNet, groups)
-molNetPlot(minimalSampData, minimalMolNet, minimalNPCTable)
+molNetPlot(minimalSampData, minimalMolNet, npcTable = minimalNPCTable)
 molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 }
