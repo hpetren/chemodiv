@@ -1,7 +1,4 @@
-# This requires a graph object. So I'm first running molNet here.
-# This should work I think, as for tests, testthat.R is ran,
-# which has library(chemdiv), so using other functions in this test-script
-# I guess should be fine
+# This requires a graph object, so first running molNet here
 testCompDis <- matrix(data = c(0,0.6,0.7,0.6,0,0.3,0.7,0.3,0), nrow = 3)
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
@@ -13,6 +10,7 @@ testNpcTable <- data.frame(compound = c("compA", "compB", "compC"),
                            pathway = c("Path1", "Path1", "Path2"))
 
 testMolNet <- molNet(testCompDis)
+
 
 test_that("network plot is generated", {
   expect_match(typeof(molNetPlot(testSampData,
