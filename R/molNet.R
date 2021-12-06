@@ -93,6 +93,7 @@ molNet <- function(compDisMat,
   # Number of compounds
   nCompounds <- nrow(compSimMatFull)
 
+  # Maybe remove this since we added FAD.
   # Mean similarity. This is done on FULL matrix (not cut-off) as
   # that makes more sense (you want the mean similarity of the full bouquet,
   # not an arbitrarily cut-off one). Kept as similarity instead of

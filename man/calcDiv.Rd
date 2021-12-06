@@ -15,7 +15,7 @@ calculations of Functional Hill diversity or Rao's Q.}
 
 \item{type}{Type(s) of diversity or evenness to calculate. Any of
 \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
-"HillEven", "RaoQ"}.}
+"HillEven", "RaoQ", "FAD"}.}
 
 \item{q}{Diversity order to use for (Functional) Hill diversity.}
 }
@@ -24,18 +24,19 @@ Data frame with calculated diversity/evenness for each sample.
 }
 \description{
 Function to calculate Hill diveristy, Functional Hill diversity,
-Shannon's diveristy, Simpson diveristy, Pielou's evenness, Hill evenness
-and Rao's Q.
+Shannon's diveristy, Simpson diveristy, Pielou's evenness, Hill evenness,
+Rao's Q and Functional Attribute Diversity (FAD).
 }
 \details{
 Add details here
 Hill diversity:
-Functional Hill diversity:
+Functional Hill diversity: With compound matrix.
 Shannon's diversity:
 Simpson diversity:
 Pielou's evenness:
 Hill evenness:
-Rao's Q:
+Rao's Q: With compound matrix.
+FAD: Functional Attribute Diversity.
 }
 \examples{
 data(minimalSampData)

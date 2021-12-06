@@ -1,17 +1,18 @@
 #' Calculate various diversity/evenness measures
 #'
 #' Function to calculate Hill diveristy, Functional Hill diversity,
-#' Shannon's diveristy, Simpson diveristy, Pielou's evenness, Hill evenness
-#' and Rao's Q.
+#' Shannon's diveristy, Simpson diveristy, Pielou's evenness, Hill evenness,
+#' Rao's Q and Functional Attribute Diversity (FAD).
 #'
 #' Add details here
 #' Hill diversity:
-#' Functional Hill diversity:
+#' Functional Hill diversity: With compound matrix.
 #' Shannon's diversity:
 #' Simpson diversity:
 #' Pielou's evenness:
 #' Hill evenness:
-#' Rao's Q:
+#' Rao's Q: With compound matrix.
+#' FAD: Functional Attribute Diversity.
 #'
 #' @param sampleData Dataframe with samples as rows and compounds as columns.
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
@@ -19,7 +20,7 @@
 #' calculations of Functional Hill diversity or Rao's Q.
 #' @param type Type(s) of diversity or evenness to calculate. Any of
 #' \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
-#' "HillEven", "RaoQ"}.
+#' "HillEven", "RaoQ", "FAD"}.
 #' @param q Diversity order to use for (Functional) Hill diversity.
 #'
 #' @return Data frame with calculated diversity/evenness for each sample.
@@ -41,13 +42,15 @@ calcDiv <- function(sampleData,
                     q = 1) {
 
   if (!(any(c("HillDiv", "FuncHillDiv", "Shannon", "Simpson",
-              "PielouEven", "HillEven", "RaoQ") %in% type))) {
+              "PielouEven", "HillEven", "RaoQ", "FAD") %in% type))) {
     stop("Provide at least one type of diversity/evenness to calculate:
          HillDiv, FuncHillDiv, Shannon, Simpson, PielouEven, HillEven or RaoQ")
   }
-  if(is.null(compDisMat) && ("FuncHillDiv" %in% type || "RaoQ" %in% type)) {
+  if(is.null(compDisMat) && ("FuncHillDiv" %in% type ||
+                             "RaoQ" %in% type ||
+                             "FAD" %in% type)) {
     stop("A compound dissimilarity matrix must be supplied
-         when calculating Functional Hill diversity or Rao's Q")
+         when calculating Functional Hill diversity, Rao's Q, or FAD.")
   }
   if(q < 0) {
     stop("q must be >= 0")
@@ -98,6 +101,9 @@ calcDiv <- function(sampleData,
       divData$RaoQ[i] <- calculateQ(data = sampleData[i,],
                                     Dij = compDisMat)
     }
+  }
+  if ("FAD" %in% type) {
+    divData$FAD <- sum(compDisMat)
   }
   return(divData)
 }
