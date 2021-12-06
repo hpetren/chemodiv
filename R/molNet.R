@@ -1,7 +1,7 @@
 #' Generate molecular network with properties
 #'
 #' Function which generates a molecular network object, and some
-#' basic properties of the network/dissimilarity matrix.
+#' basic properties of the network.
 #'
 #' Note that the supplied dissimilarity matrix is translated to a
 #' similarity matrix, and this is what cutOff values are set for.
@@ -20,7 +20,7 @@
 #' is supplied.
 #'
 #' @return List with a graph (tidygrph/igraph?) object, the number of compounds,
-#' the mean similarity of the compounds, number of NPC pathways and modularity.
+#' number of NPC pathways and modularity.
 #'
 #' @export
 #'

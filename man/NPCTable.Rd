@@ -22,7 +22,10 @@ and puts the results in a dataframe containing the pathway,
 superclass and class for each compound.
 }
 \details{
-Connects to \url{https://npclassifier.ucsd.edu/}
+NPCTable classifies compounds into groups largely corresponding to
+biosynthesis pathways (at three hierarchical levels: pathway, superclass,
+class) using thr NPClassifier tool (Kim et al. 2021).
+Connects to \url{https://npclassifier.ucsd.edu/}.
 }
 \examples{
 data(minimalCompData)

@@ -5,6 +5,14 @@
 #' If also a compound dissimilarity matrix is supplied, Generalized UniFrac
 #' dissimilarities are calculated.
 #'
+#' \code{sampleDis} calculates a dissimilarity matrix for all the samples
+#' in \code{sampleData}. Bray-Curtis dissimilarities are calculated using only
+#' the \code{sampleData}. If a compound dissimilarity matrix, \code{compDisMat},
+#' is supplied, Generalized UniFrac dissimilarities are instead calculated,
+#' which take the biosynthesis/structure of the compounds into account
+#' when calculating sample dissimilarities.
+#'
+#'
 #' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. If this is supplied UniFrac dissimilarities are

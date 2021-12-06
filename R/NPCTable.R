@@ -4,7 +4,10 @@
 #' and puts the results in a dataframe containing the pathway,
 #' superclass and class for each compound.
 #'
-#' Connects to \url{https://npclassifier.ucsd.edu/}
+#' NPCTable classifies compounds into groups largely corresponding to
+#' biosynthesis pathways (at three hierarchical levels: pathway, superclass,
+#' class) using thr NPClassifier tool (Kim et al. 2021).
+#' Connects to \url{https://npclassifier.ucsd.edu/}.
 #'
 #' @param compoundData Data frame with the chemical compounds of interest.
 #' Should have a column named "compound" with common names, and a column named

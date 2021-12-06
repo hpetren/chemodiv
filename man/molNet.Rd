@@ -24,11 +24,11 @@ is supplied.}
 }
 \value{
 List with a graph (tidygrph/igraph?) object, the number of compounds,
-the mean similarity of the compounds, number of NPC pathways and modularity.
+number of NPC pathways and modularity.
 }
 \description{
 Function which generates a molecular network object, and some
-basic properties of the network/dissimilarity matrix.
+basic properties of the network.
 }
 \details{
 Note that the supplied dissimilarity matrix is translated to a

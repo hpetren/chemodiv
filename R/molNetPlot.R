@@ -33,13 +33,18 @@
 #'
 #' @examples
 #' data(minimalSampData)
-#' data(minimalMolNet)
+#' data(minimalCompDis)
 #' data(minimalNPCTable)
 #' groups <- c("A", "A", "B", "B")
-#' molNetPlot(minimalSampData, minimalMolNet)
-#' molNetPlot(minimalSampData, minimalMolNet, groups)
-#' molNetPlot(minimalSampData, minimalMolNet, npcTable = minimalNPCTable)
-#' molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
+#' minimalMolNet <- molNet(minimalCompDis)
+#' molNetPlot(minimalSampData, minimalMolNet$networkObject)
+#' molNetPlot(minimalSampData, minimalMolNet$networkObject, groups)
+#' molNetPlot(minimalSampData,
+#' minimalMolNet$networkObject,
+#' npcTable = minimalNPCTable)
+#' molNetPlot(minimalSampData,
+#' minimalMolNet$networkObject,
+#' plotNames = TRUE)
 molNetPlot <- function(sampleData,
                        networkObject,
                        groupData = NULL,
