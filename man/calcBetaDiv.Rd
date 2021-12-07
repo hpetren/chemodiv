@@ -35,3 +35,6 @@ calcBetaDiv(sampleData = minimalSampData)
 calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis, q = 0)
 
 }
+\references{
+ref for beta (hill) div
+}

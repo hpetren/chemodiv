@@ -44,7 +44,7 @@ This function calculates compound dissimilarities in three different ways:
 \enumerate{
 \item Using the classification from NPClassifier, which largely correspond
 to biosynthetic groups/pathways.
-\item Using PubChem Fingerprints, a a binary substructure fingerprint with
+\item Using PubChem Fingerprints, a binary substructure fingerprint with
 881 binary variables describing the chemical structure of a compound.
 \item fMCS, flexible Maximum Common Substructure,
 a pairwise graph matching concept allowing for atom and/or

@@ -18,6 +18,8 @@
 #'
 #' @export
 #'
+#' @references ref for beta (hill) div
+#'
 #' @examples
 #' data(minimalSampData)
 #' data(minimalCompDis)

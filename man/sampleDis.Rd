@@ -43,3 +43,10 @@ data(minimalCompDis)
 sampleDis(minimalSampData)
 sampleDis(minimalSampData, minimalCompDis, alpha = 0.5)
 }
+\references{
+Bray-Curtis ref?
+Chen, J., K. Bittinger, E. S. Charlson, C. Hoffmann, J. Lewis, G. D. Wu,
+R. G. Collman, F. D. Bushman, and H. Li. 2012.
+Associating microbiome composition with environmental covariates using
+generalized UniFrac distances. Bioinformatics 28:2106–2113.
+}

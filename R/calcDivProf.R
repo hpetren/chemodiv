@@ -17,6 +17,8 @@
 #'
 #' @export
 #'
+#' @references Who came up with divprofs?
+#'
 #' @examples
 #' data(minimalSampData)
 #' data(minimalCompDis)

@@ -3,10 +3,10 @@
 \docType{package}
 \name{chemdiv}
 \alias{chemdiv}
-\title{chemDiv: A package for analysing phytochemical diversity}
+\title{chemdiv: A package for analysing phytochemical diversity}
 \description{
 The chemdiv package contains various functions for convenient analyses
-of phytochemical (and other) data on e.g. floral scent,
+of phytochemical (and similar) data on e.g. floral scent,
 green leaf volatiles and chemical defence compounds.
 Analyses are centered around calculations of diversity and
 molecular/biosynthetic similarity, both separately and combined.

@@ -17,17 +17,26 @@
 #' @param sampleData Dataframe with samples as rows and compounds as columns.
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for
-#' calculations of Functional Hill diversity or Rao's Q.
+#' calculations of Functional Hill diversity, Rao's Q and FAD.
 #' @param type Type(s) of diversity or evenness to calculate. Any of
 #' \code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
 #' "HillEven", "RaoQ", "FAD"}.
-#' @param q Diversity order to use for (Functional) Hill diversity.
+#' @param q Diversity order to use for (Functional) Hill diversity. q should
+#' be equal to or larger than zero. This parameter determines the sensitivity
+#' of the (Functional) Hill diversity measure to the relative frequencies
+#' of compounds. For q = 0 compound proportions are not taken into account.
+#' For q = 1 compounds are weighed according to their proportion in the sample.
+#' For q = 2, more weight is put on compounds with high proportions.
 #'
 #' @return Data frame with calculated diversity/evenness for each sample.
 #'
-#' @references Chao's and other papers
-#'
 #' @export
+#'
+#' @references Chao's and other papers
+#' Chao, A., C.-H. Chiu, and L. Jost. 2014. Unifying Species Diversity,
+#' Phylogenetic Diversity, Functional Diversity, and Related Similarity
+#' and Differentiation Measures Through Hill Numbers. Annual Review of
+#' Ecology, Evolution, and Systematics 45:297–324.
 #'
 #' @examples
 #' data(minimalSampData)

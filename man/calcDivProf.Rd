@@ -35,3 +35,6 @@ calcDivProf(sampleData = minimalSampData)
 calcDivProf(sampleData = minimalSampData, compDisMat = minimalCompDis,
 qMin = 1, qMax = 2, step = 0.2)
 }
+\references{
+Who came up with divprofs?
+}
