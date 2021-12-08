@@ -40,7 +40,10 @@ name, SMILES and InChIKey of all the compounds found in the samples.
 
 Function `NPCTable` uses NPClassifier to classify chemical compounds.
 Function `compDis` calculates dissimilarity matrices between chemical
-compounds based on their biosynthetic and/or structural properties.
+compounds based on their biosynthetic and/or structural properties. Note
+that `compDis` outputs a list with one or several matrices. Functions
+below require only a matrix as input, (subsetted with
+e.g. fullList$specificMatrix) and not the whole list to work.
 
 #### Diversity calculations
 
