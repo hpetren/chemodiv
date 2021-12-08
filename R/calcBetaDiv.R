@@ -10,7 +10,7 @@
 #'
 #' @param sampleData Dataframe with samples as rows and compounds as columns.
 #' @param compDisMat Compound distance matrix, as calculated by
-#' \code{\link{NPCTable}}. Has to be supplied for
+#' \code{\link{compDis}}. Has to be supplied for
 #' calculations of Functional Hill beta-diversity.
 #' @param q Diversity order to use for (Functional) Hill diversity.
 #'

@@ -34,7 +34,12 @@ should be given mean dissimilarity values. If not, these will have
 dissimilarity 1 to all other compounds.}
 }
 \value{
-List with compound dissimilarity matrices.
+List with compound dissimilarity matrices. A list is always
+outputted, even if only one matrix is calculated. Downstream functions,
+including \code{\link{calcDiv}}, \code{\link{calcBetaDiv}},
+\code{\link{calcDivProp}}, \code{\link{sampleDis}},
+\code{\link{molNet}} and \code{\link{chemDivPlot}} require only the matrix
+as input (subsetted with e.g. fullList$specificMatrix) and not the whole list
 }
 \description{
 Function to calculate dissimilarities between compounds.

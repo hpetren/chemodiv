@@ -20,7 +20,8 @@
 #' created for each group.
 #' @param networkObject tidygraph network object, as created by the
 #' \code{\link{molNet}} function. Note that this is only the network object,
-#' which has to be taken from the list.
+#' which is one of the elements in the list outputted by \code{\link{molNet}}.
+#' The network is extracted as molNetOutput$networkObject.
 #' @param npcTable An \code{\link{NPCTable}} can optionally be supplied.
 #' This will result in network nodes being coloured by their
 #' NPC pathway classification.
