@@ -39,6 +39,9 @@ molNet <- function(compDisMat,
   if (is.character(cutOff) & !(cutOff == "median" | cutOff == "minPathway")) {
     stop("cutOff must be a value between 0 and 1, median or minPathway")
   }
+  if (!all(colnames(compDisMat) == rownames(compDisMat))) {
+    stop("compDisMat must be a square matrix with identical row and column names")
+  }
 
   # From dissimilarity to similarity matrix
   compSimMat <- 1 - compDisMat

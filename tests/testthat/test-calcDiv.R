@@ -30,19 +30,30 @@ test_that("all diversity/evenness gives non-NA output", {
 
 test_that("all indices can be calculated simultaneously", {
   expect_equal(ncol(calcDiv(sampleData = testSampData,
-                       compDisMat = testCompDis,
-                       type = c("HillDiv", "FuncHillDiv", "Shannon",
-                                "Simpson", "PielouEven", "HillEven", "RaoQ"),
-                       q = 1.5)), 7)
+                            compDisMat = testCompDis,
+                            type = c("HillDiv", "FuncHillDiv", "Shannon",
+                                     "Simpson", "PielouEven", "HillEven",
+                                     "RaoQ", "FAD"),
+                            q = 1.5)), 8)
 })
 
-test_that("wrong input is detected and gives error", {
+test_that("wrong/non-logical input is detected and gives error/message", {
   expect_error(calcDiv(sampleData = testSampData,
                        type = "HillDiv", q = -1))
   expect_error(calcDiv(sampleData = testSampData,
                        type = "NotAnIndex"))
   expect_error(calcDiv(sampleData = testSampData,
                        type = "FuncHillDiv"))
+  expect_message(calcDiv(sampleData = testSampData,
+                         compDisMat = testCompDis,
+                         type = c("HillDiv", "Shannon",
+                                  "Simpson", "PielouEven", "HillEven")))
 })
+
+
+
+
+
+
 
 

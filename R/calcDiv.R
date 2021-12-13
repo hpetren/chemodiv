@@ -64,6 +64,13 @@ calcDiv <- function(sampleData,
   if(q < 0) {
     stop("q must be >= 0")
   }
+  if (any(c("HillDiv", "Shannon", "Simpson",
+            "PielouEven", "HillEven") %in% type) &&
+      !any(c("FuncHillDiv", "RaoQ", "FAD") %in% type) &&
+      !is.null(compDisMat)) {
+    message("Note that the calculated diveristy measures do not use a
+            compound dissimilarity matrix.")
+  }
 
   divData <- as.data.frame(matrix(data = NA,
                                   nrow = nrow(sampleData),
