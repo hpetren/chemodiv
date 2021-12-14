@@ -66,6 +66,16 @@ compounds as rows and group (NPClassifier) or binary fingerprint variable
 (PubChem Fingerprints) as columns. fMCS generates dissimilarity
 values directly (allowing for one atom and one bond mismatch).
 }
+
+If there are unknown compounds, which do not
+have a corresponding SMILES or InChIKey, this can be handled in three
+different ways. First, these can be completely removed from the list
+of compounds and the sample data set, and hence excluded from all analyses.
+Second, if unknownCompoundsMean = FALSE, unknown compounds will be given
+a dissimilarity value of 1 to all other compounds. Third, if
+unknownCompoundsMean = TRUE, unknown compounds will be given a dissimilarity
+value to all other compounds which equals the mean dissimilarity value
+between all known compounds.
 }
 \examples{
 data(minimalCompData)

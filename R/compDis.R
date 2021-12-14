@@ -22,6 +22,17 @@
 #' (PubChem Fingerprints) as columns. fMCS generates dissimilarity
 #' values directly (allowing for one atom and one bond mismatch).
 #'
+#' If there are unknown compounds, which do not
+#' have a corresponding SMILES or InChIKey, this can be handled in three
+#' different ways. First, these can be completely removed from the list
+#' of compounds and the sample data set, and hence excluded from all analyses.
+#' Second, if unknownCompoundsMean = FALSE, unknown compounds will be given
+#' a dissimilarity value of 1 to all other compounds. Third, if
+#' unknownCompoundsMean = TRUE, unknown compounds will be given a dissimilarity
+#' value to all other compounds which equals the mean dissimilarity value
+#' between all known compounds.
+#'
+#'
 #'
 #' @param compoundData Data frame with the chemical compounds of interest.
 #' Should have a column named "compound" with common names, and a column named
@@ -37,7 +48,6 @@
 #' possible (from the SI in Kim et al. 2021), and then supply this
 #' classification to \code{compDis()} with the npcTable argument. This will ensure
 #' that compound dissimilarities are computed optimally.
-#'
 #' @param unknownCompoundsMean If unknown compounds, i.e. ones without SMILES,
 #' should be given mean dissimilarity values. If not, these will have
 #' dissimilarity 1 to all other compounds.
