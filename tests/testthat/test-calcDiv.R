@@ -23,9 +23,6 @@ test_that("all diversity/evenness gives non-NA output", {
   expect_false(any(is.na(calcDiv(sampleData = testSampData,
                                  type = "RaoQ",
                                  compDisMat = testCompDis))))
-  expect_false(any(is.na(calcDiv(sampleData = testSampData,
-                                 type = "FAD",
-                                 compDisMat = testCompDis))))
 })
 
 test_that("all indices can be calculated simultaneously", {
