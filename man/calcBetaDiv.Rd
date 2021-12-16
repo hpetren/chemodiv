@@ -4,37 +4,47 @@
 \alias{calcBetaDiv}
 \title{Calculate beta diversity}
 \usage{
-calcBetaDiv(sampleData, compDisMat = NULL, q = 1)
+calcBetaDiv(sampleData, compDisMat = NULL, type = "HillDiv", q = 1)
 }
 \arguments{
-\item{sampleData}{Dataframe with samples as rows and compounds as columns.}
+\item{sampleData}{Data frame with samples as rows and compounds as columns.}
 
 \item{compDisMat}{Compound distance matrix, as calculated by
-\code{\link{compDis}}. Has to be supplied for
-calculations of Functional Hill beta-diversity.}
+\code{\link{compDis}}. Has to be supplied for calculations of
+Functional Hill-beta-diversity.}
 
-\item{q}{Diversity order to use for (Functional) Hill diversity.}
+\item{type}{Type(s) of Hill-beta-diversity to calculate. \code{"HillDiv"}
+and/or \code{"FuncHillDiv"}.}
+
+\item{q}{Diversity order to use for the calculation of beta-diversity.}
 }
 \value{
-Data frame with alpha-, beta- and gamma-diversity.
+Data frame with type of Hill-beta-diversity calculated, q,
+gamma-diversity, alpha-diversity and beta-diversity.
 }
 \description{
-Function to calculate Hill beta-diversity or Functional Hill beta-diversity.
-Done with hillR:hill_taxa_parti, see that for details. In essence,
-beta = gamma/alpha, and one value is generated for the whole data set.
+Function to calculate beta, gamma and alpha diversity in the
+Hill-diversity framework. This can be calculated as normal
+Hill-beta-diversity or functional Hill-beta-diversity.
 }
 \details{
-Hill beta-diversity is calculated if compDisMat is not supplied,
-Functional Hill beta-diversity is calculated if compDisMat is supplied.
-The gamma- and alpha-diversity values used to calculate beta are also output.
+The function calculates a single beta-diversity value for the supplied
+sample data. This is calculated as beta = gamma / alpha. Gamma-diversity
+represents the diversity of the pooled data set, alpha-diversity represents
+the mean diversity across individual samples, and beta-diversity represents
+turnover or variability among samples. With \code{type = "HillDiv"} and
+\code{q = 0} the calculated beta-diversity is equal to the well-known and
+most simple measure of beta-diversity introduced by Whittaker 1960, where
+beta = gamma / alpha, based only on the number of species (here compounds).
 }
 \examples{
 data(minimalSampData)
 data(minimalCompDis)
 calcBetaDiv(sampleData = minimalSampData)
-calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis, q = 0)
-
+calcBetaDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
+type = c("HillDiv", "FuncHillDiv"), q = 1)
 }
 \references{
-ref for beta (hill) div
+Chao 2014, Chiu 2014, Jost 2007,
+Li 2018 (hillR), Marion 2017, Whittaker 1960. Add these.
 }

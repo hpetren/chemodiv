@@ -7,15 +7,30 @@ rownames(testCompDis) <- c("compA", "compB", "compC")
 
 
 test_that("beta diversity is calculated", {
-  expect_equal(ncol(calcBetaDiv(sampleData = testSampData)), 3)
-  expect_equal(ncol(calcBetaDiv(sampleData = testSampData,
-                                compDisMat = testCompDis, q = 3)), 3)
+  expect_equal(nrow(calcBetaDiv(sampleData = testSampData)), 1)
+  expect_equal(nrow(calcBetaDiv(sampleData = testSampData,
+                                compDisMat = testCompDis,
+                                type = "FuncHillDiv",
+                                q = 3)), 1)
+  expect_equal(nrow(calcBetaDiv(sampleData = testSampData,
+                                compDisMat = testCompDis,
+                                type = c("HillDiv", "FuncHillDiv"),
+                                q = 3)), 2)
   expect_false(any(is.na(calcBetaDiv(sampleData = testSampData))))
   expect_false(any(is.na(calcBetaDiv(sampleData = testSampData,
-                                     compDisMat = testCompDis, q = 3))))
+                                     compDisMat = testCompDis,
+                                     type = "FuncHillDiv",
+                                     q = 3))))
 })
 
-test_that("wrong input is detected and gives error", {
+test_that("wrong/non-logical input is detected and gives error/message", {
   expect_error(calcBetaDiv(sampleData = testSampData,
                            q = -1))
+  expect_error(calcBetaDiv(sampleData = testSampData,
+                           type = "NotAnIndex"))
+  expect_error(calcBetaDiv(sampleData = testSampData,
+                           type = "FuncHillDiv"))
+  expect_message(calcBetaDiv(sampleData = testSampData,
+                             compDisMat = testCompDis,
+                             type = c("HillDiv")))
 })

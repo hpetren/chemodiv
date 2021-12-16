@@ -1,51 +1,76 @@
 #' Calculate beta diversity
 #'
-#' Function to calculate Hill beta-diversity or Functional Hill beta-diversity.
-#' Done with hillR:hill_taxa_parti, see that for details. In essence,
-#' beta = gamma/alpha, and one value is generated for the whole data set.
+#' Function to calculate beta, gamma and alpha diversity in the
+#' Hill-diversity framework. This can be calculated as normal
+#' Hill-beta-diversity or functional Hill-beta-diversity.
 #'
-#' Hill beta-diversity is calculated if compDisMat is not supplied,
-#' Functional Hill beta-diversity is calculated if compDisMat is supplied.
-#' The gamma- and alpha-diversity values used to calculate beta are also output.
+#' The function calculates a single beta-diversity value for the supplied
+#' sample data. This is calculated as beta = gamma / alpha. Gamma-diversity
+#' represents the diversity of the pooled data set, alpha-diversity represents
+#' the mean diversity across individual samples, and beta-diversity represents
+#' turnover or variability among samples. With \code{type = "HillDiv"} and
+#' \code{q = 0} the calculated beta-diversity is equal to the well-known and
+#' most simple measure of beta-diversity introduced by Whittaker 1960, where
+#' beta = gamma / alpha, based only on the number of species (here compounds).
 #'
-#' @param sampleData Dataframe with samples as rows and compounds as columns.
+#' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param compDisMat Compound distance matrix, as calculated by
-#' \code{\link{compDis}}. Has to be supplied for
-#' calculations of Functional Hill beta-diversity.
-#' @param q Diversity order to use for (Functional) Hill diversity.
+#' \code{\link{compDis}}. Has to be supplied for calculations of
+#' Functional Hill-beta-diversity.
+#' @param type Type(s) of Hill-beta-diversity to calculate. \code{"HillDiv"}
+#' and/or \code{"FuncHillDiv"}.
+#' @param q Diversity order to use for the calculation of beta-diversity.
 #'
-#' @return Data frame with alpha-, beta- and gamma-diversity.
+#' @return Data frame with type of Hill-beta-diversity calculated, q,
+#' gamma-diversity, alpha-diversity and beta-diversity.
 #'
 #' @export
 #'
-#' @references ref for beta (hill) div
+#' @references Chao 2014, Chiu 2014, Jost 2007,
+#' Li 2018 (hillR), Marion 2017, Whittaker 1960. Add these.
 #'
 #' @examples
 #' data(minimalSampData)
 #' data(minimalCompDis)
 #' calcBetaDiv(sampleData = minimalSampData)
-#' calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis, q = 0)
-#'
+#' calcBetaDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
+#' type = c("HillDiv", "FuncHillDiv"), q = 1)
 calcBetaDiv <- function(sampleData,
                         compDisMat = NULL,
+                        type = "HillDiv",
                         q = 1) {
+
+  if (!(any(c("HillDiv", "FuncHillDiv") %in% type))) {
+    stop("Provide at least one type of beta-diversity to calculate: HillDiv or FuncHillDiv.")
+  }
+  if(is.null(compDisMat) && ("FuncHillDiv" %in% type)) {
+    stop("A compound dissimilarity matrix must be supplied
+         when calculating Functional Hill-beta diversity.")
+  }
   if(q < 0) {
     stop("q must be >= 0")
   }
-
-  if (is.null(compDisMat)) { # If no compound matrix, normal Hill beta
-    betaDiv <- hillR::hill_taxa_parti(comm = sampleData,
-                                      q = q)
-    betaDivOut <- betaDiv[, 2:4]
-    colnames(betaDivOut) <- c("gamma", "alpha", "beta")
-    return(betaDivOut)
-  } else { # If compound matrix, functional Hill beta
-    betaDiv <- hillR::hill_func_parti(comm = sampleData,
-                                      traits = compDisMat,
-                                      traits_as_is = TRUE,
-                                      q = q)
-    betaDivOut <- betaDiv[, 3:5]
-    colnames(betaDivOut) <- c("gamma", "alpha", "beta")
-    return(betaDivOut)
+  if (!is.null(compDisMat) && "HillDiv" %in% type && length(type) == 1) {
+    message("Note that the calculated beta-diveristy do not use a
+            compound dissimilarity matrix.")
   }
+
+  betaDiv <- as.data.frame(matrix(data = NA,
+                                  nrow = length(type),
+                                  ncol = 5))
+  colnames(betaDiv) <- c("Type", "q", "gamma", "alpha", "beta")
+  betaDiv$Type <- type
+
+  if ("HillDiv" %in% type) {
+    betaDiv[betaDiv$Type == "HillDiv", 2:5] <-
+      hillR::hill_taxa_parti(comm = sampleData, q = q)[, 1:4]
+  }
+  if ("FuncHillDiv" %in% type) {
+    betaDiv[betaDiv$Type == "FuncHillDiv", 2:5] <-
+      hillR::hill_func_parti(comm = sampleData,
+                             traits = compDisMat,
+                             traits_as_is = TRUE,
+                             q = q)[, c(1, 3:5)]
+  }
+  return(betaDiv)
 }
