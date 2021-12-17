@@ -58,7 +58,7 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
@@ -72,12 +72,12 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
-      ggraph::geom_node_label(ggplot2::aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
+      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2)
 
     networkList <- list(p1)
 
@@ -92,7 +92,7 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                            size = compoundMean)) +
@@ -107,13 +107,13 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
-      ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                            size = compoundMean)) +
       ggplot2::scale_size(range = c(6, 16)) +
       ggplot2::labs(color = "Pathway", width = "Molecular similarity") +
-      ggraph::geom_node_label(ggplot2::aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
+      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2)
 
     networkList <- list(p1)
 
@@ -136,7 +136,7 @@ molNetPlot <- function(sampleData,
         j <- j
 
         p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
-          ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
+          ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
           ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                               size = compoundMeanTrans[,j])) +
@@ -163,7 +163,7 @@ molNetPlot <- function(sampleData,
         j <- j
 
         p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
-          ggraph::geom_edge_link(ggplot2::aes_(width = ~weight), edge_color = "grey40") +
+          ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
           ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 12) +
           ggplot2::scale_colour_viridis_c() +

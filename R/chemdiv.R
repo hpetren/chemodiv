@@ -45,6 +45,8 @@
 #'
 #' @references A bunch probably
 #'
+#' @importFrom rlang .data
+#'
 #' @docType package
 #' @name chemdiv
 NULL

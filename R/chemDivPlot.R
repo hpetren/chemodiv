@@ -53,22 +53,17 @@ chemDivPlot <- function(compDisMat = NULL,
     compDisMatClustDend <- stats::as.dendrogram(compDisMatClust)
     compDisMatClustDendData <- ggdendro::dendro_data(compDisMatClustDend)
 
-    # Note the use of aes_(x = ~x). This is required for check() to not
-    # throw a note about "no visible binding for global variable".
-    # This is a common problem, and the aes_() removed the problem
-    # (I don't understand what aes_ actually does, and it is "soft-deprecated"
-    # (see manual) but not other solutions seemed optimal either). See
-    # https://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when#comment20826625_12429344
+    # Now using ggplot2:: for everything, and aes(.data$) as recommended
     compDisMatTreePlot <- ggplot2::ggplot() +
       ggplot2::geom_segment(data = compDisMatClustDendData$segments,
-                            ggplot2::aes_(x = ~x,
-                                          y = ~y,
-                                          xend = ~xend,
-                                          yend = ~yend)) +
+                            ggplot2::aes(x = .data$x,
+                                         y = .data$y,
+                                         xend = .data$xend,
+                                         yend = .data$yend)) +
       ggplot2::geom_text(data = compDisMatClustDendData$labels,
-                         ggplot2::aes_(x = ~x,
-                                       y = ~y,
-                                       label = ~label),
+                         ggplot2::aes(x = .data$x,
+                                      y = .data$y,
+                                      label = .data$label),
                          hjust = -0.1, angle = 0) +
       ggplot2::scale_y_reverse(limits = c(1, -0.5),
                                breaks = c(1, 0.75, 0.5, 0.25, 0)) +
@@ -106,14 +101,15 @@ chemDivPlot <- function(compDisMat = NULL,
     for (i in 1:(ncol(divDatadf)-1)) {
       allPlots[[paste0("divPlot", colnames(divDatadf)[i])]] <- local({
         i <- i
+        currentCol <- colnames(divDatadf)[i]
 
         divPlot <- ggplot2::ggplot(data = divDatadf,
-                                   ggplot2::aes_(x = ~Group,
-                                                 y = ~divDatadf[, i],
-                                                 fill = ~Group)) +
+                                   ggplot2::aes(x = .data$Group,
+                                                y = .data[[currentCol]],
+                                                fill = .data$Group)) +
           ggplot2::geom_boxplot(outlier.shape = NA) +
           ggplot2::geom_jitter(height = 0, width = 0.1, shape = 21) +
-          ggplot2::ylab(colnames(divDatadf)[i]) +
+          ggplot2::ylab(currentCol) +
           ggplot2::theme(text = ggplot2::element_text(size = 15))
       })
     }
@@ -152,15 +148,15 @@ chemDivPlot <- function(compDisMat = NULL,
 
     divProfPlot <- ggplot2::ggplot() +
       ggplot2::geom_line(data = divHillLongInd, # Note use of group and color
-                         ggplot2::aes_(x = ~q,
-                                       y = ~Diversity,
-                                       group = ~Individual,
-                                       color = ~Group),
+                         ggplot2::aes(x = .data$q,
+                                      y = .data$Diversity,
+                                      group = .data$Individual,
+                                      color = .data$Group),
                          size = 0.5, alpha = 0.15) +
       ggplot2::geom_line(data = divHillLong,
-                         ggplot2::aes_(x = ~q,
-                                       y = ~Diversity,
-                                       color = ~Group),
+                         ggplot2::aes(x = .data$q,
+                                      y = .data$Diversity,
+                                      color = .data$Group),
                          size = 1.5) +
       ggplot2::xlab("Diversity order (q)") +
       ggplot2::ylab(divProfData$type) +
@@ -186,9 +182,9 @@ chemDivPlot <- function(compDisMat = NULL,
     NMDSCoords$Group <- groupData
 
     NMDSPlot <- ggplot2::ggplot(data = NMDSCoords,
-                                ggplot2::aes_(x = ~MDS1,
-                                              y = ~MDS2,
-                                              color = ~Group)) +
+                                ggplot2::aes(x = .data$MDS1,
+                                             y = .data$MDS2,
+                                             color = .data$Group)) +
       ggplot2::geom_point(size = 4, alpha = 0.5) +
       ggplot2::theme(text = ggplot2::element_text(size = 15))
 

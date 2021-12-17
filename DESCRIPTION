@@ -32,4 +32,5 @@ Imports:
     ggplot2,
     gridExtra,
     ggdendro,
-    tidyr
+    tidyr,
+    rlang
