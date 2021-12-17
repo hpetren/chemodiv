@@ -58,10 +58,6 @@ groups <- c("A", "A", "B", "B")
 minimalMolNet <- molNet(minimalCompDis)
 molNetPlot(minimalSampData, minimalMolNet$networkObject)
 molNetPlot(minimalSampData, minimalMolNet$networkObject, groups)
-molNetPlot(minimalSampData,
-minimalMolNet$networkObject,
-npcTable = minimalNPCTable)
-molNetPlot(minimalSampData,
-minimalMolNet$networkObject,
-plotNames = TRUE)
+molNetPlot(minimalSampData, minimalMolNet$networkObject, npcTable = minimalNPCTable)
+molNetPlot(minimalSampData, minimalMolNet$networkObject, plotNames = TRUE)
 }

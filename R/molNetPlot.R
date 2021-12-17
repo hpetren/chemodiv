@@ -40,12 +40,8 @@
 #' minimalMolNet <- molNet(minimalCompDis)
 #' molNetPlot(minimalSampData, minimalMolNet$networkObject)
 #' molNetPlot(minimalSampData, minimalMolNet$networkObject, groups)
-#' molNetPlot(minimalSampData,
-#' minimalMolNet$networkObject,
-#' npcTable = minimalNPCTable)
-#' molNetPlot(minimalSampData,
-#' minimalMolNet$networkObject,
-#' plotNames = TRUE)
+#' molNetPlot(minimalSampData, minimalMolNet$networkObject, npcTable = minimalNPCTable)
+#' molNetPlot(minimalSampData, minimalMolNet$networkObject, plotNames = TRUE)
 molNetPlot <- function(sampleData,
                        networkObject,
                        groupData = NULL,
@@ -81,7 +77,7 @@ molNetPlot <- function(sampleData,
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
-      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
+      ggraph::geom_node_label(ggplot2::aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
 
     networkList <- list(p1)
 
@@ -117,7 +113,7 @@ molNetPlot <- function(sampleData,
                                            size = compoundMean)) +
       ggplot2::scale_size(range = c(6, 16)) +
       ggplot2::labs(color = "Pathway", width = "Molecular similarity") +
-      ggraph::geom_node_label(aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
+      ggraph::geom_node_label(ggplot2::aes_(label = ~name), nudge_x = 0, nudge_y = 0.2)
 
     networkList <- list(p1)
 

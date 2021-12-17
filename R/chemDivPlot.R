@@ -8,7 +8,7 @@
 #' matrix, \code{compDisMat}, will be plotted as a dendrogram visualizing
 #' which compounds are structurally/biosynthethically similar to each other.
 #' Diversity/evenness, \code{divData}, is plotted as a boxplot.
-#' A diversity profile, showing (Functional) Hill diversity at different
+#' A diversity profile, plotting (Functional) Hill diversity at different
 #' values of q will be plotted with \code{divProfData} (NB! This is
 #' the whole list outputted by calcDivProf, as qMin and qMax are used too).
 #' A sample dissimilarity matrix, \code{sampleDisMat}, will be plotted
@@ -29,13 +29,11 @@
 #'
 #' @export
 #'
-#' @import ggplot2
-#'
 #' @examples
 #' data(minimalCompDis)
 #' data(minimalSampDis)
-#' minimalDiv <- calcDiv(minimalSampData)
-#' minimalDivProf <- calcDivProf(minimalSampData)
+#' minimalDiv <- calcDiv(minimalSampData, minimalCompDis, type = "FuncHillDiv")
+#' minimalDivProf <- calcDivProf(minimalSampData, minimalCompDis, type = "FuncHillDiv")
 #' groups <- c("A", "A", "B", "B")
 #' chemDivPlot(compDisMat = minimalCompDis, divData = minimalDiv,
 #' divProfData = minimalDivProf, sampleDisMat = minimalSampDis,
@@ -61,24 +59,31 @@ chemDivPlot <- function(compDisMat = NULL,
     # (I don't understand what aes_ actually does, and it is "soft-deprecated"
     # (see manual) but not other solutions seemed optimal either). See
     # https://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when#comment20826625_12429344
-    compDisMatTreePlot <- ggplot() +
-      geom_segment(data = compDisMatClustDendData$segments,
-                   aes_(x = ~x, y = ~y, xend = ~xend, yend = ~yend)) +
-      geom_text(data = compDisMatClustDendData$labels,
-                aes_(x = ~x, y = ~y, label = ~label),
-                hjust = -0.1, angle = 0) +
-      scale_y_reverse(limits = c(1, -0.5), breaks = c(1, 0.75, 0.5, 0.25, 0)) +
-      ylab("Dissimilarity") +
-      ggtitle("") +
-      theme(axis.title.y = element_blank(),
-            axis.text.y = element_blank(),
-            axis.ticks.y = element_blank(),
-            panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank(),
-            panel.border = element_blank(),
-            panel.background = element_blank(),
-            axis.line.x = element_line(color="black", size = 0.5)) +
-      coord_flip()
+    compDisMatTreePlot <- ggplot2::ggplot() +
+      ggplot2::geom_segment(data = compDisMatClustDendData$segments,
+                            ggplot2::aes_(x = ~x,
+                                          y = ~y,
+                                          xend = ~xend,
+                                          yend = ~yend)) +
+      ggplot2::geom_text(data = compDisMatClustDendData$labels,
+                         ggplot2::aes_(x = ~x,
+                                       y = ~y,
+                                       label = ~label),
+                         hjust = -0.1, angle = 0) +
+      ggplot2::scale_y_reverse(limits = c(1, -0.5),
+                               breaks = c(1, 0.75, 0.5, 0.25, 0)) +
+      ggplot2::ylab("Dissimilarity") +
+      ggplot2::ggtitle("") +
+      ggplot2::theme(axis.title.y = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_blank(),
+                     axis.ticks.y = ggplot2::element_blank(),
+                     panel.grid.major = ggplot2::element_blank(),
+                     panel.grid.minor = ggplot2::element_blank(),
+                     panel.border = ggplot2::element_blank(),
+                     panel.background = ggplot2::element_blank(),
+                     axis.line.x = ggplot2::element_line(color = "black",
+                                                         size = 0.5)) +
+      ggplot2::coord_flip()
 
     allPlots[["compDisMatTreePlot"]] <- compDisMatTreePlot
   }
@@ -102,14 +107,14 @@ chemDivPlot <- function(compDisMat = NULL,
       allPlots[[paste0("divPlot", colnames(divDatadf)[i])]] <- local({
         i <- i
 
-        divPlot <- ggplot(data = divDatadf,
-                          aes_(x = ~Group,
-                               y = ~divDatadf[, i],
-                               fill = ~Group)) +
-          geom_boxplot(outlier.shape = NA) +
-          geom_jitter(height = 0, width = 0.1, shape = 21) +
-          ylab(colnames(divDatadf)[i]) +
-          theme(text = element_text(size = 15))
+        divPlot <- ggplot2::ggplot(data = divDatadf,
+                                   ggplot2::aes_(x = ~Group,
+                                                 y = ~divDatadf[, i],
+                                                 fill = ~Group)) +
+          ggplot2::geom_boxplot(outlier.shape = NA) +
+          ggplot2::geom_jitter(height = 0, width = 0.1, shape = 21) +
+          ggplot2::ylab(colnames(divDatadf)[i]) +
+          ggplot2::theme(text = ggplot2::element_text(size = 15))
       })
     }
   }
@@ -145,19 +150,21 @@ chemDivPlot <- function(compDisMat = NULL,
                                           values_to = "Diversity")
     divHillLongInd$Group <- rep(groupData, length(unique(divProfInd$q)))
 
-    divProfPlot <- ggplot() +
-      geom_line(data = divHillLongInd, # Note use of both group and color nicely
-                         aes_(x = ~q,
-                              y = ~Diversity,
-                              group = ~Individual,
-                              color = ~Group),
-                size = 0.5, alpha = 0.15) +
-      geom_line(data = divHillLong,
-                         aes_(x = ~q, y = ~Diversity, color = ~Group),
-                size = 1.5) +
-      xlab("q (diversity order)") +
-      ylab("(Functional) Hill Diversity") +
-      theme(text = element_text(size = 15))
+    divProfPlot <- ggplot2::ggplot() +
+      ggplot2::geom_line(data = divHillLongInd, # Note use of group and color
+                         ggplot2::aes_(x = ~q,
+                                       y = ~Diversity,
+                                       group = ~Individual,
+                                       color = ~Group),
+                         size = 0.5, alpha = 0.15) +
+      ggplot2::geom_line(data = divHillLong,
+                         ggplot2::aes_(x = ~q,
+                                       y = ~Diversity,
+                                       color = ~Group),
+                         size = 1.5) +
+      ggplot2::xlab("Diversity order (q)") +
+      ggplot2::ylab(divProfData$type) +
+      ggplot2::theme(text = ggplot2::element_text(size = 15))
 
     allPlots[["divProfPlot"]] <- divProfPlot
   }
@@ -173,16 +180,17 @@ chemDivPlot <- function(compDisMat = NULL,
     # than suppressMessage() as metaMDSiter() prints output with cat()
     # rather than with message() (which is more correct)
     # https://stackoverflow.com/questions/8797314/suppress-messages-displayed-by-print-instead-of-message-or-warning-in-r
-
     utils::capture.output(NMDS <- vegan::metaMDS(sampleDisMat,
                                                  autotransform = FALSE))
     NMDSCoords <- as.data.frame(NMDS$points)
     NMDSCoords$Group <- groupData
 
-    NMDSPlot <- ggplot(data = NMDSCoords,
-                       aes_(x = ~MDS1, y = ~MDS2, color = ~Group)) +
-      geom_point(size = 4, alpha = 0.5) +
-      theme(text = element_text(size = 15))
+    NMDSPlot <- ggplot2::ggplot(data = NMDSCoords,
+                                ggplot2::aes_(x = ~MDS1,
+                                              y = ~MDS2,
+                                              color = ~Group)) +
+      ggplot2::geom_point(size = 4, alpha = 0.5) +
+      ggplot2::theme(text = ggplot2::element_text(size = 15))
 
     allPlots[["NMDSPlot"]] <- NMDSPlot
   }
