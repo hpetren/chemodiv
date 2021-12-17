@@ -1,8 +1,8 @@
 #' Calculate beta diversity
 #'
 #' Function to calculate beta, gamma and alpha diversity in the
-#' Hill-diversity framework. This can be calculated as normal
-#' Hill-beta-diversity or functional Hill-beta-diversity.
+#' Hill diversity framework. This can be calculated as normal
+#' Hill beta-diversity or functional Hill beta-diversity.
 #'
 #' The function calculates a single beta-diversity value for the supplied
 #' sample data. This is calculated as beta = gamma / alpha. Gamma-diversity
@@ -16,12 +16,13 @@
 #' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param compDisMat Compound distance matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
-#' Functional Hill-beta-diversity.
-#' @param type Type(s) of Hill-beta-diversity to calculate. \code{"HillDiv"}
+#' Functional Hill beta-diversity.
+#' @param type Type(s) of Hill beta-diversity to calculate. \code{"HillDiv"}
 #' and/or \code{"FuncHillDiv"}.
 #' @param q Diversity order to use for the calculation of beta-diversity.
+#' See \code{\link{calcDiv}} for further details on q.
 #'
-#' @return Data frame with type of Hill-beta-diversity calculated, q,
+#' @return Data frame with type of Hill beta-diversity calculated, q,
 #' gamma-diversity, alpha-diversity and beta-diversity.
 #'
 #' @export
@@ -41,17 +42,18 @@ calcBetaDiv <- function(sampleData,
                         q = 1) {
 
   if (!(any(c("HillDiv", "FuncHillDiv") %in% type))) {
-    stop("Provide at least one type of beta-diversity to calculate: HillDiv or FuncHillDiv.")
+    stop("Provide at least one type of beta-diversity to calculate:
+         HillDiv or FuncHillDiv.")
   }
   if(is.null(compDisMat) && ("FuncHillDiv" %in% type)) {
     stop("A compound dissimilarity matrix must be supplied
-         when calculating Functional Hill-beta diversity.")
+         when calculating Functional Hill beta-diversity.")
   }
   if(q < 0) {
     stop("q must be >= 0")
   }
   if (!is.null(compDisMat) && "HillDiv" %in% type && length(type) == 1) {
-    message("Note that the calculated beta-diveristy do not use a
+    message("Note that the calculated beta-diveristy does not use the
             compound dissimilarity matrix.")
   }
 

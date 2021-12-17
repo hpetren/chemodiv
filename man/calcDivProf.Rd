@@ -2,9 +2,16 @@
 % Please edit documentation in R/calcDivProf.R
 \name{calcDivProf}
 \alias{calcDivProf}
-\title{Calculate diversity profile}
+\title{Calculate a diversity profile}
 \usage{
-calcDivProf(sampleData, compDisMat = NULL, qMin = 0, qMax = 3, step = 0.1)
+calcDivProf(
+  sampleData,
+  compDisMat = NULL,
+  type = "HillDiv",
+  qMin = 0,
+  qMax = 3,
+  step = 0.1
+)
 }
 \arguments{
 \item{sampleData}{Data frame with samples as rows and compounds as columns.}
@@ -13,28 +20,44 @@ calcDivProf(sampleData, compDisMat = NULL, qMin = 0, qMax = 3, step = 0.1)
 \code{\link{compDis}}. Has to be supplied for calculations of
 Functional Hill diversity.}
 
+\item{type}{Type of Hill Diversity to calculate for the diversity profile.
+\code{"HillDiv"} or \code{"FuncHillDiv"}.}
+
 \item{qMin}{Minimum value of q.}
 
 \item{qMax}{Maximum value of q.}
 
-\item{step}{Step by which q will be calculated between qMin and qMax.}
+\item{step}{Increment by which q will be calculated between qMin and qMax.}
 }
 \value{
 List with a diversity profile data frame with samples as rows
-and the (Functional) Hill diversity at different q values as columns;
-and values for qMin, qMax and step.
+and the Hill diversity or Functional Hill diversity for different q values
+as columns; and values for type, qMin, qMax and step.
 }
 \description{
-Function to calculate a "diversity profile", i.e. calculate (Functional)
-Hill diversity for multiple values of q.
+Function to calculate a diversity profile, i.e. calculate Hill diversity
+or Functional Hill Diversity for a range of q values.
+}
+\details{
+A diversity profile is a calculation of Hill Diversity or Functional Hill
+Diversity at different values of q. This function performs the calculations,
+while \code{\link{chemDivPlot}} can be used to conveniently create the
+diversity profile plot, where Hill Diversity is plotted as a function of q
+within the chosen range. The shape of the diversity profile curve
+reflects  the unevenness of compound proportions in the sample. For a
+perfectly even sample the curve is flat. The more uneven the compound
+proportions are, the more steep is the decline of the curve.
+A common range of q values is between qMin = 0 and qMax = 3 (default range),
+as diversity should change little beyond qMax = 3. See \code{\link{calcDiv}}
+for further details on q.
 }
 \examples{
 data(minimalSampData)
 data(minimalCompDis)
 calcDivProf(sampleData = minimalSampData)
 calcDivProf(sampleData = minimalSampData, compDisMat = minimalCompDis,
-qMin = 1, qMax = 2, step = 0.2)
+type = "FuncHillDiv", qMin = 1, qMax = 2, step = 0.2)
 }
 \references{
-Who came up with divprofs?
+Who came up with divprofs? But e.g. Jost 2010,
 }

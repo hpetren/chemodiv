@@ -7,23 +7,37 @@ rownames(testCompDis) <- c("compA", "compB", "compC")
 
 
 test_that("a diversity profile with correct dim and no NA is generated", {
-  expect_output(str(calcDivProf(sampleData = testSampData)), "List of 4")
+  expect_output(str(calcDivProf(sampleData = testSampData)), "List of 5")
   expect_output(str(calcDivProf(sampleData = testSampData,
-                                compDisMat = testCompDis)), "List of 4")
-  expect_equal(nrow(calcDivProf(sampleData = testSampData,
-                                compDisMat = testCompDis)$divProf),
+                                compDisMat = testCompDis,
+                                type = "FuncHillDiv")), "List of 5")
+  expect_equal(nrow(calcDivProf(sampleData = testSampData)$divProf),
                nrow(testSampData))
   expect_equal(ncol(calcDivProf(sampleData = testSampData,
                                 compDisMat = testCompDis,
+                                type = "FuncHillDiv",
                                 qMin = 0, qMax = 3, step = 0.1)$divProf),
                length(seq(0, 3, by = 0.1)))
   expect_false(any(is.na(calcDivProf(sampleData = testSampData,
-                                     compDisMat = testCompDis)$divProf)))
-
+                                     compDisMat = testCompDis,
+                                     type = "FuncHillDiv")$divProf)))
 })
 
-test_that("faulty input is detected and gives error", {
+test_that("wrong/non-logical input is detected and gives error/message", {
   expect_error(calcDivProf(sampleData = testSampData, step = 100))
   expect_error(calcDivProf(sampleData = testSampData, qMin = -1))
   expect_error(calcDivProf(sampleData = testSampData, qMin = 3, qMax = 1))
+  expect_error(calcDivProf(sampleData = testSampData,
+                           compDisMat = testCompDis,
+                           type = "NotAnIndex"))
+  expect_error(calcDivProf(sampleData = testSampData,
+                           compDisMat = testCompDis,
+                           type = c("HillDiv", "FuncHillDiv")))
+  expect_error(calcDivProf(sampleData = testSampData,
+                           type = "FuncHillDiv"))
+  expect_message(calcDivProf(sampleData = testSampData,
+                             compDisMat = testCompDis,
+                             type = "HillDiv"))
+
+
 })

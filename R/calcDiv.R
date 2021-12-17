@@ -92,7 +92,7 @@ calcDiv <- function(sampleData,
             "PielouEven", "HillEven") %in% type) &&
       !any(c("FuncHillDiv", "RaoQ") %in% type) &&
       !is.null(compDisMat)) {
-    message("Note that the calculated diveristy measures do not use a
+    message("Note that the calculated diveristy measures do not use the
             compound dissimilarity matrix.")
   }
 

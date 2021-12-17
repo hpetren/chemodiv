@@ -11,21 +11,22 @@ calcBetaDiv(sampleData, compDisMat = NULL, type = "HillDiv", q = 1)
 
 \item{compDisMat}{Compound distance matrix, as calculated by
 \code{\link{compDis}}. Has to be supplied for calculations of
-Functional Hill-beta-diversity.}
+Functional Hill beta-diversity.}
 
-\item{type}{Type(s) of Hill-beta-diversity to calculate. \code{"HillDiv"}
+\item{type}{Type(s) of Hill beta-diversity to calculate. \code{"HillDiv"}
 and/or \code{"FuncHillDiv"}.}
 
-\item{q}{Diversity order to use for the calculation of beta-diversity.}
+\item{q}{Diversity order to use for the calculation of beta-diversity.
+See \code{\link{calcDiv}} for further details on q.}
 }
 \value{
-Data frame with type of Hill-beta-diversity calculated, q,
+Data frame with type of Hill beta-diversity calculated, q,
 gamma-diversity, alpha-diversity and beta-diversity.
 }
 \description{
 Function to calculate beta, gamma and alpha diversity in the
-Hill-diversity framework. This can be calculated as normal
-Hill-beta-diversity or functional Hill-beta-diversity.
+Hill diversity framework. This can be calculated as normal
+Hill beta-diversity or functional Hill beta-diversity.
 }
 \details{
 The function calculates a single beta-diversity value for the supplied
