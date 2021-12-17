@@ -14,7 +14,7 @@ testDivProf <- calcDivProf(testSampData)
 testChemDivPlot <- chemDivPlot(compDisMat = testCompDis,
                                divData = testDiv,
                                divProfData = testDivProf,
-                               sampleDisMat = testSampDis,
+                               sampleDisMat = testSampDis$BrayCurtis,
                                groupData = groups)
 
 

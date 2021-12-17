@@ -11,12 +11,23 @@ rownames(testCompDis3) <- c("compA", "compY", "compC")
 
 
 test_that("Bray-Curtis and UniFracs work", {
-  expect_equal(nrow(sampleDis(testSampData)), nrow(testSampData))
-  expect_equal(nrow(sampleDis(testSampData, testCompDis)), nrow(testSampData))
+  expect_equal(nrow(sampleDis(testSampData)$BrayCurtis),
+               nrow(testSampData))
+  expect_equal(nrow(sampleDis(testSampData,
+                              testCompDis,
+                              type = "GenUniFrac")$GenUniFrac),
+               nrow(testSampData))
+  expect_output(str(sampleDis(testSampData,
+                              testCompDis,
+                              type = c("BrayCurtis","GenUniFrac"))),
+               "List of 2")
 })
 
-test_that("warnings and messages work", {
+test_that("error actions and messages work", {
   expect_message(sampleDis(testSampData*2))
+  expect_message(sampleDis(testSampData, testCompDis, type = "BrayCurtis"))
   expect_error(sampleDis(testSampData, testCompDis2))
   expect_error(sampleDis(testSampData, testCompDis3))
+  expect_error(sampleDis(testSampData, testCompDis, type = "wrong"))
+  expect_error(sampleDis(testSampData, type = "GenUniFrac"))
 })

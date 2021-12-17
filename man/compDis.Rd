@@ -16,9 +16,10 @@ compDis(
 Should have a column named "compound" with common names, and a column named
 "smiles" with SMILES IDs for the compounds.}
 
-\item{type}{Type of dissimilarity to calculate, NPClassifier,
-PubChemFingerprint or fMCS. If more than one is choosen, a mean of
-the included types will also be calculated.}
+\item{type}{Type of data compound dissimilarity calculations will be
+based on: \code{NPClassifier}, \code{PubChemFingerprint} or \code{fMCS}.
+If more than one is chosen, a mean of the included types will also
+be calculated.}
 
 \item{npcTable}{An already generated \code{\link{NPCTable}}
 can optionally be supplied. If compound distances are to be calculated using

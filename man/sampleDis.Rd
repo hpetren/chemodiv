@@ -4,44 +4,50 @@
 \alias{sampleDis}
 \title{Calculate sample dissimilarities}
 \usage{
-sampleDis(sampleData, compDisMat = NULL, alpha = 1)
+sampleDis(sampleData, compDisMat = NULL, type = "BrayCurtis", alpha = 1)
 }
 \arguments{
 \item{sampleData}{Data frame with samples as rows and compounds as columns.}
 
 \item{compDisMat}{Compound dissimilarity matrix, as calculated by
-\code{\link{compDis}}. If this is supplied UniFrac dissimilarities are
-calculated, otherwise Bray-Curtis distances are calculated.}
+\code{\link{compDis}}. If this is supplied, Generalized UniFrac
+dissimilarities can be calculated.}
 
-\item{alpha}{Alpha value used to calculate UniFracs. alpha can be set
-between 0 and 1. With alpha = 0 equal emphasis is put on every branch,
-With values closer to 1, more emphasis is put on high abundance branches.
-alpha = 0.5 strikes a balance. alpha 0.5 or 1 is recommended,
-with alpha = 1 as default.}
+\item{type}{Type of sample dissimilarity to be calculated. This is
+Bray-Curtis dissimilarity, \code{BrayCurtis} and/or Generalized UniFrac
+dissimilarity, \code{GenUniFrac}.}
+
+\item{alpha}{Alpha value used to calculate Generalized UniFracs. alpha can
+be set between 0 and 1. With alpha = 0 equal emphasis is put on every
+branch in the dendrogram. With values closer to 1, more emphasis is put
+on high abundance branches. alpha = 0.5 strikes a balance.
+alpha 0.5 or 1 is recommended, with alpha = 1 as default.}
 }
 \value{
-Sample dissimilarity matrix with Bray-Curtis or
-UniFrac dissimilarities.
+List with sample dissimilarity matrices. A list is always
+outputted, even if only one matrix is calculated.
 }
 \description{
 Function to calculate dissimilarities between samples.
-If only sample data is supplied Bray-Curtis dissimilarities are calculated.
-If also a compound dissimilarity matrix is supplied, Generalized UniFrac
-dissimilarities are calculated.
+This is either Bray-Curtis dissimilarities and/or Generalized UniFrac
+dissimilarities.
 }
 \details{
 \code{sampleDis} calculates a dissimilarity matrix for all the samples
 in \code{sampleData}. Bray-Curtis dissimilarities are calculated using only
 the \code{sampleData}. If a compound dissimilarity matrix, \code{compDisMat},
-is supplied, Generalized UniFrac dissimilarities are instead calculated,
-which take the biosynthesis/structure of the compounds into account
-when calculating sample dissimilarities.
+is supplied, Generalized UniFrac dissimilarities can also be calculated,
+which uses the compound dissimilarity matrix (transformed into a dendrogram)
+in the dissimilarity calculations. Thereby, the biosynthetic/structural
+properties of the compounds is taken into account for the calculations
+of sample dissimilarities.
 }
 \examples{
 data(minimalSampData)
 data(minimalCompDis)
 sampleDis(minimalSampData)
-sampleDis(minimalSampData, minimalCompDis, alpha = 0.5)
+sampleDis(sampleData = minimalSampData, compDisMat = minimalCompDis,
+type = c("BrayCurtis", "GenUniFrac"), alpha = 0.5)
 }
 \references{
 Bray-Curtis ref?
