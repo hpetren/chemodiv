@@ -37,7 +37,8 @@
 #' }
 #'
 #'
-#' @param sampleData Data frame with samples as rows and compounds as columns.
+#' @param sampleData Data frame with the relative concentration of each
+#' compound (column) in every sample (row).
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
 #' Functional Hill Diversity and Rao's Q.

@@ -14,7 +14,8 @@ calcDivProf(
 )
 }
 \arguments{
-\item{sampleData}{Data frame with samples as rows and compounds as columns.}
+\item{sampleData}{Data frame with the relative concentration of each
+compound (column) in every sample (row).}
 
 \item{compDisMat}{Compound distance matrix, as calculated by
 \code{\link{compDis}}. Has to be supplied for calculations of

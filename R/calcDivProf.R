@@ -15,7 +15,8 @@
 #' as diversity should change little beyond qMax = 3. See \code{\link{calcDiv}}
 #' for further details on q.
 #'
-#' @param sampleData Data frame with samples as rows and compounds as columns.
+#' @param sampleData Data frame with the relative concentration of each
+#' compound (column) in every sample (row).
 #' @param compDisMat Compound distance matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
 #' Functional Hill diversity.

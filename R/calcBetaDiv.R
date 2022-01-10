@@ -1,6 +1,6 @@
 #' Calculate beta diversity
 #'
-#' Function to calculate beta, gamma and alpha diversity in the
+#' Function to calculate beta diversity in the
 #' Hill diversity framework. This can be calculated as normal
 #' Hill beta-diversity or functional Hill beta-diversity.
 #'
@@ -13,7 +13,8 @@
 #' most simple measure of beta-diversity introduced by Whittaker 1960, where
 #' beta = gamma / alpha, based only on the number of species (here compounds).
 #'
-#' @param sampleData Data frame with samples as rows and compounds as columns.
+#' @param sampleData Data frame with the relative concentration of each
+#' compound (column) in every sample (row).
 #' @param compDisMat Compound distance matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
 #' Functional Hill beta-diversity.
