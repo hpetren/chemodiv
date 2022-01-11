@@ -60,12 +60,18 @@ diversity. Requires a compound dissimilarity matrix. This represents the
 average dissimilarity of two randomly selected (weighed by their proportions)
 compounds in the sample.
 \item \code{PielouEven}. Pielou's Evenness. The perhaps most common
-evenness measure. Equal to the Shannon's Diversity divided by the
-natural logarithm of the number of compounds. This is a relative measure
-that is not replication invariant.
-\item \code{HillEven}. Hill Evenness. This is equal to the Hill Diversity
-(at the given value of q) divided by the number of compounds.
-This is a replication invariant measure.
+evenness measure. This is equal to the Shannon's Diversity divided by the
+natural logarithm of the number of compounds. In other words, it expresses
+evenness with the observed Shannon's diversity as a proportion of the maximum
+Shannon's diversity where all compounds are equally abundant. Therefore,
+this is a relative measure with a minimum value of 0 and a maximum value
+of 1. This measure of evenness is not replication invariant.
+\item \code{HillEven}. Hill Evenness, as defined by equation 8 in
+Tuomisto 2012 . This is equal to the Hill Diversity
+(at the given value of q) divided by the number of compounds, and therefore
+has a minimum value of 1 / number of compounds and maximum value of 1.
+This measure of evenness is replication invariant. This measure can be
+normalized to range from 0 to 1 (eq. 13 in Tuomisto 2012).
 }
 }
 \examples{
