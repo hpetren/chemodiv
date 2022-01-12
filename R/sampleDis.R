@@ -5,14 +5,28 @@
 #' dissimilarities.
 #'
 #' \code{sampleDis} calculates a dissimilarity matrix for all the samples
-#' in \code{sampleData}. Bray-Curtis dissimilarities are calculated using only
-#' the \code{sampleData}. If a compound dissimilarity matrix, \code{compDisMat},
-#' is supplied, Generalized UniFrac dissimilarities can also be calculated,
-#' which uses the compound dissimilarity matrix (transformed into a dendrogram)
-#' in the dissimilarity calculations. Thereby, the biosynthetic/structural
-#' properties of the compounds is taken into account for the calculations
-#' of sample dissimilarities.
+#' in \code{sampleData}, for the given dissimilarity index/indices.
+#' Bray-Curtis dissimilarities are calculated using only
+#' the \code{sampleData}. This is the most commonly calculated dissimilarity
+#' index used for phytochemical data (other types of dissimilarities are
+#' easily calculated using the \code{vegdist} function in the \code{vegan}
+#' package).
 #'
+#' If a compound dissimilarity matrix, \code{compDisMat},
+#' is supplied, Generalized UniFrac dissimilarities can be calculated, which
+#' also uses the compound dissimilarity matrix for the sample dissimilarity
+#' calculations. For the calculation of Generalized UniFrac dissimilarities,
+#' the compound dissimilarity matrix is transformed into a dendrogram using
+#' hierarchical clustering. Calculation of UniFrac distances
+#' quantifies the fraction of the total branch length of the dendrogram that
+#' leads to compounds present in either sample, but not both.
+#' The (weighted) Generalized UniFrac dissimilarities
+#' implemented here additionally takes compound abundances
+#' into account. In this way, both the relative proportions of compounds and
+#' the biosynthetic/structural properties of these compounds are accounted for
+#' in the calculations of sample dissimilarities. As for Bray-Curtis
+#' dissimilarities, Generalized UniFrac dissimilarities range in value from
+#' 0 to 1.
 #'
 #' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
@@ -21,20 +35,30 @@
 #' @param type Type of sample dissimilarity to be calculated. This is
 #' Bray-Curtis dissimilarity, \code{BrayCurtis} and/or Generalized UniFrac
 #' dissimilarity, \code{GenUniFrac}.
-#' @param alpha Alpha value used to calculate Generalized UniFracs. alpha can
-#' be set between 0 and 1. With alpha = 0 equal emphasis is put on every
-#' branch in the dendrogram. With values closer to 1, more emphasis is put
-#' on high abundance branches. alpha = 0.5 strikes a balance.
+#' @param alpha Parameter used in calculations of Generalized UniFracs
+#' dissimilarities. alpha can be set between 0 and 1.
+#' With alpha = 0, equal weight is put on every
+#' branch in the dendrogram. With alpha = 1, branches are weighted by their
+#' abundance, and hence more emphasis is put on high abundance branches.
+#' alpha = 0.5 strikes a balance between the two.
 #' alpha 0.5 or 1 is recommended, with alpha = 1 as default.
 #'
 #' @return List with sample dissimilarity matrices. A list is always
 #' outputted, even if only one matrix is calculated.
 #'
-#' @references Bray-Curtis ref?
+#' @references
+#'
+#' Bray, J. R., and J. T. Curtis. 1957. An Ordination of the Upland Forest
+#' Communities of Southern Wisconsin. Ecological Monographs 27:325-349.
+#'
 #' Chen, J., K. Bittinger, E. S. Charlson, C. Hoffmann, J. Lewis, G. D. Wu,
-#' R. G. Collman, F. D. Bushman, and H. Li. 2012.
-#' Associating microbiome composition with environmental covariates using
-#' generalized UniFrac distances. Bioinformatics 28:2106–2113.
+#' R. G. Collman, F. D. Bushman, and H. Li. 2012. Associating microbiome
+#' composition with environmental covariates using generalized UniFrac
+#' distances. Bioinformatics 28:2106-2113.
+#'
+#' Lozupone, C., and R. Knight. 2005. UniFrac: a New Phylogenetic Method
+#' for Comparing Microbial Communities. Applied and Environmental
+#' Microbiology 71:8228-8235.
 #'
 #' @export
 #'
