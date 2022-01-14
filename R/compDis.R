@@ -322,7 +322,7 @@ compDis <- function(compoundData,
       diag(npcDisMat) <- 0
 
     }
-    compoundDisMatList[["npcDisMatMat"]] <- npcDisMat
+    compoundDisMatList[["npcDisMat"]] <- npcDisMat
   }
 
   if ("PubChemFingerprint" %in% type) { # Dissimilarities from Fingerprints
