@@ -4,7 +4,9 @@ testSampData <- data.frame(compA = c(0.3,0.4,0.1,0.2),
 testCompDis <- matrix(data = c(0,0.6,0.7,0.6,0,0.3,0.7,0.3,0), nrow = 3)
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
-testSampDis <- sampleDis(sampleData = testSampData)
+testSampDis <- sampleDis(sampleData = testSampData,
+                         compDisMat = testCompDis,
+                         type = c("BrayCurtis", "GenUniFrac"))
 groups <- c("I","I","II","II")
 
 testDiv <- calcDiv(testSampData)
@@ -17,11 +19,21 @@ testChemDivPlot <- chemDivPlot(compDisMat = testCompDis,
                                sampleDisMat = testSampDis$BrayCurtis,
                                groupData = groups)
 
+testChemDivPlot2 <- chemDivPlot(sampleDisMat = testSampDis,
+                               groupData = groups)
+
 
 test_that("chemodiversity plots are outputted", {
   expect_match(typeof(testChemDivPlot), "list")
   expect_equal(nrow(testChemDivPlot), 2)
   expect_equal(ncol(testChemDivPlot), 2)
 })
+
+test_that("chemDivPlot can handle list as sampleDisMat input", {
+  expect_match(typeof(testChemDivPlot2), "list")
+  expect_equal(nrow(testChemDivPlot2), 1)
+  expect_equal(ncol(testChemDivPlot2), 2)
+})
+
 
 
