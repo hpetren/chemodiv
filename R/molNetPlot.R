@@ -27,6 +27,11 @@
 #' NPC pathway classification.
 #' @param plotNames Indicates if compounds names should be included
 #' in the molecular network plot.
+#' @param layout Layout used by \code{\link[ggraph]{ggraph}} whan making
+#' the network. The default chosen here, "kk", is the the Kamada-Kawai
+#' layout algorithm which in most cases should produce a visually
+#' pleasing network. Another useful option is "circle", which puts all
+#' nodes in a circle, for easier comparisons between different networks.
 #'
 #' @return Molecular network(s) created with ggraph.
 #'
@@ -46,7 +51,8 @@ molNetPlot <- function(sampleData,
                        networkObject,
                        groupData = NULL,
                        npcTable = NULL,
-                       plotNames = FALSE) {
+                       plotNames = FALSE,
+                       layout = "kk") {
 
   if (!is.null(groupData) && plotNames) {
     stop("Names can only be plotted without grouping data")
@@ -57,7 +63,7 @@ molNetPlot <- function(sampleData,
 
     compoundMean <- colMeans(sampleData)
 
-    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+    p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
@@ -71,7 +77,7 @@ molNetPlot <- function(sampleData,
 
     compoundMean <- colMeans(sampleData)
 
-    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+    p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
@@ -84,14 +90,9 @@ molNetPlot <- function(sampleData,
   } else if (is.null(groupData) && !is.null(npcTable) && !plotNames) {
     # One network with NPC
 
-    # One of these is probably the best one
-    # ggraph(graph = networkObject, layout = "stress")
-    # ggraph(graph = networkObject, layout = "igraph", algorithm = "kk")
-    # ggraph(graph = networkObject, layout = "igraph", algorithm = "nicely")
-
     compoundMean <- colMeans(sampleData)
 
-    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+    p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
@@ -106,7 +107,7 @@ molNetPlot <- function(sampleData,
 
     compoundMean <- colMeans(sampleData)
 
-    p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+    p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
@@ -135,7 +136,7 @@ molNetPlot <- function(sampleData,
       networkList[[colnames(compoundMeanTrans)[j]]] <- local({
         j <- j
 
-        p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+        p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
           ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
@@ -162,7 +163,7 @@ molNetPlot <- function(sampleData,
       networkList[[colnames(compoundMeanTrans)[j]]] <- local({
         j <- j
 
-        p1 <- ggraph::ggraph(graph = networkObject, layout = "igraph", algorithm = "kk") +
+        p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
           ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 12) +
