@@ -23,13 +23,8 @@ based on: \code{NPClassifier}, \code{PubChemFingerprint} or \code{fMCS}.
 If more than one is chosen, a mean of the included types is also calculated.}
 
 \item{npcTable}{An already generated \code{\link{NPCTable}}
-can optionally be supplied. If compound distances are to be calculated using
-the NPC-classification and NPClassifier is unable to fully classify
-all compounds, it might be beneficial to run \code{\link{NPCTable}},
-manually edit the resulting data frame with probable classifications if
-possible (from the SI in Kim et al. 2021), and then supply this
-classification to \code{compDis()} with the npcTable argument. This will ensure
-that compound dissimilarities are computed optimally.}
+can optionally be supplied, if compound dissimilarities are to be
+calculated using \code{type = NPClassifier}.}
 
 \item{unknownCompoundsMean}{If unknown compounds, i.e. ones without SMILES
 or InChIKey, should be given mean dissimilarity values. If not, these
@@ -59,8 +54,14 @@ NPClassifier automatically classifies natural products
 (phytochemical compounds) into a hierarchical  classification of pathways,
 superclasses and classes, which largely correspond to the biosynthetic
 groups/pathways of the compounds. Classifications are fetched from
-\url{https://npclassifier.ucsd.edu/}. ADD DETAILS ON PSEUDOVARIABLES
-WHEN THAT IS DONE.
+\url{https://npclassifier.ucsd.edu/}. NPClassifier does not always
+manage to classify every compound into all three hierarchical levels. In
+such cases, it might be beneficial to first run \code{\link{NPCTable}},
+manually edit the resulting data frame with probable classifications if
+possible (from the Supporting Information in Kim et al. 2021), and then
+supply this classification to \code{compDis()} with the
+\code{npcTable} argument. This will ensure that compound dissimilarities
+are computed optimally.
 \item Using PubChem Fingerprints. This is a binary substructure fingerprint with
 881 binary variables describing the chemical structure of a compound.
 See \url{https://pubchemdocs.ncbi.nlm.nih.gov/data-specification} for more
