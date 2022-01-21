@@ -2,9 +2,9 @@
 % Please edit documentation in R/quickChemDiv.R
 \name{quickChemDiv}
 \alias{quickChemDiv}
-\title{Quickly calculate and plot chemodiversity}
+\title{Quickly calculate/plot chemodiversity}
 \usage{
-quickChemDiv(compoundData, sampleData, groupData = NULL)
+quickChemDiv(compoundData, sampleData, groupData = NULL, outputType = "plots")
 }
 \arguments{
 \item{compoundData}{Data frame with the chemical compounds of interest.
@@ -17,14 +17,25 @@ details on obtaining SMILES and InChIKey IDs.}
 compound (column) in every sample (row).}
 
 \item{groupData}{Grouping data.}
+
+\item{outputType}{Type of output that should be returned: either
+\code{"data"} to output a list with different types of chemodiversity data,
+or \code{"plots"} to instead produce standard plots of this data.}
 }
 \value{
-Four plots visualizing chemodiversity.
+Four types of chemodiversity measures, as either elements in a list
+or separate plots. If \code{outputType = "data"}, function returns
+a compound dissimilarity matrix, a data frame with Functional Hill
+Diversity at q = 1, a data frame with a Functional Hill Diversity profile
+for q = 0-3, and a sample dissimilarity matrix. If
+\code{outputType = "plots"}, these data sets are plotted as a dendrogram,
+a boxplot, a diversity profile plot and an NMDS plot, respectively.
 }
 \description{
 This function is a shortcut that makes use of many of the other functions in
-the package. In one simple step chemodiversity is visualized for
-users wanting to quickly explore their data using standard parameters.
+the package. In one simple step chemodiversity is calculated, and if
+requested also visualized, for users wanting to quickly explore their
+data using standard parameters.
 }
 \details{
 The function takes compound data and sample data as input. See
@@ -40,16 +51,19 @@ with Functional Hill Diversity for q = 0-3.
 \item \code{\link{sampleDis}} is used to calculate Generalized UniFrac
 dissimilarities between samples.
 \item \code{\link{chemDivPlot}} is used to create four different
-chemodiversity plots, including (1) a plot for compound dissimilarities,
-(2) a plot of Functional Hill Diversity at q = 1, (3) a Functional Hill
-Diversity profile for q = 0-3, and (4) a NMDS plot of the Generalized
-UniFrac dissimilarities.
+chemodiversity plots if requested.
 }
+
+\code{quickChemDiv} is designed to provide an easy way to visualize
+the most central measures of phytochemical diversity. It uses
+default parameters to do so, which should be reasonable in most cases.
+However, for detailed analyses we recommend using the separate
+functions to allow for full control of function parameters and output.
 }
 \examples{
 data(minimalCompData)
 data(minimalSampData)
 groups <- c("A", "A", "B", "B")
 quickChemDiv(compoundData = minimalCompData, sampleData = minimalSampData,
-groupData = groups)
+groupData = groups, outputType = "plots")
 }

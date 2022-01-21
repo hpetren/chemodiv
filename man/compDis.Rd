@@ -24,7 +24,7 @@ If more than one is chosen, a mean of the included types is also calculated.}
 
 \item{npcTable}{An already generated \code{\link{NPCTable}}
 can optionally be supplied, if compound dissimilarities are to be
-calculated using \code{type = NPClassifier}.}
+calculated using \code{type = "NPClassifier"}.}
 
 \item{unknownCompoundsMean}{If unknown compounds, i.e. ones without SMILES
 or InChIKey, should be given mean dissimilarity values. If not, these

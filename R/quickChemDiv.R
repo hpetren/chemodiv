@@ -1,8 +1,9 @@
-#' Quickly calculate and plot chemodiversity
+#' Quickly calculate/plot chemodiversity
 #'
 #' This function is a shortcut that makes use of many of the other functions in
-#' the package. In one simple step chemodiversity is visualized for
-#' users wanting to quickly explore their data using standard parameters.
+#' the package. In one simple step chemodiversity is calculated, and if
+#' requested also visualized, for users wanting to quickly explore their
+#' data using standard parameters.
 #'
 #' The function takes compound data and sample data as input. See
 #' \code{\link{chemdiv}} for details on data formatting. This function then
@@ -17,11 +18,14 @@
 #' \item \code{\link{sampleDis}} is used to calculate Generalized UniFrac
 #' dissimilarities between samples.
 #' \item \code{\link{chemDivPlot}} is used to create four different
-#' chemodiversity plots, including (1) a plot for compound dissimilarities,
-#' (2) a plot of Functional Hill Diversity at q = 1, (3) a Functional Hill
-#' Diversity profile for q = 0-3, and (4) a NMDS plot of the Generalized
-#' UniFrac dissimilarities.
+#' chemodiversity plots if requested.
 #' }
+#'
+#' \code{quickChemDiv} is designed to provide an easy way to visualize
+#' the most central measures of phytochemical diversity. It uses
+#' default parameters to do so, which should be reasonable in most cases.
+#' However, for detailed analyses we recommend using the separate
+#' functions to allow for full control of function parameters and output.
 #'
 #' @param compoundData Data frame with the chemical compounds of interest.
 #' Should have a column named "compound" with common names, a column named
@@ -31,8 +35,17 @@
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
 #' @param groupData Grouping data.
+#' @param outputType Type of output that should be returned: either
+#' \code{"data"} to output a list with different types of chemodiversity data,
+#' or \code{"plots"} to instead produce standard plots of this data.
 #'
-#' @return Four plots visualizing chemodiversity.
+#' @return Four types of chemodiversity measures, as either elements in a list
+#' or separate plots. If \code{outputType = "data"}, function returns
+#' a compound dissimilarity matrix, a data frame with Functional Hill
+#' Diversity at q = 1, a data frame with a Functional Hill Diversity profile
+#' for q = 0-3, and a sample dissimilarity matrix. If
+#' \code{outputType = "plots"}, these data sets are plotted as a dendrogram,
+#' a boxplot, a diversity profile plot and an NMDS plot, respectively.
 #'
 #' @export
 #'
@@ -41,10 +54,16 @@
 #' data(minimalSampData)
 #' groups <- c("A", "A", "B", "B")
 #' quickChemDiv(compoundData = minimalCompData, sampleData = minimalSampData,
-#' groupData = groups)
+#' groupData = groups, outputType = "plots")
 quickChemDiv <- function(compoundData,
                          sampleData,
-                         groupData = NULL) {
+                         groupData = NULL,
+                         outputType = "plots") {
+
+  if (length(outputType) > 1 ||
+      !(outputType == "plots" || outputType == "data")) {
+    stop('outputType must be either "data" or "plots"')
+  }
 
   quickCompDis <- compDis(compoundData = compoundData,
                           type = "PubChemFingerprint",
@@ -68,9 +87,16 @@ quickChemDiv <- function(compoundData,
                               type = "GenUniFrac",
                               alpha = 1)
 
-  chemDivPlot(compDisMat = quickCompDis$fingerDisMat,
-              divData = quickDiv,
-              divProfData = quickDivProf,
-              sampleDisMat = quickSampleDis$GenUniFrac,
-              groupData = groupData)
+  if (outputType == "data") {
+    chemDivData <- list(compoundDissimilarity = quickCompDis$fingerDisMat,
+                        funcHillDiv = quickDiv,
+                        funcHillDivProf = quickDivProf$divProf,
+                        sampleDissimilarity = quickSampleDis$GenUniFrac)
+  } else {
+    chemDivPlot(compDisMat = quickCompDis$fingerDisMat,
+                divData = quickDiv,
+                divProfData = quickDivProf,
+                sampleDisMat = quickSampleDis$GenUniFrac,
+                groupData = groupData)
+  }
 }
