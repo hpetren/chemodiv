@@ -402,7 +402,7 @@ compDis <- function(compoundData,
 
     # If there are unknown compound and one decides to set
     # unknown compounds to mean values
-    if (unknownCompoundsMean & any(is.na(compoundCID$cid))) {
+    if (unknownCompoundsMean && any(is.na(compoundCID$cid))) {
 
       # Subsetting only known compounds
       fingerKnown <- fingerDisMat[-unknownRow, -unknownRow]
