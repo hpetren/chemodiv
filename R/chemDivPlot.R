@@ -105,14 +105,26 @@ chemDivPlot <- function(compDisMat = NULL,
         i <- i
         currentCol <- colnames(divDatadf)[i]
 
-        divPlot <- ggplot2::ggplot(data = divDatadf,
-                                   ggplot2::aes(x = .data$Group,
-                                                y = .data[[currentCol]],
-                                                fill = .data$Group)) +
-          ggplot2::geom_boxplot(outlier.shape = NA) +
-          ggplot2::geom_jitter(height = 0, width = 0.1, shape = 21) +
-          ggplot2::ylab(currentCol) +
-          ggplot2::theme(text = ggplot2::element_text(size = 15))
+        if (i == 1) {
+          divPlot <- ggplot2::ggplot(data = divDatadf,
+                                     ggplot2::aes(x = .data$Group,
+                                                  y = .data[[currentCol]],
+                                                  fill = .data$Group)) +
+            ggplot2::geom_boxplot(outlier.shape = NA) +
+            ggplot2::geom_jitter(height = 0, width = 0.1, shape = 21) +
+            ggplot2::ylab(currentCol) +
+            ggplot2::theme(text = ggplot2::element_text(size = 15))
+        } else { # If multiple boxplots, only first has legend
+          divPlot <- ggplot2::ggplot(data = divDatadf,
+                                     ggplot2::aes(x = .data$Group,
+                                                  y = .data[[currentCol]],
+                                                  fill = .data$Group)) +
+            ggplot2::geom_boxplot(outlier.shape = NA) +
+            ggplot2::geom_jitter(height = 0, width = 0.1, shape = 21) +
+            ggplot2::ylab(currentCol) +
+            ggplot2::theme(text = ggplot2::element_text(size = 15),
+                           legend.position = "none")
+        }
       })
     }
   }

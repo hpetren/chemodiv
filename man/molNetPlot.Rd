@@ -24,14 +24,14 @@ The network is extracted as molNetOutput$networkObject.}
 \item{groupData}{Grouping data. If supplied, a separate network will be
 created for each group.}
 
-\item{npcTable}{An \code{\link{NPCTable}} can optionally be supplied.
-This will result in network nodes being coloured by their
-NPC pathway classification.}
+\item{npcTable}{It is recommended but optional to supply an
+\code{\link{NPCTable}} This will result in network nodes being coloured
+by their NPC pathway classification.}
 
 \item{plotNames}{Indicates if compounds names should be included
 in the molecular network plot.}
 
-\item{layout}{Layout used by \code{\link[ggraph]{ggraph}} whan making
+\item{layout}{Layout used by \code{\link[ggraph]{ggraph}} when creating
 the network. The default chosen here, "kk", is the the Kamada-Kawai
 layout algorithm which in most cases should produce a visually
 pleasing network. Another useful option is "circle", which puts all
@@ -42,16 +42,15 @@ Molecular network(s) created with ggraph.
 }
 \description{
 Function to conveniently create a basic plot of the molecular network
-created by the \code{\link{molNet}} function
-(based on the compound dissimilarity matrix). Nodes represent compounds,
-with size proportional to proportions, and edge widths represent
-compound similarity.
+created by the \code{\link{molNet}} function. Nodes are compounds,
+with node size or node colour representing proportional concentration
+of the compounds. Edge widths represent compound similarity.
 }
 \details{
-The network object from \code{\link{molNet}}  and sample dataset have to
+The network object from \code{\link{molNet}} and sample data frame have to
 be supplied. In addition, groupData and/or \code{\link{NPCTable}} can
-be supplied. If groupData is supplied,
-one network will be created for each group. If and NPCTable is supplied,
+be supplied. If groupData is supplied, one network will be created
+for each group. If an NPCTable is supplied (which is recommended),
 node colours will represent NPC pathways, and node size the proportional
 concentration of the compounds. Edge widths represent compound similarity,
 and only edges with similarity values above the \code{\link{molNet}}

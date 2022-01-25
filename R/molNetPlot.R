@@ -1,15 +1,14 @@
 #' Plot molecular network
 #'
 #' Function to conveniently create a basic plot of the molecular network
-#' created by the \code{\link{molNet}} function
-#' (based on the compound dissimilarity matrix). Nodes represent compounds,
-#' with size proportional to proportions, and edge widths represent
-#' compound similarity.
+#' created by the \code{\link{molNet}} function. Nodes are compounds,
+#' with node size or node colour representing proportional concentration
+#' of the compounds. Edge widths represent compound similarity.
 #'
-#' The network object from \code{\link{molNet}}  and sample dataset have to
+#' The network object from \code{\link{molNet}} and sample data frame have to
 #' be supplied. In addition, groupData and/or \code{\link{NPCTable}} can
-#' be supplied. If groupData is supplied,
-#' one network will be created for each group. If and NPCTable is supplied,
+#' be supplied. If groupData is supplied, one network will be created
+#' for each group. If an NPCTable is supplied (which is recommended),
 #' node colours will represent NPC pathways, and node size the proportional
 #' concentration of the compounds. Edge widths represent compound similarity,
 #' and only edges with similarity values above the \code{\link{molNet}}
@@ -22,12 +21,12 @@
 #' \code{\link{molNet}} function. Note that this is only the network object,
 #' which is one of the elements in the list outputted by \code{\link{molNet}}.
 #' The network is extracted as molNetOutput$networkObject.
-#' @param npcTable An \code{\link{NPCTable}} can optionally be supplied.
-#' This will result in network nodes being coloured by their
-#' NPC pathway classification.
+#' @param npcTable It is recommended but optional to supply an
+#' \code{\link{NPCTable}} This will result in network nodes being coloured
+#' by their NPC pathway classification.
 #' @param plotNames Indicates if compounds names should be included
 #' in the molecular network plot.
-#' @param layout Layout used by \code{\link[ggraph]{ggraph}} whan making
+#' @param layout Layout used by \code{\link[ggraph]{ggraph}} when creating
 #' the network. The default chosen here, "kk", is the the Kamada-Kawai
 #' layout algorithm which in most cases should produce a visually
 #' pleasing network. Another useful option is "circle", which puts all
@@ -56,6 +55,10 @@ molNetPlot <- function(sampleData,
 
   if (!is.null(groupData) && plotNames) {
     stop("Names can only be plotted without grouping data")
+  }
+  if (is.null(npcTable)) {
+    message("It is recommended to include an npcTable for an improved
+            network visualization.")
   }
 
   if (is.null(groupData) && is.null(npcTable) && !plotNames) {
