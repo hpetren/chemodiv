@@ -27,9 +27,9 @@
 #' @param plotNames Indicates if compounds names should be included
 #' in the molecular network plot.
 #' @param layout Layout used by \code{\link[ggraph]{ggraph}} when creating
-#' the network. The default chosen here, "kk", is the the Kamada-Kawai
+#' the network. The default chosen here, \code{"kk"}, is the the Kamada-Kawai
 #' layout algorithm which in most cases should produce a visually
-#' pleasing network. Another useful option is "circle", which puts all
+#' pleasing network. Another useful option is \code{"circle"}, which puts all
 #' nodes in a circle, for easier comparisons between different networks.
 #'
 #' @return Molecular network(s) created with ggraph.
@@ -71,7 +71,9 @@ molNetPlot <- function(sampleData,
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
-      ggplot2::labs(color = "Proportion", width = "Molecular similarity")
+      ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
+      ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
+                     legend.text = ggplot2::element_text(size = 14))
 
     networkList <- list(p1)
 
@@ -86,7 +88,9 @@ molNetPlot <- function(sampleData,
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
-      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2)
+      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
+      ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
+                     legend.text = ggplot2::element_text(size = 14))
 
     networkList <- list(p1)
 
@@ -97,11 +101,13 @@ molNetPlot <- function(sampleData,
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 2), name = "Molecular similarity") +
+      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                            size = compoundMean)) +
-      ggplot2::scale_size(range = c(6, 16)) +
-      ggplot2::labs(color = "Pathway", width = "Molecular similarity")
+      ggplot2::scale_size(range = c(8, 16)) +
+      ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
+      ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
+                     legend.text = ggplot2::element_text(size = 14))
 
     networkList <- list(p1)
 
@@ -115,9 +121,11 @@ molNetPlot <- function(sampleData,
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                            size = compoundMean)) +
-      ggplot2::scale_size(range = c(6, 16)) +
-      ggplot2::labs(color = "Pathway", width = "Molecular similarity") +
-      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2)
+      ggplot2::scale_size(range = c(8, 16)) +
+      ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
+      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
+      ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
+                     legend.text = ggplot2::element_text(size = 14))
 
     networkList <- list(p1)
 
@@ -141,12 +149,15 @@ molNetPlot <- function(sampleData,
 
         p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
-          ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+          ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                               size = compoundMeanTrans[,j])) +
-          ggplot2::scale_size(range = c(2, 12)) +
+          ggplot2::scale_size(range = c(4, 10)) +
           ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
-          ggplot2::ggtitle(colnames(compoundMeanTrans)[j])
+          ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
+          ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+                         legend.text = ggplot2::element_text(size = 8))
+
 
         print(p1)
       })
@@ -168,27 +179,18 @@ molNetPlot <- function(sampleData,
 
         p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
-          ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
-          ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 12) +
+          ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
+          ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 10) +
           ggplot2::scale_colour_viridis_c() +
           ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
-          ggplot2::ggtitle(colnames(compoundMeanTrans)[j])
+          ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
+          ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
+                         legend.text = ggplot2::element_text(size = 8))
 
         print(p1)
       })
     }
   }
-
-  # Can't figure out how to get this to behave as ggplot plot, i.e.
-  # you can save output into variable and when that variable is run the
-  # plot is shown. arrangeGrob makes it so that nothing is plotted when
-  # function is run, but then have to save function output into variable
-  # and run plot(variable) to actually see the plot. Not doing that.
-  #a <- gridExtra::arrangeGrob(grobs = networkList, nrow = ceiling(sqrt(length(networkList))))
-  #return(a)
-  # Sticking with the normal grid.arrange, which always make so a plot
-  # is made, even if function output is saved as variable (so function
-  # behaves like plot() does).
   return(gridExtra::grid.arrange(grobs = networkList,
                                  nrow = ceiling(sqrt(length(networkList)))))
 }

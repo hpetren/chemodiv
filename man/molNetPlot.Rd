@@ -32,9 +32,9 @@ by their NPC pathway classification.}
 in the molecular network plot.}
 
 \item{layout}{Layout used by \code{\link[ggraph]{ggraph}} when creating
-the network. The default chosen here, "kk", is the the Kamada-Kawai
+the network. The default chosen here, \code{"kk"}, is the the Kamada-Kawai
 layout algorithm which in most cases should produce a visually
-pleasing network. Another useful option is "circle", which puts all
+pleasing network. Another useful option is \code{"circle"}, which puts all
 nodes in a circle, for easier comparisons between different networks.}
 }
 \value{
