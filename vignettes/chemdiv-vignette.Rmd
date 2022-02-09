@@ -1,0 +1,143 @@
+---
+title: "Analysing Phytochemical Diversity - An introduction to *chemdiv*"
+author: "Hampus Petrén, et al"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analysing Phytochemical Diversity - An introduction to *chemdiv*}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**The *chemdiv* package and this vignette are in development and may not be fully functional/complete**
+
+## Introduction
+*chemdiv* is an R package used to analyse phytochemical data. It contains
+functions centered around calculations of phytochemical diversity and
+dissimilarity. This includes the use of diversity and dissimilarity indices 
+that incorporate the biosynthetic and/or structural properties of the 
+phytochemical compounds for the calculations, thereby providing comprehensive 
+measures of phytochemical diversity.
+
+*chemdiv* is currently available on GitHub: <https://github.com/hpetren/chemdiv>
+
+This introduction serves as a tutorial explaining the intended use of all the
+functions in the package.
+
+
+## Setup
+The developmental version of the package can be installed directly from GitHub
+in R using the `install_github` function from the `devtools` package.
+
+```{r, eval = FALSE}
+# Install and load devtools package
+install.packages("devtools")
+library("devtools")
+
+# Install chemdiv
+install_github("hpetren/chemdiv")
+```
+
+```{r}
+# Load chemdiv
+library(chemdiv)
+```
+
+
+## Using *chemdiv*
+
+## Data formatting
+Analyses in *chemdiv* will work best for sets of data, commonly generated 
+by chemical ecologists using GC-MS, LC-MS or similar, where all or most 
+compounds in the samples have been confidently identified.
+
+Two separate datasets are needed to use the full set of analyses included in 
+the package. We illustrate this by using an example dataset, that is
+included in the package, on floral scent of X individuals from Y populations 
+for the plant *Arabis alpina*.
+---Link to whatever dataset is used---
+
+
+The first dataset, which we call the *proportions* dataset, should be a 
+data frame containing data on the relative proportions of different 
+compounds (columns) in different samples (rows):
+```{r}
+data("alpinaDataSubset")
+head(alpinaDataSubset)[,1:5]
+```
+The dataset contains the proportional concentration of different floral
+scent compounds in different samples. The first column indicates which
+population each sample belongs to. For convenience, we separate this column
+from the rest of the dataset:
+```{r}
+alpinaPopulation <- alpinaDataSubset$Population
+alpinaData <- alpinaDataSubset[,-1]
+```
+
+The second dataset, which we call the *compounds* dataset, should be a 
+data frame containing, in each of three columns in a data frame,
+the common name, SMILES and InChIKey IDs of all the compounds that are 
+present in the first dataset:
+```{r}
+data("alpinaCompSubset")
+head(alpinaCompSubset)
+```
+SMILES and InChIKey are chemical identifiers that are easily obtained for 
+each compound by searching for it in 
+[PubChem](https://pubchem.ncbi.nlm.nih.gov/),
+or by using various automated tools such as the 
+[PubChem Identifier Exchange Service](https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi) 
+or [The Chemical Translation Service](https://cts.fiehnlab.ucdavis.edu/).
+The user is intentionally required to do this manually to ensure correctness,
+as lists of compounds very often contain compounds wrongly named, 
+wrongly formatted, under various synonyms etc. which prevents easy automatic 
+translation of compound names to SMILES and InChIKey.
+
+The name and order of the compounds in the first dataset (column names) has 
+to be the same as the name and order of the compounds in the second dataset
+(compound column): ---Double check if this is really necessary---
+```{r}
+table(colnames(alpinaData) == alpinaCompSubset$compound) # Should be all TRUE
+```
+
+Once data is correctly formatted we can begin with analyses. 
+
+### Compound classification and dissimilarities
+Two functions are used to classify and compare phytochemical compounds,
+and are applied to the *compounds* dataset.
+
+The function `NPCTable()` classifies compounds with 
+[NPClassifier](https://npclassifier.ucsd.edu/), and puts the results in a 
+dataframe containing the pathway, superclass and class for each compound.
+
+```{r}
+alpinaNPC <- NPCTable(alpinaCompSubset)
+alpinaNPC[1,]
+```
+NPClassifier tries to classify each compound into a hierarchical classification,
+largely corresponding to their biosynthesis, of pathway, superclass and class.
+This classification can be used by other *chemdiv* functions.
+
+
+### Diversity calculations
+
+### Sample dissimilarities
+
+### Molecular networks
+
+### Chemodiversity and network plots
+Plot, network, shortcut
+
+
+
+
+
+
+
