@@ -342,9 +342,15 @@ compDis <- function(compoundData,
     # If there are NA cid (due to NA inchikey) pubchemCidToSDF can't handle NAs
     if(any(is.na(compoundCID$cid))) { # if at least 1 NA
 
-      # Get all not NA cid and their fingerprints
+      # Get all not NA cid and their fingerprints. Temporarily shut off
+      # warnings to not print those when connection is manually closed
+      # (as that is not done by the function)
       cidNoNA <- compoundCID$cid[!is.na(compoundCID$cid)]
+      oldw <- getOption("warn")
+      options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(cidNoNA))
+      closeAllConnections()
+      options(warn = oldw)
       compoundbit <- ChemmineR::fp2bit(compoundSDF)
       compoundFinger <- as.data.frame(compoundbit@fpma)
       colnames(compoundFinger) <- c(paste0("bit", seq(1:881)))
@@ -384,7 +390,11 @@ compDis <- function(compoundData,
       }
     } else { # If no NA
       # Get all cid and their fingerprints
+      oldw <- getOption("warn")
+      options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
+      closeAllConnections()
+      options(warn = oldw)
       compoundbit <- ChemmineR::fp2bit(compoundSDF)
       compoundFinger <- as.data.frame(compoundbit@fpma)
       colnames(compoundFinger) <- c(paste0("bit", seq(1:881)))
@@ -439,7 +449,11 @@ compDis <- function(compoundData,
 
     if (any(is.na(compoundCID$cid))) { # If there are NAs
 
+      oldw <- getOption("warn")
+      options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid[!is.na(compoundCID$cid)]))
+      closeAllConnections()
+      options(warn = oldw)
 
       unknownRow <- which(is.na(compoundCID$cid))
 
@@ -500,7 +514,11 @@ compDis <- function(compoundData,
 
     } else {
 
+      oldw <- getOption("warn")
+      options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
+      closeAllConnections()
+      options(warn = oldw)
 
       fmcsSimMat <- sapply(ChemmineR::cid(compoundSDF),
                            function(x) fmcsR::fmcsBatch(compoundSDF[x],
@@ -523,8 +541,6 @@ compDis <- function(compoundData,
 
   }
   message("Done")
-  on.exit(closeAllConnections()) # Makes connection warning print directly,
-  # rather than randomly afterwards
   return(compoundDisMatList)
 }
 
