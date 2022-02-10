@@ -53,7 +53,7 @@ library(chemdiv)
 
 ## Using *chemdiv*
 
-## Data formatting
+### Data formatting
 Analyses in *chemdiv* will work best for sets of data, commonly generated 
 by chemical ecologists using GC-MS, LC-MS or similar, where all or most 
 compounds in the samples have been confidently identified.
@@ -114,30 +114,203 @@ Two functions are used to classify and compare phytochemical compounds,
 and are applied to the *compounds* dataset.
 
 The function `NPCTable()` classifies compounds with 
-[NPClassifier](https://npclassifier.ucsd.edu/), and puts the results in a 
-dataframe containing the pathway, superclass and class for each compound.
+[NPClassifier](https://npclassifier.ucsd.edu/) (Kim et al. 2021), and puts 
+the results in a dataframe containing the pathway, superclass and class 
+for each compound.
 
 ```{r}
-alpinaNPC <- NPCTable(alpinaCompSubset)
-alpinaNPC[1,]
+alpinaNPC <- NPCTable(compoundData = alpinaCompSubset)
+alpinaNPC[1,] # Classification of first compound in dataset
 ```
 NPClassifier tries to classify each compound into a hierarchical classification,
 largely corresponding to their biosynthesis, of pathway, superclass and class.
 This classification can be used by other *chemdiv* functions.
 
+The function `compDis()` calculates pairwise dissimilarities between
+phytochemical compounds. Dissimilarity calculations can be based on
+the biosynthesis and/or structure of the compounds. `type = "NPClassifier"`
+calculates dissimilarities based on the classification by NPClassifier.
+`type = "PubChemFingerprint"` and `type = "fMCS"` calculates dissimilarities
+based on the structure of the compounds with two different methods.
+
+We calculate compound dissimilarities with `type = "PubChemFingerprint"`.
+
+```{r}
+alpinaCompDis <- compDis(compoundData = alpinaCompSubset,
+                         type = "PubChemFingerprint")
+
+alpinaCompDis$fingerDisMat[1:4, 1:4] # Part of compound dissimilarity matrix
+```
+The output from the function is a list with one or several compound 
+dissimilarity matrices, depending on which type(s) was used as input. 
+This matrix is can be visualized and used by the other functions in the package.
+
 
 ### Diversity calculations
+Phytochemical diversity can be calculated with functions `calcDiv()`, 
+`calcBetaDiv()` and `calcDivProf()`.
+
+`calcDiv()` calculates alpha-diversity for each sample (row). The function
+can calculate a number of different diversity and evenness indices.
+We recommend calculating diversity as Hill numbers (Chao et al. 2014),
+as this provides a number of advantages, including the use of the parameter 
+q which controls the sensitivity of the measure to the relative 
+abundance of compounds. This can be done as normal Hill diversity, 
+which depends on compound richness and evenness, and as functional 
+Hill diversity,which additionally depends compound dissimilarity 
+(Chiu & Chao 2014), utilizing the compound dissimilarity matrix 
+from `compDis()`.
+
+We calculate functional Hill diversity for q = 1. 
+```{r}
+alpinaDiv <- calcDiv(sampleData = alpinaData, 
+                     compDisMat = alpinaCompDis$fingerDisMat,
+                     type = "FuncHillDiv",
+                     q = 1)
+
+head(alpinaDiv)
+```
+The function outputs a data frame with the selected type(s) of measures
+as columns.
+
+***
+
+`calcDivProf()` can be used to calculate normal or functional Hill diversity
+for a range of q-values simultaneously, generating a so called diversity
+profile.
+
+We calculate a diversity profile for functional Hill diversity, using the
+default range of q = 0 to q = 3. 
+```{r}
+alpinaDivProf <- calcDivProf(sampleData = alpinaData,
+                             compDisMat = alpinaCompDis$fingerDisMat,
+                             type = "FuncHillDiv")
+
+head(alpinaDivProf$divProf)[,1:5] # Part of the diversity profile data frame
+```
+The function outputs a list with input parameters and the diversity profile
+as a data frame.
+
+***
+
+`calcBetaDiv()` calculates beta-diversity for a set of samples, in the
+Hill number framework. The function calculates a single beta-diversity value 
+for the supplied sample data. This is calculated as beta = gamma / alpha.
+```{r}
+alpinaBetaDiv <- calcBetaDiv(sampleData = alpinaData,
+                             compDisMat = alpinaCompDis$fingerDisMat,
+                             type = "FuncHillDiv")
+
+alpinaBetaDiv
+```
+The output from the function is a list with one or several dissimilarity
+matrices, depending on which type(s) was used as input. This matrix is
+can be visualized and used by the other functions in the package.
+
 
 ### Sample dissimilarities
+Phytochemical dissimilarity can be calculated with the function `sampleDis()`.
+This calculates Bray-Curtis dissimilarities and/or Generalized UniFrac 
+dissimilarities between samples, utilizing the compound dissimilarity 
+matrix from `compDis()`.
 
-### Molecular networks
+We calculate phytochemical dissimilarity as Generalized UniFrac dissimilarities:
+```{r, message = FALSE}
+alpinaSampleDis <- sampleDis(sampleData = alpinaData,
+                             compDisMat = alpinaCompDis$fingerDisMat,
+                             type = "GenUniFrac")
+
+alpinaSampleDis$GenUniFrac[1:4, 1:4] # Part of sample dissimilarity matrix
+```
+The output from the function is a list with one or several sample dissimilarity
+matrices, depending on which type(s) was used as input.
+
+
+### Molecular network
+Function `molNet()` uses a matrix generated by the `compDis()` function to 
+create a molecular network of the phytochemical compounds, and calculates 
+some properties of the network.
+
+We create a molecular network based on the compound dissimilarity matrix.
+We can also include the the NPClassifier classification. We manually set
+`cutOff = 0.75` in this case.
+```{r}
+alpinaNetwork <- molNet(compDisMat = alpinaCompDis$fingerDisMat,
+                        npcTable = alpinaNPC,
+                        cutOff = 0.75)
+
+summary(alpinaNetwork)
+```
+The output is a list including the network, and some basic network parameters.
+
 
 ### Chemodiversity and network plots
-Plot, network, shortcut
+There are two functions that can be used to conveniently plot the
+molecular network and different types phytochemical diversity and 
+dissimilarity calculated by the above functions.
+
+`molNetPlot()` creates a basic plot of the molecular network generated
+by the molNet function. We create a single molecular network for the whole
+dataset, including compound names and the classification by NPClassifier.
+```{r, fig.width = 12, fig.height = 8, out.width = "90%"}
+molNetPlot(sampleData = alpinaData,
+           networkObject = alpinaNetwork$networkObject,
+           npcTable = alpinaNPC,
+           plotNames = TRUE)
+```
+
+Nodes are compounds. Nodes are coloured by their "pathway" classification
+by NPClassifier. Node size represents the mean proportional concentration of
+the compounds. Edge widths represent compound similarity, and are only plotted
+for similarities higher than the cutoff value. 
+
+***
+
+`chemDivPlot()` can be used to conveniently create basic plots of the 
+different types of chemodiversity measurements created by functions above.
+Four types of plots can be created. With argument `compDisMat` a 
+dendrogram visualizing compound dissimilarities is created. With argument 
+`divData`, diversity/evenness is visualized with a boxplot.
+With argument `divProfData` a diversity profile will be created. With argument `sampleDisMat` sample dissimilarities will be visualized as an NMDS plot.
+Grouping data can be supplied with argument `groupData`.
+```{r, fig.width = 12, fig.height = 8, out.width = "90%"}
+chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
+            divData = alpinaDiv,
+            divProfData = alpinaDivProf,
+            sampleDisMat = alpinaSampleDis$GenUniFrac,
+            groupData = alpinaPopulation)
+```
+
+The output consists of the selected plots. Any combination of plots
+can be generated.
+
+
+### Shortcut function
+The function `quickChemDiv()` uses many of the above functions to in one 
+simple step calculate/visualize chemodiversity for users wanting to 
+quickly explore their data using standard parameters. This can be used
+to generate the same four types of plots as above.
+
+```{r, eval = FALSE}
+quickChemDiv(compoundData = alpinaCompSubset,
+             sampleData = alpinaData,
+             groupData = alpinaPopulation,
+             outputType = "plots") # Not run
+```
 
 
 
+## References
 
+Paper for dataset
+
+Paper for chemdiv eventually
+
+Kim et al 2021
+
+Chao et al. 2014
+
+Chiu & Chao 2014
 
 
 
