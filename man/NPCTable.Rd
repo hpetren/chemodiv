@@ -23,7 +23,7 @@ superclass and class for each compound.
 }
 \details{
 NPCTable classifies compounds into groups largely corresponding to
-biosynthesis pathways (at three hierarchical levels: pathway, superclass,
+biosynthesic pathways (at three hierarchical levels: pathway, superclass,
 class) using thr NPClassifier tool (Kim et al. 2021).
 Connects to \url{https://npclassifier.ucsd.edu/}.
 }

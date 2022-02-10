@@ -48,9 +48,9 @@ within the chosen range. The shape of the diversity profile curve
 reflects  the unevenness of compound proportions in the sample. For a
 perfectly even sample the curve is flat. The more uneven the compound
 proportions are, the more steep is the decline of the curve.
-A common range of q values is between qMin = 0 and qMax = 3 (default range),
-as diversity should change little beyond qMax = 3. See \code{\link{calcDiv}}
-for further details on q.
+A common range, used as default, of q values is between \code{qMin = 0} and
+\code{qMax = 3} as diversity should change little beyond \code{qMax = 3}.
+See \code{\link{calcDiv}} for further details on q.
 }
 \examples{
 data(minimalSampData)

@@ -33,15 +33,15 @@
 #' \code{\link{compDis}}. If this is supplied, Generalized UniFrac
 #' dissimilarities can be calculated.
 #' @param type Type of sample dissimilarity to be calculated. This is
-#' Bray-Curtis dissimilarity, \code{BrayCurtis} and/or Generalized UniFrac
-#' dissimilarity, \code{GenUniFrac}.
+#' Bray-Curtis dissimilarity, \code{type = "BrayCurtis"} and/or
+#' Generalized UniFrac dissimilarity, \code{type = "GenUniFrac"}.
 #' @param alpha Parameter used in calculations of Generalized UniFracs
 #' dissimilarities. alpha can be set between 0 and 1.
-#' With alpha = 0, equal weight is put on every
-#' branch in the dendrogram. With alpha = 1, branches are weighted by their
-#' abundance, and hence more emphasis is put on high abundance branches.
-#' alpha = 0.5 strikes a balance between the two.
-#' alpha 0.5 or 1 is recommended, with alpha = 1 as default.
+#' With \code{alpha = 0}, equal weight is put on every
+#' branch in the dendrogram. With \code{alpha = 1}, branches are
+#' weighted by their abundance, and hence more emphasis is put on high
+#' abundance branches. \code{alpha = 0.5} strikes a balance between the two.
+#' alpha 0.5 or 1 is recommended, with \code{alpha = 1} as default.
 #'
 #' @return List with sample dissimilarity matrices. A list is always
 #' outputted, even if only one matrix is calculated.

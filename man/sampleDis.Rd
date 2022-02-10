@@ -14,16 +14,16 @@ sampleDis(sampleData, compDisMat = NULL, type = "BrayCurtis", alpha = 1)
 dissimilarities can be calculated.}
 
 \item{type}{Type of sample dissimilarity to be calculated. This is
-Bray-Curtis dissimilarity, \code{BrayCurtis} and/or Generalized UniFrac
-dissimilarity, \code{GenUniFrac}.}
+Bray-Curtis dissimilarity, \code{type = "BrayCurtis"} and/or
+Generalized UniFrac dissimilarity, \code{type = "GenUniFrac"}.}
 
 \item{alpha}{Parameter used in calculations of Generalized UniFracs
 dissimilarities. alpha can be set between 0 and 1.
-With alpha = 0, equal weight is put on every
-branch in the dendrogram. With alpha = 1, branches are weighted by their
-abundance, and hence more emphasis is put on high abundance branches.
-alpha = 0.5 strikes a balance between the two.
-alpha 0.5 or 1 is recommended, with alpha = 1 as default.}
+With \code{alpha = 0}, equal weight is put on every
+branch in the dendrogram. With \code{alpha = 1}, branches are
+weighted by their abundance, and hence more emphasis is put on high
+abundance branches. \code{alpha = 0.5} strikes a balance between the two.
+alpha 0.5 or 1 is recommended, with \code{alpha = 1} as default.}
 }
 \value{
 List with sample dissimilarity matrices. A list is always
