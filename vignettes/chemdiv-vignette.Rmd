@@ -1,8 +1,8 @@
 ---
 title: "Analysing Phytochemical Diversity -- An introduction to *chemdiv*"
-author: "Hampus Petrén, et al"
+author: "Hampus Petrén, Tobias G. Köllner, Robert R. Junker"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{Analysing Phytochemical Diversity -- An introduction to *chemdiv*}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,8 +23,8 @@ knitr::opts_chunk$set(
 functions centered around calculations of phytochemical diversity and
 dissimilarity. This includes the use of diversity and dissimilarity indices 
 that incorporate the biosynthetic and/or structural properties of the 
-phytochemical compounds for the calculations, thereby providing comprehensive 
-measures of phytochemical diversity.
+phytochemical compounds for the calculations, thereby allowing comprehensive
+calculations of phytochemical diversity.
 
 *chemdiv* is currently available on GitHub: <https://github.com/hpetren/chemdiv>
 
@@ -34,7 +34,7 @@ all the functions in the package.
 
 ## Setup
 The developmental version of the package can be installed directly from GitHub
-in R using the `install_github` function from the `devtools` package.
+in R using the `install_github()` function from the `devtools` package.
 
 ```{r, eval = FALSE}
 # Install and load devtools package
@@ -58,7 +58,7 @@ Analyses in *chemdiv* will work best for sets of data, commonly generated
 by chemical ecologists using GC-MS, LC-MS or similar, where all or most 
 compounds in the samples have been confidently identified.
 
-Two separate datasets are needed to use the full set of analyses included in 
+Two separate datasets are needed to use the full set of analyses in 
 the package. We illustrate this by using an example dataset, that is
 included in the package, on floral scent of X individuals from Y populations 
 for the plant *Arabis alpina*.
@@ -93,13 +93,13 @@ data("alpinaCompSubset")
 head(alpinaCompSubset)
 ```
 SMILES and InChIKey are chemical identifiers that are easily obtained for 
-each compound by searching for compounds in 
+each compound by searching for compounds in
 [PubChem](https://pubchem.ncbi.nlm.nih.gov/),
 or by using various automated tools such as the 
 [PubChem Identifier Exchange Service](https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi) 
 or [The Chemical Translation Service](https://cts.fiehnlab.ucdavis.edu/).
-The user is intentionally required to do this manually to ensure correctness,
-as lists of compounds very often contain compounds wrongly named, 
+The user is intentionally required to gather the IDs manually to ensure 
+correctness, as lists of compounds very often contain compounds wrongly named, 
 wrongly formatted, under various synonyms etc. which prevents easy automatic 
 translation of compound names to SMILES and InChIKey.
 
@@ -117,17 +117,17 @@ Two functions are used to classify and compare phytochemical compounds,
 and are applied to the *compounds* dataset.
 
 The function `NPCTable()` classifies compounds with 
-[NPClassifier](https://npclassifier.ucsd.edu/) (Kim et al. 2021), and puts 
-the results in a dataframe containing the pathway, superclass and class 
-for each compound.
+[NPClassifier](https://npclassifier.ucsd.edu/) (Kim et al. 2021).
+NPClassifier tries to classify phytochemical compounds into a hierarchical
+classification of three groups (pathway, superclass and class), largely 
+corresponding to their biosynthesis.
 ```{r}
 alpinaNPC <- NPCTable(compoundData = alpinaCompSubset)
 
 alpinaNPC[1,] # Classification of first compound in dataset
 ```
-NPClassifier tries to classify each compound into a hierarchical classification,
-largely corresponding to their biosynthesis, of pathway, superclass and class.
-This classification can be used by other *chemdiv* functions.
+This classification is put into a data frame and can be used by 
+other *chemdiv* functions.
 
 ***
 
@@ -155,13 +155,14 @@ multiple other functions in the package.
 Phytochemical diversity can be calculated with functions `calcDiv()`, 
 `calcBetaDiv()` and `calcDivProf()`.
 
-`calcDiv()` calculates alpha-diversity for each sample (row) in the dataset. 
-The function can calculate a number of different diversity and 
-evenness indices, depending on what `type` is used as input. 
-We recommend calculating diversity as Hill numbers (Chao et al. 2014), 
-which provides a number of advantages, including the use of the parameter 
+`calcDiv()` calculates alpha-diversity for each sample (row) in the 
+*proportions* dataset. The function can calculate a 
+number of different diversity and evenness indices, depending on
+what `type` is used as input. We recommend calculating 
+diversity as Hill numbers (Chao et al. 2014), which provides 
+a number of advantages, including the use of the parameter 
 q which controls the sensitivity of the measure to the relative abundance 
-of compounds. This can be done as normal Hill diversity, which depends on 
+of compounds. This can be done as "normal" Hill diversity, which depends on 
 compound richness and evenness, and as functional Hill diversity, 
 which additionally depends compound  dissimilarity (Chiu & Chao 2014),
 utilizing the compound dissimilarity matrix from `compDis()`. Hence, for 
@@ -180,7 +181,7 @@ alpinaDiv <- calcDiv(sampleData = alpinaData,
 head(alpinaDiv)
 ```
 The function outputs a data frame with the selected type(s) of measures
-as columns.
+as columns and each sample as rows.
 
 ***
 
@@ -203,7 +204,9 @@ along with the input parameters.
 
 `calcBetaDiv()` calculates beta-diversity for a set of samples, in the
 Hill number framework. The function calculates a single beta-diversity value 
-for the supplied sample data. This is calculated as beta = gamma / alpha.
+for the supplied sample data. This is calculated as beta = gamma / alpha,
+where gamma is the diversity of the pooled data set and alpha represents 
+the mean diversity of individual samples.
 ```{r}
 alpinaBetaDiv <- calcBetaDiv(sampleData = alpinaData,
                              compDisMat = alpinaCompDis$fingerDisMat,
@@ -216,7 +219,8 @@ alpinaBetaDiv
 ### Sample dissimilarities
 Phytochemical dissimilarity can be calculated with the function `sampleDis()`.
 This calculates Bray-Curtis dissimilarities and/or Generalized UniFrac 
-dissimilarities (Chen et al 2012) between samples. The latter utilizes the 
+dissimilarities (Chen et al 2012) between samples in the *proportions* dataset. 
+Generalized UniFrac dissimilarities utilize the 
 compound dissimilarity matrix from `compDis()`, such that two samples 
 containing more biosynthetically/structurally different compounds have a 
 higher pairwise dissimilarity than two samples containing more
@@ -250,16 +254,17 @@ alpinaNetwork <- molNet(compDisMat = alpinaCompDis$fingerDisMat,
 
 summary(alpinaNetwork)
 ```
-The output is a list including the network, and some basic network parameters.
+The output is a list including the network object, and some basic 
+network parameters.
 
 
 ### Chemodiversity and network plots
 Once the above functions have calculated different measures of phytochemical
-diversity and dissimilarity, two functions can be used to conveniently plot the
-molecular network and the diversity/dissimilarity measures.
+diversity and dissimilarity, two functions can be used to conveniently plot 
+the molecular network and the diversity/dissimilarity measures.
 
 `molNetPlot()` creates a basic plot of the molecular network generated
-by the molNet function. We create a single molecular network for the whole
+by the `molNet()` function. We create a single molecular network for the whole
 dataset, including compound names and the classification by NPClassifier.
 ```{r, fig.width = 12, fig.height = 8, out.width = "95%"}
 molNetPlot(sampleData = alpinaData,
@@ -274,17 +279,18 @@ proportional concentration of the compounds in the samples. Edge widths
 represent compound similarity, and are only plotted for similarities higher 
 than the cutoff value. We see that the floral scent bouquet consists
 mostly of compounds belonging to the "Shikimates and Phenylpropanoids" 
-pathways. These compounds are connected to each other in a network, but 
+pathway. These compounds are connected to each other in a network, but 
 separated from the three "Terpenoids" compounds, indicating that the two 
-groups of compounds are also structurally different to each other.
+groups of compounds belonging to different pathways are also structurally 
+different to each other.
 
 ***
 
 `chemDivPlot()` can be used to conveniently create basic plots of the 
-different types of chemodiversity measurements created by functions above.
-Four types of plots can be created in any combination. With 
-argument `compDisMat` a dendrogram visualizing compound dissimilarities is 
-created. With argument `divData`, diversity/evennes valuess are visualized 
+different types of diversity and dissimilarity measurements created by 
+the functions above. Four types of plots can be created, in any combination.
+With argument `compDisMat` a dendrogram visualizing compound dissimilarities is 
+created. With argument `divData`, diversity/evenness values are visualized 
 with boxplots. With argument `divProfData` a diversity profile will be created. 
 With argument `sampleDisMat` sample dissimilarities will be visualized as an 
 NMDS plot. Grouping data can be supplied with argument `groupData`.
@@ -298,16 +304,16 @@ chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
 
 The output consists of the selected plots. The dendrogram visualizes 
 dissimilarities between compounds in a way complementary to the molecular
-network above. The boxplot indicates that the functional Hill diveristy
+network above. The boxplot indicates that the functional Hill diversity
 of the floral scent compounds is highest in the G1 population (further
-analyses can specigy more exactly what components of diversity is higher in 
+analyses can specify more exactly what components of diversity is higher in 
 this population). The diversity profile demonstrates how at q = 1 
 (shown also in boxplot) diversity is highest for population G1, but at q = 0,
 where compound proportions are not taken into account, diversity is 
 highest for population It8. Finally, the NMDS indicates that all three
-populations are compositionally/structurally different to each other, and that
-in population It8, dissimilarities between samples in the same population
-is lower than for the other two populations.
+populations are compositionally/structurally different to each other, and 
+that in population It8, dissimilarities between samples in the same 
+population is lower than for the other two populations.
 
 
 
