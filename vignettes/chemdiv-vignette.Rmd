@@ -98,10 +98,10 @@ each compound by searching for compounds in
 or by using various automated tools such as the 
 [PubChem Identifier Exchange Service](https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi) 
 or [The Chemical Translation Service](https://cts.fiehnlab.ucdavis.edu/).
-The user is intentionally required to gather the IDs manually to ensure 
+The user is intentionally required to assemble these IDs manually to ensure 
 correctness, as lists of compounds very often contain compounds wrongly named, 
-wrongly formatted, under various synonyms etc. which prevents easy automatic 
-translation of compound names to SMILES and InChIKey.
+wrongly formatted, under various synonyms etc. which prevents efficient
+automatic translation of compound names to SMILES and InChIKey.
 
 The name and order of the compounds in the first dataset (column names) has 
 to be the same as the name and order of the compounds in the second dataset
@@ -118,9 +118,10 @@ and are applied to the *compounds* dataset.
 
 The function `NPCTable()` classifies compounds with 
 [NPClassifier](https://npclassifier.ucsd.edu/) (Kim et al. 2021).
-NPClassifier tries to classify phytochemical compounds into a hierarchical
-classification of three groups (pathway, superclass and class), largely 
-corresponding to their biosynthesis.
+NPClassifier is a deep-learning tool that attempts to classify 
+phytochemical compounds into a hierarchical classification of three groups
+(pathway, superclass and class), largely corresponding to 
+biosynthetic pathways.
 ```{r}
 alpinaNPC <- NPCTable(compoundData = alpinaCompSubset)
 
@@ -131,10 +132,11 @@ other *chemdiv* functions.
 
 ***
 
-The function `compDis()` calculates pairwise Jaccard dissimilarities between
-phytochemical compounds. Dissimilarity calculations can be based on
-the biosynthesis and/or structure of the compounds. `type = "NPClassifier"`
-calculates dissimilarities based on the classification made by NPClassifier.
+The function `compDis()` compares phytochemical compounds by calcualting
+pairwise Jaccard dissimilarities between them. The dissimilarity 
+calculations can be based on the biosynthesis and/or structure 
+of the compounds. `type = "NPClassifier"` calculates dissimilarities 
+based on the classification made by NPClassifier.
 `type = "PubChemFingerprint"` and `type = "fMCS"` calculates dissimilarities
 based on the structure of the compounds with two different methods.
 
@@ -152,11 +154,11 @@ multiple other functions in the package.
 
 
 ### Diversity calculations
-Phytochemical diversity can be calculated with functions `calcDiv()`, 
-`calcBetaDiv()` and `calcDivProf()`.
+Phytochemical diversity can be calculated for the *proportions* dataset
+with functions `calcDiv()`, `calcBetaDiv()` and `calcDivProf()`.
 
 `calcDiv()` calculates alpha-diversity for each sample (row) in the 
-*proportions* dataset. The function can calculate a 
+*proportions* dataset. The function is able to calculate a 
 number of different diversity and evenness indices, depending on
 what `type` is used as input. We recommend calculating 
 diversity as Hill numbers (Chao et al. 2014), which provides 
@@ -165,8 +167,8 @@ q which controls the sensitivity of the measure to the relative abundance
 of compounds. This can be done as "normal" Hill diversity, which depends on 
 compound richness and evenness, and as functional Hill diversity, 
 which additionally depends compound  dissimilarity (Chiu & Chao 2014),
-utilizing the compound dissimilarity matrix from `compDis()`. Hence, for 
-calculations of functional Hill diversity, a set of compounds that are
+utilizing the compound dissimilarity matrix from `compDis()`. This means that,
+for calculations of functional Hill diversity, a set of compounds that are
 biosynthetically/structurally different from each other is more diverse
 than a similar set of compounds that are biosynthetically/structurally 
 more similar to each other.
@@ -180,13 +182,14 @@ alpinaDiv <- calcDiv(sampleData = alpinaData,
 
 head(alpinaDiv)
 ```
-The function outputs a data frame with the selected type(s) of measures
-as columns and each sample as rows.
+The function outputs a data frame with samples as rows and the selected 
+`type` of measures as columns.
 
 ***
 
 `calcDivProf()` can be used to calculate Hill diversity for a range of 
-q-values simultaneously, generating a so called diversity profile.
+q-values simultaneously, generating a so called diversity profile. This 
+allows for a more nuanced exploration of diversity.
 
 We calculate a diversity profile for functional Hill diversity, using the
 default range of q = 0 to q = 3. 
@@ -197,8 +200,9 @@ alpinaDivProf <- calcDivProf(sampleData = alpinaData,
 
 head(alpinaDivProf$divProf)[,1:5] # Part of the diversity profile data frame
 ```
-The function outputs a list with the diversity profile as a data frame,
-along with the input parameters.
+The function outputs a list with input parameters and the diversity profile 
+as a data frame, with samples as rows and diversity values at different
+values of q as columns.
 
 ***
 
@@ -234,8 +238,8 @@ alpinaSampleDis <- sampleDis(sampleData = alpinaData,
 
 alpinaSampleDis$GenUniFrac[1:4, 1:4] # Part of sample dissimilarity matrix
 ```
-The output from the function is a list with one or several sample dissimilarity
-matrices, depending on which type(s) was used as input.
+The output from the function is a list with one or several sample 
+dissimilarity matrices, depending on which `type` was used as input.
 
 
 ### Molecular network
@@ -245,8 +249,10 @@ some properties of the network.
 
 We create a molecular network based on the compound dissimilarity matrix.
 We can also include the the NPClassifier classification, where the "pathway"
-group will control node colour. We manually set `cutOff = 0.75` in this case,
-to limit the number of edges between nodes.
+group will control node colour. We manually set `cutOff = 0.75` in this case.
+This limits the number of edges between nodes, as edges are only plotted 
+between nodes if their similarity (where similarity = 1 - dissimilarity) 
+is larger than the cut-off value.
 ```{r, message = FALSE}
 alpinaNetwork <- molNet(compDisMat = alpinaCompDis$fingerDisMat,
                         npcTable = alpinaNPC,
@@ -293,7 +299,7 @@ With argument `compDisMat` a dendrogram visualizing compound dissimilarities is
 created. With argument `divData`, diversity/evenness values are visualized 
 with boxplots. With argument `divProfData` a diversity profile will be created. 
 With argument `sampleDisMat` sample dissimilarities will be visualized as an 
-NMDS plot. Grouping data can be supplied with argument `groupData`.
+NMDS plot. Finally, grouping data can be supplied with argument `groupData`.
 ```{r, fig.width = 12, fig.height = 8, out.width = "95%"}
 chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
             divData = alpinaDiv,
@@ -304,10 +310,11 @@ chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
 
 The output consists of the selected plots. The dendrogram visualizes 
 dissimilarities between compounds in a way complementary to the molecular
-network above. The boxplot indicates that the functional Hill diversity
-of the floral scent compounds is highest in the G1 population (further
-analyses can specify more exactly what components of diversity is higher in 
-this population). The diversity profile demonstrates how at q = 1 
+network above, with the three terpenoids having a high dissimilarity to 
+the other compounds. The boxplot indicates that the functional Hill diversity
+of the floral scent compounds is highest in the G1 population. Further
+analyses can examine more exactly what components of diversity is higher in 
+this population. The diversity profile demonstrates how at q = 1 
 (shown also in boxplot) diversity is highest for population G1, but at q = 0,
 where compound proportions are not taken into account, diversity is 
 highest for population It8. Finally, the NMDS indicates that all three
@@ -319,7 +326,7 @@ population is lower than for the other two populations.
 
 ### Shortcut function
 The function `quickChemDiv()` uses many of the above functions to in one 
-simple step calculate/visualize chemodiversity for users wanting to 
+simple step calculate and visualize chemodiversity for users wanting to 
 quickly explore their data using standard parameters. This can be used
 to generate the same four types of plots as above.
 
