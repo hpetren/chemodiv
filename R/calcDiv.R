@@ -86,7 +86,7 @@ calcDiv <- function(sampleData,
   if (!(any(c("HillDiv", "FuncHillDiv", "Shannon", "Simpson",
               "PielouEven", "HillEven", "RaoQ") %in% type))) {
     stop("Provide at least one type of diversity/evenness to calculate:
-         HillDiv, FuncHillDiv, Shannon, Simpson, PielouEven, HillEven or RaoQ")
+         HillDiv, FuncHillDiv, Shannon, Simpson, PielouEven, HillEven or RaoQ.")
   }
   if(is.null(compDisMat) && ("FuncHillDiv" %in% type || "RaoQ" %in% type)) {
     stop("A compound dissimilarity matrix must be supplied

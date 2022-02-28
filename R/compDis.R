@@ -106,7 +106,7 @@ compDis <- function(compoundData,
 
   if(!(any(c("NPClassifier", "PubChemFingerprint", "fMCS") %in% type))) {
     stop("Provide at least one type of compound dissimilarity to calculate:
-         NPClassifier, PubChemFingerprint or fMCS")
+         NPClassifier, PubChemFingerprint or fMCS.")
   }
 
   colnames(compoundData) <- tolower(colnames(compoundData))

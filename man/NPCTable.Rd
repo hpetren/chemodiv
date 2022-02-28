@@ -22,7 +22,7 @@ and puts the results in a dataframe containing the pathway,
 superclass and class for each compound.
 }
 \details{
-NPCTable classifies compounds into groups largely corresponding to
+The function classifies compounds into groups largely corresponding to
 biosynthesic pathways (at three hierarchical levels: pathway, superclass,
 class) using thr NPClassifier tool (Kim et al. 2021).
 Connects to \url{https://npclassifier.ucsd.edu/}.

@@ -16,7 +16,7 @@
 #' most calculations of dissimilarity, can only be performed on relative,
 #' rather than absolute, concentrations.
 #' The second dataset should contain, in each of three columns in a data frame,
-#' the common name, SMILES and InChIKey IDs of all the compounds that are
+#' the compound name, SMILES and InChIKey IDs of all the compounds
 #' present in the first dataset. SMILES and InChIKey are chemical identifiers
 #' that are easily obtained for each compound by searching for it in
 #' PubChem \url{https://pubchem.ncbi.nlm.nih.gov/}, or by using various

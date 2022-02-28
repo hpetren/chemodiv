@@ -35,9 +35,14 @@ install_github("hpetren/chemdiv")
 
 Detailed usage notes can be found with `help(chemdiv)` and in the
 documentation for each function. In short, datasets are required. First,
-a dataset on the relative proportions of phytochemical compounds in
-different samples. Second, a dataset with the common name, SMILES and
-InChIKey for all the compounds in the first dataset.
+a dataset on the proportions of phytochemical compounds in different
+samples. Second, a dataset with the compound name, SMILES and InChIKey
+for all the compounds in the first dataset.
+
+#### Data formatting checks
+
+Function `chemDivCheck` can be used to check so that the datasets used
+by functions in the package are correctly formatted.
 
 #### Compound classification and dissimilarities
 

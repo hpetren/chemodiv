@@ -75,11 +75,11 @@ sampleDis <- function(sampleData,
 
   if (!(any(c("BrayCurtis", "GenUniFrac") %in% type))) {
     stop("Provide at least one type of dissimilarity to calculate:
-         BrayCurtis or GenUniFrac")
+         BrayCurtis or GenUniFrac.")
   }
   if ("GenUniFrac" %in% type && is.null(compDisMat)) {
     stop("A compound dissimilarity matrix must be supplied when calculating
-         Generalized UniFrac dissimilarities")
+         Generalized UniFrac dissimilarities.")
   }
   if (!is.null(compDisMat)) {
     if(!(all(colnames(sampleData) == colnames(compDisMat)) &&
