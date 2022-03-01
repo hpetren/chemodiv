@@ -64,7 +64,8 @@
 #' details on obtaining SMILES and InChIKey IDs.
 #' @param type Type of data compound dissimilarity calculations will be
 #' based on: \code{NPClassifier}, \code{PubChemFingerprint} or \code{fMCS}.
-#' If more than one is chosen, a mean of the included types is also calculated.
+#' If more than one is chosen, a matrix with mean values of the other
+#' matrices will also calculated.
 #' @param npcTable An already generated \code{\link{NPCTable}}
 #' can optionally be supplied, if compound dissimilarities are to be
 #' calculated using \code{type = "NPClassifier"}.

@@ -38,6 +38,11 @@ Once the two datasets are prepared, these should be imported into R
 as separate data frames, and all analyses in the package can then be
 performed, in largely the same order as they appear in the list below.
 }
+\section{Data format checks}{
+
+\code{\link{chemDivCheck}}
+}
+
 \section{Compound classification and dissimilarity}{
 
 \code{\link{NPCTable}}

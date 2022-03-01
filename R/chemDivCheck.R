@@ -66,7 +66,7 @@ chemDivCheck <- function(compoundData,
     formatProblem <- TRUE
   }
   if (formatProblem == FALSE) {
-    message("The two datasets seem to be correctly formated.")
+    message("The two datasets appear to be correctly formatted.")
   }
 }
 
