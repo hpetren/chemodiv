@@ -94,11 +94,14 @@ head(alpinaCompSubset)
 ```
 SMILES and InChIKey are chemical identifiers that are easily obtained for 
 each compound by searching for compounds in
-[PubChem](https://pubchem.ncbi.nlm.nih.gov/),
-or by using various automated tools such as the 
+[PubChem](https://pubchem.ncbi.nlm.nih.gov/). Searching for compounds
+by their common name, or a number of other chemical identifiers, will
+bring up the matching molecule, along with the SMILES and InChIKey.
+Additionally, various automated tools such as the 
 [PubChem Identifier Exchange Service](https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi) 
-or [The Chemical Translation Service](https://cts.fiehnlab.ucdavis.edu/).
-The user has to compile these IDs manually to ensure correctness,
+or [The Chemical Translation Service](https://cts.fiehnlab.ucdavis.edu/)
+can be used to automatically obtain IDs for lists of compounds.
+The user has to compile the SMILES and InChIKey manually to ensure correctness,
 as lists of compounds very often contain compounds wrongly named, 
 wrongly formatted, under various synonyms etc. which prevents efficient
 automatic translation of compound names to SMILES and InChIKey.
@@ -176,7 +179,7 @@ with functions `calcDiv()`, `calcBetaDiv()` and `calcDivProf()`.
 number of different diversity and evenness indices, depending on
 what `type` is used as input. The default and recommended way of calculating 
 diversity is as Hill numbers (Chao et al. 2014), which provides 
-a number of advantages, including the use of the parameter q which 
+a number of advantages, including the use of the parameter *q* which 
 controls the sensitivity of the measure to the relative concentrations
 of compounds. This can be done as "normal" Hill diversity, which depends
 on compound richness and evenness, and as functional Hill diversity, 
@@ -187,7 +190,7 @@ biosynthetically/structurally different from each other is more diverse
 than a similar set of compounds that are biosynthetically/structurally 
 more similar to each other.
 
-We calculate functional Hill diversity for q = 1. 
+We calculate functional Hill diversity for *q = 1*. 
 ```{r}
 alpinaDiv <- calcDiv(sampleData = alpinaData, 
                      compDisMat = alpinaCompDis$fingerDisMat,
@@ -206,7 +209,7 @@ q-values simultaneously, generating a so called diversity profile. This
 allows for a more nuanced exploration of diversity.
 
 We calculate a diversity profile for functional Hill diversity, using the
-default range of q = 0 to q = 3. 
+default range of *q = 0* to *q = 3*. 
 ```{r}
 alpinaDivProf <- calcDivProf(sampleData = alpinaData,
                              compDisMat = alpinaCompDis$fingerDisMat,
@@ -216,13 +219,13 @@ head(alpinaDivProf$divProf)[,1:5] # Part of the diversity profile data frame
 ```
 The function outputs a list with input parameters and the diversity profile 
 as a data frame, with samples as rows and diversity values at different
-values of q as columns.
+values of *q* as columns.
 
 ***
 
 `calcBetaDiv()` calculates beta-diversity for a set of samples, in the
 Hill number framework. The function calculates a single beta-diversity value 
-for the supplied sample data. This is calculated as beta = gamma / alpha,
+for the supplied sample data. This is calculated as *beta = gamma / alpha*,
 where gamma is the diversity of the pooled data set and alpha represents 
 the mean diversity of individual samples.
 ```{r}
@@ -268,7 +271,7 @@ We create a molecular network based on the compound dissimilarity matrix.
 We can also include the the NPClassifier classification, where the "pathway"
 group will control node colour. We manually set `cutOff = 0.75` in this case.
 This limits the number of edges between nodes, as edges are only plotted 
-between nodes if their similarity (where similarity = 1 - dissimilarity) 
+between nodes if their similarity (where *similarity = 1 - dissimilarity*) 
 is larger than the cut-off value.
 ```{r, message = FALSE}
 alpinaNetwork <- molNet(compDisMat = alpinaCompDis$fingerDisMat,
@@ -331,8 +334,8 @@ network above, with the three terpenoids having a high dissimilarity to
 the other compounds. The boxplot indicates that the functional Hill diversity
 of the floral scent compounds is highest in the G1 population. Further
 analyses can examine more exactly what components of diversity is higher in 
-this population. The diversity profile demonstrates how at q = 1 
-(shown also in boxplot) diversity is highest for population G1, but at q = 0,
+this population. The diversity profile demonstrates how at *q = 1* 
+(shown also in boxplot) diversity is highest for population G1, but at *q = 0*,
 where compound proportions are not taken into account, diversity is 
 highest for population It8. Finally, the NMDS indicates that all three
 populations are compositionally/structurally different to each other, and 
