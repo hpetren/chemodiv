@@ -60,13 +60,13 @@ calcDivProf <- function(sampleData,
             compound dissimilarity matrix.")
   }
   if(qMin < 0) {
-    stop("qMin should be >= 0")
+    stop("qMin should be >= 0.")
   }
   if(qMin > qMax) {
-    stop("qMin should be less than qMax")
+    stop("qMin should be less than qMax.")
   }
   if((step <= 0) || (step > (qMax - qMin))) {
-    stop("step must be > 0 and less than qMax - qMin")
+    stop("step must be > 0 and less than qMax - qMin.")
   }
 
   # Creating datasets to store diversity values

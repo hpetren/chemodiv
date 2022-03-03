@@ -101,7 +101,7 @@
 #' data(minimalCompData)
 #' compDis(minimalCompData)
 compDis <- function(compoundData,
-                    type = c("NPClassifier", "PubChemFingerprint", "fMCS"),
+                    type = "PubChemFingerprint",
                     npcTable = NULL,
                     unknownCompoundsMean = FALSE) {
 
@@ -178,8 +178,8 @@ compDis <- function(compoundData,
             }
             # If the output from NPClassifier API is not as expected
           } else {
-            message(paste("NPClassifier produced error output for Compound", i,
-                          "Is the SMILES correct?"))
+            message(paste0("NPClassifier gave error output for compound ", i,". ",
+                           "Is the SMILES correct?"))
           }
         }
       }
@@ -336,7 +336,7 @@ compDis <- function(compoundData,
     message("Calculating compound dissimilarity matrix using Fingerprints...")
 
     if(any(is.na(compoundData$inchikey))){
-      message("Fingerprint calculations: There are compounds with missing inchikey")
+      message("Fingerprint calculations: There are compounds with missing inchikey.")
     }
 
     # Getting CID from inchikey
@@ -444,7 +444,7 @@ compDis <- function(compoundData,
     message("Calculating compound dissimilarity matrix using fMCS...")
 
     if(any(is.na(compoundData$inchikey))){
-      message("fMCS calculations: There are compounds with missing inchikey")
+      message("fMCS calculations: There are compounds with missing inchikey.")
     }
 
     if(!exists("compoundCID")) {

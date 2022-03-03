@@ -10,7 +10,8 @@ testCompData <- data.frame(compounds = c("limonene",
 
 # Running this outside test_that() as vegan and webchem functions
 # throw warnings (vegan ok, webchem is the connection one)
-compDisRes <- compDis(testCompData)
+compDisRes <- compDis(testCompData,
+                      type = c("NPClassifier", "PubChemFingerprint", "fMCS"))
 
 
 # So all matrices are outputted

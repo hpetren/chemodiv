@@ -34,13 +34,13 @@ molNet <- function(compDisMat,
                    cutOff = "median") {
 
   if (is.numeric(cutOff) && ((cutOff < 0) || (cutOff > 1))) {
-    stop("Numeric values for cutOff must be between 0 and 1")
+    stop("Numeric values for cutOff must be between 0 and 1.")
   }
   if (is.character(cutOff) && !(cutOff == "median" || cutOff == "minPathway")) {
-    stop("cutOff must be a value between 0 and 1, median or minPathway")
+    stop("cutOff must be a value between 0 and 1, median or minPathway.")
   }
   if (!all(colnames(compDisMat) == rownames(compDisMat))) {
-    stop("compDisMat must be a square matrix with identical row and column names")
+    stop("compDisMat must be a square matrix with identical row and column names.")
   }
 
   # From dissimilarity to similarity matrix
@@ -55,7 +55,7 @@ molNet <- function(compDisMat,
   # Set cut-off point. Median, manual or lowest within-pathway similarity
   if (cutOff == "median") {
 
-    message("Using median similarity as cut-off")
+    message("Using median similarity as cut-off.")
     medianSim <- stats::median(compSimMat[lower.tri(compSimMat)])
     compSimMat[compSimMat < medianSim] <- 0
 
@@ -66,7 +66,7 @@ molNet <- function(compDisMat,
 
   } else if (cutOff == "minPathway" && !is.null(npcTable)) {
 
-    message("Using lowest within-pathway similarity as cut-off")
+    message("Using lowest within-pathway similarity as cut-off.")
     minIntraPath <- max(compSimMat)
     simValue <- NA
 
@@ -87,7 +87,7 @@ molNet <- function(compDisMat,
     compSimMat[compSimMat < minIntraPath] <- 0
 
   } else if (cutOff == "minPathway" && is.null(npcTable)) {
-    stop("Using minPathway as cut-off requires npcTable")
+    stop("Using minPathway as cut-off requires npcTable.")
   }
 
   # Creating network

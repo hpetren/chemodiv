@@ -93,14 +93,14 @@ NPCTable <- function(compoundData) {
         }
         # If the output from NPClassifier API is not as expected
       } else {
-        message(paste("NPClassifier produced error output for Compound", i,
+        message(paste0("NPClassifier gave error output for compound ", i,". ",
                       "Is the SMILES correct?"))
       }
     }
   }
   # If no compounds were classified
   if(all(is.na(npcTab$pathway))) {
-    stop("No compounds could be classified")
+    stop("No compounds could be classified.")
   }
   # Removes columns that are only NA
   npcTab <- npcTab[, colSums(is.na(npcTab)) < nrow(npcTab)]

@@ -54,7 +54,7 @@ molNetPlot <- function(sampleData,
                        layout = "kk") {
 
   if (!is.null(groupData) && plotNames) {
-    stop("Names can only be plotted without grouping data")
+    stop("Names can only be plotted without grouping data.")
   }
   if (is.null(npcTable)) {
     message("It is recommended to include an npcTable for an improved

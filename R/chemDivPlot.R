@@ -99,7 +99,7 @@ chemDivPlot <- function(compDisMat = NULL,
     # as that is not the case if only one column is input
 
     if (is.null(groupData)) {
-      message("No grouping data provided")
+      message("No grouping data provided.")
       groupData <- rep("NoGroup", nrow(divDatadf))
     }
     divDatadf$Group <- groupData
@@ -129,7 +129,7 @@ chemDivPlot <- function(compDisMat = NULL,
   if (!is.null(divProfData)) { # Diversity profile
 
     if (is.null(groupData)) {
-      message("No grouping data provided")
+      message("No grouping data provided.")
       groupData <- rep("NoGroup", nrow(divProfData$divProf))
     }
     divProf <- divProfData$divProf # Extract the df from the list
@@ -179,7 +179,7 @@ chemDivPlot <- function(compDisMat = NULL,
   if (!is.null(sampleDisMat)) { # NMDS
 
     if (is.null(groupData)) {
-      message("No grouping data provided")
+      message("No grouping data provided.")
       groupData <- rep("NoGroup", nrow(sampleDisMat))
     }
 

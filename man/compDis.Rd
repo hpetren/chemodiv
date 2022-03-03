@@ -6,7 +6,7 @@
 \usage{
 compDis(
   compoundData,
-  type = c("NPClassifier", "PubChemFingerprint", "fMCS"),
+  type = "PubChemFingerprint",
   npcTable = NULL,
   unknownCompoundsMean = FALSE
 )
