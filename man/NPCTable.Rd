@@ -30,6 +30,11 @@ Connects to \url{https://npclassifier.ucsd.edu/}.
 \examples{
 data(minimalCompData)
 NPCTable(minimalCompData)
+
+\dontrun{
+data(alpinaCompData)
+NPCTable(compoundData = alpinaCompData)
+}
 }
 \references{
 Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,

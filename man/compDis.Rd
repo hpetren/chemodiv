@@ -102,6 +102,11 @@ dissimilarity value between all known compounds.
 \examples{
 data(minimalCompData)
 compDis(minimalCompData)
+
+\dontrun{
+data(alpinaCompData)
+compDis(compoundData = alpinaCompData)
+}
 }
 \references{
 Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,

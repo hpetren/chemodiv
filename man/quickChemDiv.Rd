@@ -77,4 +77,12 @@ data(minimalSampData)
 groups <- c("A", "A", "B", "B")
 quickChemDiv(sampleData = minimalSampData, compoundData = minimalCompData,
 groupData = groups, outputType = "plots")
+
+\dontrun{
+data(alpinaCompData)
+data(alpinaSampData)
+data(alpinaPopData)
+quickChemDiv(sampleData = alpinaSampData, compoundData = alpinaCompData,
+groupData = alpinaPopData, outputType = "plots")
+}
 }

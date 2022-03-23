@@ -30,6 +30,11 @@
 #' @examples
 #' data(minimalCompData)
 #' NPCTable(minimalCompData)
+#'
+#' \dontrun{
+#' data(alpinaCompData)
+#' NPCTable(compoundData = alpinaCompData)
+#' }
 NPCTable <- function(compoundData) {
 
   colnames(compoundData) <- tolower(colnames(compoundData))

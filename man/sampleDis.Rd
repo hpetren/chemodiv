@@ -65,6 +65,15 @@ data(minimalCompDis)
 sampleDis(minimalSampData)
 sampleDis(sampleData = minimalSampData, compDisMat = minimalCompDis,
 type = c("BrayCurtis", "GenUniFrac"), alpha = 0.5)
+
+\dontrun{
+data(alpinaCompData)
+data(alpinaSampData)
+alpinaCompDis <- compDis(compoundData = alpinaCompData)
+sampleDis(sampleData = alpinaSampData,
+compDisMat = alpinaCompDis$fingerDisMat,
+type = "GenUniFrac")
+}
 }
 \references{
 Bray, J. R., and J. T. Curtis. 1957. An Ordination of the Upland Forest

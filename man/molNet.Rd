@@ -39,4 +39,12 @@ data(minimalCompDis)
 data(minimalNPCTable)
 molNet(minimalCompDis)
 molNet(minimalCompDis, minimalNPCTable, cutOff = 0)
+
+\dontrun{
+data(alpinaCompData)
+alpinaNPCTable <- NPCTable(compoundData = alpinaCompData)
+alpinaCompDis <- compDis(compoundData = alpinaCompData)
+molNet(compDisMat = alpinaCompDis$fingerDisMat,
+npcTable = alpinaNPCTable, cutOff = 0.75)
+}
 }

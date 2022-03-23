@@ -40,6 +40,15 @@
 #' calcDivProf(sampleData = minimalSampData)
 #' calcDivProf(sampleData = minimalSampData, compDisMat = minimalCompDis,
 #' type = "FuncHillDiv", qMin = 1, qMax = 2, step = 0.2)
+#'
+#' \dontrun{
+#' data(alpinaCompData)
+#' data(alpinaSampData)
+#' alpinaCompDis <- compDis(compoundData = alpinaCompData)
+#' calcDivProf(sampleData = alpinaSampData,
+#' compDisMat = alpinaCompDis$fingerDisMat,
+#' type = "FuncHillDiv")
+#' }
 calcDivProf <- function(sampleData,
                         compDisMat = NULL,
                         type = "HillDiv",

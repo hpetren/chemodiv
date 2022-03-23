@@ -41,15 +41,24 @@
 #' data(minimalSampData)
 #' data(minimalCompDis)
 #' data(minimalNPCTable)
+#' data(minimalMolNet)
 #' groups <- c("A", "A", "B", "B")
-#' minimalMolNet <- molNet(minimalCompDis)
-#' molNetPlot(minimalSampData, minimalMolNet$networkObject)
-#' molNetPlot(minimalSampData, minimalMolNet$networkObject, groups)
-#' molNetPlot(minimalSampData, minimalMolNet$networkObject, npcTable = minimalNPCTable)
-#' molNetPlot(minimalSampData, minimalMolNet$networkObject, plotNames = TRUE)
+#' molNetPlot(minimalSampData, minimalMolNet)
+#' molNetPlot(minimalSampData, minimalMolNet, groups)
+#' molNetPlot(minimalSampData, minimalMolNet, npcTable = minimalNPCTable)
+#' molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 #'
 #' \dontrun{
-#'
+#' data(alpinaCompData)
+#' data(alpinaSampData)
+#' data(alpinaPopData)
+#' alpinaNPCTable <- NPCTable(compoundData = alpinaCompData)
+#' alpinaCompDis <- compDis(compoundData = alpinaCompData)
+#' alpinaMolNet <- molNet(compDisMat = alpinaCompDis$fingerDisMat,
+#' npcTable = alpinaNPCTable, cutOff = 0.75)
+#' molNetPlot(sampleData = alpinaSampData,
+#' networkObject = alpinaMolNet$networkObject,
+#' groupData = alpinaPopData, npcTable = alpinaNPCTable)
 #' }
 molNetPlot <- function(sampleData,
                        networkObject,

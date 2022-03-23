@@ -82,6 +82,15 @@ calcDiv(sampleData = minimalSampData)
 calcDiv(sampleData = minimalSampData, type = c("HillDiv", "HillEven"))
 calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
 type = "FuncHillDiv", q = 2)
+
+\dontrun{
+data(alpinaCompData)
+data(alpinaSampData)
+alpinaCompDis <- compDis(compoundData = alpinaCompData)
+calcDiv(sampleData = alpinaSampData,
+compDisMat = alpinaCompDis$fingerDisMat,
+type = "FuncHillDiv")
+}
 }
 \references{
 Chao's and other papers, e.g. Botta-Dukat 2005, Hill 1973,

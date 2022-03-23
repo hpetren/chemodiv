@@ -51,7 +51,22 @@
 #' groupData = groups)
 #'
 #' \dontrun{
-#'
+#' data(alpinaCompData)
+#' data(alpinaSampData)
+#' data(alpinaPopData)
+#' alpinaCompDis <- compDis(compoundData = alpinaCompData)
+#' alpinaDiv <- calcDiv(sampleData = alpinaSampData,
+#' compDisMat = alpinaCompDis$fingerDisMat,
+#' type = "FuncHillDiv")
+#' alpinaDivProf <- calcDivProf(sampleData = alpinaSampData,
+#' compDisMat = alpinaCompDis$fingerDisMat,
+#' type = "FuncHillDiv")
+#' alpinaSampDis <- sampleDis(sampleData = alpinaSampData,
+#' compDisMat = alpinaCompDis$fingerDisMat,
+#' type = "GenUniFrac")
+#' chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat, divData = alpinaDiv,
+#' divProfData = alpinaDivProf, sampleDisMat = alpinaSampDis$GenUniFrac,
+#' groupData = alpinaPopData)
 #' }
 chemDivPlot <- function(compDisMat = NULL,
                         divData = NULL,

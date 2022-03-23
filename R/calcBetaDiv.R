@@ -37,6 +37,15 @@
 #' calcBetaDiv(sampleData = minimalSampData)
 #' calcBetaDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
 #' type = c("HillDiv", "FuncHillDiv"), q = 1)
+#'
+#' \dontrun{
+#' data(alpinaCompData)
+#' data(alpinaSampData)
+#' alpinaCompDis <- compDis(compoundData = alpinaCompData)
+#' calcBetaDiv(sampleData = alpinaSampData,
+#' compDisMat = alpinaCompDis$fingerDisMat,
+#' type = "FuncHillDiv")
+#' }
 calcBetaDiv <- function(sampleData,
                         compDisMat = NULL,
                         type = "HillDiv",

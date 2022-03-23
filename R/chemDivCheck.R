@@ -36,6 +36,12 @@
 #' data(minimalSampData)
 #' chemDivCheck(minimalCompData, minimalSampData) # Correct format
 #' chemDivCheck(minimalCompData[c(2,3,1),], minimalSampData) # Incorrect format
+#'
+#' \dontrun{
+#' data(alpinaCompData)
+#' data(alpinaSampData)
+#' chemDivCheck(compoundData = alpinaCompData, sampleData = alpinaSampData)
+#' }
 chemDivCheck <- function(compoundData,
                          sampleData) {
 

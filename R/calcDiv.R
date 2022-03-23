@@ -79,6 +79,15 @@
 #' calcDiv(sampleData = minimalSampData, type = c("HillDiv", "HillEven"))
 #' calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
 #' type = "FuncHillDiv", q = 2)
+#'
+#' \dontrun{
+#' data(alpinaCompData)
+#' data(alpinaSampData)
+#' alpinaCompDis <- compDis(compoundData = alpinaCompData)
+#' calcDiv(sampleData = alpinaSampData,
+#' compDisMat = alpinaCompDis$fingerDisMat,
+#' type = "FuncHillDiv")
+#' }
 calcDiv <- function(sampleData,
                     compDisMat = NULL,
                     type = "HillDiv",
