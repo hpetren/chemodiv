@@ -6,12 +6,12 @@
 \title{Minimal sample dataset}
 \format{
 A data frame with 4 rows and 3 columns. Each row is a sample,
-each column is a scent compound.
+each column is a phytochemical compound.
 }
 \usage{
 minimalSampData
 }
 \description{
-A minimal made up dataset with floral scent data.
+A minimal made up dataset with phytochemical data.
 }
 \keyword{datasets}

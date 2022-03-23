@@ -1,9 +1,8 @@
 #' Functional Hill diversity
 #'
 #' Function to calculate Functional Hill diversity, as in equations
-#' 4b and 6b (for alpha, not gamma) in Chiu & Chao 2014 Plos One.
+#' 4b and 6b in Chiu & Chao 2014 Plos One.
 #' Note that this is done for one sample (row).
-#'
 #'
 #' @param data Dataset. Can be proportional or absolute data.
 #' @param Dij Dissimilarity matrix.
@@ -12,7 +11,7 @@
 #' @return Functional Hill diversity (FD).
 funcHillDiv <- function(data, Dij, q) {
 
-  # First we calculate Rao's Q
+  # Rao's Q
   pAbs <- data[data != 0]
   p <- pAbs / sum(pAbs)
   dij <- Dij[data != 0, data != 0]
@@ -20,7 +19,7 @@ funcHillDiv <- function(data, Dij, q) {
 
   temp <- 0
 
-  if(length(p) > 1) { # If we have more than one compound
+  if(length(p) > 1) { # If more than one compound
 
     # FD for q != 1
     if (q != 1) {
@@ -41,9 +40,7 @@ funcHillDiv <- function(data, Dij, q) {
     }
 
   } else {
-    # FD is mathematically not defined for one compound
-    # so setting NA as that for now, but maybe one could define it to
-    # be = 1, which would match normal Hill diversity
+    # FD is mathematically not defined with one compound, so setting to NA
     FD <- NA
   }
   return(FD)
@@ -60,11 +57,10 @@ funcHillDiv <- function(data, Dij, q) {
 #' @return Value of Rao's Q.
 calculateQ = function(data, Dij) {
 
-  # This is not same variables as when calculating Q above. Change?
-  Xi <- data[data != 0]
-  a <- Xi / sum(Xi)
-  distance <- Dij[data != 0, data != 0]
-  Q = sum(distance * (a %*% t(a)))
+  pAbs <- data[data != 0]
+  p <- pAbs / sum(pAbs)
+  dij <- Dij[data != 0, data != 0]
+  Q <- sum(dij * (p %*% t(p)))
 
   return(Q)
 }

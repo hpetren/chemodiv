@@ -69,18 +69,18 @@ The first dataset, which we call the *composition* dataset, should be a
 data frame containing data on the relative concentration (proportions) of 
 different compounds (columns) in different samples (rows):
 ```{r}
-data("alpinaDataSubset")
+data("alpinaSampData")
 
-head(alpinaDataSubset)[,1:5]
+head(alpinaSampData)[,1:5]
 ```
 The dataset contains the proportional concentration of 15 phytochemical 
 compounds in different samples. The first column indicates which
 population each sample belongs to. For convenience, we separate this column
 from the rest of the dataset:
 ```{r}
-alpinaPopulation <- alpinaDataSubset$Population
+alpinaPopulation <- alpinaSampData$Population
 
-alpinaData <- alpinaDataSubset[,-1]
+alpinaData <- alpinaSampData[,-1]
 ```
 
 The second dataset, which we call the *compounds* dataset, should be a 
@@ -88,9 +88,9 @@ data frame containing, in each of three columns, the common name,
 SMILES and InChIKey IDs of all the compounds that are present in the
 *composition* dataset:
 ```{r}
-data("alpinaCompSubset")
+data("alpinaCompData")
 
-head(alpinaCompSubset)
+head(alpinaCompData)
 ```
 SMILES and InChIKey are chemical identifiers that are easily obtained for 
 each compound by searching for compounds in
@@ -115,7 +115,7 @@ When both datasets are prepared, we can use the function `chemDivCheck()`
 to make sure that the *composition* dataset and the *compounds* dataset 
 are formatted correctly, to be used by the other functions in the package:
 ```{r}
-chemDivCheck(compoundData = alpinaCompSubset, sampleData = alpinaData)
+chemDivCheck(compoundData = alpinaCompData, sampleData = alpinaData)
 ```
 
 The data is correctly formatted and we can begin with analyses. 
@@ -130,7 +130,7 @@ is a deep-learning tool that classifies phytochemical compounds into a
 hierarchical classification of three groups, pathway, superclass and class, 
 largely corresponding to biosynthetic pathways:
 ```{r}
-alpinaNPC <- NPCTable(compoundData = alpinaCompSubset)
+alpinaNPC <- NPCTable(compoundData = alpinaCompData)
 
 alpinaNPC[1,] # Classification of first compound in dataset
 ```
@@ -155,7 +155,7 @@ will have a high dissimilarity.
 
 We calculate compound dissimilarities with `type = "PubChemFingerprint"`.
 ```{r, message = FALSE}
-alpinaCompDis <- compDis(compoundData = alpinaCompSubset,
+alpinaCompDis <- compDis(compoundData = alpinaCompData,
                          type = "PubChemFingerprint")
 
 alpinaCompDis$fingerDisMat[1:4, 1:4] # Part of compound dissimilarity matrix
@@ -360,7 +360,7 @@ quickly explore their data using standard parameters. This can be used
 to generate the same four types of plots as above.
 
 ```{r, eval = FALSE}
-quickChemDiv(compoundData = alpinaCompSubset,
+quickChemDiv(compoundData = alpinaCompData,
              sampleData = alpinaData,
              groupData = alpinaPopulation,
              outputType = "plots") # Not run

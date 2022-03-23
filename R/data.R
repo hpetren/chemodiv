@@ -6,37 +6,45 @@
 #' @format A data frame with 87 rows and 16 columns. Each row is a sample,
 #' first column is population, the other columns are scent compounds.
 #'
-#' @source \url{https://doi.org/10.1093/aob/mcab007}
-"alpinaDataSubset"
+#' @source Petren H, Torang P, Agren J, Friberg M. 2021.
+#' Evolution of floral scent in relation to self-incompatibility and capacity
+#' for autonomous self-pollination in the perennial herb \emph{Arabis alpina}.
+#' Annals of Botany 127: 737-747.
+#' \url{https://doi.org/10.1093/aob/mcab007}
+"alpinaSampData"
 
 #' Arabis alpina floral scent compounds
 #'
-#' A dataset listing the compounds found in \code{\link{alpinaDataSubset}}.
+#' A dataset listing the compounds found in \code{\link{alpinaSampData}}.
 #'
 #' @format A data frame with 15 rows and 3 columns. Each row is a compound.
 #' First column is a common name of the compound, second column is the
 #' SMILES (Simplified Molecular-Input Line-Entry System) specification,
 #' third column is the InChIKey (International Chemical Identifier).
 #'
-#' @source \url{https://doi.org/10.1093/aob/mcab007}
-"alpinaCompSubset"
+#' @source Petren H, Torang P, Agren J, Friberg M. 2021.
+#' Evolution of floral scent in relation to self-incompatibility and capacity
+#' for autonomous self-pollination in the perennial herb \emph{Arabis alpina}.
+#' Annals of Botany 127: 737-747.
+#' \url{https://doi.org/10.1093/aob/mcab007}
+"alpinaCompData"
 
 #' Minimal sample dataset
 #'
-#' A minimal made up dataset with floral scent data.
+#' A minimal made up dataset with phytochemical data.
 #'
 #' @format A data frame with 4 rows and 3 columns. Each row is a sample,
-#' each column is a scent compound.
+#' each column is a phytochemical compound.
 #'
 "minimalSampData"
 
 #' Minimal compound dataset
 #'
-#' A minimal dataset with three floral scent compounds.
+#' A minimal dataset with three phytochemical compounds.
 #'
-#' @format A data frame with 3 rows and 3 columns. Each row is a compound.
-#' First column is a common name of the compound, second column is the
-#' SMILES (Simplified Molecular-Input Line-Entry System) specification,
+#' @format A data frame with 3 rows and 3 columns. Each row is a phytochemical
+#' compound. First column is a common name of the compound, second column is
+#' the SMILES (Simplified Molecular-Input Line-Entry System) specification,
 #' third column is the InChIKey (International Chemical Identifier).
 #'
 "minimalCompData"
@@ -54,7 +62,7 @@
 #'
 #' A minimal matrix with sample dissimilarities calculated from
 #' \code{\link{minimalSampData}} and \code{\link{minimalCompDis}}
-#' using UniFracs with alpha = 0.5 (and UPGMA clustering).
+#' using Generalized UniFracs with alpha = 0.5 (and UPGMA clustering).
 #'
 #' @format A 4x4 sample dissimilarity matrix.
 #'

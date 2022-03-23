@@ -18,6 +18,6 @@ Functional Hill diversity (FD).
 }
 \description{
 Function to calculate Functional Hill diversity, as in equations
-4b and 6b (for alpha, not gamma) in Chiu & Chao 2014 Plos One.
+4b and 6b in Chiu & Chao 2014 Plos One.
 Note that this is done for one sample (row).
 }
