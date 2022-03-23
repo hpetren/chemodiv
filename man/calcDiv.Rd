@@ -59,10 +59,11 @@ dissimilarities in the dissimilarity matrix.
 diversity. Requires a compound dissimilarity matrix. This represents the
 average dissimilarity of two randomly selected (weighed by their proportions)
 compounds in the sample.
-\item \code{PielouEven}. Pielou's Evenness. The perhaps most common
-evenness measure. This is equal to the Shannon's Diversity divided by the
-natural logarithm of the number of compounds. In other words, it expresses
-evenness with the observed Shannon's diversity as a proportion of the maximum
+\item \code{PielouEven}. Pielou's Evenness, also referred to as
+Shannon's equitability. This is perhaps the most common evenness
+measure. Equal to the Shannon's Diversity divided by the natural
+logarithm of the number of compounds. In other words, it expresses evenness
+with the observed Shannon's diversity as a proportion of the maximum
 Shannon's diversity where all compounds are equally abundant. Therefore,
 this is a relative measure with a minimum value of 0 and a maximum value
 of 1. This measure of evenness is not replication invariant.

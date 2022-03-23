@@ -1,5 +1,6 @@
-# This requires a graph object, so first running molNet here
-testCompDis <- matrix(data = c(0,0.6,0.7,0.6,0,0.3,0.7,0.3,0), nrow = 3)
+testCompDis <- matrix(data = c(0,0.6,0.7,
+                               0.6,0,0.3,
+                               0.7,0.3,0), nrow = 3)
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
 group <- c("I","I","II","II")
@@ -11,8 +12,7 @@ testNpcTable <- data.frame(compound = c("compA", "compB", "compC"),
 
 testMolNet <- molNet(testCompDis)
 
-
-test_that("network plot is generated", {
+test_that("network plots are generated", {
   expect_match(typeof(molNetPlot(testSampData,
                                  testMolNet$networkObject)), "list")
   expect_match(typeof(molNetPlot(testSampData,
@@ -32,4 +32,3 @@ test_that("faulty input is detected and gives error", {
                           group,
                           plotNames = TRUE))
 })
-

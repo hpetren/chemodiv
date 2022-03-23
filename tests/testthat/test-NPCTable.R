@@ -3,7 +3,6 @@ testCompData <- data.frame(compounds = c("limonene", "unknown"),
                            inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N",
                                         "NOTINCHIKEY"))
 
-
 test_that("NPC-classification is generated", {
   expect_equal(nrow(NPCTable(testCompData[1,])), nrow(testCompData[1,]))
   expect_message(NPCTable(testCompData), "Is the SMILES correct?")

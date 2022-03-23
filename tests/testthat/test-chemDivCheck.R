@@ -4,7 +4,6 @@ testCompData <- data.frame(compound = c("limonene",
                                       "C1=CC=C(C=C1)C=O"),
                            inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N",
                                         "HUMNYLRZRPPJDN-UHFFFAOYSA-N"))
-
 testSampData <- data.frame(limonene = c(0.3,0.4,0.1),
                            benzaldehyde = c(0.7,0.6,0.9))
 
@@ -27,5 +26,3 @@ test_that("Formatting problem messages are printed", {
   expect_message(chemDivCheck(testCompData, testSampData[,c(2,1)]),
                  "The name and order")
 })
-
-
