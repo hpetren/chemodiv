@@ -22,7 +22,8 @@ which is one of the elements in the list outputted by \code{\link{molNet}}.
 The network is extracted as molNetOutput$networkObject.}
 
 \item{groupData}{Grouping data. If supplied, a separate network will be
-created for each group.}
+created for each group. Should be either a vector or a data frame
+with a single column.}
 
 \item{npcTable}{It is recommended but optional to supply an
 \code{\link{NPCTable}} This will result in network nodes being coloured
@@ -66,4 +67,8 @@ molNetPlot(minimalSampData, minimalMolNet$networkObject)
 molNetPlot(minimalSampData, minimalMolNet$networkObject, groups)
 molNetPlot(minimalSampData, minimalMolNet$networkObject, npcTable = minimalNPCTable)
 molNetPlot(minimalSampData, minimalMolNet$networkObject, plotNames = TRUE)
+
+\dontrun{
+
+}
 }

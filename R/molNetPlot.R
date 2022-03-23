@@ -16,7 +16,8 @@
 #'
 #' @param sampleData Data frame with samples as rows and compounds as columns.
 #' @param groupData Grouping data. If supplied, a separate network will be
-#' created for each group.
+#' created for each group. Should be either a vector or a data frame
+#' with a single column.
 #' @param networkObject tidygraph network object, as created by the
 #' \code{\link{molNet}} function. Note that this is only the network object,
 #' which is one of the elements in the list outputted by \code{\link{molNet}}.
@@ -46,6 +47,10 @@
 #' molNetPlot(minimalSampData, minimalMolNet$networkObject, groups)
 #' molNetPlot(minimalSampData, minimalMolNet$networkObject, npcTable = minimalNPCTable)
 #' molNetPlot(minimalSampData, minimalMolNet$networkObject, plotNames = TRUE)
+#'
+#' \dontrun{
+#'
+#' }
 molNetPlot <- function(sampleData,
                        networkObject,
                        groupData = NULL,
@@ -59,6 +64,10 @@ molNetPlot <- function(sampleData,
   if (is.null(npcTable)) {
     message("It is recommended to include an npcTable for an improved
             network visualization.")
+  }
+
+  if (is.data.frame(groupData)) {
+    groupData <- as.vector(groupData[,1])
   }
 
   if (is.null(groupData) && is.null(npcTable) && !plotNames) {

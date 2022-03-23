@@ -33,7 +33,8 @@
 #' the \code{sampleDis} function. This can be either the list of one or
 #' both matrices outputted by the function, or a single matrix directly.
 #'
-#' @param groupData Grouping data.
+#' @param groupData Grouping data. Should be either a vector or a data frame
+#' with a single column.
 #'
 #' @return Various plots on chemodiversity.
 #'
@@ -48,6 +49,10 @@
 #' chemDivPlot(compDisMat = minimalCompDis, divData = minimalDiv,
 #' divProfData = minimalDivProf, sampleDisMat = minimalSampDis,
 #' groupData = groups)
+#'
+#' \dontrun{
+#'
+#' }
 chemDivPlot <- function(compDisMat = NULL,
                         divData = NULL,
                         divProfData = NULL,
@@ -55,6 +60,10 @@ chemDivPlot <- function(compDisMat = NULL,
                         groupData = NULL) {
 
   allPlots <- list()
+
+  if (is.data.frame(groupData)) {
+    groupData <- as.vector(groupData[,1])
+  }
 
   if (!is.null(compDisMat)) { # Compound tree
 
