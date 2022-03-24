@@ -1,4 +1,4 @@
-testCompData <- data.frame(compounds = c("limonene", "unknown"),
+testCompData <- data.frame(compound = c("limonene", "unknown"),
                            smiles = c("CC1=CCC(CC1)C(=C)C", "NOTSMILES"),
                            inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N",
                                         "NOTINCHIKEY"))
