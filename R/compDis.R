@@ -3,7 +3,7 @@
 #' Function to quantify dissimilarities between phytochemical compounds.
 #'
 #' This function calculates matrices with pairwise dissimilarities between
-#' chemical compounds, in an effort to quantify how different pairs of
+#' chemical compounds, in an effort to quantify how different
 #' molecules are to each other. It does so in three different ways, based
 #' on the biosynthetic classification or molecular structure of the molecules:
 #' 1. Using the classification from the NPClassifier tool,

@@ -3,7 +3,11 @@ Title: Analysing Phytochemical Diversity
 Version: 0.0.0.9000
 Authors@R: 
     person("Hampus", "Petrén", email = "hampus.petren@gmail.com",
-    role = c("aut", "cre"))
+    role = c("aut", "cre")),
+    person("Tobias G.", "Köllner", email = "koellner@ice.mpg.de",
+    role = c("aut")),
+    person("Robert R.", "Junker", email = "robert.junker@uni-marburg.de",
+    role = c("aut"))
 Description: Provides functions to analyse data on phytochemial diversity.
 License: GPL (>= 3)
 Encoding: UTF-8
@@ -37,3 +41,5 @@ Imports:
     tidyr,
     rlang
 VignetteBuilder: knitr
+URL: https://github.com/hpetren/chemdiv
+BugReports: https://github.com/hpetren/chemdiv/issues
