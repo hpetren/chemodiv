@@ -11,7 +11,8 @@ A 3x3 compound dissimilarity matrix.
 minimalCompDis
 }
 \description{
-A minimal matrix with compound dissimilarities calculated from
-PubChem Fingerprints for the compounds in \code{\link{minimalCompData}}.
+A matrix with compound dissimilarities calculated using
+\code{\link{compDis}} with \code{PubChemFingerprint} as \code{type},
+for the compounds in \code{\link{minimalCompData}}.
 }
 \keyword{datasets}

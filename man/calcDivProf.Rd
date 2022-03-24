@@ -28,12 +28,13 @@ Functional Hill diversity.}
 
 \item{qMax}{Maximum value of q.}
 
-\item{step}{Increment by which q will be calculated between qMin and qMax.}
+\item{step}{Increment by which q will be calculated between \code{qMin}
+and \code{qMax}.}
 }
 \value{
 List with a diversity profile data frame with samples as rows
 and the Hill diversity or Functional Hill diversity for different q values
-as columns; and values for type, qMin, qMax and step.
+as columns; and values for type, \code{qMin}, \code{qMax} and \code{step}.
 }
 \description{
 Function to calculate a diversity profile, i.e. calculate Hill diversity
@@ -69,5 +70,8 @@ type = "FuncHillDiv")
 }
 }
 \references{
-Who came up with divprofs? But e.g. Jost 2010,
+Chao A, Chiu C-H, Jost L. 2014. Unifying Species Diversity,
+Phylogenetic Diversity, Functional Diversity, and Related Similarity and
+Differentiation Measures Through Hill Numbers.
+Annual Review of Ecology, Evolution, and Systematics 45: 297-324.
 }

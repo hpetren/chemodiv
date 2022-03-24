@@ -12,6 +12,6 @@ each column is a phytochemical compound.
 minimalSampData
 }
 \description{
-A minimal made up dataset with phytochemical data.
+A small made up dataset with phytochemical data.
 }
 \keyword{datasets}

@@ -4,31 +4,34 @@
 #' This is either Bray-Curtis dissimilarities and/or Generalized UniFrac
 #' dissimilarities.
 #'
-#' \code{sampleDis} calculates a dissimilarity matrix for all the samples
+#' The function calculates a dissimilarity matrix for all the samples
 #' in \code{sampleData}, for the given dissimilarity index/indices.
 #' Bray-Curtis dissimilarities are calculated using only
 #' the \code{sampleData}. This is the most commonly calculated dissimilarity
 #' index used for phytochemical data (other types of dissimilarities are
-#' easily calculated using the \code{vegdist} function in the \code{vegan}
-#' package).
+#' easily calculated using the \code{\link[vegan]{vegdist}} function in
+#' the \code{vegan} package).
 #'
-#' If a compound dissimilarity matrix, \code{compDisMat},
-#' is supplied, Generalized UniFrac dissimilarities can be calculated, which
-#' also uses the compound dissimilarity matrix for the sample dissimilarity
+#' If a compound dissimilarity matrix, \code{compDisMat}, is supplied,
+#' Generalized UniFrac dissimilarities can be calculated, which also
+#' use the compound dissimilarity matrix for the sample dissimilarity
 #' calculations. For the calculation of Generalized UniFrac dissimilarities,
 #' the compound dissimilarity matrix is transformed into a dendrogram using
-#' hierarchical clustering. Calculation of UniFrac distances
-#' quantifies the fraction of the total branch length of the dendrogram that
-#' leads to compounds present in either sample, but not both.
-#' The (weighted) Generalized UniFrac dissimilarities
-#' implemented here additionally takes compound abundances
-#' into account. In this way, both the relative proportions of compounds and
-#' the biosynthetic/structural properties of these compounds are accounted for
-#' in the calculations of sample dissimilarities. As for Bray-Curtis
+#' hierarchical clustering (with the UPGMA method). Calculation of
+#' UniFrac dissimilarities quantifies the fraction of the total branch length
+#' of the dendrogram that leads to compounds present in either sample,
+#' but not both. The (weighted) Generalized UniFrac dissimilarities
+#' implemented here additionally take compound abundances into account.
+#' In this way, both the relative proportions of compounds and
+#' the biosynthetic/structural properties of the compounds are accounted for
+#' in the calculations of sample dissimilarities, such that , such that
+#' two samples containing more biosynthetically/structurally different
+#' compounds have a higher dissimilarity. As with Bray-Curtis
 #' dissimilarities, Generalized UniFrac dissimilarities range in value from
 #' 0 to 1.
 #'
-#' @param sampleData Data frame with samples as rows and compounds as columns.
+#' @param sampleData Data frame with the relative concentration of each
+#' compound (column) in every sample (row).
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. If this is supplied, Generalized UniFrac
 #' dissimilarities can be calculated.
@@ -47,18 +50,15 @@
 #' outputted, even if only one matrix is calculated.
 #'
 #' @references
+#' Bray JR, Curtis JT. 1957. An Ordination of the Upland Forest Communities
+#' of Southern Wisconsin. Ecological Monographs 27: 325-349.
 #'
-#' Bray, J. R., and J. T. Curtis. 1957. An Ordination of the Upland Forest
-#' Communities of Southern Wisconsin. Ecological Monographs 27:325-349.
+#' Chen J, Bittinger K, Charlson ES, et al. 2012. Associating microbiome
+#' composition with environmental covariates using generalized
+#' UniFrac distances. Bioinformatics 28: 2106-2113.
 #'
-#' Chen, J., K. Bittinger, E. S. Charlson, C. Hoffmann, J. Lewis, G. D. Wu,
-#' R. G. Collman, F. D. Bushman, and H. Li. 2012. Associating microbiome
-#' composition with environmental covariates using generalized UniFrac
-#' distances. Bioinformatics 28:2106-2113.
-#'
-#' Lozupone, C., and R. Knight. 2005. UniFrac: a New Phylogenetic Method
-#' for Comparing Microbial Communities. Applied and Environmental
-#' Microbiology 71:8228-8235.
+#' Lozupone C, Knight R. 2005. UniFrac: a New Phylogenetic Method for Comparing
+#' Microbial Communities. Applied and Environmental Microbiology 71: 8228-8235.
 #'
 #' @export
 #'

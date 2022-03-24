@@ -14,6 +14,6 @@ third column is the InChIKey (International Chemical Identifier).
 minimalCompData
 }
 \description{
-A minimal dataset with three phytochemical compounds.
+A small dataset with three phytochemical compounds.
 }
 \keyword{datasets}

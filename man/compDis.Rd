@@ -13,10 +13,9 @@ compDis(
 }
 \arguments{
 \item{compoundData}{Data frame with the chemical compounds of interest.
-Should have a column named "compound" with common names, a column named
-"smiles" with SMILES IDs for the compounds, and a column named "inchikey"
-with the InChIKey IDs for the compounds. See \code{\link{chemdiv}} for
-details on obtaining SMILES and InChIKey IDs.}
+Should have a column named "compound" with common names of
+the compounds, a column named "smiles" with SMILES IDs of the compounds,
+and a column named "inchikey" with the InChIKey IDs for the compounds.}
 
 \item{type}{Type of data compound dissimilarity calculations will be
 based on: \code{NPClassifier}, \code{PubChemFingerprint} or \code{fMCS}.
@@ -37,8 +36,7 @@ outputted, even if only one matrix is calculated. Downstream functions,
 including \code{\link{calcDiv}}, \code{\link{calcBetaDiv}},
 \code{\link{calcDivProf}}, \code{\link{sampleDis}},
 \code{\link{molNet}} and \code{\link{chemDivPlot}} require only the matrix
-as input (subsetted with e.g. fullList$specificMatrix) and not the
-whole list.
+as input (e.g. as fullList$specificMatrix) and not the whole list.
 }
 \description{
 Function to quantify dissimilarities between phytochemical compounds.
@@ -46,35 +44,37 @@ Function to quantify dissimilarities between phytochemical compounds.
 \details{
 This function calculates matrices with pairwise dissimilarities between
 chemical compounds, in an effort to quantify how different pairs of
-molecules are to each other.
-It does so in three different ways, based on the biosynthetic classification
-or the molecular structure of the molecules:
+molecules are to each other. It does so in three different ways, based
+on the biosynthetic classification or molecular structure of the molecules:
 \enumerate{
 \item Using the classification from the NPClassifier tool,
-\code{type = "NPClassifier"}. NPClassifier (Kim et al 2021)
+\code{type = "NPClassifier"}. NPClassifier (Kim et al. 2021)
 automatically classifies natural products (phytochemical compounds)
-into a hierarchical  classification of pathways, superclasses
-and classes, which largely correspond to the biosynthetic
+into a hierarchical  classification of pathway, superclass
+and class, which largely correspond to the biosynthetic
 groups/pathways of the compounds. Classifications are fetched from
 \url{https://npclassifier.ucsd.edu/}. NPClassifier does not always
 manage to classify every compound into all three hierarchical levels. In
 such cases, it might be beneficial to first run \code{\link{NPCTable}},
 manually edit the resulting data frame with probable classifications if
-possible (from the Supporting Information in Kim et al. 2021), and then
-supply this classification to \code{compDis()} with the
+possible (with help from the Supporting Information in Kim et al. 2021),
+and then supply this classification to \code{compDis()} with the
 \code{npcTable} argument. This will ensure that compound dissimilarities
 are computed optimally.
 \item Using PubChem Fingerprints, \code{type = "PubChemFingerprint"}.
 This is a binary substructure fingerprint with 881 binary
 variables describing the chemical structure of a compound.
+With this method, compounds are therefore compared
+based on how structurally dissimilar the molecules are.
 See \url{https://pubchemdocs.ncbi.nlm.nih.gov/data-specification}
 for more information.
 \item fMCS, flexible Maximum Common Substructure,
 \code{type = "fMCS"}. This is a pairwise graph matching concept
-allowing for atom and/or bond mismatches (Wang et al 2013).
-While potentially a very accurate similarity measure, fMCS is more
-computationally demanding than the other methods, and will take a
-significant amount of time for larger data sets.
+allowing for atom and/or bond mismatches (Wang et al 2013). As with the
+fingerprints, compounds are compared based on how structurally dissimilar
+the molecules are. While potentially a very accurate similarity measure,
+fMCS is more computationally demanding than the other methods, and will
+take a significant amount of time for larger data sets.
 }
 
 Dissimilarities using NPClassifier and PubChem Fingerprints
@@ -109,14 +109,12 @@ compDis(compoundData = alpinaCompData)
 }
 }
 \references{
-Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,
-J. J. J. van der Hooft, P. C. Dorrestein, W. H. Gerwick,
-and G. W. Cottrell. 2021. NPClassifier: A Deep Neural Network-Based
-Structural Classification Tool for Natural Products.
-Journal of Natural Products:acs.jnatprod.1c00399.
-UPDATE WITH FULL REF WHEN AVAILABLE
+Kim HW, Wang M, Leber CA, Nothias L-F, Reher R, Kang KB,
+van der Hooft JJJ, Dorrestein PC, Gerwick WH, Cottrell GW. 2021.
+NPClassifier: A Deep Neural Network-Based Structural Classification
+Tool for Natural Products. Journal of Natural Products 84: 2795-2807.
 
-Wang, Y., T. W. H. Backman, K. Horan, and T. Girke. 2013.
+Wang Y, Backman TWH, Horan K, Girke T. 2013.
 fmcsR: mismatch tolerant maximum common substructure searching in R.
-Bioinformatics 29:2792-2794.
+Bioinformatics 29: 2792-2794.
 }

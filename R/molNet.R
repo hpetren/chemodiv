@@ -1,26 +1,30 @@
 #' Generate molecular network with properties
 #'
-#' Function which generates a molecular network object, and some
+#' Function to generate a molecular network object, and some
 #' basic properties of the network.
 #'
-#' Note that the supplied dissimilarity matrix is translated to a
-#' similarity matrix, and this is what cutOff values are set for.
+#' Molecular networks can be used to illustrate the biosynthetic/structural
+#' similarity of phytochemical compounds in a sample, while
+#' simultaneously visualizing their relative concentrations. \code{molNet}
+#' creates the network, and \code{\link{molNetPlot}} can then be used to
+#' create a plot of the network.
 #'
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
-#' \code{\link{compDis}}.
+#' \code{\link{compDis}}. Note that the supplied dissimilarity matrix
+#' is transformed into a similarity matrix, and this is what \code{cutOff}
+#' values are set for.
 #' @param npcTable An already generated \code{\link{NPCTable}} can be supplied
 #' for calculations of the number of NPC pathways and network modularity.
 #' @param cutOff Cut-off value for compound similarities. Any similarity
 #' lower than this value will be set to zero when the network is generated,
 #' which strongly affects the look of the network. The value can be set
-#' manually 0 <= cutOff <= 1 (maybe mention that others use 0.6 for another
-#' kind of molecular similarity measure), to the \code{median} dissimilarity
+#' manually 0 <= cutOff <= 1, to the \code{median} dissimilarity
 #' value in the compDisMat, or to \code{minPathway}, the lowest within-pathway
 #' similarity (which allows all within-NPC-pathway to be kept) if an NPCTable
 #' is supplied.
 #'
-#' @return List with a graph (tidygrph/igraph?) object, the number of compounds,
-#' number of NPC pathways and modularity.
+#' @return List with a (tbl_graph/igraph) graph object, the number of compounds,
+#' number of NPC pathways and modularity of the network.
 #'
 #' @export
 #'

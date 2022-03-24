@@ -21,6 +21,6 @@ Annals of Botany 127: 737-747.
 alpinaCompData
 }
 \description{
-A dataset listing the compounds found in \code{\link{alpinaSampData}}.
+A dataset listing the compounds in \code{\link{alpinaSampData}}.
 }
 \keyword{datasets}

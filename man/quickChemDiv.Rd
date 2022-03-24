@@ -2,7 +2,7 @@
 % Please edit documentation in R/quickChemDiv.R
 \name{quickChemDiv}
 \alias{quickChemDiv}
-\title{Quickly calculate/plot chemodiversity}
+\title{Quickly calculate or plot chemodiversity}
 \usage{
 quickChemDiv(
   sampleData,
@@ -15,17 +15,18 @@ quickChemDiv(
 \item{sampleData}{Data frame with the relative concentration of each
 compound (column) in every sample (row).}
 
-\item{compoundData}{Data frame with the chemical compounds of interest.
-Should have a column named "compound" with common names, a column named
-"smiles" with SMILES IDs for the compounds, and a column named "inchikey"
-with the InChIKey IDs for the compounds. See \code{\link{chemdiv}} for
-details on obtaining SMILES and InChIKey IDs.}
+\item{compoundData}{Data frame with the compounds in \code{sampleData}
+as rows. Should have a column named "compound" with common names of
+the compounds, a column named "smiles" with SMILES IDs of the compounds,
+and a column named "inchikey" with the InChIKey IDs for the compounds.
+See \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.}
 
-\item{groupData}{Grouping data.}
+\item{groupData}{Grouping data. Should be either a vector, or a data frame
+with a single column.}
 
 \item{outputType}{Type of output that should be returned: either
-\code{"data"} to output a list with different types of chemodiversity data,
-or \code{"plots"} to instead produce standard plots of this data.}
+\code{data} to output a list with different types of chemodiversity data,
+or \code{plots} to instead produce standard plots of this data.}
 }
 \value{
 Various types of chemodiversity measures, either as elements in
@@ -47,7 +48,7 @@ data using standard parameters.
 The function requires sample data as input, and can also include
 compound data. If only sample data is supplied, phytochemical diversity and
 dissimilarity will be calculated as Hill diversity and Bray-Curtis
-dissimilarities, respectively. If sample data nd compound data is supplied,
+dissimilarities, respectively. If sample data and compound data is supplied,
 phytochemical diversity and dissimilarity will be calculated as
 Functional Hill diversity and Generalized UniFrac dissimilarities,
 respectively. See \code{\link{chemdiv}} for details on data formatting.

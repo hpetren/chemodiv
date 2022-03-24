@@ -4,16 +4,16 @@
 \alias{chemDivCheck}
 \title{Check data formatting}
 \usage{
-chemDivCheck(compoundData, sampleData)
+chemDivCheck(sampleData, compoundData)
 }
 \arguments{
-\item{compoundData}{Data frame with the chemical compounds of interest.
-Should have a column named "compound" with common names, a column named
-"smiles" with SMILES IDs for the compounds, and a column named "inchikey"
-with the InChIKey IDs for the compounds.}
-
 \item{sampleData}{Data frame with the relative concentration of each
 compound (column) in every sample (row).}
+
+\item{compoundData}{Data frame with the compounds in \code{sampleData}
+as rows. Should have a column named "compound" with common names of
+the compounds, a column named "smiles" with SMILES IDs of the compounds,
+and a column named "inchikey" with the InChIKey IDs for the compounds.}
 }
 \value{
 One or several messages pointing out problems with data formatting,
@@ -41,14 +41,14 @@ all the compounds present in the first dataset. See
 \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
 }
 \examples{
-data(minimalCompData)
 data(minimalSampData)
-chemDivCheck(minimalCompData, minimalSampData) # Correct format
-chemDivCheck(minimalCompData[c(2,3,1),], minimalSampData) # Incorrect format
+data(minimalCompData)
+chemDivCheck(minimalSampData, minimalCompData) # Correct format
+chemDivCheck(minimalSampData, minimalCompData[c(2,3,1),]) # Incorrect format
 
 \dontrun{
-data(alpinaCompData)
 data(alpinaSampData)
-chemDivCheck(compoundData = alpinaCompData, sampleData = alpinaSampData)
+data(alpinaCompData)
+chemDivCheck(sampleData = alpinaSampData, compoundData = alpinaCompData)
 }
 }

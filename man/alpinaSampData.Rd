@@ -19,7 +19,7 @@ Annals of Botany 127: 737-747.
 alpinaSampData
 }
 \description{
-A dataset with (proportional) floral scent data from three populations of
+A dataset with proportional floral scent data from three populations of
 the plant species Arabis alpina.
 }
 \keyword{datasets}

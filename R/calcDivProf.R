@@ -24,15 +24,20 @@
 #' \code{"HillDiv"} or \code{"FuncHillDiv"}.
 #' @param qMin Minimum value of q.
 #' @param qMax Maximum value of q.
-#' @param step Increment by which q will be calculated between qMin and qMax.
+#' @param step Increment by which q will be calculated between \code{qMin}
+#' and \code{qMax}.
 #'
 #' @return List with a diversity profile data frame with samples as rows
 #' and the Hill diversity or Functional Hill diversity for different q values
-#' as columns; and values for type, qMin, qMax and step.
+#' as columns; and values for type, \code{qMin}, \code{qMax} and \code{step}.
 #'
 #' @export
 #'
-#' @references Who came up with divprofs? But e.g. Jost 2010,
+#' @references
+#' Chao A, Chiu C-H, Jost L. 2014. Unifying Species Diversity,
+#' Phylogenetic Diversity, Functional Diversity, and Related Similarity and
+#' Differentiation Measures Through Hill Numbers.
+#' Annual Review of Ecology, Evolution, and Systematics 45: 297-324.
 #'
 #' @examples
 #' data(minimalSampData)

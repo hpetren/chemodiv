@@ -1,31 +1,30 @@
 #' NPClassifier Data Table
 #'
-#' This function classifies compounds with NPClassifier,
+#' This function classifies compounds with NPClassifier (Kim et al. 2021),
 #' and puts the results in a dataframe containing the pathway,
 #' superclass and class for each compound.
 #'
-#' The function classifies compounds into groups largely corresponding to
-#' biosynthesic pathways (at three hierarchical levels: pathway, superclass,
-#' class) using thr NPClassifier tool (Kim et al. 2021).
+#' The function classifies natural products (phytochemical compounds)
+#' into groups largely corresponding to biosynthetic pathways,
+#' at three hierarchical levels: pathway, superclass
+#' and class. This is done using the NPClassifier tool (Kim et al. 2021).
 #' Connects to \url{https://npclassifier.ucsd.edu/}.
 #'
 #' @param compoundData Data frame with the chemical compounds of interest.
-#' Should have a column named "compound" with common names, and a column named
-#' "smiles" with isomeric or canonical SMILES IDs for the compounds.
+#' Should include a column named "compound" with common names of
+#' the compounds and a column named "smiles" with SMILES IDs of the compounds.
 #'
 #' @return Data frame with the NPClassifier classification for each compound
-#' as pathways, superclass and class. Note that compounds may be classified
+#' as pathway, superclass and class. Note that compounds may be classified
 #' in more than one group, or no group, at each level of classification.
 #'
 #' @export
 #'
 #' @references
-#' Kim, H. W., M. Wang, C. A. Leber, L.-F. Nothias, R. Reher, K. B. Kang,
-#' J. J. J. van der Hooft, P. C. Dorrestein, W. H. Gerwick,
-#' and G. W. Cottrell. 2021. NPClassifier: A Deep Neural Network-Based
-#' Structural Classification Tool for Natural Products.
-#' Journal of Natural Products:acs.jnatprod.1c00399.
-#' UPDATE WITH FULL REF WHEN AVAILABLE
+#' Kim HW, Wang M, Leber CA, Nothias L-F, Reher R, Kang KB,
+#' van der Hooft JJJ, Dorrestein PC, Gerwick WH, Cottrell GW. 2021.
+#' NPClassifier: A Deep Neural Network-Based Structural Classification
+#' Tool for Natural Products. Journal of Natural Products 84: 2795-2807.
 #'
 #' @examples
 #' data(minimalCompData)

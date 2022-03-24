@@ -19,12 +19,12 @@
 #' all the compounds present in the first dataset. See
 #' \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
 #'
-#' @param compoundData Data frame with the chemical compounds of interest.
-#' Should have a column named "compound" with common names, a column named
-#' "smiles" with SMILES IDs for the compounds, and a column named "inchikey"
-#' with the InChIKey IDs for the compounds.
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
+#' @param compoundData Data frame with the compounds in \code{sampleData}
+#' as rows. Should have a column named "compound" with common names of
+#' the compounds, a column named "smiles" with SMILES IDs of the compounds,
+#' and a column named "inchikey" with the InChIKey IDs for the compounds.
 #'
 #' @return One or several messages pointing out problems with data formatting,
 #' or a message informing that the datasets are correctly formatted.
@@ -32,18 +32,18 @@
 #' @export
 #'
 #' @examples
-#' data(minimalCompData)
 #' data(minimalSampData)
-#' chemDivCheck(minimalCompData, minimalSampData) # Correct format
-#' chemDivCheck(minimalCompData[c(2,3,1),], minimalSampData) # Incorrect format
+#' data(minimalCompData)
+#' chemDivCheck(minimalSampData, minimalCompData) # Correct format
+#' chemDivCheck(minimalSampData, minimalCompData[c(2,3,1),]) # Incorrect format
 #'
 #' \dontrun{
-#' data(alpinaCompData)
 #' data(alpinaSampData)
-#' chemDivCheck(compoundData = alpinaCompData, sampleData = alpinaSampData)
+#' data(alpinaCompData)
+#' chemDivCheck(sampleData = alpinaSampData, compoundData = alpinaCompData)
 #' }
-chemDivCheck <- function(compoundData,
-                         sampleData) {
+chemDivCheck <- function(sampleData,
+                         compoundData) {
 
   formatProblem <- FALSE
 

@@ -5,7 +5,7 @@
 \alias{alpinaPopData}
 \title{Arabis alpina populations}
 \format{
-A data frame with 87 rows and 1 columns. Each row represents
+A data frame with 87 rows and 1 column. Each row represents
 the population each sample in \code{\link{alpinaSampData}} comes from
 (It8, S1 or G1).
 }

@@ -5,7 +5,7 @@
 \alias{chemdiv}
 \title{chemdiv: A package for analysing phytochemical diversity}
 \description{
-chemdiv is an R package for analysing phytochemical data. The package
+\emph{chemdiv} is an R package for analysing phytochemical data. The package
 includes a number of functions that enables quantification and
 visualization of phytochemical diversity and dissimilarity for any type of
 phytochemical (and similar) samples, such as herbivore defence
@@ -24,18 +24,23 @@ relative proportions of different compounds (columns) in
 different samples (rows). Note that all calculations of diversity, and
 most calculations of dissimilarity, can only be performed on relative,
 rather than absolute, concentrations.
+
 The second dataset should contain, in each of three columns in a data frame,
 the compound name, SMILES and InChIKey IDs of all the compounds
 present in the first dataset. SMILES and InChIKey are chemical identifiers
 that are easily obtained for each compound by searching for it in
-PubChem \url{https://pubchem.ncbi.nlm.nih.gov/}, or by using various
-automated tools such as the PubChem Identifier Exchange Service
+PubChem \url{https://pubchem.ncbi.nlm.nih.gov/}. Here, a search with a
+common name will bring up the compound's record in the database, where
+the (isomeric/canonical )SMILES and InChIKey are included.
+Alternatively, various automated tools such as the
+PubChem Identifier Exchange Service
 \url{https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi} or
-The Chemical Translation Service \url{https://cts.fiehnlab.ucdavis.edu/}.
-The user is intentionally required to do this manually to ensure correctness,
+The Chemical Translation Service \url{https://cts.fiehnlab.ucdavis.edu/}
+can be used. The user is intentionally required to compile the
+chemical identifiers manually to ensure correctness,
 as lists of compounds very often contain compounds wrongly named,
-wrongly formatted, under various synonyms etc. which prevents easy automatic
-translation of compound names to SMILES and InChIKey.
+wrongly formatted, under various synonyms etc. which prevents easy
+automatic translation of compound names to SMILES and InChIKey.
 
 Once the two datasets are prepared, these should be imported into R
 as separate data frames, and all analyses in the package can then be
@@ -75,9 +80,18 @@ performed, in largely the same order as they appear in the list below.
 \code{\link{chemDivPlot}}
 }
 
+\section{Shortcut function}{
+
+\code{\link{quickChemDiv}}
+}
+
 \references{
-A bunch probably
+Paper associated with the package:
+\emph{To be added when published}
+}
+\seealso{
+\url{https://github.com/hpetren/chemdiv}
 }
 \author{
-List authors here
+Hampus Petren, Tobias G. Kollner, Robert Junker
 }

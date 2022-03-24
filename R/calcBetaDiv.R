@@ -2,16 +2,16 @@
 #'
 #' Function to calculate beta diversity in the
 #' Hill diversity framework. This can be calculated as normal
-#' Hill beta-diversity or functional Hill beta-diversity.
+#' Hill beta-diversity or Functional Hill beta-diversity.
 #'
 #' The function calculates a single beta-diversity value for the supplied
-#' sample data. This is calculated as beta = gamma / alpha. Gamma-diversity
+#' sample data. This is calculated as *beta = gamma / alpha*. Gamma-diversity
 #' represents the diversity of the pooled data set, alpha-diversity represents
 #' the mean diversity across individual samples, and beta-diversity represents
 #' turnover or variability among samples. With \code{type = "HillDiv"} and
 #' \code{q = 0} the calculated beta-diversity is equal to the well-known and
 #' most simple measure of beta-diversity introduced by Whittaker 1960, where
-#' beta = gamma / alpha, based only on the number of species (here compounds).
+#' *beta = gamma / alpha*, based only on the number of species (here compounds).
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
@@ -28,8 +28,14 @@
 #'
 #' @export
 #'
-#' @references Chao 2014, Chiu 2014, Jost 2007,
-#' Li 2018 (hillR), Marion 2017, Whittaker 1960. Add these.
+#' @references
+#' Chao A, Chiu C-H, Jost L. 2014. Unifying Species Diversity,
+#' Phylogenetic Diversity, Functional Diversity, and Related Similarity and
+#' Differentiation Measures Through Hill Numbers.
+#' Annual Review of Ecology, Evolution, and Systematics 45: 297-324.
+#'
+#' Jost L. 2007. Partitioning diversity into independent alpha and
+#' beta components. Ecology 88: 2427-2439.
 #'
 #' @examples
 #' data(minimalSampData)
