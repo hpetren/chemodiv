@@ -295,7 +295,7 @@ compDis <- function(compoundData,
     # Replacing NA with 0
     npcTableW[is.na(npcTableW)] <- 0
 
-    # Making distance matrix out of it
+    # Making dissimilarity matrix out of it
     npcDisMat <- as.matrix(vegan::vegdist(npcTableW[, 2:ncol(npcTableW)],
                                           method = "jaccard"))
 
@@ -364,7 +364,7 @@ compDis <- function(compoundData,
       # of columns and number of rows equal to number of NA compounds.
       # We put 0 and not NA into this, because we use this to calculate
       # dissimilarities. Rows with all 0 values will have a jaccard
-      # distance of 1 to all others (as I currently want). In contrast,
+      # dissimilarity of 1 to all others (as I currently want). In contrast,
       # vegdist() throws error if there are NAs in community matrix
       # (and we don't want that). This is correct and the same as in npcDis.
       unknownFinger <- as.data.frame(matrix(data = 0,
@@ -548,5 +548,3 @@ compDis <- function(compoundData,
   message("Done")
   return(compoundDisMatList)
 }
-
-

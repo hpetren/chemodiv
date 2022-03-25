@@ -15,7 +15,7 @@
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
-#' @param compDisMat Compound distance matrix, as calculated by
+#' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
 #' Functional Hill beta-diversity.
 #' @param type Type(s) of Hill beta-diversity to calculate. \code{"HillDiv"}

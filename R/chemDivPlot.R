@@ -79,14 +79,13 @@ chemDivPlot <- function(compDisMat = NULL,
     groupData <- as.vector(groupData[,1])
   }
 
-  if (!is.null(compDisMat)) { # Compound tree
+  if (!is.null(compDisMat)) { # Compound dendrogram
 
     compDisMatClust <- stats::hclust(stats::as.dist(compDisMat),
                                      method = "average")
     compDisMatClustDend <- stats::as.dendrogram(compDisMatClust)
     compDisMatClustDendData <- ggdendro::dendro_data(compDisMatClustDend)
 
-    # Now using ggplot2:: for everything, and aes(.data$) as recommended
     compDisMatTreePlot <- ggplot2::ggplot() +
       ggplot2::geom_segment(data = compDisMatClustDendData$segments,
                             ggplot2::aes(x = .data$x,
@@ -211,8 +210,7 @@ chemDivPlot <- function(compDisMat = NULL,
 
       # Suppressing iteration output here requires capture.output() rather
       # than suppressMessage() as metaMDSiter() prints output with cat()
-      # rather than with message() (which is more correct)
-      # https://stackoverflow.com/questions/8797314/suppress-messages-displayed-by-print-instead-of-message-or-warning-in-r
+      # rather than with message()
       utils::capture.output(NMDS <- vegan::metaMDS(sampleDisMat,
                                                    autotransform = FALSE))
       NMDSCoords <- as.data.frame(NMDS$points)
@@ -255,7 +253,6 @@ chemDivPlot <- function(compDisMat = NULL,
       allPlots[["GUNMDSPlot"]] <- GUNMDSPlot
     }
   }
-  # Arranging plots
   gridExtra::grid.arrange(grobs = allPlots,
                           ncol = ceiling(sqrt(length(allPlots))))
 }
