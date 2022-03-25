@@ -10,7 +10,7 @@ calcBetaDiv(sampleData, compDisMat = NULL, type = "HillDiv", q = 1)
 \item{sampleData}{Data frame with the relative concentration of each
 compound (column) in every sample (row).}
 
-\item{compDisMat}{Compound distance matrix, as calculated by
+\item{compDisMat}{Compound dissimilarity matrix, as calculated by
 \code{\link{compDis}}. Has to be supplied for calculations of
 Functional Hill beta-diversity.}
 

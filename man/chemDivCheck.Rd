@@ -39,6 +39,8 @@ concentrations. The second dataset should contain, in each of three
 columns in a data frame, the compound name, SMILES and InChIKey IDs of
 all the compounds present in the first dataset. See
 \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
+Avoid including Greek letters or other special characters in
+the compound names column.
 }
 \examples{
 data(minimalSampData)

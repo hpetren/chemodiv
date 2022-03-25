@@ -7,9 +7,7 @@ testCompDis <- matrix(data = c(0,0.6,0.7,
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
 testCompDis2 <- testCompDis
-testCompDis3 <- testCompDis
-colnames(testCompDis2) <- c("compX", "compB", "compC")
-rownames(testCompDis3) <- c("compA", "compY", "compC")
+colnames(testCompDis2) <- c("compA", "compB", "compX")
 
 test_that("Bray-Curtis and UniFracs work", {
   expect_equal(nrow(sampleDis(testSampData)$BrayCurtis),
@@ -27,8 +25,8 @@ test_that("Bray-Curtis and UniFracs work", {
 test_that("error actions and messages work", {
   expect_message(sampleDis(testSampData*2))
   expect_message(sampleDis(testSampData, testCompDis, type = "BrayCurtis"))
+  expect_error(sampleDis(testSampData, testCompDis[3:1,3:1]))
   expect_error(sampleDis(testSampData, testCompDis2))
-  expect_error(sampleDis(testSampData, testCompDis3))
   expect_error(sampleDis(testSampData, testCompDis, type = "wrong"))
   expect_error(sampleDis(testSampData, type = "GenUniFrac"))
 })

@@ -18,6 +18,8 @@
 #' columns in a data frame, the compound name, SMILES and InChIKey IDs of
 #' all the compounds present in the first dataset. See
 #' \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
+#' Avoid including Greek letters or other special characters in
+#' the compound names column.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).

@@ -6,6 +6,8 @@ testCompDis <- matrix(data = c(0,0.6,0.7,
                                0.7,0.3,0), nrow = 3)
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
+testCompDis2 <- testCompDis
+colnames(testCompDis2) <- c("compA", "compB", "compX")
 
 test_that("all diversity/evenness gives non-NA output", {
   expect_false(any(is.na(calcDiv(sampleData = testSampData,
@@ -41,6 +43,12 @@ test_that("wrong/non-logical input is detected and gives error/message", {
   expect_error(calcDiv(sampleData = testSampData,
                        type = "NotAnIndex"))
   expect_error(calcDiv(sampleData = testSampData,
+                       type = "FuncHillDiv"))
+  expect_error(calcDiv(sampleData = testSampData,
+                       compDisMat = testCompDis[3:1,3:1],
+                       type = "FuncHillDiv"))
+  expect_error(calcDiv(sampleData = testSampData,
+                       compDisMat = testCompDis2,
                        type = "FuncHillDiv"))
   expect_message(calcDiv(sampleData = testSampData,
                          compDisMat = testCompDis,

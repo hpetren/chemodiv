@@ -6,6 +6,8 @@ testCompDis <- matrix(data = c(0,0.6,0.7,
                                0.7,0.3,0), nrow = 3)
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
+testCompDis2 <- testCompDis
+colnames(testCompDis2) <- c("compA", "compB", "compX")
 
 test_that("a diversity profile with correct dim and no NA is generated", {
   expect_output(str(calcDivProf(sampleData = testSampData)), "List of 5")
@@ -35,6 +37,12 @@ test_that("wrong/non-logical input is detected and gives error/message", {
                            compDisMat = testCompDis,
                            type = c("HillDiv", "FuncHillDiv")))
   expect_error(calcDivProf(sampleData = testSampData,
+                           type = "FuncHillDiv"))
+  expect_error(calcDivProf(sampleData = testSampData,
+                           compDisMat = testCompDis[3:1,3:1],
+                           type = "FuncHillDiv"))
+  expect_error(calcDivProf(sampleData = testSampData,
+                           compDisMat = testCompDis2,
                            type = "FuncHillDiv"))
   expect_message(calcDivProf(sampleData = testSampData,
                              compDisMat = testCompDis,

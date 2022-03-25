@@ -6,6 +6,8 @@ testCompDis <- matrix(data = c(0,0.6,0.7,
                                0.7,0.3,0), nrow = 3)
 colnames(testCompDis) <- c("compA", "compB", "compC")
 rownames(testCompDis) <- c("compA", "compB", "compC")
+testCompDis2 <- testCompDis
+colnames(testCompDis2) <- c("compA", "compB", "compX")
 
 test_that("beta diversity is calculated", {
   expect_equal(nrow(calcBetaDiv(sampleData = testSampData)), 1)
@@ -31,6 +33,12 @@ test_that("wrong/non-logical input is detected and gives error/message", {
                            type = "NotAnIndex"))
   expect_error(calcBetaDiv(sampleData = testSampData,
                            type = "FuncHillDiv"))
+  expect_error(calcBetaDiv(sampleData = testSampData,
+                           compDisMat = testCompDis[3:1,3:1],
+                           type = c("FuncHillDiv")))
+  expect_error(calcBetaDiv(sampleData = testSampData,
+                           compDisMat = testCompDis2,
+                           type = c("FuncHillDiv")))
   expect_message(calcBetaDiv(sampleData = testSampData,
                              compDisMat = testCompDis,
                              type = c("HillDiv")))

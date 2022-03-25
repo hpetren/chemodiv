@@ -73,6 +73,13 @@ calcDivProf <- function(sampleData,
     message("Note that the calculated diveristy profile does not use the
             compound dissimilarity matrix.")
   }
+  if (!is.null(compDisMat)) {
+    if(!(all(colnames(sampleData) == colnames(compDisMat)) &&
+         all(colnames(sampleData) == rownames(compDisMat)))) {
+      stop("The name and order of the columns in sampleData should be identical
+         to the name and order of the columns/rows in compDisMat.")
+    }
+  }
   if(qMin < 0) {
     stop("qMin should be >= 0.")
   }

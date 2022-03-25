@@ -118,5 +118,5 @@ Social Molecular Networking. Nature Biotechnology 34: 828-837.
 \url{https://github.com/hpetren/chemdiv}
 }
 \author{
-Hampus Petren, Tobias G. Kollner, Robert Junker
+Hampus Petren, Tobias G. Kollner, Robert R. Junker
 }
