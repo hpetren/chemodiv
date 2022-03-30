@@ -6,8 +6,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-chemdiv is an R package used to analyse phytochemical data. **The
-package is in development and may not be fully functional.**
+chemdiv is an R package used to analyse phytochemical data.
+
+**The package is in development and may not be fully functional.**
 
 The package can be used to calculate various types of diversities and
 dissimilarities for phytochemical datasets. This includes the use of
@@ -90,4 +91,10 @@ quickly explore their data using standard parameters.
 
 ## Vignette
 
-Under construction.
+An under-construction, preliminary
+[vignette](https://drive.google.com/file/d/1cHOSQgJE2mScIX_pHRm9s00_OQH6Tn5w/view)
+describing an example is available.
+
+## Citation
+
+Under construction
