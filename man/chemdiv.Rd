@@ -22,21 +22,23 @@ See Petren et al. 2022 for a detailed description of the package.
 Two datasets are needed to use the full set of analyses
 included in the package.
 
-The first dataset should contain data on the
-relative proportions of different compounds (columns) in
-different samples (rows). Note that all calculations of diversity, and
-most calculations of dissimilarity, can only be performed on relative,
-rather than absolute, concentrations.
+The first dataset should contain data on the relative proportions
+of different compounds (columns) in different samples (rows).
+See the included dataset \code{\link{minimalSampData}} for a basic example.
+Note that all calculations of diversity, and most calculations
+of dissimilarity, can only be performed on relative, rather than
+absolute, concentrations.
 
 The second dataset should contain, in each of three columns in a data frame,
 the compound name, SMILES and InChIKey IDs of all the compounds
-present in the first dataset. SMILES and InChIKey are chemical identifiers
-that are easily obtained for each compound by searching for it in
-PubChem \url{https://pubchem.ncbi.nlm.nih.gov/}. Here, a search with a
-common name will bring up the compound's record in the database, where
-the (isomeric/canonical) SMILES and InChIKey are included.
-Alternatively, various automated tools such as the
-PubChem Identifier Exchange Service
+present in the first dataset. See the included dataset
+\code{\link{minimalCompData}} for a basic example. SMILES and InChIKey
+are chemical identifiers that are easily obtained for each compound
+by searching for it in PubChem \url{https://pubchem.ncbi.nlm.nih.gov/}.
+Here, a search with a common name will bring up the compound's
+record in the database, where the (isomeric/canonical) SMILES and
+InChIKey are included. Alternatively, various automated tools
+such as the PubChem Identifier Exchange Service
 \url{https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi} or
 The Chemical Translation Service \url{https://cts.fiehnlab.ucdavis.edu/}
 can be used. The user is intentionally required to compile the
@@ -44,6 +46,12 @@ chemical identifiers manually to ensure correctness,
 as lists of compounds very often contain compounds wrongly named,
 wrongly formatted, under various synonyms etc. which prevents easy
 automatic translation of compound names to SMILES and InChIKey.
+Note that SMILES IDs might contain the character combination \code{"\\C"}.
+If SMILES are entered manually directly in R, this is interpreted as an
+unrecognized escape and results in an error. In this case, and extra
+backslash has to be added: \code{"\\\C"}. If the dataset is instead
+imported into R as a csv- or txt-file (recommended), this is done
+automatically and no manual edits has to be done.
 
 The second dataset is primarily used to construct one or more
 dissimilarity matrices with pairwise dissimilarities between chemical

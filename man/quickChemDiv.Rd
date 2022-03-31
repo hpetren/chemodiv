@@ -46,12 +46,14 @@ data using standard parameters.
 }
 \details{
 The function requires sample data as input, and can also include
-compound data. If only sample data is supplied, phytochemical diversity and
-dissimilarity will be calculated as Hill diversity and Bray-Curtis
-dissimilarities, respectively. If sample data and compound data is supplied,
-phytochemical diversity and dissimilarity will be calculated as
-Functional Hill diversity and Generalized UniFrac dissimilarities,
-respectively. See \code{\link{chemdiv}} for details on data formatting.
+compound data. \code{\link{chemDivCheck}} can be used to ensure these
+datasets are correctly formatted, see \code{\link{chemdiv}} for further
+details on data formatting. If only sample data is supplied,
+phytochemical diversity and dissimilarity will be calculated
+as Hill diversity and Bray-Curtis dissimilarities, respectively.
+If sample data and compound data is supplied, phytochemical diversity
+and dissimilarity will be calculated as Functional Hill diversity
+and Generalized UniFrac dissimilarities, respectively.
 This function then uses the following other functions in the package:
 \itemize{
 \item \code{\link{compDis}} is used to calculate compound dissimilarities
