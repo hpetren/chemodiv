@@ -48,7 +48,7 @@ wrongly formatted, under various synonyms etc. which prevents easy
 automatic translation of compound names to SMILES and InChIKey.
 Note that SMILES IDs might contain the character combination \code{"\\C"}.
 If SMILES are entered manually directly in R, this is interpreted as an
-unrecognized escape and results in an error. In this case, and extra
+unrecognized escape and results in an error. In this case, an extra
 backslash has to be added: \code{"\\\C"}. If the dataset is instead
 imported into R as a csv- or txt-file (recommended), this is done
 automatically and no manual edits has to be done.

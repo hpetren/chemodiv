@@ -158,7 +158,8 @@ chemDivPlot <- function(compDisMat = NULL,
 
     # Get mean data in order
     divProfMean1 <- stats::aggregate(divProf,
-                                     by = list(Group = groupData), mean)
+                                     by = list(Group = groupData), mean,
+                                     na.rm = TRUE)
     divProfMean2 <- as.data.frame(t(divProfMean1[, 2:ncol(divProfMean1)]))
     colnames(divProfMean2) <- divProfMean1$Group
     qAll <- seq(from = divProfData$qMin,
@@ -190,7 +191,7 @@ chemDivPlot <- function(compDisMat = NULL,
                          ggplot2::aes(x = .data$q,
                                       y = .data$Diversity,
                                       color = .data$Group),
-                         size = 1.5) +
+                         size = 2) +
       ggplot2::xlab("Diversity order (q)") +
       ggplot2::ylab(divProfData$type) +
       ggplot2::theme(text = ggplot2::element_text(size = 15))
