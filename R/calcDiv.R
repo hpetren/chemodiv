@@ -25,7 +25,13 @@
 #' determines the  sensitivity of the measure to the relative frequencies
 #' of compounds (see above for details). For \code{q = 0}, this is
 #' equal to Functional Attribute Diversity (FAD) which is the sum of all
-#' dissimilarities in the dissimilarity matrix.
+#' dissimilarities in the dissimilarity matrix. FAD divided by
+#' n(n-1), where n is the number of compounds and hence the number of
+#' rows/columns in the dissimilarity matrix, is equal to the
+#' Mean Pairwise Dissimilarity (MPD). This value is the mean of the
+#' pairwise dissimilarities in the compound dissimilarity matrix (excluding
+#' the 0 values in the diagonal), and is therefore in contrast to FAD not
+#' dependent on the number of compounds.
 #' \item \code{RaoQ}. Rao's Q. The perhaps most common measure of
 #' functional diversity. Requires a compound dissimilarity matrix.
 #' Rao's Q represents the average dissimilarity of two randomly selected

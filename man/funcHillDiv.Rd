@@ -7,7 +7,7 @@
 funcHillDiv(data, Dij, q)
 }
 \arguments{
-\item{data}{Dataset. Can be proportional or absolute data.}
+\item{data}{Dataset. Single row in dataframe. Proportional or absolute data.}
 
 \item{Dij}{Dissimilarity matrix.}
 

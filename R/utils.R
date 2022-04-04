@@ -4,7 +4,7 @@
 #' 4b and 6b in Chiu & Chao 2014 Plos One.
 #' Note that this is done for one sample (row).
 #'
-#' @param data Dataset. Can be proportional or absolute data.
+#' @param data Dataset. Single row in dataframe. Proportional or absolute data.
 #' @param Dij Dissimilarity matrix.
 #' @param q Diversity order.
 #'
@@ -51,7 +51,7 @@ funcHillDiv <- function(data, Dij, q) {
 #' Function to calculate Rao's Q.
 #' Note that this is done for one sample (row).
 #'
-#' @param data Dataset. Can be proportional or absolute data.
+#' @param data Dataset. Single row in dataframe. Proportional or absolute data.
 #' @param Dij Dissimilarity matrix.
 #'
 #' @return Value of Rao's Q.
