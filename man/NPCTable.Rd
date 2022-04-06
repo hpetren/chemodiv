@@ -2,12 +2,13 @@
 % Please edit documentation in R/NPCTable.R
 \name{NPCTable}
 \alias{NPCTable}
-\title{NPClassifier Data Table}
+\title{Generate NPClassifier classification}
 \usage{
 NPCTable(compoundData)
 }
 \arguments{
-\item{compoundData}{Data frame with the chemical compounds of interest.
+\item{compoundData}{Data frame with the chemical compounds of interest,
+usually the compounds found in the sample dataset.
 Should include a column named "compound" with common names of
 the compounds and a column named "smiles" with SMILES IDs of the compounds.}
 }
@@ -17,16 +18,18 @@ as pathway, superclass and class. Note that compounds may be classified
 in more than one group, or no group, at each level of classification.
 }
 \description{
-This function classifies compounds with NPClassifier (Kim et al. 2021),
-and puts the results in a dataframe containing the pathway,
-superclass and class for each compound.
+Function to classify compounds with \emph{NPClassifier}, and put the results in
+a data frame containing the pathway, superclass and class for each compound.
 }
 \details{
-The function classifies natural products (phytochemical compounds)
-into groups largely corresponding to biosynthetic pathways,
-at three hierarchical levels: pathway, superclass
-and class. This is done using the NPClassifier tool (Kim et al. 2021).
-Connects to \url{https://npclassifier.ucsd.edu/}.
+\emph{NPClassifier} (Kim et al. 2021) is a deep-learning tool that automatically
+classifies natural products (i.e. phytochemical compounds) into a
+hierarchical classification of three levels: pathway, superclass and class.
+This classification largely corresponds to the biosynthetic groups/pathways
+the compounds are produced in. The \code{NPCTable} function
+conveniently performs this classification directly in R on the
+compounds in \code{compoundData}, by accessing the
+tool at \url{https://npclassifier.ucsd.edu/}.
 }
 \examples{
 data(minimalCompData)

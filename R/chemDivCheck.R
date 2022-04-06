@@ -1,25 +1,25 @@
 #' Check data formatting
 #'
-#' This function checks so that the datasets used by functions in
-#' the package are correctly formatted.
+#' Function to check that the datasets used by other functions in
+#' the *chemdiv* package are correctly formatted.
 #'
 #' The function performs a number of checks on the two main datasets used
 #' as input data, to make sure datasets are formatted in a way suitable
-#' for the other functions in the package. This should make it easier for
-#' users to correctly format datasets before starting with analyses.
+#' for the other functions in the package. This should facilitate for
+#' users to correctly construct datasets before starting with analyses.
 #'
 #' Two datasets are needed to use the full set of analyses included in
 #' the package, and can be checked for formatting issues.
 #' The first dataset should contain data on the proportions
 #' of different compounds (columns) in different samples (rows).
 #' Note that all calculations of diversity, and most calculations of
-#' dissimilarity, can only be performed on relative, rather than absolute,
-#' concentrations. The second dataset should contain, in each of three
+#' dissimilarity, are only performed on relative, rather than absolute,
+#' values. The second dataset should contain, in each of three
 #' columns in a data frame, the compound name, SMILES and InChIKey IDs of
 #' all the compounds present in the first dataset. See
 #' \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
-#' Avoid including Greek letters or other special characters in
-#' the compound names column.
+#' Avoid including Greek letters or other special characters in the
+#' compound names.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
@@ -29,7 +29,7 @@
 #' and a column named "inchikey" with the InChIKey IDs for the compounds.
 #'
 #' @return One or several messages pointing out problems with data formatting,
-#' or a message informing that the datasets are correctly formatted.
+#' or a message informing that the datasets appear to be correctly formatted.
 #'
 #' @export
 #'

@@ -21,19 +21,19 @@ the compounds, a column named "smiles" with SMILES IDs of the compounds,
 and a column named "inchikey" with the InChIKey IDs for the compounds.
 See \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.}
 
-\item{groupData}{Grouping data. Should be either a vector, or a data frame
-with a single column.}
+\item{groupData}{Grouping data (e.g. population, species etc.).
+Should be either a vector, or a data frame with a single column.}
 
 \item{outputType}{Type of output that should be returned: either
 \code{data} to output a list with different types of chemodiversity data,
 or \code{plots} to instead produce standard plots of this data.}
 }
 \value{
-Various types of chemodiversity measures, either as elements in
+Different types of chemodiversity measures, either as elements in
 a list or as separate plots. If \code{outputType = "data"}, function returns
 a compound dissimilarity matrix (if compound data was supplied),
-a data frame with (Functional) Hill Diversity at q = 1,
-a data frame with a (Functional) Hill Diversity profile for q = 0-3,
+a data frame with (Functional) Hill Diversity at \emph{q} = 1,
+a data frame with a (Functional) Hill Diversity profile for \emph{q} = 0-3,
 and a sample dissimilarity matrix. If \code{outputType = "plots"},
 these data sets are plotted as a dendrogram (if compound data was supplied),
 a boxplot, a diversity profile plot and an NMDS plot, respectively.
@@ -50,10 +50,10 @@ compound data. \code{\link{chemDivCheck}} can be used to ensure these
 datasets are correctly formatted, see \code{\link{chemdiv}} for further
 details on data formatting. If only sample data is supplied,
 phytochemical diversity and dissimilarity will be calculated
-as Hill diversity and Bray-Curtis dissimilarities, respectively.
+as Hill diversity and Bray-Curtis dissimilarity, respectively.
 If sample data and compound data is supplied, phytochemical diversity
 and dissimilarity will be calculated as Functional Hill diversity
-and Generalized UniFrac dissimilarities, respectively.
+and Generalized UniFrac dissimilarity, respectively.
 This function then uses the following other functions in the package:
 \itemize{
 \item \code{\link{compDis}} is used to calculate compound dissimilarities
@@ -61,9 +61,9 @@ using PubChem Fingerprints, if compound data is supplied.
 \item \code{\link{calcDiv}} is used to calculate (Functional) Hill
 Diversity for q = 1.
 \item \code{\link{calcDivProf}} is used to calculate a diversity profile
-with (Functional) Hill Diversity for q = 0-3.
-\item \code{\link{sampleDis}} is used to calculate Bray-Curtis/Generalized
-UniFrac dissimilarities between samples.
+with (Functional) Hill Diversity for \emph{q} = 0-3.
+\item \code{\link{sampleDis}} is used to calculate Bray-Curtis or
+Generalized UniFrac dissimilarities between samples.
 \item \code{\link{chemDivPlot}} is used to create different
 chemodiversity plots if requested.
 }
@@ -71,8 +71,8 @@ chemodiversity plots if requested.
 \code{quickChemDiv} is designed to provide an easy way to visualize
 the most central measures of phytochemical diversity. It uses
 default parameters to do so, which should be reasonable in most cases.
-However, for detailed analyses we recommend using the separate
-functions to allow for full control of function parameters and output.
+However, for detailed analyses it is recommended to use the separate
+functions to allow for full control of function input, arguments and output.
 }
 \examples{
 data(minimalCompData)

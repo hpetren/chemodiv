@@ -1,8 +1,8 @@
 #' Calculate sample dissimilarities
 #'
 #' Function to calculate dissimilarities between samples.
-#' This is either Bray-Curtis dissimilarities and/or Generalized UniFrac
-#' dissimilarities.
+#' Either Bray-Curtis dissimilarities and/or Generalized UniFrac
+#' dissimilarities are calculated.
 #'
 #' The function calculates a dissimilarity matrix for all the samples
 #' in \code{sampleData}, for the given dissimilarity index/indices.
@@ -17,16 +17,16 @@
 #' use the compound dissimilarity matrix for the sample dissimilarity
 #' calculations. For the calculation of Generalized UniFrac dissimilarities,
 #' the compound dissimilarity matrix is transformed into a dendrogram using
-#' hierarchical clustering (with the UPGMA method). Calculation of
+#' hierarchical clustering (with the UPGMA method). Calculations of
 #' UniFrac dissimilarities quantifies the fraction of the total branch length
 #' of the dendrogram that leads to compounds present in either sample,
 #' but not both. The (weighted) Generalized UniFrac dissimilarities
 #' implemented here additionally take compound abundances into account.
 #' In this way, both the relative proportions of compounds and
 #' the biosynthetic/structural properties of the compounds are accounted for
-#' in the calculations of sample dissimilarities, such that , such that
-#' two samples containing more biosynthetically/structurally different
-#' compounds have a higher dissimilarity. As with Bray-Curtis
+#' in the calculations of sample dissimilarities, such that two
+#' samples containing more biosynthetically/structurally different
+#' compounds have an increased dissimilarity. As with Bray-Curtis
 #' dissimilarities, Generalized UniFrac dissimilarities range in value from
 #' 0 to 1.
 #'
@@ -36,7 +36,7 @@
 #' \code{\link{compDis}}. If this is supplied, Generalized UniFrac
 #' dissimilarities can be calculated.
 #' @param type Type of sample dissimilarity to be calculated. This is
-#' Bray-Curtis dissimilarity, \code{type = "BrayCurtis"} and/or
+#' Bray-Curtis dissimilarity, \code{type = "BrayCurtis"}, and/or
 #' Generalized UniFrac dissimilarity, \code{type = "GenUniFrac"}.
 #' @param alpha Parameter used in calculations of Generalized UniFracs
 #' dissimilarities. alpha can be set between 0 and 1.

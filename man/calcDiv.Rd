@@ -15,11 +15,11 @@ compound (column) in every sample (row).}
 Functional Hill Diversity and Rao's Q.}
 
 \item{type}{Type(s) of diversity or evenness to calculate. Any of
-\code{"HillDiv", "FuncHillDiv", "Shannon", "Simpson", "PielouEven",
-"HillEven", "RaoQ"}.}
+\code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "RaoQ",
+"PielouEven", "HillEven"}.}
 
 \item{q}{Diversity order to use for Hill diversity, Functional Hill
-Diversity and Hill Evenness. q should be equal to or larger than zero.
+Diversity and Hill Evenness. \emph{q} should be equal to or larger than zero.
 This parameter determines the sensitivity of the (Functional) Hill Diversity
 measure to the relative frequencies of compounds. Commonly set to 0, 1 or 2,
 although any value > 0 may be used. For \code{q = 0} compound proportions
@@ -37,14 +37,15 @@ Shannon's diversity, Simpson diversity, Rao's Q, Pielou's evenness and
 Hill evenness.
 }
 \details{
-The function can calculate the following values:
+The function calculates diversity and/or evenness for each sample
+in \code{sampleData}. It can calculate the following indices:
 \itemize{
 \item \code{Shannon}. Shannon's Diversity.
 \item \code{Simpson}. Simpson Diversity, often referred to as
 the Inverse Simpson Index.
 \item \code{HillDiv}. Hill Diversity. Equation 4a/4b in Chao et al. 2014.
 Also referred to as the Hill number or the effective number of
-species (here compounds). The parameter q determines the sensitivity
+species (here compounds). The parameter \emph{q} determines the sensitivity
 of the measure to the relative frequencies of
 compounds (see above for details). For \code{q = 0}, this equals the
 number of compounds in a sample. For \code{q = 1}, this equals the
@@ -53,21 +54,24 @@ Simpson Diversity.
 \item \code{FuncHillDiv}. Functional Hill Diversity. Equation 4b/6b in
 Chiu & Chao 2014. Requires a compound dissimilarity matrix.
 Functional Hill Diversity quantifies the effective
-total dissimilarity between compounds in the sample. The parameter q
+total dissimilarity between compounds in the sample. The parameter \emph{q}
 determines the  sensitivity of the measure to the relative frequencies
-of compounds (see above for details). For \code{q = 0}, this is
+of compounds (see above for details). For \code{q = 1}, this is a measure
+sensitive to compound richness, evenness and dissimilarity, and is therefore
+the most comprehensive measure of diversity. For \code{q = 0}, this is
 equal to Functional Attribute Diversity (FAD) which is the sum of all
 dissimilarities in the dissimilarity matrix. FAD divided by
-n(n-1), where n is the number of compounds and hence the number of
+\emph{n(n-1)}, where \emph{n} is the number of compounds and hence the number of
 rows/columns in the dissimilarity matrix, is equal to the
 Mean Pairwise Dissimilarity (MPD). This value is the mean of the
 pairwise dissimilarities in the compound dissimilarity matrix (excluding
 the 0 values in the diagonal), and is therefore in contrast to FAD not
 dependent on the number of compounds.
-\item \code{RaoQ}. Rao's Q. The perhaps most common measure of
-functional diversity. Requires a compound dissimilarity matrix.
-Rao's Q represents the average dissimilarity of two randomly selected
-(weighed by their proportions) compounds in the sample.
+\item \code{RaoQ}. Rao's quadratic entropy index Q.
+The perhaps most common measure of functional diversity.
+Requires a compound dissimilarity matrix. Rao's Q represents the
+average dissimilarity of two randomly selected (weighed by
+their proportions) compounds in the sample.
 \item \code{PielouEven}. Pielou's Evenness, also referred to as
 Shannon's equitability. This is perhaps the most common evenness
 measure. Equal to the Shannon's Diversity divided by the natural
@@ -77,7 +81,7 @@ Shannon's diversity where all compounds are equally abundant. Therefore,
 this is a relative measure with a minimum value of 0 and a maximum value
 of 1. This measure of evenness is not replication invariant.
 \item \code{HillEven}. Hill Evenness, as defined by equation 8 in
-Tuomisto 2012 . This is equal to the Hill Diversity, at a given value of q,
+Tuomisto 2012. This is equal to the Hill Diversity, at a given value of \emph{q},
 divided by the number of compounds, and therefore
 has a minimum value of 1 / number of compounds and maximum value of 1.
 This measure of evenness is replication invariant. This measure can be

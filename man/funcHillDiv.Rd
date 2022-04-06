@@ -14,7 +14,7 @@ funcHillDiv(data, Dij, q)
 \item{q}{Diversity order.}
 }
 \value{
-Functional Hill diversity (FD).
+Functional Hill diversity (FHD).
 }
 \description{
 Function to calculate Functional Hill diversity, as in equations

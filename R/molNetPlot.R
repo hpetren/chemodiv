@@ -1,33 +1,34 @@
-#' Plot molecular network
+#' Plot molecular network(s)
 #'
 #' Function to conveniently create a basic plot of the molecular network
 #' created by the \code{\link{molNet}} function. Molecular networks can be
 #' used to illustrate the biosynthetic/structural similarity of
 #' phytochemical compounds in a sample, while simultaneously visualizing
-#' their relative concentrations. Nodes are compounds,
-#' with node size or node colour representing proportional concentration
-#' of the compounds. Edge widths represent compound similarity.
+#' their relative concentrations. In the network, nodes are compounds,
+#' with node sizes or node colours representing the relative concentrations
+#' of compounds. Edges connects nodes, with edge widths representing
+#' compound similarity.
 #'
-#' The network object from \code{\link{molNet}} and sample data frame have to
-#' be supplied. In addition, groupData and/or an \code{\link{NPCTable}} can
-#' be supplied. If groupData is supplied, one network will be created
-#' for each group. If an NPCTable is supplied, which is recommended,
-#' node colours will represent NPC pathways, and node size the proportional
+#' The network object from \code{\link{molNet}} and \code{sampleData} have to
+#' be supplied. In addition, \code{groupData} and/or an \code{\link{NPCTable}}
+#' can be supplied. If \code{groupData} is supplied, one network will be
+#' created for each group. If an NPCTable is supplied, which is recommended,
+#' node colours will represent NPC pathways, and node sizes the relative
 #' concentration of the compounds. Edge widths represent compound similarity,
-#' and only edges with similarity values above the \code{\link{molNet}}
-#' function's cut-off will be plotted.
+#' and only edges with similarity values above the \code{cutOff} value
+#' in the \code{\link{molNet}} function will be plotted.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
-#' @param groupData Grouping data. If supplied, a separate network will be
-#' created for each group. Should be either a vector, or a data frame
-#' with a single column.
+#' @param groupData Grouping data (e.g. population, species etc.).
+#' If supplied, a separate network will be created for each group.
+#' Should be either a vector, or a data frame with a single column.
 #' @param networkObject A network object, as created by the
 #' \code{\link{molNet}} function. Note that this is only the network object,
 #' which is one of the elements in the list outputted by \code{\link{molNet}}.
-#' The network is extracted as molNetOutput$networkObject.
-#' @param npcTable It is recommended but optional to supply an
-#' \code{\link{NPCTable}} This will result in network nodes being coloured
+#' The network is extracted as \code{molNetOutput$networkObject}.
+#' @param npcTable It is optional but recommended to supply an
+#' \code{\link{NPCTable}}. This will result in network nodes being coloured
 #' by their NPC pathway classification.
 #' @param plotNames Indicates if compounds names should be included
 #' in the molecular network plot.
@@ -37,7 +38,7 @@
 #' pleasing network. Another useful option is \code{"circle"}, which puts all
 #' nodes in a circle, for easier comparisons between different networks.
 #'
-#' @return Molecular network(s) created using \code{ggraph}.
+#' @return A plot with one or more molecular networks.
 #'
 #' @export
 #'

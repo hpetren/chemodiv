@@ -18,26 +18,27 @@ Functional Hill beta-diversity.}
 and/or \code{"FuncHillDiv"}.}
 
 \item{q}{Diversity order to use for the calculation of beta-diversity.
-See \code{\link{calcDiv}} for further details on q.}
+See \code{\link{calcDiv}} for further details on \emph{q}.}
 }
 \value{
-Data frame with type of Hill beta-diversity calculated, q,
-gamma-diversity, alpha-diversity and beta-diversity.
+Data frame with type of Hill beta diversity calculated, \emph{q}, and
+values for gamma diversity, alpha diversity and beta diversity.
 }
 \description{
-Function to calculate beta diversity in the
-Hill diversity framework. This can be calculated as normal
-Hill beta-diversity or Functional Hill beta-diversity.
+Function to calculate beta diversity in the Hill diversity framework.
+This can be calculated as Hill beta diversity or
+Functional Hill beta diversity.
 }
 \details{
-The function calculates a single beta-diversity value for the supplied
-sample data. This is calculated as \emph{beta = gamma / alpha}. Gamma-diversity
-represents the diversity of the pooled data set, alpha-diversity represents
-the mean diversity across individual samples, and beta-diversity represents
-turnover or variability among samples. With \code{type = "HillDiv"} and
-\code{q = 0} the calculated beta-diversity is equal to the well-known and
-most simple measure of beta-diversity introduced by Whittaker 1960, where
-\emph{beta = gamma / alpha}, based only on the number of species (here compounds).
+The function calculates a single beta diversity value for the supplied
+\code{sampleData}. This is calculated as \emph{beta = gamma / alpha}. Gamma
+diversity represents the diversity of the pooled data set, alpha diversity
+represents the mean diversity across individual samples, and
+beta diversity represents turnover or variability among samples.
+With \code{type = "HillDiv"} and \code{q = 0} the calculated beta diversity
+is equal to the well-known and most simple measure of beta diversity
+introduced by Whittaker 1960, where \emph{beta = gamma / alpha}, based only
+on the number of species (here compounds).
 }
 \examples{
 data(minimalSampData)
@@ -63,4 +64,7 @@ Annual Review of Ecology, Evolution, and Systematics 45: 297-324.
 
 Jost L. 2007. Partitioning diversity into independent alpha and
 beta components. Ecology 88: 2427-2439.
+
+Whittaker RH. 1960. Vegetation of the Siskiyou Mountains, Oregon
+and California. Ecological Monographs 30: 279-338.
 }

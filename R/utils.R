@@ -8,7 +8,7 @@
 #' @param Dij Dissimilarity matrix.
 #' @param q Diversity order.
 #'
-#' @return Functional Hill diversity (FD).
+#' @return Functional Hill diversity (FHD).
 funcHillDiv <- function(data, Dij, q) {
 
   # Rao's Q
@@ -21,7 +21,7 @@ funcHillDiv <- function(data, Dij, q) {
 
   if(length(p) > 1) { # If more than one compound
 
-    # FD for q != 1
+    # FHD for q != 1
     if (q != 1) {
       for (i in 1:length(p)) {
         for (j in 1:length(p)) {
@@ -30,7 +30,7 @@ funcHillDiv <- function(data, Dij, q) {
       }
       FD <- temp^(1 / (1 - q))
 
-    } else { # FD for q == 1
+    } else { # FHD for q == 1
       for (i in 1:length(p)) {
         for (j in 1:length(p)) {
           temp <- temp + dij[i, j] * p[i] * p[j] / Q * log(p[i] * p[j] / Q)
@@ -40,7 +40,7 @@ funcHillDiv <- function(data, Dij, q) {
     }
 
   } else {
-    # FD is mathematically not defined with one compound, so setting to NA
+    # FHD is mathematically not defined with one compound, so setting to NA
     FD <- NA
   }
   return(FD)

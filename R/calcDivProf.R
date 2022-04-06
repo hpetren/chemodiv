@@ -1,19 +1,22 @@
 #' Calculate a diversity profile
 #'
 #' Function to calculate a diversity profile, i.e. calculate Hill diversity
-#' or Functional Hill Diversity for a range of q values.
+#' or Functional Hill Diversity for a range of *q* values.
 #'
-#' A diversity profile is a calculation of Hill Diversity or Functional Hill
-#' Diversity at different values of q. This function performs the calculations,
-#' while \code{\link{chemDivPlot}} can be used to conveniently create the
-#' diversity profile plot, where Hill Diversity is plotted as a function of q
-#' within the chosen range. The shape of the diversity profile curve
-#' reflects  the unevenness of compound proportions in the sample. For a
-#' perfectly even sample the curve is flat. The more uneven the compound
-#' proportions are, the more steep is the decline of the curve.
-#' A common range, used as default, of q values is between \code{qMin = 0} and
-#' \code{qMax = 3} as diversity should change little beyond \code{qMax = 3}.
-#' See \code{\link{calcDiv}} for further details on q.
+#' The function calculates a diversity profile for each sample
+#' in \code{sampleData}. A diversity profile is a calculation of
+#' Hill Diversity or Functional Hill Diversity for a range of
+#' different values of *q*. This function performs the calculations,
+#' while \code{\link{chemDivPlot}} can be used to conveniently
+#' create the diversity profile plot, where Hill Diversity is
+#' plotted as a function of *q* within the chosen range.
+#' The shape of the diversity profile curve reflects the evenness
+#' of compound proportions in the sample. For a perfectly even sample
+#' the curve is flat. The more uneven the compound proportions are,
+#' the more steep is the decline of the curve. A common range,
+#' used as default, of *q* values is between \code{qMin = 0} and
+#' \code{qMax = 3}, as diversity should change little beyond \code{qMax = 3}.
+#' See \code{\link{calcDiv}} for further details on *q*.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
@@ -22,13 +25,13 @@
 #' Functional Hill diversity.
 #' @param type Type of Hill Diversity to calculate for the diversity profile.
 #' \code{"HillDiv"} or \code{"FuncHillDiv"}.
-#' @param qMin Minimum value of q.
-#' @param qMax Maximum value of q.
-#' @param step Increment by which q will be calculated between \code{qMin}
+#' @param qMin Minimum value of *q*.
+#' @param qMax Maximum value of *q*.
+#' @param step Increment by which *q* will be calculated between \code{qMin}
 #' and \code{qMax}.
 #'
 #' @return List with a diversity profile data frame with samples as rows
-#' and the Hill diversity or Functional Hill diversity for different q values
+#' and the Hill diversity or Functional Hill diversity for different *q* values
 #' as columns; and values for type, \code{qMin}, \code{qMax} and \code{step}.
 #'
 #' @export
