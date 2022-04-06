@@ -1,7 +1,7 @@
 #' Quickly calculate or plot chemodiversity
 #'
-#' This function is a shortcut that makes use of many of the other functions in
-#' the package. In one simple step chemodiversity is calculated, and if
+#' This function is a shortcut that makes use of many of the other functions
+#' in the package. In one simple step chemodiversity is calculated, and if
 #' requested also visualized, for users wanting to quickly explore their
 #' data using standard parameters.
 #'
@@ -28,8 +28,8 @@
 #' chemodiversity plots if requested.
 #' }
 #'
-#' \code{quickChemDiv} is designed to provide an easy way to visualize
-#' the most central measures of phytochemical diversity. It uses
+#' \code{quickChemDiv} is designed to provide an easy way to calculate and
+#' visualize the most central measures of phytochemical diversity. It uses
 #' default parameters to do so, which should be reasonable in most cases.
 #' However, for detailed analyses it is recommended to use the separate
 #' functions to allow for full control of function input, arguments and output.

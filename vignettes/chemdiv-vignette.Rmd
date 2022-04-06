@@ -23,15 +23,16 @@ knitr::opts_chunk$set(
 a number of functions that makes it straightforward to quantify and
 visualize phytochemical diversity and dissimilarity for any type of
 phytochemical samples, such as herbivore defence compounds, volatiles 
-or similar. Importantly, calculations of diversity and
-dissimilarity can incorporate biosynthetic and/or structural properties 
-of the phytochemical compounds, resulting in a more complete quantification 
-of diversity and dissimilarity.
+or similar. Importantly, calculations of diversity and dissimilarity can 
+incorporate biosynthetic and/or structural properties of the phytochemical 
+compounds, resulting in more comprehensive quantifications of 
+diversity and dissimilarity.
 
 *chemdiv* is currently available on GitHub: <https://github.com/hpetren/chemdiv>
 
 This introduction serves as a tutorial explaining the main intended use of 
-all the functions in the package.
+all the functions in the package. A complete description of the package will
+be available in Petrén et al. 2022.
 
 
 ## Setup
@@ -66,14 +67,14 @@ Two separate datasets are needed to use the full set of analyses in
 the *chemdiv* package. 
 
 The first dataset, which we call the *sample* dataset, should be a 
-data frame containing data on the relative concentration (proportions) of 
+data frame containing data on the relative concentrations (proportions) of 
 different compounds (columns) in different samples (rows):
 ```{r}
 data("alpinaSampData")
 
 head(alpinaSampData)[,1:5]
 ```
-The dataset contains the proportional concentration of 15 phytochemical 
+The dataset contains the relative concentration of 15 phytochemical 
 compounds in different samples.
 
 The second dataset, which we call the *compound* dataset, should be a 
@@ -106,7 +107,8 @@ where all or most compounds in the samples have been confidently identified.
 
 When both datasets are prepared, we can use the function `chemDivCheck()` 
 to make sure that the *sample* dataset and the *compound* dataset 
-are formatted correctly, to be used by the other functions in the package:
+are formatted correctly, so that they can be used by the other functions
+in the package:
 ```{r}
 chemDivCheck(compoundData = alpinaCompData, sampleData = alpinaSampData)
 ```
@@ -139,12 +141,12 @@ largely corresponding to biosynthetic pathways:
 ```{r}
 alpinaNPC <- NPCTable(compoundData = alpinaCompData)
 
-alpinaNPC[1,] # Classification of first compound in dataset
+alpinaNPC[1,] # Classification of the first compound in dataset
 ```
 Here, the first compound in the list, *(Z)-beta-Ocimene*, is classified as
 Terpenoids > Monoterpenoids > Acyclic monoterpenoids.
 The classification of the compounds is put into a data frame and can 
-subsequently be used by other *chemdiv* functions.
+subsequently be used by other functions.
 
 ***
 
@@ -153,12 +155,12 @@ pairwise Jaccard dissimilarities between them. The dissimilarity
 calculations can be based on the biosynthesis and/or structure 
 of the compounds. `type = "NPClassifier"` calculates dissimilarities 
 based on the classification made by NPClassifier, which largely corresponds
-to biosynthetic pathways.
-`type = "PubChemFingerprint"` and `type = "fMCS"` are two similar methods
-that calculates dissimilarities based on the structure of the compounds.
-In this case, molecules that have similar substructures/features will have
-a low dissimilarity, while molecules not having similar substructures/features
-will have a high dissimilarity.
+to biosynthetic pathways. `type = "PubChemFingerprint"` and
+`type = "fMCS"` are two similar methods that calculate dissimilarities 
+based on the structure of the compounds. In this case, molecules that
+have similar substructures/features will have a low dissimilarity,
+while molecules not having similar substructures/features will have
+a high dissimilarity.
 
 We calculate compound dissimilarities with `type = "PubChemFingerprint"`.
 ```{r, message = FALSE}
@@ -181,7 +183,7 @@ Calculations of phytochemical diversity is the core of the *chemdiv* package.
 Phytochemical diversity can be calculated for the *sample* dataset 
 with functions `calcDiv()`, `calcBetaDiv()` and `calcDivProf()`.
 
-`calcDiv()` calculates alpha-diversity for each sample (row) in the 
+`calcDiv()` calculates alpha diversity for each sample (row) in the 
 *sample* dataset. The function can calculate a 
 number of different diversity and evenness indices, depending on
 what `type` is used as input. The default and recommended way of calculating 
@@ -190,7 +192,7 @@ a number of advantages, including the use of the parameter *q* which
 controls the sensitivity of the measure to the relative concentrations
 of compounds. This can be done as "normal" Hill diversity, which depends
 on compound richness and evenness, and as functional Hill diversity, 
-which additionally considers compound  dissimilarity (Chiu & Chao 2014),
+which additionally considers compound dissimilarity (Chiu & Chao 2014),
 utilizing the compound dissimilarity matrix from `compDis()`. This means that,
 for calculations of functional Hill diversity, a set of compounds that are
 biosynthetically/structurally different from each other is more diverse
@@ -213,7 +215,7 @@ The function outputs a data frame with samples as rows and the selected
 
 `calcDivProf()` can be used to calculate Hill diversity for a range of 
 q-values simultaneously, generating a so called diversity profile. This 
-allows for a more nuanced exploration of diversity.
+allows for a more nuanced exploration of the diversity.
 
 We calculate a diversity profile for functional Hill diversity, using the
 default range of *q = 0* to *q = 3*. 
@@ -230,8 +232,8 @@ values of *q* as columns.
 
 ***
 
-`calcBetaDiv()` calculates beta-diversity for a set of samples, in the
-Hill number framework. The function calculates a single beta-diversity value 
+`calcBetaDiv()` calculates beta diversity for a set of samples, in the
+Hill numbers framework. The function calculates a single beta-diversity value 
 for the supplied sample data. This is calculated as *beta = gamma / alpha*,
 where gamma is the diversity of the pooled data set and alpha represents 
 the mean diversity of individual samples.
@@ -242,6 +244,8 @@ alpinaBetaDiv <- calcBetaDiv(sampleData = alpinaSampData,
 
 alpinaBetaDiv
 ```
+The function outputs a data frame with type of beta diversity calculated, *q*,
+and values for gamma diversity, mean alpha diversity and beta diversity.
 
 
 ### Sample dissimilarities
@@ -272,7 +276,6 @@ Function `molNet()` uses a matrix generated by the `compDis()` function to
 create a molecular network of the phytochemical compounds, and calculates 
 some properties of the network. Such networks are useful to
 visualize relationships between compound similarities and abundances.
-
 
 We create a molecular network based on the compound dissimilarity matrix.
 We can also include the the NPClassifier classification, where the "pathway"
@@ -305,7 +308,6 @@ molNetPlot(sampleData = alpinaSampData,
            npcTable = alpinaNPC,
            plotNames = TRUE)
 ```
-
 Nodes represent individual compounds. They are coloured by their 
 "pathway" classification by NPClassifier. Node size corresponds to the mean
 proportional concentration of the compounds in the samples. Edge widths 
@@ -320,13 +322,13 @@ different to each other.
 ***
 
 `chemDivPlot()` can be used to conveniently create basic plots of the 
-different types of diversity and dissimilarity measurements created by 
+different types of diversity and dissimilarity measurements calculated by 
 the functions above. Four types of plots can be created, in any combination.
 With argument `compDisMat` a dendrogram visualizing compound dissimilarities is 
 created. With argument `divData`, diversity/evenness values are visualized 
 with boxplots. With argument `divProfData` a diversity profile will be created. 
 With argument `sampleDisMat` sample dissimilarities will be visualized as an 
-NMDS plot. Finally, grouping data can be supplied with argument `groupData`.
+NMDS plot. Grouping data can be supplied with argument `groupData`.
 ```{r, fig.width = 12, fig.height = 8, out.width = "95%"}
 chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
             divData = alpinaDiv,
@@ -334,13 +336,12 @@ chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
             sampleDisMat = alpinaSampleDis$GenUniFrac,
             groupData = alpinaPopData)
 ```
-
 The output consists of the selected plots. The dendrogram visualizes 
 similarities between compounds in a way complementary to the molecular
 network above, with the three terpenoids having a high dissimilarity to 
 the other compounds. The boxplot indicates that the functional Hill diversity
 of the floral scent compounds is highest in the G1 population. Further
-analyses can examine more exactly what components of diversity is higher in 
+analyses can examine more exactly what components of diversity are higher in 
 this population. The diversity profile demonstrates how at *q = 1* 
 (shown also in boxplot) diversity is highest for population G1, but at *q = 0*,
 where compound proportions are not taken into account, diversity is 
@@ -355,7 +356,7 @@ and between groups of samples that represent different populations, species
 etc. Importantly, testing for associations between measures of 
 diversity/dissimilarity and variables such as herbivore performance, 
 pollinator visitation rates and plant fitness may provide insights on the 
-effects of phytochemical variation in plants on various ecological
+effects of phytochemical variation on plants for various ecological
 interactions and evolutionary processes.
 
 
@@ -365,7 +366,6 @@ The function `quickChemDiv()` uses many of the above functions to in one
 simple step calculate and visualize chemodiversity for users wanting to 
 quickly explore their data using standard parameters. This can be used
 to generate the same four types of plots as above.
-
 ```{r, eval = FALSE}
 quickChemDiv(compoundData = alpinaCompData,
              sampleData = alpinaSampData,
@@ -403,3 +403,5 @@ Petrén, H., P. Toräng, J. Ågren, and M. Friberg. 2021.
 Evolution of floral scent in relation to self-incompatibility and 
 capacity for autonomous self-pollination in the perennial herb *Arabis alpina*. 
 Annals of Botany 127:737–747.
+
+Petren et al. 2022. Unpublished manuscript.

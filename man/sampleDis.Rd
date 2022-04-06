@@ -58,9 +58,10 @@ In this way, both the relative proportions of compounds and
 the biosynthetic/structural properties of the compounds are accounted for
 in the calculations of sample dissimilarities, such that two
 samples containing more biosynthetically/structurally different
-compounds have an increased dissimilarity. As with Bray-Curtis
-dissimilarities, Generalized UniFrac dissimilarities range in value from
-0 to 1.
+compounds have a higher pairwise dissimilarity than two samples
+containing more biosynthetically/structurally similar compounds.
+As with Bray-Curtis dissimilarities, Generalized UniFrac dissimilarities
+range in value from 0 to 1.
 }
 \examples{
 data(minimalSampData)

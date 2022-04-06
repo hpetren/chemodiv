@@ -25,7 +25,7 @@
 #' See \code{\link{calcDiv}} for further details on *q*.
 #'
 #' @return Data frame with type of Hill beta diversity calculated, *q*, and
-#' values for gamma diversity, alpha diversity and beta diversity.
+#' values for gamma diversity, mean alpha diversity and beta diversity.
 #'
 #' @export
 #'

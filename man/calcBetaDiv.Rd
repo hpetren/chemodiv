@@ -22,7 +22,7 @@ See \code{\link{calcDiv}} for further details on \emph{q}.}
 }
 \value{
 Data frame with type of Hill beta diversity calculated, \emph{q}, and
-values for gamma diversity, alpha diversity and beta diversity.
+values for gamma diversity, mean alpha diversity and beta diversity.
 }
 \description{
 Function to calculate beta diversity in the Hill diversity framework.

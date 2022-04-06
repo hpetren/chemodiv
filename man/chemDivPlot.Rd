@@ -37,7 +37,7 @@ The specified chemodiversity plots.
 }
 \description{
 Function to conveniently create basic plots of the different types of
-chemodiversity measurements created by functions in the package.
+chemodiversity measurements calculated by functions in the package.
 }
 \details{
 The function can create four different types of plots,
