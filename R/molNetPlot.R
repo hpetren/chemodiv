@@ -96,7 +96,9 @@ molNetPlot <- function(sampleData,
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
-                     legend.text = ggplot2::element_text(size = 14))
+                     legend.text = ggplot2::element_text(size = 14),
+                     panel.background = ggplot2::element_blank(),
+                     legend.key = ggplot2::element_blank())
 
     networkList <- list(p1)
 
@@ -113,7 +115,9 @@ molNetPlot <- function(sampleData,
       ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
       ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
-                     legend.text = ggplot2::element_text(size = 14))
+                     legend.text = ggplot2::element_text(size = 14),
+                     panel.background = ggplot2::element_blank(),
+                     legend.key = ggplot2::element_blank())
 
     networkList <- list(p1)
 
@@ -130,7 +134,9 @@ molNetPlot <- function(sampleData,
       ggplot2::scale_size(range = c(8, 16)) +
       ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
-                     legend.text = ggplot2::element_text(size = 14))
+                     legend.text = ggplot2::element_text(size = 14),
+                     panel.background = ggplot2::element_blank(),
+                     legend.key = ggplot2::element_blank())
 
     networkList <- list(p1)
 
@@ -148,7 +154,9 @@ molNetPlot <- function(sampleData,
       ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
       ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
-                     legend.text = ggplot2::element_text(size = 14))
+                     legend.text = ggplot2::element_text(size = 14),
+                     panel.background = ggplot2::element_blank(),
+                     legend.key = ggplot2::element_blank())
 
     networkList <- list(p1)
 
@@ -179,7 +187,9 @@ molNetPlot <- function(sampleData,
           ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
           ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
-                         legend.text = ggplot2::element_text(size = 8))
+                         legend.text = ggplot2::element_text(size = 8),
+                         panel.background = ggplot2::element_blank(),
+                         legend.key = ggplot2::element_blank())
 
 
         print(p1)
@@ -208,7 +218,9 @@ molNetPlot <- function(sampleData,
           ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
           ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
-                         legend.text = ggplot2::element_text(size = 8))
+                         legend.text = ggplot2::element_text(size = 8),
+                         panel.background = ggplot2::element_blank(),
+                         legend.key = ggplot2::element_blank())
 
         print(p1)
       })
