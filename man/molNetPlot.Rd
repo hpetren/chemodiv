@@ -55,12 +55,18 @@ compound similarity.
 \details{
 The network object from \code{\link{molNet}} and \code{sampleData} have to
 be supplied. In addition, \code{groupData} and/or an \code{\link{NPCTable}}
-can be supplied. If \code{groupData} is supplied, one network will be
-created for each group. If an NPCTable is supplied, which is recommended,
+can be supplied. If an NPCTable is supplied, which is recommended,
 node colours will represent NPC pathways, and node sizes the relative
 concentration of the compounds. Edge widths represent compound similarity,
 and only edges with similarity values above the \code{cutOff} value
 in the \code{\link{molNet}} function will be plotted.
+If \code{groupData} is supplied, one network will be created for each group.
+When \code{groupData} but not an \code{\link{NPCTable}} is supplied,
+compounds missing (i.e. having a mean of 0) from
+specific groups are plotted as triangles. When \code{groupData}
+and an \code{\link{NPCTable}} is supplied, compounds missing from
+specific groups have a white fill. This is done so that networks are more
+easy to compare across groups.
 }
 \examples{
 data(minimalSampData)

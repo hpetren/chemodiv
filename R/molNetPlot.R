@@ -11,12 +11,18 @@
 #'
 #' The network object from \code{\link{molNet}} and \code{sampleData} have to
 #' be supplied. In addition, \code{groupData} and/or an \code{\link{NPCTable}}
-#' can be supplied. If \code{groupData} is supplied, one network will be
-#' created for each group. If an NPCTable is supplied, which is recommended,
+#' can be supplied. If an NPCTable is supplied, which is recommended,
 #' node colours will represent NPC pathways, and node sizes the relative
 #' concentration of the compounds. Edge widths represent compound similarity,
 #' and only edges with similarity values above the \code{cutOff} value
 #' in the \code{\link{molNet}} function will be plotted.
+#' If \code{groupData} is supplied, one network will be created for each group.
+#' When \code{groupData} but not an \code{\link{NPCTable}} is supplied,
+#' compounds missing (i.e. having a mean of 0) from
+#' specific groups are plotted as triangles. When \code{groupData}
+#' and an \code{\link{NPCTable}} is supplied, compounds missing from
+#' specific groups have a white fill. This is done so that networks are more
+#' easy to compare across groups.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
@@ -124,15 +130,33 @@ molNetPlot <- function(sampleData,
   } else if (is.null(groupData) && !is.null(npcTable) && !plotNames) {
     # One network with NPC
 
+    # Colours from https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/
+    npcTable$col <- NA
+    npcTable$col[is.na(npcTable$pathway)] <- "#666666"
+    npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
+    npcTable$col[npcTable$pathway == "Amino acids and Peptides"] <- "#66A61E"
+    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#E6AB02"
+    npcTable$col[npcTable$pathway == "Fatty acids"] <- "#7570B3"
+    npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
+    npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
+    npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
+
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
-                                           size = compoundMean)) +
+                                           fill = npcTable$pathway,
+                                           size = compoundMean),
+                              shape = 21) +
+      ggraph::geom_node_point(ggplot2::aes(size = compoundMean),
+                              shape = 21,
+                              color = npcTable$col,
+                              fill = npcTable$col) +
       ggplot2::scale_size(range = c(8, 16)) +
-      ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
+      ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
+      ggplot2::guides(color = "none") +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
                      panel.background = ggplot2::element_blank(),
@@ -143,15 +167,32 @@ molNetPlot <- function(sampleData,
   } else if (is.null(groupData) && !is.null(npcTable) && plotNames) {
     # One network with names and NPC
 
+    npcTable$col <- NA
+    npcTable$col[is.na(npcTable$pathway)] <- "#666666"
+    npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
+    npcTable$col[npcTable$pathway == "Amino acids and Peptides"] <- "#66A61E"
+    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#E6AB02"
+    npcTable$col[npcTable$pathway == "Fatty acids"] <- "#7570B3"
+    npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
+    npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
+    npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
+
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
       ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
-                                           size = compoundMean)) +
+                                           fill = npcTable$pathway,
+                                           size = compoundMean),
+                              shape = 21) +
+      ggraph::geom_node_point(ggplot2::aes(size = compoundMean),
+                              shape = 21,
+                              color = npcTable$col,
+                              fill = npcTable$col) +
       ggplot2::scale_size(range = c(8, 16)) +
-      ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
+      ggplot2::guides(color = "none") +
+      ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
       ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
@@ -162,6 +203,16 @@ molNetPlot <- function(sampleData,
 
   } else if (!is.null(groupData) && !is.null(npcTable)) {
     # Both group and NPC
+
+    npcTable$col <- NA
+    npcTable$col[is.na(npcTable$pathway)] <- "#666666"
+    npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
+    npcTable$col[npcTable$pathway == "Amino acids and Peptides"] <- "#66A61E"
+    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#E6AB02"
+    npcTable$col[npcTable$pathway == "Fatty acids"] <- "#7570B3"
+    npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
+    npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
+    npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
 
     # Calculating average per compound per group. Note that this is
     # the average of proportions (as that is indata)
@@ -178,19 +229,34 @@ molNetPlot <- function(sampleData,
       networkList[[colnames(compoundMeanTrans)[j]]] <- local({
         j <- j
 
+        # Fix white colours for 0 values in each group
+        groupCol <- as.data.frame(npcTable$col)
+        colnames(groupCol) <- "col"
+        for(row in 1:nrow(compoundMeanTrans)) {
+          if (compoundMeanTrans[row,j] == 0) {
+            groupCol$col[row] <- "#FFFFFF"
+          }
+        }
+
         p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
           ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
-                              size = compoundMeanTrans[,j])) +
+                                               fill = npcTable$pathway,
+                                               size = compoundMeanTrans[,j]),
+                                  shape = 21) +
+          ggraph::geom_node_point(ggplot2::aes(size = compoundMeanTrans[,j]),
+                                  shape = 21,
+                                  color = npcTable$col,
+                                  fill = groupCol$col) +
           ggplot2::scale_size(range = c(4, 10)) +
-          ggplot2::labs(color = "Pathway", width = "Molecular similarity", size = "Proportion") +
+          ggplot2::guides(color = "none") +
+          ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
           ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                          legend.text = ggplot2::element_text(size = 8),
                          panel.background = ggplot2::element_blank(),
                          legend.key = ggplot2::element_blank())
-
 
         print(p1)
       })
@@ -210,10 +276,19 @@ molNetPlot <- function(sampleData,
       networkList[[colnames(compoundMeanTrans)[j]]] <- local({
         j <- j
 
+        # Fix different shape for 0 values in each group
+        groupShape <- data.frame(shape = rep("Pos", nrow(compoundMeanTrans)))
+        for(row in 1:nrow(compoundMeanTrans)) {
+          if (compoundMeanTrans[row,j] == 0) {
+            groupShape$shape[row] <- "Zero"
+          }
+        }
+
         p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
           ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
-          ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j]), size = 10) +
+          ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j],
+                                               shape = groupShape$shape), size = 10) +
           ggplot2::scale_colour_viridis_c() +
           ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
