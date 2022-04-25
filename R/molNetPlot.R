@@ -302,5 +302,5 @@ molNetPlot <- function(sampleData,
     }
   }
   return(gridExtra::grid.arrange(grobs = networkList,
-                                 nrow = ceiling(sqrt(length(networkList)))))
+                                 ncol = ceiling(sqrt(length(networkList)))))
 }
