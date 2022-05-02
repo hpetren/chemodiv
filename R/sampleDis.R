@@ -110,7 +110,10 @@ sampleDis <- function(sampleData,
     # If data is not proportional a message is produced. This only
     # applies if we're working with Bray-Curtis, UniFracs are always on props
     if(!sum(rowSums(sampleData)) == nrow(sampleData)) {
-      message("sampleData does not contain proportion data. Bray-Curtis
+      sampleData <- sampleData / rowSums(sampleData)
+
+      message("sampleData appears to not contain proportion data. Data is made
+              into proportions before dissimiliarty calcualtions, as Bray-Curtis
               dissimilarities calculated on absolute and proportional data
               are not identical.")
     }
