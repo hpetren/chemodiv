@@ -65,8 +65,9 @@ When \code{groupData} but not an \code{\link{NPCTable}} is supplied,
 compounds missing (i.e. having a mean of 0) from
 specific groups are plotted as triangles. When \code{groupData}
 and an \code{\link{NPCTable}} is supplied, compounds missing from
-specific groups have a white fill. This is done so that networks are more
-easy to compare across groups.
+specific groups have a white fill. Additionally, in both cases, edges
+connecting to missing compounds are lighter coloured. These edits are
+done so that networks are more easy to compare across groups.
 }
 \examples{
 data(minimalSampData)

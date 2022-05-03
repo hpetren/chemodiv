@@ -21,8 +21,9 @@
 #' compounds missing (i.e. having a mean of 0) from
 #' specific groups are plotted as triangles. When \code{groupData}
 #' and an \code{\link{NPCTable}} is supplied, compounds missing from
-#' specific groups have a white fill. This is done so that networks are more
-#' easy to compare across groups.
+#' specific groups have a white fill. Additionally, in both cases, edges
+#' connecting to missing compounds are lighter coloured. These edits are
+#' done so that networks are more easy to compare across groups.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
@@ -232,19 +233,80 @@ molNetPlot <- function(sampleData,
         # Fix white colours for 0 values in each group
         groupCol <- as.data.frame(npcTable$col)
         colnames(groupCol) <- "col"
-        for(row in 1:nrow(compoundMeanTrans)) {
+        for (row in 1:nrow(compoundMeanTrans)) {
           if (compoundMeanTrans[row,j] == 0) {
             groupCol$col[row] <- "#FFFFFF"
           }
         }
 
-        p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
-          ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
+        # In this case, as edge colours should vary depending on if compound
+        # is present in group, a new network is created manually
+        # https://stackoverflow.com/questions/63536934/how-to-manually-customize-edge-color-and-arrows-in-ggraph
+        # Create similarity matrix
+        compSimMat <- matrix(data = NA,
+                             nrow = nrow(compoundMeanTrans),
+                             ncol = nrow(compoundMeanTrans))
+        colnames(compSimMat) <- rownames(compoundMeanTrans)
+        rownames(compSimMat) <- rownames(compoundMeanTrans)
+
+        for (i in 1:nrow(compoundMeanTrans)) {
+          compSimMat[i,] <- networkObject[i]
+        }
+
+        # Extract which compounds are linked (only one link per pair)
+        linkedComps <- as.data.frame(matrix(data = NA,
+                                            nrow = length(compSimMat[compSimMat > 0])/2,
+                                            ncol = 2))
+
+        colnames(linkedComps) <- c("Comp1", "Comp2")
+
+        l <- 1
+        for(i in 1:nrow(compSimMat)) {
+          for (k in i:ncol(compSimMat)) {
+            if(compSimMat[i,k] > 0) {
+              linkedComps$Comp1[l] <- rownames(compSimMat)[i]
+              linkedComps$Comp2[l] <- rownames(compSimMat)[k]
+              l <- l + 1
+            }
+          }
+        }
+
+        # Set colour of links depending on if compounds are <0 or not
+        linkCol <- rep("grey40", nrow(linkedComps))
+
+        for (i in 1:nrow(linkedComps)) {
+          # Get correct rows
+          row1 <- match(linkedComps$Comp1[i], rownames(compoundMeanTrans))
+          row2 <- match(linkedComps$Comp2[i], rownames(compoundMeanTrans))
+          if (compoundMeanTrans[row1,j] == 0 | compoundMeanTrans[row2,j] == 0) {
+            linkCol[i] <- "grey90"
+          }
+        }
+
+        # Create network manually
+        compSimMatTri <- compSimMat[upper.tri(compSimMat)]
+        compSimMatTriPos <- compSimMatTri[compSimMatTri > 0]
+
+        nodes <- data.frame(name = rownames(compoundMeanTrans))
+
+        links <- data.frame(from = linkedComps$Comp1,
+                            to = linkedComps$Comp2,
+                            weight = compSimMatTriPos,
+                            linkCol = linkCol)
+
+        networkObjectMan <- tidygraph::tbl_graph(nodes = nodes, edges = links)
+
+        p1 <- ggraph::ggraph(graph = networkObjectMan, layout = layout) +
+          ggraph::geom_edge_link(ggplot2::aes(width = .data$weight,
+                                              color = .data$linkCol)) +
           ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                                fill = npcTable$pathway,
                                                size = compoundMeanTrans[,j]),
                                   shape = 21) +
+          ggraph::scale_edge_color_manual(limits = as.factor(links$linkCol),
+                                          values = links$linkCol,
+                                          guide = "none") +
           ggraph::geom_node_point(ggplot2::aes(size = compoundMeanTrans[,j]),
                                   shape = 21,
                                   color = npcTable$col,
@@ -261,7 +323,6 @@ molNetPlot <- function(sampleData,
         print(p1)
       })
     }
-
   } else {
     # Only group data
 
@@ -278,20 +339,81 @@ molNetPlot <- function(sampleData,
 
         # Fix different shape for 0 values in each group
         groupShape <- data.frame(shape = rep("Pos", nrow(compoundMeanTrans)))
-        for(row in 1:nrow(compoundMeanTrans)) {
+        for (row in 1:nrow(compoundMeanTrans)) {
           if (compoundMeanTrans[row,j] == 0) {
             groupShape$shape[row] <- "Zero"
           }
         }
 
-        p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
-          ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
+        # Creating new network manually as above
+        # Create similarity matrix
+        compSimMat <- matrix(data = NA,
+                             nrow = nrow(compoundMeanTrans),
+                             ncol = nrow(compoundMeanTrans))
+        colnames(compSimMat) <- rownames(compoundMeanTrans)
+        rownames(compSimMat) <- rownames(compoundMeanTrans)
+
+        for (i in 1:nrow(compoundMeanTrans)) {
+          compSimMat[i,] <- networkObject[i]
+        }
+
+        # Extract which compounds are linked (only one link per pair)
+        linkedComps <- as.data.frame(matrix(data = NA,
+                                            nrow = length(compSimMat[compSimMat > 0])/2,
+                                            ncol = 2))
+
+        colnames(linkedComps) <- c("Comp1", "Comp2")
+
+        l <- 1
+        for(i in 1:nrow(compSimMat)) {
+          for (k in i:ncol(compSimMat)) {
+            if(compSimMat[i,k] > 0) {
+              linkedComps$Comp1[l] <- rownames(compSimMat)[i]
+              linkedComps$Comp2[l] <- rownames(compSimMat)[k]
+              l <- l + 1
+            }
+          }
+        }
+
+        # Set colour of links depending on if compounds are <0 or not
+        linkCol <- rep("grey40", nrow(linkedComps))
+
+        for (i in 1:nrow(linkedComps)) {
+          # Get correct rows
+          row1 <- match(linkedComps$Comp1[i], rownames(compoundMeanTrans))
+          row2 <- match(linkedComps$Comp2[i], rownames(compoundMeanTrans))
+          if (compoundMeanTrans[row1,j] == 0 | compoundMeanTrans[row2,j] == 0) {
+            linkCol[i] <- "grey90"
+          }
+        }
+
+        # Create network manually
+        compSimMatTri <- compSimMat[upper.tri(compSimMat)]
+        compSimMatTriPos <- compSimMatTri[compSimMatTri > 0]
+
+        nodes <- data.frame(name = rownames(compoundMeanTrans))
+
+        links <- data.frame(from = linkedComps$Comp1,
+                            to = linkedComps$Comp2,
+                            weight = compSimMatTriPos,
+                            linkCol = linkCol)
+
+        networkObjectMan <- tidygraph::tbl_graph(nodes = nodes, edges = links)
+
+        p1 <- ggraph::ggraph(graph = networkObjectMan, layout = layout) +
+          ggraph::geom_edge_link(ggplot2::aes(width = .data$weight,
+                                              color = .data$linkCol)) +
           ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j],
-                                               shape = groupShape$shape), size = 10) +
+                                               shape = groupShape$shape),
+                                  size = 10) +
+          ggraph::scale_edge_color_manual(limits = as.factor(links$linkCol),
+                                          values = links$linkCol,
+                                          guide = "none") +
           ggplot2::scale_colour_viridis_c() +
           ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
+          ggplot2::guides(shape = "none") +
           ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                          legend.text = ggplot2::element_text(size = 8),
                          panel.background = ggplot2::element_blank(),
