@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-**The *chemdiv* package and this vignette are in development and may not be fully functional/complete**
+**The *chemdiv* package is in development and may not be fully functional/complete**
 
 ## Introduction
 *chemdiv* is an R package for analysing phytochemical data. It includes
@@ -404,4 +404,4 @@ Evolution of floral scent in relation to self-incompatibility and
 capacity for autonomous self-pollination in the perennial herb *Arabis alpina*. 
 Annals of Botany 127:737–747.
 
-Petren et al. 2022. Unpublished manuscript.
+Petrén et al. 2022. Unpublished manuscript.

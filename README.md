@@ -96,7 +96,7 @@ wanting to quickly explore their data using standard parameters.
 
 An under-construction, preliminary vignette describing an example is
 available
-[here](https://drive.google.com/file/d/1cHOSQgJE2mScIX_pHRm9s00_OQH6Tn5w/view).
+[here](https://drive.google.com/file/d/1ye9uiBtzHNjsX_ocF4OGFnTMAUKfdWE7/view?usp=sharing).
 
 ## Citation
 
