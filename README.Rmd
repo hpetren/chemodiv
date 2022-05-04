@@ -102,7 +102,7 @@ users wanting to quickly explore their data using standard parameters.
 
 
 ## Vignette
-An under-construction, preliminary vignette describing an example is available [here](https://drive.google.com/file/d/1ye9uiBtzHNjsX_ocF4OGFnTMAUKfdWE7/view?usp=sharing).
+A preliminary vignette describing an example is available [here](https://drive.google.com/file/d/1ISOx21M7z9IOtPNXM71Jjuo22uzay5JA/view?usp=sharing).
 
 
 ## Citation
