@@ -64,9 +64,11 @@ calcDivProf <- function(sampleData,
                         qMax = 3,
                         step = 0.1) {
 
-  if (!(type == "HillDiv" || type == "FuncHillDiv") || length(type) > 1) {
-    stop("Provide a single type of diversity profile to calculate:
-         HillDiv or FuncHillDiv.")
+  if (length(type) > 1) {
+    stop("Provide only one type of diversity profile to calculate.")
+  }
+  if (!(type == "HillDiv" || type == "FuncHillDiv")) {
+    stop("type should be HillDiv or FuncHillDiv.")
   }
   if(is.null(compDisMat) && ("FuncHillDiv" %in% type)) {
     stop("A compound dissimilarity matrix must be supplied
