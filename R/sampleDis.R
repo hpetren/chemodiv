@@ -107,8 +107,7 @@ sampleDis <- function(sampleData,
 
   if ("BrayCurtis" %in% type) {
 
-    # If data is not proportional a message is produced. This only
-    # applies if we're working with Bray-Curtis, UniFracs are always on props
+    # Turn non-proportion data into proportion-data
     if(!sum(rowSums(sampleData)) == nrow(sampleData)) {
       sampleData <- sampleData / rowSums(sampleData)
 
@@ -124,13 +123,11 @@ sampleDis <- function(sampleData,
 
   if ("GenUniFrac" %in% type) {
 
-    # Note method is now "average" (UPGMA). This is used in Chemoecology paper
+    # Note method "average" (UPGMA)
     disClust <- stats::hclust(stats::as.dist(compDisMat), method = "average")
     disClustPhylo <- ape::as.phylo(disClust)
 
-    # GUniFrac() returns a list with an array. Seem unnecessarily complicated,
-    # so syntax becomes a bit strange
-    # Suppressing the warnings about NaNs produced for d_VAW
+    # Suppressing warnings about NaNs produced for d_VAW (not relevant)
     uniFracs <- suppressWarnings(GUniFrac::GUniFrac(otu.tab = sampleData,
                                                     tree = disClustPhylo,
                                                     alpha = alpha))

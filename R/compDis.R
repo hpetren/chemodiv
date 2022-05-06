@@ -120,7 +120,7 @@ compDis <- function(compoundData,
 
     message("Calculating compound dissimilarity matrix using NPClassifier...")
 
-    if (is.null(npcTable)) { # If we don't already have the table
+    if (is.null(npcTable)) { # If no table in input
 
       npcTable <- compoundData
 
@@ -128,41 +128,30 @@ compDis <- function(compoundData,
                "superclass", "superclass2", "superclass3",
                "class", "class2", "class3")] <- NA
 
+      # Get NPC for each SMILE
       for (i in 1:nrow(npcTable)) {
 
         # No NA
         if (!is.na(npcTable$smiles[i])) {
 
-          # Get the NPC for the SMILES
-          # NOTE! This gives an error, but still works...
+          # (May produce strange error if run separately)
           npcClass1 <- httr::GET("https://npclassifier.ucsd.edu/classify",
                                  query = list(smiles = npcTable$smiles[i]))
 
-          # Retrieving contents
           npcClass2 <- httr::content(npcClass1, as = "text")
 
-          # If the request for some reason fails then npcClass2
-          # is not in proper format, and does not begin with "{",
-          # so we check for that (we have to do that, because otherwise
-          # fromJSON() throws an error and loop stops)
+          # If request fails, npcClass2 does not begin with "{", check for that
           if (substring(npcClass2, 1, 1) == "{") {
 
-            # Parsing the long json character string, into a list
             npcClass3 <- jsonlite::fromJSON(npcClass2)
 
-            # Check if there is any classifications (otherwise empty list), then
-            # put in correct place in df
+            # Check if there is any classifications, then put data in data frame
             if (is.character(npcClass3$pathway_results)) {
 
-              # Adding pathway. In cases there is only 1 pathway, trying to
-              # take an index that is higher then what is in the vector
-              # just returns NA, which is appropriate
               npcTable$pathway[i] <- npcClass3$pathway_results[1]
               npcTable$pathway2[i] <- npcClass3$pathway_results[2]
               npcTable$pathway3[i] <- npcClass3$pathway_results[3]
 
-              # If the compound is not classified, but there is nothing wrong
-              # (i.e. the pathway is NA)
             } else {
               message(paste("NPClassifier has no classification for compound", i))
             }
@@ -187,7 +176,7 @@ compDis <- function(compoundData,
       }
     }
 
-    # If there are NAs, then inform about this
+    # Message in case of NAs
     if (any(is.na(npcTable$pathway)) ||
         any(is.na(npcTable$superclass)) ||
         any(is.na(npcTable$class))) {
@@ -200,10 +189,8 @@ compDis <- function(compoundData,
               See ?compDis for details.")
     }
 
-    # Replace all superclass and class NA with pseudo-variables.
-    # Note that we're not replacing things for compounds with missing pathways.
-    # These compounds with missing SMILES or with SMILES but without pathway
-    # are treated equally and below given 1 or mean dissim to other comps)
+    # For dissimilarity calculations, add pseudo-variables to replace NA
+    # for compounds where superclass and/or class but not pathway is NA
     for (i in 1:nrow(npcTable)) {
       if (is.na(npcTable$superclass[i]) && !is.na(npcTable$pathway[i])) {
         npcTable$superclass[i] <- paste("superclass", npcTable$compound[i], sep = "_")
@@ -213,35 +200,29 @@ compDis <- function(compoundData,
       }
     }
 
-    # From long to W ###
+    # Long to wide
     npcTableW <- data.frame(compound = npcTable$compound)
 
     for (i in 1:nrow(npcTable)) { # For each compound
       for (j in which(colnames(npcTable) == "pathway"):ncol(npcTable)) {
-        # For each classification (from pathway and onwards)
 
         if (npcTable[i, j] %in% colnames(npcTableW)) {
-          # If the name already exist as column in npcTableW
+          # If the name already exist as column in npcTableW, add 1
 
-          # Get column number and then add 1 in correct column
           colNumber <- match(npcTable[i, j], colnames(npcTableW))
           npcTableW[i, colNumber] <- 1
 
         } else if (!is.na(npcTable[i,j])) {
-          # If the name do not already exist as column in npcTableW
-          # (if i,j is NA nothing is done)
+          # If name does not exist as column in npcTableW, add column and 1
 
-          # Make new column, with name from npcTable[i,j]. Add 1 to correct row
           npcTableW[,npcTable[i,j]] <- NA
           npcTableW[i,npcTable[i,j]] <- 1
         }
       }
     }
 
-    # Fixing Greek letters in class names. Included all.
-    # gsub() can only handle one replacement at a time
+    # Replace Greek letters in names
 
-    # Lower case
     correctColNames <- gsub("\u03b1", "alpha", colnames(npcTableW))
     correctColNames <- gsub("\u03b2", "beta", correctColNames)
     correctColNames <- gsub("\u03b3", "gamma", correctColNames)
@@ -267,7 +248,6 @@ compDis <- function(compoundData,
     correctColNames <- gsub("\u03c8", "psi", correctColNames)
     correctColNames <- gsub("\u03c9", "omega", correctColNames)
 
-    # Upper case
     correctColNames <- gsub("\u0391", "Alpha", colnames(npcTableW))
     correctColNames <- gsub("\u0392", "Beta", correctColNames)
     correctColNames <- gsub("\u0393", "Gamma", correctColNames)
@@ -298,37 +278,29 @@ compDis <- function(compoundData,
     # Replacing NA with 0
     npcTableW[is.na(npcTableW)] <- 0
 
-    # Making dissimilarity matrix out of it
+    # Make dissimilarity matrix
     npcDisMat <- as.matrix(vegan::vegdist(npcTableW[, 2:ncol(npcTableW)],
                                           method = "jaccard"))
 
     colnames(npcDisMat) <- npcTableW$compound
     rownames(npcDisMat) <- npcTableW$compound
 
-    # If there are >1 NA (unknown compound) these become NaN to each
-    # other in vegdist. Setting these manually to 1. (This does not affect
-    # any mean dissimilarity calculations, as those are done for only
-    # known compounds)
+    # Setting dissimilarity of pairs of unknown compounds from NaN to 1
     npcDisMat[is.nan(npcDisMat)] <- 1
 
-    # If one decides to set unknown compounds to mean values.
-    # Done for both known-unknown and unknown-unknown pairs
+    # If unknown compounds should have mean dissimilarity
     if (unknownCompoundsMean && any(is.na(npcTable$pathway))) {
 
-      # Subsetting only known compounds
+      # Calculate and add mean compound dissimilarity of known compounds
       npcKnown <- npcDisMat[-which(is.na(npcTable$pathway)),
                             -which(is.na(npcTable$pathway))]
 
-      # mean compound dissimilarity of known compounds
       meanDis <- mean(npcKnown[lower.tri(npcKnown)], na.rm = TRUE)
 
-      # We replace those rows and columns (can't do both at once) with mean values
       npcDisMat[which(is.na(npcTable$pathway)),] <- meanDis
       npcDisMat[,which(is.na(npcTable$pathway))] <- meanDis
 
-      # And the make sure diagonal is all 0 again
       diag(npcDisMat) <- 0
-
     }
     compoundDisMatList[["npcDisMat"]] <- npcDisMat
   }
@@ -341,18 +313,16 @@ compDis <- function(compoundData,
       message("Fingerprint calculations: There are compounds with missing inchikey.")
     }
 
-    # Getting CID from inchikey
+    # Get CID from inchikey
     compoundCID <- webchem::get_cid(query = compoundData$inchikey,
                                     from = "inchikey",
                                     match = "first")
 
-    # If there are NA cid (due to NA inchikey) pubchemCidToSDF can't handle NAs
-    if(any(is.na(compoundCID$cid))) { # if at least 1 NA
+    # If there are inchikey NAs (pubchemCidToSDF does not handle this)
+    if(any(is.na(compoundCID$cid))) {
 
-      # Get all not NA cid and their fingerprints. Temporarily shut off
-      # warnings to not print those when connection is shown
-      # (as this seem to be enough to close the connection ChemmineR opens,
-      # which means we don't  have to use closeAllConnections).
+      # Get fingerprints, and suppress warnings and show connections
+      # in order to close connections ChemmineR sets up
       cidNoNA <- compoundCID$cid[!is.na(compoundCID$cid)]
       oldw <- getOption("warn")
       options(warn = -1)
@@ -363,31 +333,22 @@ compDis <- function(compoundData,
       compoundFinger <- as.data.frame(compoundbit@fpma)
       colnames(compoundFinger) <- c(paste0("bit", seq(1:881)))
 
-      # Make a similar dataframe with only 0, with same number
-      # of columns and number of rows equal to number of NA compounds.
-      # We put 0 and not NA into this, because we use this to calculate
-      # dissimilarities. Rows with all 0 values will have a jaccard
-      # dissimilarity of 1 to all others (as I currently want). In contrast,
-      # vegdist() throws error if there are NAs in community matrix
-      # (and we don't want that). This is correct and the same as in npcDis.
+      # Make data frame with 0 values for the compounds with NA inchikey,
+      # to ensure dissimilarity calculations are done correctly below
       unknownFinger <- as.data.frame(matrix(data = 0,
                                             nrow = sum(is.na(compoundCID$cid)),
                                             ncol = ncol(compoundFinger)))
       colnames(unknownFinger) <- c(paste0("bit", seq(1:881)))
 
-      # Get index of NA cid
+
+      # Get the rows for compounds with NA inchikey into correcct place
       unknownRow <- which(is.na(compoundCID$cid))
 
-      # This puts each NA row into it's correct place using rbind(),
-      # by taking first part of compoundFinger, inserting NA row into
-      # correct place, and then taking second part of compoundFinger.
-      # rbind() is apperently slow, but should work here.
-      # https://stackoverflow.com/questions/11561856/add-new-row-to-dataframe-at-specific-row-index-not-appended
-      # This could alternatively be done with dplyr add_row() with .before =
+      # This puts each NA row into it's correct place using rbind()
       for (i in 1:length(unknownRow)) {
-        if(unknownRow[i] == 1) { # If first is NA
+        if(unknownRow[i] == 1) { # If first compound is NA
           compoundFinger <- rbind(unknownFinger[i,], compoundFinger)
-        } else if (unknownRow[i] > nrow(compoundFinger)) { # If last(s) are NA
+        } else if (unknownRow[i] > nrow(compoundFinger)) { # If last are NA
           compoundFinger <- rbind(compoundFinger, unknownFinger[i,])
         } else {
           compoundFinger <- rbind(compoundFinger[1:(unknownRow[i]-1),],
@@ -396,8 +357,7 @@ compDis <- function(compoundData,
                                                    nrow(compoundFinger),])
         }
       }
-    } else { # If no NA
-      # Get all cid and their fingerprints
+    } else { # If no inchikey NAs
       oldw <- getOption("warn")
       options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
@@ -408,37 +368,26 @@ compDis <- function(compoundData,
       colnames(compoundFinger) <- c(paste0("bit", seq(1:881)))
     }
 
-    # Calculate dissimilarity matrix based on fingerprints
     fingerDis <- vegan::vegdist(compoundFinger, method = "jaccard")
     fingerDisMat <- as.matrix(fingerDis)
     colnames(fingerDisMat) <- compoundData$compound
     rownames(fingerDisMat) <- compoundData$compound
 
-    # If there are >1 NA (unknown compound) these become NaN to each
-    # other in vegdist. Setting these manually to 1.
     fingerDisMat[is.nan(fingerDisMat)] <- 1
 
-    # If there are unknown compound and one decides to set
-    # unknown compounds to mean values
+    # If unknown compounds should have mean dissimilarity
     if (unknownCompoundsMean && any(is.na(compoundCID$cid))) {
 
-      # Subsetting only known compounds
       fingerKnown <- fingerDisMat[-unknownRow, -unknownRow]
 
-      # mean compound dissimilarity
       meanDis <- mean(fingerKnown[lower.tri(fingerKnown)])
 
-      # We replace those rows and columns (can't do both at once) with mean values
       fingerDisMat[unknownRow,] <- meanDis
       fingerDisMat[,unknownRow] <- meanDis
 
-      # And the make sure diagonal is all 0 again
       diag(fingerDisMat) <- 0
-
     }
-
     compoundDisMatList[["fingerDisMat"]] <- fingerDisMat
-
   }
 
   if ("fMCS" %in% type) { # Dissimilarities from fMCS
@@ -455,7 +404,7 @@ compDis <- function(compoundData,
                                       match = "first")
     }
 
-    if (any(is.na(compoundCID$cid))) { # If there are NAs
+    if (any(is.na(compoundCID$cid))) { # If there are inchikey NAs
 
       oldw <- getOption("warn")
       options(warn = -1)
@@ -465,9 +414,9 @@ compDis <- function(compoundData,
 
       unknownRow <- which(is.na(compoundCID$cid))
 
-      # Doing with 1 atom and 1 bond mismatch for now. I think there is a motivation
-      # for this in some earlier R-script. Note that this is similarity matrix
-      # as it's Tanimoto coefficient (Jaccard similarity)
+      # Doing fMCS with 1 atom and 1 bond mismatch, note that this similarity
+      # (Tanimoto = Jaccard dissimilarity) and not dissimilarity, and note
+      # that output is matrix
       fmcsSimMat <- sapply(ChemmineR::cid(compoundSDF),
                            function(x) fmcsR::fmcsBatch(compoundSDF[x],
                                                  compoundSDF,
@@ -477,7 +426,7 @@ compDis <- function(compoundData,
       meanSim <- mean(fmcsSimMat[lower.tri(fmcsSimMat)])
 
       # Putting rows/column with unknown compounds into correct place
-      # Note that rbind() adds whole row even if only single value is added
+      # in matrix, and add mean value or 0 depending on unknownCompoundsMean
       if (unknownCompoundsMean) { # Adding mean similarity
 
         for (i in 1:length(unknownRow)) {
@@ -485,7 +434,7 @@ compDis <- function(compoundData,
           if(unknownRow[i] == 1) { # If first compound is NA
             fmcsSimMat <- rbind(meanSim, fmcsSimMat)
             fmcsSimMat <- cbind(meanSim, fmcsSimMat)
-          } else if (unknownRow[i] > nrow(fmcsSimMat)) { # If last compound(s) are NA
+          } else if (unknownRow[i] > nrow(fmcsSimMat)) { # If last is NA
             fmcsSimMat <- rbind(fmcsSimMat, meanSim)
             fmcsSimMat <- cbind(fmcsSimMat, meanSim)
           } else {
@@ -504,7 +453,7 @@ compDis <- function(compoundData,
           if(unknownRow[i] == 1) { # If first compound is NA
             fmcsSimMat <- rbind(0, fmcsSimMat)
             fmcsSimMat <- cbind(0, fmcsSimMat)
-          } else if (unknownRow[i] > nrow(fmcsSimMat)) { # If last compound(s) are NA
+          } else if (unknownRow[i] > nrow(fmcsSimMat)) { # If last is NA
             fmcsSimMat <- rbind(fmcsSimMat, 0)
             fmcsSimMat <- cbind(fmcsSimMat, 0)
           } else {
@@ -520,7 +469,7 @@ compDis <- function(compoundData,
 
       diag(fmcsSimMat) <- 1
 
-    } else {
+    } else { # If no inchikey NAs
 
       oldw <- getOption("warn")
       options(warn = -1)
@@ -535,6 +484,7 @@ compDis <- function(compoundData,
                                                  bu = 1)[,"Tanimoto_Coefficient"])
     }
 
+    # From similarity to dissimilarity
     fmcsDisMat <- 1 - fmcsSimMat
     colnames(fmcsDisMat) <- compoundData$compound
     rownames(fmcsDisMat) <- compoundData$compound
@@ -542,7 +492,7 @@ compDis <- function(compoundData,
     compoundDisMatList[["fmcsDisMat"]] <- fmcsDisMat
   }
 
-  if (length(type) > 1) { # Matrix with mean if >1 type was calculated
+  if (length(type) > 1) { # Matrix with mean values if >1 type was calculated
 
     compoundDisMatList[["meanDisMat"]] <- Reduce("+", compoundDisMatList) /
       length(compoundDisMatList)

@@ -122,8 +122,7 @@ chemDivPlot <- function(compDisMat = NULL,
 
   if (!is.null(divData)) { # Boxplot of diversity/evenness
 
-    divDatadf <- as.data.frame(divData) # Make sure it's a df,
-    # as that is not the case if only one column is input
+    divDatadf <- as.data.frame(divData) # Ensure data is data frame
 
     if (is.null(groupData)) {
       message("No grouping data provided.")
@@ -131,10 +130,6 @@ chemDivPlot <- function(compDisMat = NULL,
     }
     divDatadf$Group <- groupData
 
-    # Plot(s). Note that if a single column from df with multiple columns
-    # is indata, then y-axis is not specified. I don't think this can be solved
-    # as then it's only a vector, but it's not a big problem, so keeping it
-    # like this
     for (i in 1:(ncol(divDatadf)-1)) {
       allPlots[[paste0("divPlot", colnames(divDatadf)[i])]] <- local({
         i <- i
@@ -159,7 +154,7 @@ chemDivPlot <- function(compDisMat = NULL,
       message("No grouping data provided.")
       groupData <- rep("NoGroup", nrow(divProfData$divProf))
     }
-    divProf <- divProfData$divProf # Extract the df from the list
+    divProf <- divProfData$divProf
 
     # Get mean data in order
     divProfMean1 <- stats::aggregate(divProf,
@@ -186,7 +181,7 @@ chemDivPlot <- function(compDisMat = NULL,
     divHillLongInd$Group <- rep(groupData, length(unique(divProfInd$q)))
 
     divProfPlot <- ggplot2::ggplot() +
-      ggplot2::geom_line(data = divHillLongInd, # Note use of group and color
+      ggplot2::geom_line(data = divHillLongInd,
                          ggplot2::aes(x = .data$q,
                                       y = .data$Diversity,
                                       group = .data$Individual,
@@ -214,9 +209,8 @@ chemDivPlot <- function(compDisMat = NULL,
     # If input is a single matrix
     if (is.matrix(sampleDisMat)) {
 
-      # Suppressing iteration output here requires capture.output() rather
-      # than suppressMessage() as metaMDSiter() prints output with cat()
-      # rather than with message()
+      # Suppressing iteration output for vegan::metaMDS, this requires
+      # capture.output() rather than the more common suppressMessage()
       utils::capture.output(NMDS <- vegan::metaMDS(sampleDisMat,
                                                    autotransform = FALSE))
       NMDSCoords <- as.data.frame(NMDS$points)

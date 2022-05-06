@@ -95,15 +95,14 @@ calcDivProf <- function(sampleData,
     stop("step must be > 0 and less than qMax - qMin.")
   }
 
-  # Creating datasets to store diversity values
   qAll <- seq(from = qMin, to = qMax, by = step)
   divProf <- as.data.frame(matrix(data = NA,
                                   nrow = nrow(sampleData),
                                   ncol = length(qAll)))
   colnames(divProf) <- paste0("q", qAll)
 
-  for (c in 1:length(qAll)) { # For each column
-    for (r in 1:nrow(divProf)) { # For each row
+  for (c in 1:length(qAll)) { # For each column (q)
+    for (r in 1:nrow(divProf)) { # For each row (sample)
       if (type == "FuncHillDiv") {
         divProf[r, c] <- funcHillDiv(data = sampleData[r,],
                                      Dij = compDisMat,

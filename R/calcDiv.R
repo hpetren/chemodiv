@@ -147,12 +147,12 @@ calcDiv <- function(sampleData,
   colnames(divData) <- type
 
   if ("HillDiv" %in% type) {
-    # This function works row-wise without loop
+    # Works row-wise without loop
     divData$HillDiv <- hillR::hill_taxa(comm = sampleData,
                                         q = q)
   }
   if ("FuncHillDiv" %in% type) {
-    # My utils.R function needs a loop to work on dataframe
+    # utils.R function needs loop to work on data frame
     for (i in 1:nrow(sampleData)) {
       divData$FuncHillDiv[i] <- funcHillDiv(data = sampleData[i,],
                                             Dij = compDisMat,
@@ -164,7 +164,7 @@ calcDiv <- function(sampleData,
                                         index = "shannon",
                                         base = exp(1))
   }
-  if ("Simpson" %in% type) { # Note that vegan uses invsimpson for this
+  if ("Simpson" %in% type) {
     divData$Simpson <- vegan::diversity(sampleData,
                                         index = "invsimpson",
                                         base = exp(1))
@@ -182,7 +182,7 @@ calcDiv <- function(sampleData,
   }
   if ("RaoQ" %in% type) {
     for (i in 1:nrow(sampleData)) {
-      # function in utils.R
+      # Function in utils.R
       divData$RaoQ[i] <- calculateQ(data = sampleData[i,],
                                     Dij = compDisMat)
     }

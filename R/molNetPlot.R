@@ -131,7 +131,6 @@ molNetPlot <- function(sampleData,
   } else if (is.null(groupData) && !is.null(npcTable) && !plotNames) {
     # One network with NPC
 
-    # Colours from https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/
     npcTable$col <- NA
     npcTable$col[is.na(npcTable$pathway)] <- "#666666"
     npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
@@ -215,8 +214,7 @@ molNetPlot <- function(sampleData,
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
     npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
 
-    # Calculating average per compound per group. Note that this is
-    # the average of proportions (as that is indata)
+    # Calculating average per compound per group
     compoundMean <- stats::aggregate(sampleData,
                                      by = list(Group = groupData),
                                      mean)
@@ -230,7 +228,7 @@ molNetPlot <- function(sampleData,
       networkList[[colnames(compoundMeanTrans)[j]]] <- local({
         j <- j
 
-        # Fix white colours for 0 values in each group
+        # Fixing white node fill for 0 values in each group
         groupCol <- as.data.frame(npcTable$col)
         colnames(groupCol) <- "col"
         for (row in 1:nrow(compoundMeanTrans)) {
@@ -239,10 +237,8 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # In this case, as edge colours should vary depending on if compound
-        # is present in group, a new network is created manually
-        # https://stackoverflow.com/questions/63536934/how-to-manually-customize-edge-color-and-arrows-in-ggraph
-        # Create similarity matrix
+        # Fix link colour to white nodes, with manually created new network
+        # Similarity matrix
         compSimMat <- matrix(data = NA,
                              nrow = nrow(compoundMeanTrans),
                              ncol = nrow(compoundMeanTrans))
@@ -253,7 +249,7 @@ molNetPlot <- function(sampleData,
           compSimMat[i,] <- networkObject[i]
         }
 
-        # Extract which compounds are linked (only one link per pair)
+        # Linked compounds
         linkedComps <- as.data.frame(matrix(data = NA,
                                             nrow = length(compSimMat[compSimMat > 0])/2,
                                             ncol = 2))
@@ -271,11 +267,10 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Set colour of links depending on if compounds are <0 or not
+        # Set colour of links
         linkCol <- rep("grey40", nrow(linkedComps))
 
         for (i in 1:nrow(linkedComps)) {
-          # Get correct rows
           row1 <- match(linkedComps$Comp1[i], rownames(compoundMeanTrans))
           row2 <- match(linkedComps$Comp2[i], rownames(compoundMeanTrans))
           if (compoundMeanTrans[row1,j] == 0 | compoundMeanTrans[row2,j] == 0) {
@@ -283,7 +278,7 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Create network manually
+        # Create new manually
         compSimMatTri <- compSimMat[upper.tri(compSimMat)]
         compSimMatTriPos <- compSimMatTri[compSimMatTri > 0]
 
@@ -337,7 +332,7 @@ molNetPlot <- function(sampleData,
       networkList[[colnames(compoundMeanTrans)[j]]] <- local({
         j <- j
 
-        # Fix different shape for 0 values in each group
+        # Node fill and link colour as above
         groupShape <- data.frame(shape = rep("Pos", nrow(compoundMeanTrans)))
         for (row in 1:nrow(compoundMeanTrans)) {
           if (compoundMeanTrans[row,j] == 0) {
@@ -345,8 +340,6 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Creating new network manually as above
-        # Create similarity matrix
         compSimMat <- matrix(data = NA,
                              nrow = nrow(compoundMeanTrans),
                              ncol = nrow(compoundMeanTrans))
@@ -357,7 +350,6 @@ molNetPlot <- function(sampleData,
           compSimMat[i,] <- networkObject[i]
         }
 
-        # Extract which compounds are linked (only one link per pair)
         linkedComps <- as.data.frame(matrix(data = NA,
                                             nrow = length(compSimMat[compSimMat > 0])/2,
                                             ncol = 2))
@@ -375,11 +367,9 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Set colour of links depending on if compounds are <0 or not
         linkCol <- rep("grey40", nrow(linkedComps))
 
         for (i in 1:nrow(linkedComps)) {
-          # Get correct rows
           row1 <- match(linkedComps$Comp1[i], rownames(compoundMeanTrans))
           row2 <- match(linkedComps$Comp2[i], rownames(compoundMeanTrans))
           if (compoundMeanTrans[row1,j] == 0 | compoundMeanTrans[row2,j] == 0) {
@@ -387,7 +377,6 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Create network manually
         compSimMatTri <- compSimMat[upper.tri(compSimMat)]
         compSimMatTriPos <- compSimMatTri[compSimMatTri > 0]
 
