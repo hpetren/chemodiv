@@ -8,7 +8,9 @@ testSampData <- data.frame(compA = c(0.3,0.4,0.1,0.2),
                            compB = c(0.4,0.3,0.4,0.4),
                            compC = c(0.3,0.3,0.5,0.4))
 testNpcTable <- data.frame(compound = c("compA", "compB", "compC"),
-                           pathway = c("Path1", "Path1", "Path2"))
+                           pathway = c("Polyketides",
+                                       "Polyketides",
+                                       "Carbohydrates"))
 
 testMolNet <- molNet(testCompDis)
 

@@ -135,7 +135,7 @@ molNetPlot <- function(sampleData,
     npcTable$col[is.na(npcTable$pathway)] <- "#666666"
     npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
     npcTable$col[npcTable$pathway == "Amino acids and Peptides"] <- "#66A61E"
-    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#E6AB02"
+    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#F0E442"
     npcTable$col[npcTable$pathway == "Fatty acids"] <- "#7570B3"
     npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
@@ -154,6 +154,7 @@ molNetPlot <- function(sampleData,
                               shape = 21,
                               color = npcTable$col,
                               fill = npcTable$col) +
+      ggplot2::scale_fill_manual(values = levels(as.factor(npcTable$col))) +
       ggplot2::scale_size(range = c(8, 16)) +
       ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
       ggplot2::guides(color = "none") +
@@ -171,7 +172,7 @@ molNetPlot <- function(sampleData,
     npcTable$col[is.na(npcTable$pathway)] <- "#666666"
     npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
     npcTable$col[npcTable$pathway == "Amino acids and Peptides"] <- "#66A61E"
-    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#E6AB02"
+    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#F0E442"
     npcTable$col[npcTable$pathway == "Fatty acids"] <- "#7570B3"
     npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
@@ -190,6 +191,7 @@ molNetPlot <- function(sampleData,
                               shape = 21,
                               color = npcTable$col,
                               fill = npcTable$col) +
+      ggplot2::scale_fill_manual(values = levels(as.factor(npcTable$col))) +
       ggplot2::scale_size(range = c(8, 16)) +
       ggplot2::guides(color = "none") +
       ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
@@ -208,7 +210,7 @@ molNetPlot <- function(sampleData,
     npcTable$col[is.na(npcTable$pathway)] <- "#666666"
     npcTable$col[npcTable$pathway == "Alkaloids"] <- "#E7298A"
     npcTable$col[npcTable$pathway == "Amino acids and Peptides"] <- "#66A61E"
-    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#E6AB02"
+    npcTable$col[npcTable$pathway == "Carbohydrates"] <- "#F0E442"
     npcTable$col[npcTable$pathway == "Fatty acids"] <- "#7570B3"
     npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
@@ -278,9 +280,9 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Create new manually
+        # Create new network manually
         compSimMatTri <- compSimMat[upper.tri(compSimMat)]
-        compSimMatTriPos <- compSimMatTri[compSimMatTri > 0]
+        compSimMatTriPos <- compSimMatTri[compSimMatTri > 0] # No self-links
 
         nodes <- data.frame(name = rownames(compoundMeanTrans))
 
@@ -306,6 +308,7 @@ molNetPlot <- function(sampleData,
                                   shape = 21,
                                   color = npcTable$col,
                                   fill = groupCol$col) +
+          ggplot2::scale_fill_manual(values = levels(as.factor(npcTable$col))) +
           ggplot2::scale_size(range = c(4, 10)) +
           ggplot2::guides(color = "none") +
           ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
