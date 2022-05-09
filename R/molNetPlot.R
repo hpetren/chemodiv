@@ -141,6 +141,10 @@ molNetPlot <- function(sampleData,
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
     npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
 
+    incPath <- unique(npcTable$pathway)[!is.na(unique(npcTable$pathway))]
+    incPathOrder <- incPath[order(incPath)]
+    legCol <- npcTable$col[match(incPathOrder, npcTable$pathway)]
+
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
@@ -154,7 +158,7 @@ molNetPlot <- function(sampleData,
                               shape = 21,
                               color = npcTable$col,
                               fill = npcTable$col) +
-      ggplot2::scale_fill_manual(values = levels(as.factor(npcTable$col))) +
+      ggplot2::scale_fill_manual(values = legCol) +
       ggplot2::scale_size(range = c(8, 16)) +
       ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
       ggplot2::guides(color = "none") +
@@ -178,6 +182,10 @@ molNetPlot <- function(sampleData,
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
     npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
 
+    incPath <- unique(npcTable$pathway)[!is.na(unique(npcTable$pathway))]
+    incPathOrder <- incPath[order(incPath)]
+    legCol <- npcTable$col[match(incPathOrder, npcTable$pathway)]
+
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
@@ -191,7 +199,7 @@ molNetPlot <- function(sampleData,
                               shape = 21,
                               color = npcTable$col,
                               fill = npcTable$col) +
-      ggplot2::scale_fill_manual(values = levels(as.factor(npcTable$col))) +
+      ggplot2::scale_fill_manual(values = legCol) +
       ggplot2::scale_size(range = c(8, 16)) +
       ggplot2::guides(color = "none") +
       ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
@@ -215,6 +223,10 @@ molNetPlot <- function(sampleData,
     npcTable$col[npcTable$pathway == "Polyketides"] <- "#A6761D"
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
     npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
+
+    incPath <- unique(npcTable$pathway)[!is.na(unique(npcTable$pathway))]
+    incPathOrder <- incPath[order(incPath)]
+    legCol <- npcTable$col[match(incPathOrder, npcTable$pathway)]
 
     # Calculating average per compound per group
     compoundMean <- stats::aggregate(sampleData,
@@ -308,7 +320,7 @@ molNetPlot <- function(sampleData,
                                   shape = 21,
                                   color = npcTable$col,
                                   fill = groupCol$col) +
-          ggplot2::scale_fill_manual(values = levels(as.factor(npcTable$col))) +
+          ggplot2::scale_fill_manual(values = legCol) +
           ggplot2::scale_size(range = c(4, 10)) +
           ggplot2::guides(color = "none") +
           ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
