@@ -87,7 +87,7 @@ sampleDis <- function(sampleData,
     stop("Provide at least one type of dissimilarity to calculate:
          BrayCurtis or GenUniFrac.")
   }
-  if ("GenUniFrac" %in% type && is.null(compDisMat)) {
+  if (("GenUniFrac" %in% type) && is.null(compDisMat)) {
     stop("A compound dissimilarity matrix must be supplied when calculating
          Generalized UniFrac dissimilarities.")
   }
@@ -98,7 +98,7 @@ sampleDis <- function(sampleData,
          to the name and order of the columns/rows in compDisMat.")
     }
   }
-  if ("BrayCurtis" %in% type && length(type) == 1 && !is.null(compDisMat)) {
+  if (("BrayCurtis" %in% type) && (length(type) == 1) && !is.null(compDisMat)) {
     message("Note that Bray-Curtis dissimilarity calculations do not use the
             compound dissimilarity matrix.")
   }

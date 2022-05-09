@@ -79,7 +79,7 @@ calcBetaDiv <- function(sampleData,
          to the name and order of the columns/rows in compDisMat.")
     }
   }
-  if (!is.null(compDisMat) && "HillDiv" %in% type && length(type) == 1) {
+  if (!is.null(compDisMat) && ("HillDiv" %in% type) && length(type) == 1) {
     message("Note that the calculated beta-diveristy does not use the
             compound dissimilarity matrix.")
   }

@@ -79,7 +79,7 @@ quickChemDiv <- function(sampleData,
 
   if (length(outputType) > 1 ||
       !(outputType == "plots" || outputType == "data")) {
-    stop('outputType must be either "data" or "plots".')
+    stop('outputType must be either data or plots.')
   }
 
   if (is.null(compoundData)) {
