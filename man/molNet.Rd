@@ -26,7 +26,7 @@ to \code{minPathway}, the lowest within-pathway similarity
 }
 \value{
 List with a (tbl_graph/igraph) graph object, the number of compounds,
-number of NPC pathways and modularity of the network.
+number of NPC pathways and a measure of the modularity of the network.
 }
 \description{
 Function to generate a molecular network object, and some

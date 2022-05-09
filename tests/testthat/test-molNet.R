@@ -9,7 +9,7 @@ testNpcTable <- data.frame(compound = c("compA", "compB", "compC"),
                            pathway = c("Path1", "Path1", "Path2"))
 
 test_that("network object and properties are calculated", {
-  expect_equal(length(molNet(testCompDis)), 5)
+  expect_equal(length(molNet(testCompDis)), 4)
   expect_true(is.list(molNet(testCompDis)$networkObject))
   expect_true(is.numeric(molNet(testCompDis,
                                 testNpcTable)$nNpcPathways))

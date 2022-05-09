@@ -25,7 +25,7 @@
 #' (which allows all within-NPC-pathway similarities to be kept).
 #'
 #' @return List with a (tbl_graph/igraph) graph object, the number of compounds,
-#' number of NPC pathways and modularity of the network.
+#' number of NPC pathways and a measure of the modularity of the network.
 #'
 #' @export
 #'
@@ -56,13 +56,10 @@ molNet <- function(compDisMat,
     stop("compDisMat must be a square matrix with identical row and column names.")
   }
 
-  # From dissimilarity to similarity matrix
+  # Make a similarity matrix
   compSimMat <- 1 - compDisMat
-
-  # Keep diagnoal being 0
   diag(compSimMat) <- 0
 
-  # Keep the full similarity matrix
   compSimMatFull <- compSimMat
 
   # Set cut-off point. Median, manual or lowest within-pathway similarity
@@ -103,27 +100,48 @@ molNet <- function(compDisMat,
     stop("Using minPathway as cut-off requires npcTable.")
   }
 
-  # Creating network
-  networkObject <- tidygraph::as_tbl_graph(compSimMat)
+  # The network
+  # networkObject <- tidygraph::as_tbl_graph(compSimMat)
+
+  # Creation of network is currently done with tbl_graph() using data on
+  # nodes and links, rather than with as_tbl_graph() using the
+  # similarity matrix, in order to avoid warnings produced by the latter
+  # function, likely due to incorrect use of || or && for R 4.2.0
+  linkedComps <- as.data.frame(matrix(data = NA,
+                                      nrow = length(compSimMat[compSimMat > 0])/2,
+                                      ncol = 2))
+
+  colnames(linkedComps) <- c("Comp1", "Comp2")
+
+  l <- 1
+  for(i in 1:nrow(compSimMat)) {
+    for (k in i:ncol(compSimMat)) {
+      if(compSimMat[i,k] > 0) {
+        linkedComps$Comp1[l] <- rownames(compSimMat)[i]
+        linkedComps$Comp2[l] <- rownames(compSimMat)[k]
+        l <- l + 1
+      }
+    }
+  }
+
+  compSimMatTri <- compSimMat[upper.tri(compSimMat)]
+  compSimMatTriPos <- compSimMatTri[compSimMatTri > 0] # No self-links
+
+  nodes <- data.frame(name = rownames(compSimMat))
+
+  # Links in both directions (as done by as_tbl_graph, order is not
+  # the same with function and manually, but that doesn't matter)
+  links <- data.frame(from = c(linkedComps$Comp1, linkedComps$Comp2),
+                      to = c(linkedComps$Comp2, linkedComps$Comp1),
+                      weight = rep(compSimMatTriPos, 2))
+
+  networkObject <- tidygraph::tbl_graph(nodes = nodes, edges = links)
 
   # Number of compounds
   nCompounds <- nrow(compSimMatFull)
 
-  # Maybe remove this since we added FAD.
-  # Mean similarity. This is done on FULL matrix (not cut-off) as
-  # that makes more sense (you want the mean similarity of the full bouquet,
-  # not an arbitrarily cut-off one). Kept as similarity instead of
-  # dissimilarity as that makes more sense for network plot
-  meanSimilarity <- mean(compSimMatFull[lower.tri(compSimMatFull)])
-
-  # Modularity. Done on the FULL matrix, as we don't want it to depend
-  # on arbitrarily chosen cut-off. Done with pathways as groups,
-  # as algorithmically finding group structure seems like overkill
-  # (and I don't understand it). This then measures how separate/modular
-  # molecules in different pathways are, which is a bit strange measure,
-  # but I can't figure out how modularity would be more useful in another way.
-  # We also calculate the number of pathways. Both these are only done if
-  # npcTable is supplied.
+  # Calculating the number of pathways, and modularity, which is done on the
+  # full matrix with pathways as groups, to not depend on the cut-off
   nNpcPathways <- NA
   modularity <- NA
   if(!is.null(npcTable)) {
@@ -133,14 +151,13 @@ molNet <- function(compDisMat,
                                       mode = "undirected",
                                       weighted = TRUE)
     membership <- as.numeric(as.factor(npcTable$pathway))
-    # Give NA their own category, otherwise modularity() crashes the session
+    # Give NA their own category, otherwise modularity() causes a crash
     membership[is.na(membership)] <- max(membership, na.rm = TRUE) + 1
     modularity <- igraph::modularity(modNet, membership)
   }
 
   networkOutput <- list("networkObject" = networkObject,
                         "nCompounds" = nCompounds,
-                        "meanSimilarity" = meanSimilarity,
                         "nNpcPathways" = nNpcPathways,
                         "modularity" = modularity)
   return(networkOutput)
