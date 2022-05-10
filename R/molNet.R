@@ -24,8 +24,9 @@
 #' to \code{minPathway}, the lowest within-pathway similarity
 #' (which allows all within-NPC-pathway similarities to be kept).
 #'
-#' @return List with a (tbl_graph/igraph) graph object, the number of compounds,
-#' number of NPC pathways and a measure of the modularity of the network.
+#' @return List with a (tbl_graph) graph object, the number of compounds,
+#' number of NPC pathways and a measure of the modularity of the network
+#' (see \code{\link[igraph]{modularity}}).
 #'
 #' @export
 #'
@@ -104,7 +105,7 @@ molNet <- function(compDisMat,
   # networkObject <- tidygraph::as_tbl_graph(compSimMat)
 
   # Creation of network is currently done with tbl_graph() using data on
-  # nodes and links, rather than with as_tbl_graph() using the
+  # nodes and edges (links), rather than with as_tbl_graph() using the
   # similarity matrix, in order to avoid warnings produced by the latter
   # function, likely due to incorrect use of || or && for R 4.2.0
   linkedComps <- as.data.frame(matrix(data = NA,
@@ -129,7 +130,7 @@ molNet <- function(compDisMat,
 
   nodes <- data.frame(name = rownames(compSimMat))
 
-  # Links in both directions (as done by as_tbl_graph, order is not
+  # Edges in both directions (as done by as_tbl_graph, order is not
   # the same with function and manually, but that doesn't matter)
   links <- data.frame(from = c(linkedComps$Comp1, linkedComps$Comp2),
                       to = c(linkedComps$Comp2, linkedComps$Comp1),

@@ -1,7 +1,7 @@
 #' Arabis alpina floral scent data
 #'
 #' A dataset with proportional floral scent data from three populations of
-#' the plant species Arabis alpina.
+#' the plant Arabis alpina.
 #'
 #' @format A data frame with 87 rows and 15 columns. Each row is a sample,
 #' each column is a floral scent compound.

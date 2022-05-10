@@ -36,7 +36,7 @@
 #' \url{https://pubchem.ncbi.nlm.nih.gov/idexchange/idexchange.cgi} or
 #' The Chemical Translation Service \url{https://cts.fiehnlab.ucdavis.edu/}
 #' can be used. The user is intentionally required to compile the
-#' chemical identifiers manually to ensure correctness,
+#' chemical identifiers manually to ensure these are correct,
 #' as lists of compounds very often contain compounds wrongly named,
 #' wrongly formatted, under various synonyms etc. which prevents easy
 #' automatic translation of compound names to SMILES and InChIKey.
@@ -44,7 +44,7 @@
 #' If SMILES are entered manually directly in R, this is interpreted as an
 #' unrecognized escape and results in an error. In this case, an extra
 #' backslash has to be added: \code{"\\\C"}. If the dataset is instead
-#' imported into R as a csv- or txt-file (recommended), this is done
+#' imported into R as a csv-file or txt-file (recommended), this is done
 #' automatically and no manual edits has to be done.
 #'
 #' The second dataset with the chemical IDs is primarily used to construct
@@ -57,7 +57,7 @@
 #' using indices that do not consider compound dissimilarities.
 #' Alternatively, other ways to calculate compound dissimilarities,
 #' not based on knowing compound identities, can be used.
-#' For example, cosine dissimilarities between (MS/MS) mass spectra of
+#' For example, cosine dissimilarities between tandem (MS/MS) mass spectra of
 #' metabolomic features can be calculated in the GNPS
 #' framework \url{https://gnps.ucsd.edu} (Wang et al. 2016).
 #' A dissimilarity matrix of such dissimilarities can then be used

@@ -40,7 +40,7 @@ funcHillDiv <- function(data, Dij, q) {
     }
 
   } else {
-    # FHD not mathematically with one compound
+    # FHD not mathematically defined with one compound
     FD <- NA
   }
   return(FD)

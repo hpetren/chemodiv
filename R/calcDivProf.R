@@ -31,8 +31,9 @@
 #' and \code{qMax}.
 #'
 #' @return List with a diversity profile data frame with samples as rows
-#' and the Hill diversity or Functional Hill diversity for different *q* values
-#' as columns; and values for type, \code{qMin}, \code{qMax} and \code{step}.
+#' and the Hill diversity or Functional Hill diversity for different *q*
+#' values as columns; and values for \code{type}, \code{qMin},
+#' \code{qMax} and \code{step}.
 #'
 #' @export
 #'

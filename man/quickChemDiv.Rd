@@ -41,7 +41,7 @@ a boxplot, a diversity profile plot and an NMDS plot, respectively.
 \description{
 This function is a shortcut that makes use of many of the other functions
 in the package. In one simple step chemodiversity is calculated, and if
-requested also visualized, for users wanting to quickly explore their
+requested also plotted, for users wanting to quickly explore their
 data using standard parameters.
 }
 \details{

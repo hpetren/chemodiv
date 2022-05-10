@@ -20,6 +20,6 @@ alpinaSampData
 }
 \description{
 A dataset with proportional floral scent data from three populations of
-the plant species Arabis alpina.
+the plant Arabis alpina.
 }
 \keyword{datasets}

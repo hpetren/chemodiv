@@ -14,9 +14,9 @@ compound (column) in every sample (row).}
 \code{\link{compDis}}. If this is supplied, Generalized UniFrac
 dissimilarities can be calculated.}
 
-\item{type}{Type of sample dissimilarity to be calculated. This is
-Bray-Curtis dissimilarity, \code{type = "BrayCurtis"}, and/or
-Generalized UniFrac dissimilarity, \code{type = "GenUniFrac"}.}
+\item{type}{Type of sample dissimilarities to be calculated. This is
+Bray-Curtis dissimilarities, \code{type = "BrayCurtis"}, and/or
+Generalized UniFrac dissimilarities, \code{type = "GenUniFrac"}.}
 
 \item{alpha}{Parameter used in calculations of Generalized UniFracs
 dissimilarities. alpha can be set between 0 and 1.
@@ -55,8 +55,8 @@ of the dendrogram that leads to compounds present in either sample,
 but not both. The (weighted) Generalized UniFrac dissimilarities
 implemented here additionally take compound abundances into account.
 In this way, both the relative proportions of compounds and
-the biosynthetic/structural properties of the compounds are accounted for
-in the calculations of sample dissimilarities, such that two
+the biosynthetic/structural dissimilarities of the compounds are accounted
+for in the calculations of sample dissimilarities, such that two
 samples containing more biosynthetically/structurally different
 compounds have a higher pairwise dissimilarity than two samples
 containing more biosynthetically/structurally similar compounds.

@@ -26,11 +26,11 @@ the \emph{chemdiv} package are correctly formatted.
 \details{
 The function performs a number of checks on the two main datasets used
 as input data, to make sure datasets are formatted in a way suitable
-for the other functions in the package. This should facilitate for
+for the other functions in the package. This should make it easier for
 users to correctly construct datasets before starting with analyses.
 
 Two datasets are needed to use the full set of analyses included in
-the package, and can be checked for formatting issues.
+the package, and these can be checked for formatting issues.
 The first dataset should contain data on the proportions
 of different compounds (columns) in different samples (rows).
 Note that all calculations of diversity, and most calculations of

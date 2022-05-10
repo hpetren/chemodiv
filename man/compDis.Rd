@@ -36,8 +36,8 @@ List with compound dissimilarity matrices. A list is always
 outputted, even if only one matrix is calculated. Downstream functions,
 including \code{\link{calcDiv}}, \code{\link{calcBetaDiv}},
 \code{\link{calcDivProf}}, \code{\link{sampleDis}}, \code{\link{molNet}}
-and \code{\link{chemDivPlot}} require only the matrix
-as input (e.g. as \code{fullList$specificMatrix}) rather than the whole list.
+and \code{\link{chemDivPlot}} require only the matrix as
+input (e.g. as \code{fullList$specificMatrix}) rather than the whole list.
 }
 \description{
 Function to quantify dissimilarities between phytochemical compounds.
@@ -72,12 +72,14 @@ based on how structurally dissimilar the molecules are.
 See \url{https://pubchemdocs.ncbi.nlm.nih.gov/data-specification}
 for more information.
 \item fMCS, flexible Maximum Common Substructure,
-\code{type = "fMCS"}. This is a pairwise graph matching concept
-allowing for atom and/or bond mismatches (Wang et al 2013). As with the
-fingerprints, compounds are compared based on how structurally dissimilar
-the molecules are. While potentially a very accurate similarity measure,
-fMCS is more computationally demanding than the other methods, and will
-take a significant amount of time for larger data sets.
+\code{type = "fMCS"}. This is a pairwise graph matching concept.
+The fMCS of two compounds is the largest substructure that occurs in both
+compounds allowing for atom and/or bond mismatches (Wang et al 2013).
+As with the fingerprints, compounds are compared based on how
+structurally dissimilar the molecules are. While potentially a very
+accurate similarity measure, fMCS is more computationally demanding than
+the other methods, and will take a significant amount of time for larger
+data sets.
 }
 
 Dissimilarities using NPClassifier and PubChem Fingerprints

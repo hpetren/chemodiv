@@ -1,4 +1,4 @@
-#' Plot molecular network(s)
+#' Plot molecular networks
 #'
 #' Function to conveniently create a basic plot of the molecular network
 #' created by the \code{\link{molNet}} function. Molecular networks can be
@@ -22,8 +22,8 @@
 #' specific groups are plotted as triangles. When \code{groupData}
 #' and an \code{\link{NPCTable}} is supplied, compounds missing from
 #' specific groups have a white fill. Additionally, in both cases, edges
-#' connecting to missing compounds are lighter coloured. These edits are
-#' done so that networks are more easy to compare across groups.
+#' connecting to missing compounds are lighter coloured. These graphical
+#' styles are done so that networks are more easy to compare across groups.
 #'
 #' @param sampleData Data frame with the relative concentration of each
 #' compound (column) in every sample (row).
@@ -35,8 +35,8 @@
 #' which is one of the elements in the list outputted by \code{\link{molNet}}.
 #' The network is extracted as \code{molNetOutput$networkObject}.
 #' @param npcTable It is optional but recommended to supply an
-#' \code{\link{NPCTable}}. This will result in network nodes being coloured
-#' by their NPC pathway classification.
+#' \code{\link{NPCTable}}. This will result in network nodes being
+#' coloured by their NPC pathway classification.
 #' @param plotNames Indicates if compounds names should be included
 #' in the molecular network plot.
 #' @param layout Layout used by \code{\link[ggraph]{ggraph}} when creating
@@ -101,7 +101,8 @@ molNetPlot <- function(sampleData,
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
-      ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
+      ggplot2::labs(color = "Proportion",
+                    width = "Molecular similarity") +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
                      panel.background = ggplot2::element_blank(),
@@ -119,7 +120,8 @@ molNetPlot <- function(sampleData,
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
-      ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
+      ggplot2::labs(color = "Proportion",
+                    width = "Molecular similarity") +
       ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
@@ -141,6 +143,7 @@ molNetPlot <- function(sampleData,
     npcTable$col[npcTable$pathway == "Shikimates and Phenylpropanoids"] <- "#1B9E77"
     npcTable$col[npcTable$pathway == "Terpenoids"] <- "#D95F02"
 
+    # Correct colours in legend
     incPath <- unique(npcTable$pathway)[!is.na(unique(npcTable$pathway))]
     incPathOrder <- incPath[order(incPath)]
     legCol <- npcTable$col[match(incPathOrder, npcTable$pathway)]
@@ -160,7 +163,9 @@ molNetPlot <- function(sampleData,
                               fill = npcTable$col) +
       ggplot2::scale_fill_manual(values = legCol) +
       ggplot2::scale_size(range = c(8, 16)) +
-      ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
+      ggplot2::labs(fill = "Pathway",
+                    width = "Molecular similarity",
+                    size = "Proportion") +
       ggplot2::guides(color = "none") +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
@@ -202,8 +207,12 @@ molNetPlot <- function(sampleData,
       ggplot2::scale_fill_manual(values = legCol) +
       ggplot2::scale_size(range = c(8, 16)) +
       ggplot2::guides(color = "none") +
-      ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
-      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
+      ggplot2::labs(fill = "Pathway",
+                    width = "Molecular similarity",
+                    size = "Proportion") +
+      ggraph::geom_node_label(ggplot2::aes(label = .data$name),
+                              nudge_x = 0,
+                              nudge_y = 0.2) +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
                      panel.background = ggplot2::element_blank(),
@@ -228,7 +237,7 @@ molNetPlot <- function(sampleData,
     incPathOrder <- incPath[order(incPath)]
     legCol <- npcTable$col[match(incPathOrder, npcTable$pathway)]
 
-    # Calculating average per compound per group
+    # Calculating average proportion per compound per group
     compoundMean <- stats::aggregate(sampleData,
                                      by = list(Group = groupData),
                                      mean)
@@ -251,7 +260,7 @@ molNetPlot <- function(sampleData,
           }
         }
 
-        # Fix link colour to white nodes, with manually created new network
+        # Fix edge (link) colour to white nodes, with manually created network
         # Similarity matrix
         compSimMat <- matrix(data = NA,
                              nrow = nrow(compoundMeanTrans),
@@ -323,7 +332,9 @@ molNetPlot <- function(sampleData,
           ggplot2::scale_fill_manual(values = legCol) +
           ggplot2::scale_size(range = c(4, 10)) +
           ggplot2::guides(color = "none") +
-          ggplot2::labs(fill = "Pathway", width = "Molecular similarity", size = "Proportion") +
+          ggplot2::labs(fill = "Pathway",
+                        width = "Molecular similarity",
+                        size = "Proportion") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
           ggplot2::theme(legend.title = ggplot2::element_text(size = 10),
                          legend.text = ggplot2::element_text(size = 8),
@@ -415,7 +426,8 @@ molNetPlot <- function(sampleData,
                                           values = links$linkCol,
                                           guide = "none") +
           ggplot2::scale_colour_viridis_c() +
-          ggplot2::labs(color = "Proportion", width = "Molecular similarity") +
+          ggplot2::labs(color = "Proportion",
+                        width = "Molecular similarity") +
           ggplot2::ggtitle(colnames(compoundMeanTrans)[j]) +
           ggplot2::guides(shape = "none") +
           ggplot2::theme(legend.title = ggplot2::element_text(size = 10),

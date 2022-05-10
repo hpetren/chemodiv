@@ -18,10 +18,10 @@
 #' compound (column) in every sample (row).
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
-#' Functional Hill beta-diversity.
-#' @param type Type(s) of Hill beta-diversity to calculate. \code{"HillDiv"}
+#' Functional Hill beta diversity.
+#' @param type Type(s) of Hill beta diversity to calculate. \code{"HillDiv"}
 #' and/or \code{"FuncHillDiv"}.
-#' @param q Diversity order to use for the calculation of beta-diversity.
+#' @param q Diversity order to use for the calculation of beta diversity.
 #' See \code{\link{calcDiv}} for further details on *q*.
 #'
 #' @return Data frame with type of Hill beta diversity calculated, *q*, and

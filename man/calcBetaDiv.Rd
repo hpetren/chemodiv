@@ -12,12 +12,12 @@ compound (column) in every sample (row).}
 
 \item{compDisMat}{Compound dissimilarity matrix, as calculated by
 \code{\link{compDis}}. Has to be supplied for calculations of
-Functional Hill beta-diversity.}
+Functional Hill beta diversity.}
 
-\item{type}{Type(s) of Hill beta-diversity to calculate. \code{"HillDiv"}
+\item{type}{Type(s) of Hill beta diversity to calculate. \code{"HillDiv"}
 and/or \code{"FuncHillDiv"}.}
 
-\item{q}{Diversity order to use for the calculation of beta-diversity.
+\item{q}{Diversity order to use for the calculation of beta diversity.
 See \code{\link{calcDiv}} for further details on \emph{q}.}
 }
 \value{

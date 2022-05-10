@@ -2,7 +2,7 @@
 % Please edit documentation in R/molNetPlot.R
 \name{molNetPlot}
 \alias{molNetPlot}
-\title{Plot molecular network(s)}
+\title{Plot molecular networks}
 \usage{
 molNetPlot(
   sampleData,
@@ -27,8 +27,8 @@ If supplied, a separate network will be created for each group.
 Should be either a vector, or a data frame with a single column.}
 
 \item{npcTable}{It is optional but recommended to supply an
-\code{\link{NPCTable}}. This will result in network nodes being coloured
-by their NPC pathway classification.}
+\code{\link{NPCTable}}. This will result in network nodes being
+coloured by their NPC pathway classification.}
 
 \item{plotNames}{Indicates if compounds names should be included
 in the molecular network plot.}
@@ -66,8 +66,8 @@ compounds missing (i.e. having a mean of 0) from
 specific groups are plotted as triangles. When \code{groupData}
 and an \code{\link{NPCTable}} is supplied, compounds missing from
 specific groups have a white fill. Additionally, in both cases, edges
-connecting to missing compounds are lighter coloured. These edits are
-done so that networks are more easy to compare across groups.
+connecting to missing compounds are lighter coloured. These graphical
+styles are done so that networks are more easy to compare across groups.
 }
 \examples{
 data(minimalSampData)

@@ -63,7 +63,7 @@ NPCTable <- function(compoundData) {
 
         npcClass3 <- jsonlite::fromJSON(npcClass2)
 
-        # Check if there is any classifications, then put data in data frame
+        # Check if there are any classifications, then put data in data frame
         if (is.character(npcClass3$pathway_results)) {
 
           npcTab$pathway[i] <- npcClass3$pathway_results[1]

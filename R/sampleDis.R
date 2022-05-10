@@ -23,8 +23,8 @@
 #' but not both. The (weighted) Generalized UniFrac dissimilarities
 #' implemented here additionally take compound abundances into account.
 #' In this way, both the relative proportions of compounds and
-#' the biosynthetic/structural properties of the compounds are accounted for
-#' in the calculations of sample dissimilarities, such that two
+#' the biosynthetic/structural dissimilarities of the compounds are accounted
+#' for in the calculations of sample dissimilarities, such that two
 #' samples containing more biosynthetically/structurally different
 #' compounds have a higher pairwise dissimilarity than two samples
 #' containing more biosynthetically/structurally similar compounds.
@@ -36,9 +36,9 @@
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. If this is supplied, Generalized UniFrac
 #' dissimilarities can be calculated.
-#' @param type Type of sample dissimilarity to be calculated. This is
-#' Bray-Curtis dissimilarity, \code{type = "BrayCurtis"}, and/or
-#' Generalized UniFrac dissimilarity, \code{type = "GenUniFrac"}.
+#' @param type Type of sample dissimilarities to be calculated. This is
+#' Bray-Curtis dissimilarities, \code{type = "BrayCurtis"}, and/or
+#' Generalized UniFrac dissimilarities, \code{type = "GenUniFrac"}.
 #' @param alpha Parameter used in calculations of Generalized UniFracs
 #' dissimilarities. alpha can be set between 0 and 1.
 #' With \code{alpha = 0}, equal weight is put on every
@@ -105,7 +105,7 @@ sampleDis <- function(sampleData,
 
   sampleDisMatList <- list()
 
-  if ("BrayCurtis" %in% type) {
+  if ("BrayCurtis" %in% type) { # Bray-Curtis
 
     # Turn non-proportion data into proportion-data
     if(!sum(rowSums(sampleData)) == nrow(sampleData)) {
@@ -121,7 +121,7 @@ sampleDis <- function(sampleData,
     sampleDisMatList[["BrayCurtis"]] <- sampleDisBrayCurtis
   }
 
-  if ("GenUniFrac" %in% type) {
+  if ("GenUniFrac" %in% type) { # Generalized UniFracs
 
     # Note method "average" (UPGMA)
     disClust <- stats::hclust(stats::as.dist(compDisMat), method = "average")

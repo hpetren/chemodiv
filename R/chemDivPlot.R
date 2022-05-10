@@ -9,13 +9,13 @@
 #' \itemize{
 #' \item Function argument \code{compDisMat}. A compound dissimilarity matrix
 #' will be plotted as a dendrogram visualizing how
-#' structurally/biosynthethically similar different compounds are to each other.
+#' structurally/biosynthetically similar different compounds are to each other.
 #' \item Function argument \code{divData}. Diversity/evenness values will
 #' be plotted as a boxplot.
 #' \item Function argument \code{divProfData}. A diversity profile, plotting
 #' (Functional) Hill diversity at different values of q will be plotted
 #' as a line plot.
-#' \item Function argument \code{sampleDisMat}. A sample dissimilarity matrix,
+#' \item Function argument \code{sampleDisMat}. A sample dissimilarity matrix
 #' will be plotted as an NMDS plot.
 #' \item Function argument \code{groupData}. Grouping data (e.g. population,
 #' species etc.) may be supplied, to plot each group in different
@@ -122,7 +122,7 @@ chemDivPlot <- function(compDisMat = NULL,
 
   if (!is.null(divData)) { # Boxplot of diversity/evenness
 
-    divDatadf <- as.data.frame(divData) # Ensure data is data frame
+    divDatadf <- as.data.frame(divData)
 
     if (is.null(groupData)) {
       message("No grouping data provided.")
