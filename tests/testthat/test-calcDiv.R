@@ -13,8 +13,8 @@ test_that("all diversity/evenness gives non-NA output", {
   expect_false(any(is.na(calcDiv(sampleData = testSampData,
                                  type = "HillDiv"))))
   expect_false(any(is.na(calcDiv(sampleData = testSampData,
-                                 type = "FuncHillDiv",
-                                 compDisMat = testCompDis))))
+                                 compDisMat = testCompDis,
+                                 type = "FuncHillDiv"))))
   expect_false(any(is.na(calcDiv(sampleData = testSampData,
                                  type = "Shannon"))))
   expect_false(any(is.na(calcDiv(sampleData = testSampData,
@@ -54,4 +54,18 @@ test_that("wrong/non-logical input is detected and gives error/message", {
                          compDisMat = testCompDis,
                          type = c("HillDiv", "Shannon",
                                   "Simpson", "PielouEven", "HillEven")))
+})
+
+test_that("FuncHillDiv and Raos Q in utils.R produce correct output", {
+  expect_equal(round(as.numeric(calcDiv(sampleData = testSampData[1,],
+                                        compDisMat = testCompDis,
+                                        type = "FuncHillDiv",
+                                        q = 1)), 3), 3.169)
+  expect_equal(as.numeric(calcDiv(sampleData = testSampData[1,],
+                                  compDisMat = testCompDis,
+                                  type = "FuncHillDiv",
+                                  q = 0)), 3.2)
+  expect_equal(as.numeric(calcDiv(sampleData = testSampData[1,],
+                                  compDisMat = testCompDis,
+                                  type = "RaoQ")), 0.342)
 })
