@@ -95,7 +95,7 @@ wanting to quickly explore their data using standard parameters.
 ## Vignette
 
 A preliminary vignette describing an example is available
-[here](https://drive.google.com/file/d/1ISOx21M7z9IOtPNXM71Jjuo22uzay5JA/view?usp=sharing).
+[here](https://drive.google.com/file/d/140cba_FWe6hQaYuLe1s5RnuKsixQRoNO/view?usp=sharing).
 
 ## Citation
 
