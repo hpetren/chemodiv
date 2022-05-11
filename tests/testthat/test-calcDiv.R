@@ -33,8 +33,8 @@ test_that("all indices can be calculated simultaneously", {
                             compDisMat = testCompDis,
                             type = c("HillDiv", "FuncHillDiv", "Shannon",
                                      "Simpson", "PielouEven", "HillEven",
-                                     "RaoQ", "FAD"),
-                            q = 1.5)), 8)
+                                     "RaoQ"),
+                            q = 1.5)), 7)
 })
 
 test_that("wrong/non-logical input is detected and gives error/message", {

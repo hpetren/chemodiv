@@ -27,4 +27,8 @@ test_that("wrong output argument gives error", {
                             sampleData = testSampData,
                             groupData = groups,
                             output = "wrong"))
+  expect_error(quickChemDiv(compoundData = testCompData,
+                            sampleData = testSampData,
+                            groupData = groups,
+                            output = c("plots", "data")))
 })

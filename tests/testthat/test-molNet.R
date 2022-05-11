@@ -11,8 +11,7 @@ testNpcTable <- data.frame(compound = c("compA", "compB", "compC"),
 test_that("network object and properties are calculated", {
   expect_equal(length(molNet(testCompDis)), 4)
   expect_true(is.list(molNet(testCompDis)$networkObject))
-  expect_true(is.numeric(molNet(testCompDis,
-                                testNpcTable)$nNpcPathways))
+  expect_true(is.numeric(molNet(testCompDis, testNpcTable)$nNpcPathways))
 })
 
 test_that("faulty input is detected and gives error", {

@@ -15,17 +15,17 @@
 #' If a compound dissimilarity matrix, \code{compDisMat}, is supplied,
 #' Generalized UniFrac dissimilarities can be calculated, which also
 #' use the compound dissimilarity matrix for the sample dissimilarity
-#' calculations. For the calculation of Generalized UniFrac dissimilarities,
-#' the compound dissimilarity matrix is transformed into a dendrogram using
-#' hierarchical clustering (with the UPGMA method). Calculations of
-#' UniFrac dissimilarities quantifies the fraction of the total branch length
-#' of the dendrogram that leads to compounds present in either sample,
-#' but not both. The (weighted) Generalized UniFrac dissimilarities
-#' implemented here additionally take compound abundances into account.
-#' In this way, both the relative proportions of compounds and
-#' the biosynthetic/structural dissimilarities of the compounds are accounted
-#' for in the calculations of sample dissimilarities, such that two
-#' samples containing more biosynthetically/structurally different
+#' calculations. For the calculation of Generalized UniFrac
+#' dissimilarities (Chen et al. 2012), the compound dissimilarity matrix is
+#' transformed into a dendrogram using hierarchical clustering (with the
+#' UPGMA method). Calculations of UniFrac dissimilarities quantifies the
+#' fraction of the total branch length of the dendrogram that leads to
+#' compounds present in either sample, but not both. The (weighted) Generalized
+#' UniFrac dissimilarities implemented here additionally take compound
+#' abundances into account. In this way, both the relative proportions of
+#' compounds and the biosynthetic/structural dissimilarities of the compounds
+#' are accounted for in the calculations of sample dissimilarities, such that
+#' two samples containing more biosynthetically/structurally different
 #' compounds have a higher pairwise dissimilarity than two samples
 #' containing more biosynthetically/structurally similar compounds.
 #' As with Bray-Curtis dissimilarities, Generalized UniFrac dissimilarities
@@ -46,6 +46,7 @@
 #' weighted by their abundance, and hence more emphasis is put on high
 #' abundance branches. \code{alpha = 0.5} strikes a balance between the two.
 #' alpha 0.5 or 1 is recommended, with \code{alpha = 1} as default.
+#' See Chen et al. 2012 for details.
 #'
 #' @return List with sample dissimilarity matrices. A list is always
 #' outputted, even if only one matrix is calculated.
@@ -108,7 +109,7 @@ sampleDis <- function(sampleData,
   if ("BrayCurtis" %in% type) { # Bray-Curtis
 
     # Turn non-proportion data into proportion-data
-    if(!sum(rowSums(sampleData)) == nrow(sampleData)) {
+    if(!all(rowSums(sampleData) == 1)) {
       sampleData <- sampleData / rowSums(sampleData)
 
       message("sampleData appears to not contain proportion data. Data is made

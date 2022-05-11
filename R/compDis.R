@@ -187,8 +187,8 @@ compDis <- function(compoundData,
               NPClassifier due to missing SMILES and/or NPClassifier not
               producing full classifications for all compounds.
               If possible, consider adding classifications manually for these
-              before running compDis() for optimal dissimilarity calculations.
-              See ?compDis for details.")
+              before running compDis() with type =  NPClassifier for optimal
+              dissimilarity calculations. See ?compDis for details.")
     }
 
     # For dissimilarity calculations, add pseudo-variables to replace NA
@@ -342,7 +342,7 @@ compDis <- function(compoundData,
       colnames(unknownFinger) <- c(paste0("bit", seq(1:881)))
 
 
-      # Get the rows for compounds with NA inchikey into correcct place
+      # Get the rows for compounds with NA inchikey into correct place
       unknownRow <- which(is.na(compoundCID$cid))
 
       # Put each NA row into it's correct place using rbind()

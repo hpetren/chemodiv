@@ -119,7 +119,7 @@ molNet <- function(compDisMat,
     for (k in i:ncol(compSimMat)) {
       if(compSimMat[i,k] > 0) {
         linkedComps$Comp1[l] <- rownames(compSimMat)[i]
-        linkedComps$Comp2[l] <- rownames(compSimMat)[k]
+        linkedComps$Comp2[l] <- colnames(compSimMat)[k]
         l <- l + 1
       }
     }

@@ -22,15 +22,23 @@ test_that("network plots are generated", {
                                  groupData = group)), "list")
   expect_match(typeof(molNetPlot(testSampData,
                                  testMolNet$networkObject,
+                                 groupData = group,
+                                 npcTable = testNpcTable,)), "list")
+  expect_match(typeof(molNetPlot(testSampData,
+                                 testMolNet$networkObject,
                                  npcTable = testNpcTable)), "list")
   expect_match(typeof(molNetPlot(testSampData,
                                  testMolNet$networkObject,
+                                 plotNames = TRUE)), "list")
+  expect_match(typeof(molNetPlot(testSampData,
+                                 testMolNet$networkObject,
+                                 npcTable = testNpcTable,
                                  plotNames = TRUE)), "list")
 })
 
 test_that("faulty input is detected and gives error", {
   expect_error(molNetPlot(testSampData,
                           testMolNet$networkObject,
-                          group,
+                          groupData = group,
                           plotNames = TRUE))
 })

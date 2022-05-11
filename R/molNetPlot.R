@@ -51,7 +51,6 @@
 #'
 #' @examples
 #' data(minimalSampData)
-#' data(minimalCompDis)
 #' data(minimalNPCTable)
 #' data(minimalMolNet)
 #' groups <- c("A", "A", "B", "B")
@@ -284,7 +283,7 @@ molNetPlot <- function(sampleData,
           for (k in i:ncol(compSimMat)) {
             if(compSimMat[i,k] > 0) {
               linkedComps$Comp1[l] <- rownames(compSimMat)[i]
-              linkedComps$Comp2[l] <- rownames(compSimMat)[k]
+              linkedComps$Comp2[l] <- colnames(compSimMat)[k]
               l <- l + 1
             }
           }
@@ -307,6 +306,7 @@ molNetPlot <- function(sampleData,
 
         nodes <- data.frame(name = rownames(compoundMeanTrans))
 
+        # Only one link per pair in this case
         links <- data.frame(from = linkedComps$Comp1,
                             to = linkedComps$Comp2,
                             weight = compSimMatTriPos,
@@ -387,7 +387,7 @@ molNetPlot <- function(sampleData,
           for (k in i:ncol(compSimMat)) {
             if(compSimMat[i,k] > 0) {
               linkedComps$Comp1[l] <- rownames(compSimMat)[i]
-              linkedComps$Comp2[l] <- rownames(compSimMat)[k]
+              linkedComps$Comp2[l] <- colnames(compSimMat)[k]
               l <- l + 1
             }
           }

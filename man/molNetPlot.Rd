@@ -71,7 +71,6 @@ styles are done so that networks are more easy to compare across groups.
 }
 \examples{
 data(minimalSampData)
-data(minimalCompDis)
 data(minimalNPCTable)
 data(minimalMolNet)
 groups <- c("A", "A", "B", "B")
