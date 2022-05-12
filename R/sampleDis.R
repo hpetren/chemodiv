@@ -109,7 +109,7 @@ sampleDis <- function(sampleData,
   if ("BrayCurtis" %in% type) { # Bray-Curtis
 
     # Turn non-proportion data into proportion-data
-    if(!all(rowSums(sampleData) == 1)) {
+    if(!sum(rowSums(sampleData)) == nrow(sampleData)) {
       sampleData <- sampleData / rowSums(sampleData)
 
       message("sampleData appears to not contain proportion data. Data is made
