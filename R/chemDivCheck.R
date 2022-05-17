@@ -69,7 +69,7 @@ chemDivCheck <- function(sampleData,
   }
   if (!all(colnames(sampleData) == compoundData$compound)) {
     message("The name and order of the compounds in the compound column in
-            compoundData should identical to the name and order of the
+            compoundData should be identical to the name and order of the
             columns in sampleData.")
     formatProblem <- TRUE
   }
