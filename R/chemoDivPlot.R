@@ -50,7 +50,7 @@
 #' minimalDiv <- calcDiv(minimalSampData, minimalCompDis, type = "FuncHillDiv")
 #' minimalDivProf <- calcDivProf(minimalSampData, minimalCompDis, type = "FuncHillDiv")
 #' groups <- c("A", "A", "B", "B")
-#' chemDivPlot(compDisMat = minimalCompDis, divData = minimalDiv,
+#' chemoDivPlot(compDisMat = minimalCompDis, divData = minimalDiv,
 #' divProfData = minimalDivProf, sampDisMat = minimalSampDis,
 #' groupData = groups)
 #'
@@ -68,15 +68,15 @@
 #' alpinaSampDis <- sampDis(sampleData = alpinaSampData,
 #' compDisMat = alpinaCompDis$fingerDisMat,
 #' type = "GenUniFrac")
-#' chemDivPlot(compDisMat = alpinaCompDis$fingerDisMat, divData = alpinaDiv,
+#' chemoDivPlot(compDisMat = alpinaCompDis$fingerDisMat, divData = alpinaDiv,
 #' divProfData = alpinaDivProf, sampDisMat = alpinaSampDis$GenUniFrac,
 #' groupData = alpinaPopData)
 #' }
-chemDivPlot <- function(compDisMat = NULL,
-                        divData = NULL,
-                        divProfData = NULL,
-                        sampDisMat = NULL,
-                        groupData = NULL) {
+chemoDivPlot <- function(compDisMat = NULL,
+                         divData = NULL,
+                         divProfData = NULL,
+                         sampDisMat = NULL,
+                         groupData = NULL) {
 
   allPlots <- list()
 

@@ -6,8 +6,8 @@
 #' data using standard parameters.
 #'
 #' The function requires sample data as input, and can also include
-#' compound data. \code{\link{chemDivCheck}} can be used to ensure these
-#' datasets are correctly formatted, see \code{\link{chemdiv}} for further
+#' compound data. \code{\link{chemoDivCheck}} can be used to ensure these
+#' datasets are correctly formatted, see \code{\link{chemodiv}} for further
 #' details on data formatting. If only sample data is supplied,
 #' phytochemical diversity and dissimilarity will be calculated
 #' as Hill diversity and Bray-Curtis dissimilarity, respectively.
@@ -24,11 +24,11 @@
 #' with (Functional) Hill Diversity for *q* = 0-3.
 #' \item \code{\link{sampDis}} is used to calculate Bray-Curtis or
 #' Generalized UniFrac dissimilarities between samples.
-#' \item \code{\link{chemDivPlot}} is used to create different
+#' \item \code{\link{chemoDivPlot}} is used to create different
 #' chemodiversity plots if requested.
 #' }
 #'
-#' \code{quickChemDiv} is designed to provide an easy way to calculate and
+#' \code{quickChemoDiv} is designed to provide an easy way to calculate and
 #' visualize the most central measures of phytochemical diversity. It uses
 #' default parameters to do so, which should be reasonable in most cases.
 #' However, for detailed analyses it is recommended to use the separate
@@ -40,7 +40,7 @@
 #' as rows. Should have a column named "compound" with common names of
 #' the compounds, a column named "smiles" with SMILES IDs of the compounds,
 #' and a column named "inchikey" with the InChIKey IDs for the compounds.
-#' See \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
+#' See \code{\link{chemodiv}} for details on obtaining SMILES and InChIKey IDs.
 #' @param groupData Grouping data (e.g. population, species etc.).
 #' Should be either a vector, or a data frame with a single column.
 #' @param outputType Type of output that should be returned: either
@@ -62,20 +62,20 @@
 #' data(minimalCompData)
 #' data(minimalSampData)
 #' groups <- c("A", "A", "B", "B")
-#' quickChemDiv(sampleData = minimalSampData, compoundData = minimalCompData,
+#' quickChemoDiv(sampleData = minimalSampData, compoundData = minimalCompData,
 #' groupData = groups, outputType = "plots")
 #'
 #' \dontrun{
 #' data(alpinaCompData)
 #' data(alpinaSampData)
 #' data(alpinaPopData)
-#' quickChemDiv(sampleData = alpinaSampData, compoundData = alpinaCompData,
+#' quickChemoDiv(sampleData = alpinaSampData, compoundData = alpinaCompData,
 #' groupData = alpinaPopData, outputType = "plots")
 #' }
-quickChemDiv <- function(sampleData,
-                         compoundData = NULL,
-                         groupData = NULL,
-                         outputType = "plots") {
+quickChemoDiv <- function(sampleData,
+                          compoundData = NULL,
+                          groupData = NULL,
+                          outputType = "plots") {
 
   if (length(outputType) > 1) {
     stop('outputType must be either data or plots.')
@@ -100,14 +100,14 @@ quickChemDiv <- function(sampleData,
                             type = "BrayCurtis")
 
     if (outputType == "data") {
-      chemDivData <- list(HillDiv = quickDiv,
-                          HillDivProf = quickDivProf$divProf,
-                          SampleDissimilarity = quickSampDis$BrayCurtis)
+      chemoDivData <- list(HillDiv = quickDiv,
+                           HillDivProf = quickDivProf$divProf,
+                           SampleDissimilarity = quickSampDis$BrayCurtis)
     } else {
-      chemDivPlot(divData = quickDiv,
-                  divProfData = quickDivProf,
-                  sampDisMat = quickSampDis$BrayCurtis,
-                  groupData = groupData)
+      chemoDivPlot(divData = quickDiv,
+                   divProfData = quickDivProf,
+                   sampDisMat = quickSampDis$BrayCurtis,
+                   groupData = groupData)
     }
 
   } else {
@@ -134,16 +134,16 @@ quickChemDiv <- function(sampleData,
                             alpha = 1)
 
     if (outputType == "data") {
-      chemDivData <- list(CompoundDissimilarity = quickCompDis$fingerDisMat,
-                          FuncHillDiv = quickDiv,
-                          FuncHillDivProf = quickDivProf$divProf,
-                          SampleDissimilarity = quickSampDis$GenUniFrac)
+      chemoDivData <- list(CompoundDissimilarity = quickCompDis$fingerDisMat,
+                           FuncHillDiv = quickDiv,
+                           FuncHillDivProf = quickDivProf$divProf,
+                           SampleDissimilarity = quickSampDis$GenUniFrac)
     } else {
-      chemDivPlot(compDisMat = quickCompDis$fingerDisMat,
-                  divData = quickDiv,
-                  divProfData = quickDivProf,
-                  sampDisMat = quickSampDis$GenUniFrac,
-                  groupData = groupData)
+      chemoDivPlot(compDisMat = quickCompDis$fingerDisMat,
+                   divData = quickDiv,
+                   divProfData = quickDivProf,
+                   sampDisMat = quickSampDis$GenUniFrac,
+                   groupData = groupData)
     }
   }
 }

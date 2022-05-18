@@ -71,7 +71,7 @@
 #' same order as they appear in the list below.
 #'
 #' @section Data format checks:
-#' \code{\link{chemDivCheck}}
+#' \code{\link{chemoDivCheck}}
 #'
 #' @section Compound classification and dissimilarity:
 #' \code{\link{NPCTable}}
@@ -90,10 +90,10 @@
 #'
 #' @section Chemodiversity and network plots:
 #' \code{\link{molNetPlot}}
-#' \code{\link{chemDivPlot}}
+#' \code{\link{chemoDivPlot}}
 #'
 #' @section Shortcut function:
-#' \code{\link{quickChemDiv}}
+#' \code{\link{quickChemoDiv}}
 #'
 #' @author Hampus Petren, Tobias G. Kollner, Robert R. Junker
 #'
@@ -104,10 +104,10 @@
 #' curation of mass spectrometry data with Global Natural Products
 #' Social Molecular Networking. Nature Biotechnology 34: 828-837.
 #'
-#' @seealso \url{https://github.com/hpetren/chemdiv}
+#' @seealso \url{https://github.com/hpetren/chemodiv}
 #'
 #' @importFrom rlang .data
 #'
 #' @docType package
-#' @name chemdiv
+#' @name chemodiv
 NULL

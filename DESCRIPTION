@@ -13,7 +13,7 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests: 
     knitr,
     rmarkdown,
@@ -41,5 +41,5 @@ Imports:
     tidyr,
     rlang
 VignetteBuilder: knitr
-URL: https://github.com/hpetren/chemdiv
-BugReports: https://github.com/hpetren/chemdiv/issues
+URL: https://github.com/hpetren/chemodiv
+BugReports: https://github.com/hpetren/chemodiv/issues

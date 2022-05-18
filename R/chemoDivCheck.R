@@ -1,7 +1,7 @@
 #' Check data formatting
 #'
 #' Function to check that the datasets used by other functions in
-#' the *chemdiv* package are correctly formatted.
+#' the *chemodiv* package are correctly formatted.
 #'
 #' The function performs a number of checks on the two main datasets used
 #' as input data, to make sure datasets are formatted in a way suitable
@@ -17,7 +17,7 @@
 #' values. The second dataset should contain, in each of three
 #' columns in a data frame, the compound name, SMILES and InChIKey IDs of
 #' all the compounds present in the first dataset. See
-#' \code{\link{chemdiv}} for details on obtaining SMILES and InChIKey IDs.
+#' \code{\link{chemodiv}} for details on obtaining SMILES and InChIKey IDs.
 #' Avoid including Greek letters or other special characters in the
 #' compound names.
 #'
@@ -36,16 +36,16 @@
 #' @examples
 #' data(minimalSampData)
 #' data(minimalCompData)
-#' chemDivCheck(minimalSampData, minimalCompData) # Correct format
-#' chemDivCheck(minimalSampData, minimalCompData[c(2,3,1),]) # Incorrect format
+#' chemoDivCheck(minimalSampData, minimalCompData) # Correct format
+#' chemoDivCheck(minimalSampData, minimalCompData[c(2,3,1),]) # Incorrect format
 #'
 #' \dontrun{
 #' data(alpinaSampData)
 #' data(alpinaCompData)
-#' chemDivCheck(sampleData = alpinaSampData, compoundData = alpinaCompData)
+#' chemoDivCheck(sampleData = alpinaSampData, compoundData = alpinaCompData)
 #' }
-chemDivCheck <- function(sampleData,
-                         compoundData) {
+chemoDivCheck <- function(sampleData,
+                          compoundData) {
 
   formatProblem <- FALSE
 

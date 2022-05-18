@@ -46,7 +46,7 @@ The function calculates a diversity profile for each sample
 in \code{sampleData}. A diversity profile is a calculation of
 Hill Diversity or Functional Hill Diversity for a range of
 different values of \emph{q}. This function performs the calculations,
-while \code{\link{chemDivPlot}} can be used to conveniently
+while \code{\link{chemoDivPlot}} can be used to conveniently
 create the diversity profile plot, where Hill Diversity is
 plotted as a function of \emph{q} within the chosen range.
 The shape of the diversity profile curve reflects the evenness
