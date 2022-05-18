@@ -1,5 +1,5 @@
-Package: chemdiv
-Title: Analysing Phytochemical Diversity
+Package: chemodiv
+Title: Analysing Chemodiversity of phytochemical data
 Version: 0.0.0.9000
 Authors@R: c(
     person("Hampus", "Petrén", email = "hampus.petren@gmail.com",

@@ -50,7 +50,7 @@ install_github("hpetren/chemdiv")
 
 ```{r}
 # Load chemdiv
-library(chemdiv)
+library(chemodiv)
 ```
 
 

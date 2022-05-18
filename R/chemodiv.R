@@ -1,11 +1,11 @@
-#' chemdiv: A package for analysing phytochemical diversity
+#' chemodiv: A package for analysing phytochemical diversity
 #'
-#' *chemdiv* is an R package for analysing phytochemical data. The package
-#' includes a number of functions that enables quantification and
-#' visualization of phytochemical diversity and dissimilarity for any type of
-#' phytochemical (and similar) samples, such as herbivore defence
-#' compounds, volatiles and similar. Importantly, calculations
-#' of diversity and dissimilarity can incorporate biosynthetic
+#' *chemodiv* is an R package for aor analysing the chemodiversity of
+#' phytochemical data. The package includes a number of functions that enables
+#' quantification and visualization of phytochemical diversity and
+#' dissimilarity for any type of phytochemical (and similar) samples, such as
+#' herbivore defence compounds, volatiles and similar. Importantly,
+#' calculations of diversity and dissimilarity can incorporate biosynthetic
 #' and/or structural properties of the phytochemical compounds, resulting
 #' in a more comprehensive quantification of diversity and dissimilarity.
 #' Functions in the R-package will work best for sets of data, commonly

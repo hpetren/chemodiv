@@ -1,12 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# chemdiv
+# chemodiv
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-chemdiv is an R package used to analyse phytochemical data.
+chemodiv is an R package for analysing the chemodiversity of
+phytochemical data
 
 **The package is in development and may not be fully functional.**
 

@@ -1,4 +1,4 @@
 library(testthat)
-library(chemdiv)
+library(chemodiv)
 
-test_check("chemdiv")
+test_check("chemodiv")
