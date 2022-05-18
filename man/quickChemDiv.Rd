@@ -62,7 +62,7 @@ using PubChem Fingerprints, if compound data is supplied.
 Diversity for q = 1.
 \item \code{\link{calcDivProf}} is used to calculate a diversity profile
 with (Functional) Hill Diversity for \emph{q} = 0-3.
-\item \code{\link{sampleDis}} is used to calculate Bray-Curtis or
+\item \code{\link{sampDis}} is used to calculate Bray-Curtis or
 Generalized UniFrac dissimilarities between samples.
 \item \code{\link{chemDivPlot}} is used to create different
 chemodiversity plots if requested.

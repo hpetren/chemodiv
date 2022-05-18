@@ -80,7 +80,7 @@
 #' @return List with compound dissimilarity matrices. A list is always
 #' outputted, even if only one matrix is calculated. Downstream functions,
 #' including \code{\link{calcDiv}}, \code{\link{calcBetaDiv}},
-#' \code{\link{calcDivProf}}, \code{\link{sampleDis}}, \code{\link{molNet}}
+#' \code{\link{calcDivProf}}, \code{\link{sampDis}}, \code{\link{molNet}}
 #' and \code{\link{chemDivPlot}} require only the matrix as
 #' input (e.g. as \code{fullList$specificMatrix}) rather than the whole list.
 #'

@@ -22,7 +22,7 @@
 #' Diversity for q = 1.
 #' \item \code{\link{calcDivProf}} is used to calculate a diversity profile
 #' with (Functional) Hill Diversity for *q* = 0-3.
-#' \item \code{\link{sampleDis}} is used to calculate Bray-Curtis or
+#' \item \code{\link{sampDis}} is used to calculate Bray-Curtis or
 #' Generalized UniFrac dissimilarities between samples.
 #' \item \code{\link{chemDivPlot}} is used to create different
 #' chemodiversity plots if requested.
@@ -96,17 +96,17 @@ quickChemDiv <- function(sampleData,
                                 qMax = 3,
                                 step = 0.1)
 
-    quickSampleDis <- sampleDis(sampleData = sampleData,
-                                type = "BrayCurtis")
+    quickSampDis <- sampDis(sampleData = sampleData,
+                            type = "BrayCurtis")
 
     if (outputType == "data") {
       chemDivData <- list(HillDiv = quickDiv,
                           HillDivProf = quickDivProf$divProf,
-                          SampleDissimilarity = quickSampleDis$BrayCurtis)
+                          SampleDissimilarity = quickSampDis$BrayCurtis)
     } else {
       chemDivPlot(divData = quickDiv,
                   divProfData = quickDivProf,
-                  sampleDisMat = quickSampleDis$BrayCurtis,
+                  sampDisMat = quickSampDis$BrayCurtis,
                   groupData = groupData)
     }
 
@@ -128,21 +128,21 @@ quickChemDiv <- function(sampleData,
                                 qMax = 3,
                                 step = 0.1)
 
-    quickSampleDis <- sampleDis(sampleData = sampleData,
-                                compDisMat = quickCompDis$fingerDisMat,
-                                type = "GenUniFrac",
-                                alpha = 1)
+    quickSampDis <- sampDis(sampleData = sampleData,
+                            compDisMat = quickCompDis$fingerDisMat,
+                            type = "GenUniFrac",
+                            alpha = 1)
 
     if (outputType == "data") {
       chemDivData <- list(CompoundDissimilarity = quickCompDis$fingerDisMat,
                           FuncHillDiv = quickDiv,
                           FuncHillDivProf = quickDivProf$divProf,
-                          SampleDissimilarity = quickSampleDis$GenUniFrac)
+                          SampleDissimilarity = quickSampDis$GenUniFrac)
     } else {
       chemDivPlot(compDisMat = quickCompDis$fingerDisMat,
                   divData = quickDiv,
                   divProfData = quickDivProf,
-                  sampleDisMat = quickSampleDis$GenUniFrac,
+                  sampDisMat = quickSampDis$GenUniFrac,
                   groupData = groupData)
     }
   }

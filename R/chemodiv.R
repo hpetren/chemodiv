@@ -1,6 +1,6 @@
 #' chemodiv: A package for analysing phytochemical diversity
 #'
-#' *chemodiv* is an R package for aor analysing the chemodiversity of
+#' *chemodiv* is an R package for analysing the chemodiversity of
 #' phytochemical data. The package includes a number of functions that enables
 #' quantification and visualization of phytochemical diversity and
 #' dissimilarity for any type of phytochemical (and similar) samples, such as
@@ -83,7 +83,7 @@
 #' \code{\link{calcDivProf}}
 #'
 #' @section Sample dissimilarities:
-#' \code{\link{sampleDis}}
+#' \code{\link{sampDis}}
 #'
 #' @section Molecular network and properties:
 #' \code{\link{molNet}}

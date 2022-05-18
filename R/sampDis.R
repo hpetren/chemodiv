@@ -67,19 +67,19 @@
 #' @examples
 #' data(minimalSampData)
 #' data(minimalCompDis)
-#' sampleDis(minimalSampData)
-#' sampleDis(sampleData = minimalSampData, compDisMat = minimalCompDis,
+#' sampDis(minimalSampData)
+#' sampDis(sampleData = minimalSampData, compDisMat = minimalCompDis,
 #' type = c("BrayCurtis", "GenUniFrac"), alpha = 0.5)
 #'
 #' \dontrun{
 #' data(alpinaCompData)
 #' data(alpinaSampData)
 #' alpinaCompDis <- compDis(compoundData = alpinaCompData)
-#' sampleDis(sampleData = alpinaSampData,
+#' sampDis(sampleData = alpinaSampData,
 #' compDisMat = alpinaCompDis$fingerDisMat,
 #' type = "GenUniFrac")
 #' }
-sampleDis <- function(sampleData,
+sampDis <- function(sampleData,
                       compDisMat = NULL,
                       type = "BrayCurtis",
                       alpha = 1) {
@@ -104,7 +104,7 @@ sampleDis <- function(sampleData,
             compound dissimilarity matrix.")
   }
 
-  sampleDisMatList <- list()
+  sampDisMatList <- list()
 
   if ("BrayCurtis" %in% type) { # Bray-Curtis
 
@@ -117,9 +117,9 @@ sampleDis <- function(sampleData,
               dissimilarities calculated on absolute and proportional data
               are not identical.")
     }
-    sampleDisBrayCurtis <- as.matrix(vegan::vegdist(sampleData,
+    sampDisBrayCurtis <- as.matrix(vegan::vegdist(sampleData,
                                                     method = "bray"))
-    sampleDisMatList[["BrayCurtis"]] <- sampleDisBrayCurtis
+    sampDisMatList[["BrayCurtis"]] <- sampDisBrayCurtis
   }
 
   if ("GenUniFrac" %in% type) { # Generalized UniFracs
@@ -132,10 +132,10 @@ sampleDis <- function(sampleData,
     uniFracs <- suppressWarnings(GUniFrac::GUniFrac(otu.tab = sampleData,
                                                     tree = disClustPhylo,
                                                     alpha = alpha))
-    sampleDisUniFrac <- uniFracs$unifracs[, , paste0("d_", alpha)]
-    colnames(sampleDisUniFrac) <- 1:ncol(sampleDisUniFrac)
-    rownames(sampleDisUniFrac) <- 1:nrow(sampleDisUniFrac)
-    sampleDisMatList[["GenUniFrac"]] <- sampleDisUniFrac
+    sampDisUniFrac <- uniFracs$unifracs[, , paste0("d_", alpha)]
+    colnames(sampDisUniFrac) <- 1:ncol(sampDisUniFrac)
+    rownames(sampDisUniFrac) <- 1:nrow(sampDisUniFrac)
+    sampDisMatList[["GenUniFrac"]] <- sampDisUniFrac
   }
-  return(sampleDisMatList)
+  return(sampDisMatList)
 }

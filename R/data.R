@@ -76,7 +76,7 @@
 #'
 #' A matrix with sample dissimilarities calculated from
 #' \code{\link{minimalSampData}} and \code{\link{minimalCompDis}}
-#' using \code{\link{sampleDis}} with Generalized UniFracs with
+#' using \code{\link{sampDis}} with Generalized UniFracs with
 #' \code{alpha = 0.5}.
 #'
 #' @format A 4x4 sample dissimilarity matrix.
