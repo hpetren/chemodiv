@@ -1,6 +1,6 @@
 ---
 title: "Analysing Phytochemical Diversity -- an introduction to *chemodiv*"
-author: "Hampus Petrén, Tobias G. Köllner, Robert R. Junker"
+author: "Hampus Petrén^1^, Tobias G. Köllner^2^, Robert R. Junker^1,3^"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
@@ -16,7 +16,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-**The *chemodiv* package is in development and may not be fully functional/complete**
+^1^ Department of Biology, Philipps-University Marburg, Marburg, Germany
+
+^2^ Department of Natural Product Biosynthesis, Max Planck Institute for Chemical Ecology, Jena, Germany
+
+^3^ Department of Environment and Biodiversity, University of Salzburg, Salzburg, Austria
 
 ## Introduction
 *chemodiv* is an R package for analysing phytochemical data. It includes
@@ -27,8 +31,6 @@ or similar. Importantly, calculations of diversity and dissimilarity can
 incorporate biosynthetic and/or structural properties of the phytochemical 
 compounds, resulting in more comprehensive quantifications of 
 diversity and dissimilarity.
-
-*chemodiv* is currently available on GitHub: <https://github.com/hpetren/chemodiv>
 
 This introduction serves as a tutorial explaining the main intended use of 
 all the functions in the package. A complete description of the package will
