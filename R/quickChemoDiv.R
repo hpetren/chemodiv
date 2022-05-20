@@ -62,16 +62,14 @@
 #' data(minimalCompData)
 #' data(minimalSampData)
 #' groups <- c("A", "A", "B", "B")
-#' quickChemoDiv(sampleData = minimalSampData, compoundData = minimalCompData,
-#' groupData = groups, outputType = "plots")
+#' quickChemoDiv(sampleData = minimalSampData, groupData = groups,
+#' outputType = "data") # Without compound data
 #'
-#' \dontrun{
-#' data(alpinaCompData)
 #' data(alpinaSampData)
 #' data(alpinaPopData)
-#' quickChemoDiv(sampleData = alpinaSampData, compoundData = alpinaCompData,
-#' groupData = alpinaPopData, outputType = "plots")
-#' }
+#' quickChemoDiv(sampleData = alpinaSampData,
+#' outputType = "plots",
+#' groupData = alpinaPopData) # Without compound data
 quickChemoDiv <- function(sampleData,
                           compoundData = NULL,
                           groupData = NULL,
@@ -103,6 +101,7 @@ quickChemoDiv <- function(sampleData,
       chemoDivData <- list(HillDiv = quickDiv,
                            HillDivProf = quickDivProf$divProf,
                            SampleDissimilarity = quickSampDis$BrayCurtis)
+      return(chemoDivData)
     } else {
       chemoDivPlot(divData = quickDiv,
                    divProfData = quickDivProf,
@@ -138,6 +137,7 @@ quickChemoDiv <- function(sampleData,
                            FuncHillDiv = quickDiv,
                            FuncHillDivProf = quickDivProf$divProf,
                            SampleDissimilarity = quickSampDis$GenUniFrac)
+      return(chemoDivData)
     } else {
       chemoDivPlot(compDisMat = quickCompDis$fingerDisMat,
                    divData = quickDiv,

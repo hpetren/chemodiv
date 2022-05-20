@@ -76,19 +76,13 @@ data(minimalMolNet)
 groups <- c("A", "A", "B", "B")
 molNetPlot(minimalSampData, minimalMolNet)
 molNetPlot(minimalSampData, minimalMolNet, groups)
-molNetPlot(minimalSampData, minimalMolNet, npcTable = minimalNPCTable)
 molNetPlot(minimalSampData, minimalMolNet, plotNames = TRUE)
 
-\dontrun{
-data(alpinaCompData)
 data(alpinaSampData)
 data(alpinaPopData)
-alpinaNPCTable <- NPCTable(compoundData = alpinaCompData)
-alpinaCompDis <- compDis(compoundData = alpinaCompData)
-alpinaMolNet <- molNet(compDisMat = alpinaCompDis$fingerDisMat,
-npcTable = alpinaNPCTable, cutOff = 0.75)
+data(alpinaMolNet)
+data(alpinaNPCTable)
 molNetPlot(sampleData = alpinaSampData,
-networkObject = alpinaMolNet$networkObject,
-groupData = alpinaPopData, npcTable = alpinaNPCTable)
-}
+networkObject = alpinaMolNet,
+npcTable = alpinaNPCTable)
 }

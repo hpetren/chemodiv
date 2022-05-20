@@ -33,10 +33,8 @@
 #' data(minimalCompData)
 #' NPCTable(minimalCompData)
 #'
-#' \dontrun{
 #' data(alpinaCompData)
-#' NPCTable(compoundData = alpinaCompData)
-#' }
+#' NPCTable(compoundData = alpinaCompData[1:3,]) # First three compounds only
 NPCTable <- function(compoundData) {
 
   colnames(compoundData) <- tolower(colnames(compoundData))

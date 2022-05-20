@@ -43,14 +43,8 @@ used to create a plot of the network.
 \examples{
 data(minimalCompDis)
 data(minimalNPCTable)
-molNet(minimalCompDis)
 molNet(minimalCompDis, minimalNPCTable, cutOff = 0)
 
-\dontrun{
-data(alpinaCompData)
-alpinaNPCTable <- NPCTable(compoundData = alpinaCompData)
-alpinaCompDis <- compDis(compoundData = alpinaCompData)
-molNet(compDisMat = alpinaCompDis$fingerDisMat,
-npcTable = alpinaNPCTable, cutOff = 0.75)
-}
+data(alpinaCompDis)
+molNet(compDisMat = alpinaCompDis, cutOff = 0.75)
 }

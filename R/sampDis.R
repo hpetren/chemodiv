@@ -71,14 +71,11 @@
 #' sampDis(sampleData = minimalSampData, compDisMat = minimalCompDis,
 #' type = c("BrayCurtis", "GenUniFrac"), alpha = 0.5)
 #'
-#' \dontrun{
-#' data(alpinaCompData)
 #' data(alpinaSampData)
-#' alpinaCompDis <- compDis(compoundData = alpinaCompData)
+#' data(alpinaCompDis)
 #' sampDis(sampleData = alpinaSampData,
-#' compDisMat = alpinaCompDis$fingerDisMat,
+#' compDisMat = alpinaCompDis,
 #' type = "GenUniFrac")
-#' }
 sampDis <- function(sampleData,
                       compDisMat = NULL,
                       type = "BrayCurtis",

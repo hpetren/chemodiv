@@ -96,14 +96,11 @@ calcDiv(sampleData = minimalSampData, type = c("HillDiv", "HillEven"))
 calcDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
 type = "FuncHillDiv", q = 2)
 
-\dontrun{
-data(alpinaCompData)
 data(alpinaSampData)
-alpinaCompDis <- compDis(compoundData = alpinaCompData)
+data(alpinaCompDis)
 calcDiv(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis$fingerDisMat,
+compDisMat = alpinaCompDis,
 type = "FuncHillDiv")
-}
 }
 \references{
 Chao A, Chiu C-H, Jost L. 2014. Unifying Species Diversity,

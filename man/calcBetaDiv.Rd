@@ -45,16 +45,13 @@ data(minimalSampData)
 data(minimalCompDis)
 calcBetaDiv(sampleData = minimalSampData)
 calcBetaDiv(sampleData = minimalSampData, compDisMat = minimalCompDis,
-type = c("HillDiv", "FuncHillDiv"), q = 1)
+type = c("HillDiv", "FuncHillDiv"), q = 2)
 
-\dontrun{
-data(alpinaCompData)
 data(alpinaSampData)
-alpinaCompDis <- compDis(compoundData = alpinaCompData)
+data(alpinaCompDis)
 calcBetaDiv(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis$fingerDisMat,
+compDisMat = alpinaCompDis,
 type = "FuncHillDiv")
-}
 }
 \references{
 Chao A, Chiu C-H, Jost L. 2014. Unifying Species Diversity,

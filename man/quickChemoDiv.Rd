@@ -78,14 +78,12 @@ functions to allow for full control of function input, arguments and output.
 data(minimalCompData)
 data(minimalSampData)
 groups <- c("A", "A", "B", "B")
-quickChemoDiv(sampleData = minimalSampData, compoundData = minimalCompData,
-groupData = groups, outputType = "plots")
+quickChemoDiv(sampleData = minimalSampData, groupData = groups,
+outputType = "data") # Without compound data
 
-\dontrun{
-data(alpinaCompData)
 data(alpinaSampData)
 data(alpinaPopData)
-quickChemoDiv(sampleData = alpinaSampData, compoundData = alpinaCompData,
-groupData = alpinaPopData, outputType = "plots")
-}
+quickChemoDiv(sampleData = alpinaSampData,
+outputType = "plots",
+groupData = alpinaPopData) # Without compound data
 }

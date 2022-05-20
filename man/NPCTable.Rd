@@ -35,10 +35,8 @@ tool at \url{https://npclassifier.ucsd.edu/}.
 data(minimalCompData)
 NPCTable(minimalCompData)
 
-\dontrun{
 data(alpinaCompData)
-NPCTable(compoundData = alpinaCompData)
-}
+NPCTable(compoundData = alpinaCompData[1:3,]) # First three compounds only
 }
 \references{
 Kim HW, Wang M, Leber CA, Nothias L-F, Reher R, Kang KB,

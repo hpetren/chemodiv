@@ -100,10 +100,10 @@
 #' data(minimalCompData)
 #' compDis(minimalCompData)
 #'
-#' \dontrun{
 #' data(alpinaCompData)
-#' compDis(compoundData = alpinaCompData)
-#' }
+#' data(alpinaNPCTable)
+#' compDis(compoundData = alpinaCompData, type = "NPClassifier",
+#' npcTable = alpinaNPCTable)
 compDis <- function(compoundData,
                     type = "PubChemFingerprint",
                     npcTable = NULL,

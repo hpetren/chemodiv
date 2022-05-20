@@ -63,31 +63,22 @@ as input, and argument names should always be specified to ensure
 each dataset is correctly plotted.
 }
 \examples{
-data(minimalCompDis)
-data(minimalSampDis)
 minimalDiv <- calcDiv(minimalSampData, minimalCompDis, type = "FuncHillDiv")
-minimalDivProf <- calcDivProf(minimalSampData, minimalCompDis, type = "FuncHillDiv")
 groups <- c("A", "A", "B", "B")
-chemoDivPlot(compDisMat = minimalCompDis, divData = minimalDiv,
-divProfData = minimalDivProf, sampDisMat = minimalSampDis,
-groupData = groups)
+chemoDivPlot(divData = minimalDiv, groupData = groups)
 
-\dontrun{
-data(alpinaCompData)
-data(alpinaSampData)
+data(alpinaCompDis)
+data(alpinaSampDis)
 data(alpinaPopData)
-alpinaCompDis <- compDis(compoundData = alpinaCompData)
 alpinaDiv <- calcDiv(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis$fingerDisMat,
+compDisMat = alpinaCompDis,
 type = "FuncHillDiv")
 alpinaDivProf <- calcDivProf(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis$fingerDisMat,
-type = "FuncHillDiv")
-alpinaSampDis <- sampDis(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis$fingerDisMat,
-type = "GenUniFrac")
-chemoDivPlot(compDisMat = alpinaCompDis$fingerDisMat, divData = alpinaDiv,
-divProfData = alpinaDivProf, sampDisMat = alpinaSampDis$GenUniFrac,
+compDisMat = alpinaCompDis,
+type = "FuncHillDiv", qMin = 0, qMax = 2, step = 0.2)
+chemoDivPlot(compDisMat = alpinaCompDis,
+divData = alpinaDiv,
+divProfData = alpinaDivProf,
+sampDisMat = alpinaSampDis,
 groupData = alpinaPopData)
-}
 }

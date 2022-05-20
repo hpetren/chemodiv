@@ -108,10 +108,10 @@ dissimilarity value between all known compounds.
 data(minimalCompData)
 compDis(minimalCompData)
 
-\dontrun{
 data(alpinaCompData)
-compDis(compoundData = alpinaCompData)
-}
+data(alpinaNPCTable)
+compDis(compoundData = alpinaCompData, type = "NPClassifier",
+npcTable = alpinaNPCTable)
 }
 \references{
 Kim HW, Wang M, Leber CA, Nothias L-F, Reher R, Kang KB,
