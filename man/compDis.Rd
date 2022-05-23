@@ -55,7 +55,7 @@ deep-learning tool that automatically classifies natural products
 (i.e. phytochemical compounds) into a hierarchical classification of
 three levels: pathway, superclass and class. This classification largely
 corresponds to the biosynthetic groups/pathways the compounds
-are produced in. Classifications are fetched from
+are produced in. Classifications are downloaded from
 \url{https://npclassifier.ucsd.edu/}. \emph{NPClassifier} does not always
 manage to classify every compound into all three hierarchical levels. In
 such cases, it might be beneficial to first run \code{\link{NPCTable}},
@@ -70,7 +70,7 @@ variables describing the chemical structure of a compound.
 With this method, compounds are therefore compared
 based on how structurally dissimilar the molecules are.
 See \url{https://pubchemdocs.ncbi.nlm.nih.gov/data-specification}
-for more information.
+for more information. Data on molecules is downloaded from PubChem.
 \item fMCS, flexible Maximum Common Substructure,
 \code{type = "fMCS"}. This is a pairwise graph matching concept.
 The fMCS of two compounds is the largest substructure that occurs in both
@@ -79,7 +79,7 @@ As with the fingerprints, compounds are compared based on how
 structurally dissimilar the molecules are. While potentially a very
 accurate similarity measure, fMCS is more computationally demanding than
 the other methods, and will take a significant amount of time for larger
-data sets.
+data sets. Data on molecules is downloaded from PubChem.
 }
 
 Dissimilarities using NPClassifier and PubChem Fingerprints

@@ -9,8 +9,8 @@
 #' This classification largely corresponds to the biosynthetic groups/pathways
 #' the compounds are produced in. The \code{NPCTable} function
 #' conveniently performs this classification directly in R on the
-#' compounds in \code{compoundData}, by accessing the
-#' tool at \url{https://npclassifier.ucsd.edu/}.
+#' compounds in \code{compoundData}, by accessing the tool
+#' at \url{https://npclassifier.ucsd.edu/} and downloading the classifications.
 #'
 #' @param compoundData Data frame with the chemical compounds of interest,
 #' usually the compounds found in the sample dataset.
@@ -36,6 +36,10 @@
 #' data(alpinaCompData)
 #' NPCTable(compoundData = alpinaCompData[1:3,]) # First three compounds only
 NPCTable <- function(compoundData) {
+
+  if(!curl::has_internet()) {
+    stop("The function requires an internet connection to download data.")
+  }
 
   colnames(compoundData) <- tolower(colnames(compoundData))
   npcTab <- compoundData

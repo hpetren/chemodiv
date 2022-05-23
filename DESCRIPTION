@@ -43,7 +43,8 @@ Imports:
     gridExtra,
     ggdendro,
     tidyr,
-    rlang
+    rlang,
+    curl
 VignetteBuilder: knitr
 URL: https://github.com/hpetren/chemodiv
 BugReports: https://github.com/hpetren/chemodiv/issues
