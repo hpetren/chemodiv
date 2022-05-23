@@ -14,10 +14,10 @@ funcHillDiv(data, Dij, q)
 \item{q}{Diversity order.}
 }
 \value{
-Functional Hill diversity (FHD).
+Functional Hill diversity.
 }
 \description{
 Function to calculate Functional Hill diversity, as in equations
-4b and 6b in Chiu & Chao 2014 Plos One.
+4b and 6b in Chiu & Chao 2014 PLoS One.
 Note that this is done for one sample (row).
 }

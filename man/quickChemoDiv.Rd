@@ -83,7 +83,6 @@ outputType = "data") # Without compound data
 
 data(alpinaSampData)
 data(alpinaPopData)
-quickChemoDiv(sampleData = alpinaSampData,
-outputType = "plots",
+quickChemoDiv(sampleData = alpinaSampData, outputType = "plots",
 groupData = alpinaPopData) # Without compound data
 }

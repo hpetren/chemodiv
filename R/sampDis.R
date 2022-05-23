@@ -39,7 +39,7 @@
 #' @param type Type of sample dissimilarities to be calculated. This is
 #' Bray-Curtis dissimilarities, \code{type = "BrayCurtis"}, and/or
 #' Generalized UniFrac dissimilarities, \code{type = "GenUniFrac"}.
-#' @param alpha Parameter used in calculations of Generalized UniFracs
+#' @param alpha Parameter used in calculations of Generalized UniFrac
 #' dissimilarities. alpha can be set between 0 and 1.
 #' With \code{alpha = 0}, equal weight is put on every
 #' branch in the dendrogram. With \code{alpha = 1}, branches are
@@ -73,8 +73,7 @@
 #'
 #' data(alpinaSampData)
 #' data(alpinaCompDis)
-#' sampDis(sampleData = alpinaSampData,
-#' compDisMat = alpinaCompDis,
+#' sampDis(sampleData = alpinaSampData, compDisMat = alpinaCompDis,
 #' type = "GenUniFrac")
 sampDis <- function(sampleData,
                       compDisMat = NULL,

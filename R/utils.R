@@ -1,14 +1,14 @@
 #' Functional Hill diversity
 #'
 #' Function to calculate Functional Hill diversity, as in equations
-#' 4b and 6b in Chiu & Chao 2014 Plos One.
+#' 4b and 6b in Chiu & Chao 2014 PLoS One.
 #' Note that this is done for one sample (row).
 #'
 #' @param data Dataset. Single row in dataframe. Proportional or absolute data.
 #' @param Dij Dissimilarity matrix.
 #' @param q Diversity order.
 #'
-#' @return Functional Hill diversity (FHD).
+#' @return Functional Hill diversity.
 funcHillDiv <- function(data, Dij, q) {
 
   # Rao's Q

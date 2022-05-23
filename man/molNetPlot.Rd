@@ -82,7 +82,6 @@ data(alpinaSampData)
 data(alpinaPopData)
 data(alpinaMolNet)
 data(alpinaNPCTable)
-molNetPlot(sampleData = alpinaSampData,
-networkObject = alpinaMolNet,
+molNetPlot(sampleData = alpinaSampData, networkObject = alpinaMolNet,
 npcTable = alpinaNPCTable)
 }

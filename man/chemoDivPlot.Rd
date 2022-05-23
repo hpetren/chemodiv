@@ -70,15 +70,12 @@ chemoDivPlot(divData = minimalDiv, groupData = groups)
 data(alpinaCompDis)
 data(alpinaSampDis)
 data(alpinaPopData)
-alpinaDiv <- calcDiv(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis,
+alpinaDiv <- calcDiv(sampleData = alpinaSampData, compDisMat = alpinaCompDis,
 type = "FuncHillDiv")
 alpinaDivProf <- calcDivProf(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis,
-type = "FuncHillDiv", qMin = 0, qMax = 2, step = 0.2)
-chemoDivPlot(compDisMat = alpinaCompDis,
-divData = alpinaDiv,
-divProfData = alpinaDivProf,
-sampDisMat = alpinaSampDis,
+compDisMat = alpinaCompDis, type = "FuncHillDiv",
+qMin = 0, qMax = 2, step = 0.2)
+chemoDivPlot(compDisMat = alpinaCompDis, divData = alpinaDiv,
+divProfData = alpinaDivProf, sampDisMat = alpinaSampDis,
 groupData = alpinaPopData)
 }

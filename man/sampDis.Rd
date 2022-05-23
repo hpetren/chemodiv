@@ -18,7 +18,7 @@ dissimilarities can be calculated.}
 Bray-Curtis dissimilarities, \code{type = "BrayCurtis"}, and/or
 Generalized UniFrac dissimilarities, \code{type = "GenUniFrac"}.}
 
-\item{alpha}{Parameter used in calculations of Generalized UniFracs
+\item{alpha}{Parameter used in calculations of Generalized UniFrac
 dissimilarities. alpha can be set between 0 and 1.
 With \code{alpha = 0}, equal weight is put on every
 branch in the dendrogram. With \code{alpha = 1}, branches are
@@ -73,8 +73,7 @@ type = c("BrayCurtis", "GenUniFrac"), alpha = 0.5)
 
 data(alpinaSampData)
 data(alpinaCompDis)
-sampDis(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis,
+sampDis(sampleData = alpinaSampData, compDisMat = alpinaCompDis,
 type = "GenUniFrac")
 }
 \references{

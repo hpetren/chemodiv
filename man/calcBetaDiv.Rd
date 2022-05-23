@@ -49,8 +49,7 @@ type = c("HillDiv", "FuncHillDiv"), q = 2)
 
 data(alpinaSampData)
 data(alpinaCompDis)
-calcBetaDiv(sampleData = alpinaSampData,
-compDisMat = alpinaCompDis,
+calcBetaDiv(sampleData = alpinaSampData, compDisMat = alpinaCompDis,
 type = "FuncHillDiv")
 }
 \references{

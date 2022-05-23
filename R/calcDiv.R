@@ -53,7 +53,7 @@
 #' of *q*, divided by the number of compounds, and therefore
 #' has a minimum value of 1 / number of compounds and maximum value of 1.
 #' This measure of evenness is replication invariant. This measure can be
-#' normalized to range from 0 to 1 (eq. 13 in Tuomisto 2012).
+#' normalized to range from 0 to 1 (equation 13 in Tuomisto 2012).
 #' }
 #'
 #' @param sampleData Data frame with the relative concentration of each
@@ -103,8 +103,7 @@
 #'
 #' data(alpinaSampData)
 #' data(alpinaCompDis)
-#' calcDiv(sampleData = alpinaSampData,
-#' compDisMat = alpinaCompDis,
+#' calcDiv(sampleData = alpinaSampData, compDisMat = alpinaCompDis,
 #' type = "FuncHillDiv")
 calcDiv <- function(sampleData,
                     compDisMat = NULL,

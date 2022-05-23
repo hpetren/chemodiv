@@ -62,8 +62,7 @@
 #' data(alpinaPopData)
 #' data(alpinaMolNet)
 #' data(alpinaNPCTable)
-#' molNetPlot(sampleData = alpinaSampData,
-#' networkObject = alpinaMolNet,
+#' molNetPlot(sampleData = alpinaSampData, networkObject = alpinaMolNet,
 #' npcTable = alpinaNPCTable)
 molNetPlot <- function(sampleData,
                        networkObject,
