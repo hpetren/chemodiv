@@ -10,7 +10,6 @@
 #' Evolution of floral scent in relation to self-incompatibility and capacity
 #' for autonomous self-pollination in the perennial herb *Arabis alpina*.
 #' Annals of Botany 127: 737-747.
-#' \url{https://doi.org/10.1093/aob/mcab007}
 "alpinaSampData"
 
 #' Arabis alpina floral scent compounds
@@ -26,7 +25,6 @@
 #' Evolution of floral scent in relation to self-incompatibility and capacity
 #' for autonomous self-pollination in the perennial herb *Arabis alpina*.
 #' Annals of Botany 127: 737-747.
-#' \url{https://doi.org/10.1093/aob/mcab007}
 "alpinaCompData"
 
 #' Arabis alpina populations
@@ -42,7 +40,6 @@
 #' Evolution of floral scent in relation to self-incompatibility and capacity
 #' for autonomous self-pollination in the perennial herb *Arabis alpina*.
 #' Annals of Botany 127: 737-747.
-#' \url{https://doi.org/10.1093/aob/mcab007}
 "alpinaPopData"
 
 #' Arabis alpina floral scent compound dissimilarity matrix
