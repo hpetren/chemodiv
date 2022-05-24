@@ -44,8 +44,9 @@ install_github("hpetren/chemodiv")
 
 ## Usage
 
-Detailed usage notes can be found with `help(chemodiv)` and in the documentation
-for each function. In short, two datasets are required. First, a dataset
+Detailed usage notes can be found with `help(chemodiv)` and in the 
+documentation for each function. See the vignette for a worked example.
+In short, two datasets are required. First, a dataset
 on the relative relative abundance/concentration (i.e. proportion) of
 different phytochemical compounds in different samples. Second, a dataset 
 with the compound name, SMILES and InChIKey for all the compounds in 
@@ -97,12 +98,3 @@ dissimilarity calculated by the other functions in the package.
 Function `quickChemoDiv()` uses many of the other functions in
 the package to in one simple step calculate and visualize chemodiversity for
 users wanting to quickly explore their data using standard parameters.
-
-
-## Vignette
-A preliminary vignette describing an example is available [here](https://drive.google.com/file/d/1AGSrXYAc_iwsbszZdS798_atrfFibdDy/view?usp=sharing).
-
-
-## Citation
-Under construction
-
