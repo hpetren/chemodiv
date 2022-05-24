@@ -14,7 +14,6 @@ Petren H, Torang P, Agren J, Friberg M. 2021.
 Evolution of floral scent in relation to self-incompatibility and capacity
 for autonomous self-pollination in the perennial herb \emph{Arabis alpina}.
 Annals of Botany 127: 737-747.
-\url{https://doi.org/10.1093/aob/mcab007}
 }
 \usage{
 alpinaPopData
