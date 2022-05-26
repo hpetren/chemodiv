@@ -8,6 +8,8 @@
 #' @param Dij Dissimilarity matrix.
 #' @param q Diversity order.
 #'
+#' @noRd
+#'
 #' @return Functional Hill diversity.
 funcHillDiv <- function(data, Dij, q) {
 
@@ -53,6 +55,8 @@ funcHillDiv <- function(data, Dij, q) {
 #'
 #' @param data Dataset. Single row in dataframe. Proportional or absolute data.
 #' @param Dij Dissimilarity matrix.
+#'
+#' @noRd
 #'
 #' @return Value of Rao's Q.
 calculateQ = function(data, Dij) {
