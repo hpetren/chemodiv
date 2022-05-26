@@ -1,7 +1,7 @@
 ## Test environments
 
 * local Windows 10 install, R 4.2.0
-* ubuntu ADD VERSION, R 4.2.0
+* Ubuntu 22.04 LTS, R 4.2.0
 * win-builder (R-devel)
 
 ## R CMD check results
