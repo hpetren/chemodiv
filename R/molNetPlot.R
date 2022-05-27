@@ -89,7 +89,8 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
-      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight),
+                             edge_color = "grey40") +
       ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
@@ -108,13 +109,17 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
-      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight),
+                             edge_color = "grey40") +
+      ggraph::scale_edge_width(range = c(0.3, 3),
+                               name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = compoundMean), size = 16) +
       ggplot2::scale_colour_viridis_c() +
       ggplot2::labs(color = "Proportion",
                     width = "Molecular similarity") +
-      ggraph::geom_node_label(ggplot2::aes(label = .data$name), nudge_x = 0, nudge_y = 0.2) +
+      ggraph::geom_node_label(ggplot2::aes(label = .data$name),
+                              nudge_x = 0,
+                              nudge_y = 0.2) +
       ggplot2::theme(legend.title = ggplot2::element_text(size = 16),
                      legend.text = ggplot2::element_text(size = 14),
                      panel.background = ggplot2::element_blank(),
@@ -143,8 +148,10 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
-      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight),
+                             edge_color = "grey40") +
+      ggraph::scale_edge_width(range = c(0.3, 3),
+                               name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                            fill = npcTable$pathway,
                                            size = compoundMean),
@@ -186,8 +193,10 @@ molNetPlot <- function(sampleData,
     compoundMean <- colMeans(sampleData)
 
     p1 <- ggraph::ggraph(graph = networkObject, layout = layout) +
-      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight), edge_color = "grey40") +
-      ggraph::scale_edge_width(range = c(0.3, 3), name = "Molecular similarity") +
+      ggraph::geom_edge_link(ggplot2::aes(width = .data$weight),
+                             edge_color = "grey40") +
+      ggraph::scale_edge_width(range = c(0.3, 3),
+                               name = "Molecular similarity") +
       ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                            fill = npcTable$pathway,
                                            size = compoundMean),
@@ -310,7 +319,8 @@ molNetPlot <- function(sampleData,
         p1 <- ggraph::ggraph(graph = networkObjectMan, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight,
                                               color = .data$linkCol)) +
-          ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
+          ggraph::scale_edge_width(range = c(0.3, 2.5),
+                                   name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = npcTable$pathway,
                                                fill = npcTable$pathway,
                                                size = compoundMeanTrans[,j]),
@@ -340,7 +350,9 @@ molNetPlot <- function(sampleData,
   } else {
     # Only group data
 
-    compoundMean <- stats::aggregate(sampleData, by = list(Group = groupData), mean)
+    compoundMean <- stats::aggregate(sampleData,
+                                     by = list(Group = groupData),
+                                     mean)
     compoundMeanTrans <- t(compoundMean[, 2:ncol(compoundMean)])
     colnames(compoundMeanTrans) <- compoundMean$Group
     compoundMeanTrans <- as.data.frame(compoundMeanTrans)
@@ -411,7 +423,8 @@ molNetPlot <- function(sampleData,
         p1 <- ggraph::ggraph(graph = networkObjectMan, layout = layout) +
           ggraph::geom_edge_link(ggplot2::aes(width = .data$weight,
                                               color = .data$linkCol)) +
-          ggraph::scale_edge_width(range = c(0.3, 2.5), name = "Molecular similarity") +
+          ggraph::scale_edge_width(range = c(0.3, 2.5),
+                                   name = "Molecular similarity") +
           ggraph::geom_node_point(ggplot2::aes(color = compoundMeanTrans[,j],
                                                shape = groupShape$shape),
                                   size = 10) +

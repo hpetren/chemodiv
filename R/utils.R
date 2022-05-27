@@ -59,7 +59,7 @@ funcHillDiv <- function(data, Dij, q) {
 #' @noRd
 #'
 #' @return Value of Rao's Q.
-calculateQ = function(data, Dij) {
+calculateQ <- function(data, Dij) {
 
   pAbs <- data[data != 0]
   p <- pAbs / sum(pAbs)

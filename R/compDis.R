@@ -151,7 +151,7 @@ compDis <- function(compoundData,
 
             npcClass3 <- jsonlite::fromJSON(npcClass2)
 
-            # Check if there are any classifications, then put data in data frame
+            # Check if there are classifications, then put data in data frame
             if (is.character(npcClass3$pathway_results)) {
 
               npcTable$pathway[i] <- npcClass3$pathway_results[1]
@@ -175,8 +175,8 @@ compDis <- function(compoundData,
             }
             # If the output from NPClassifier API is not as expected
           } else {
-            message(paste0("NPClassifier gave error output for compound ", i,". ",
-                           "Is the SMILES correct?"))
+            message(paste0("NPClassifier gave error output for compound ", i,
+                           ". ", "Is the SMILES correct?"))
           }
         }
       }
@@ -199,7 +199,9 @@ compDis <- function(compoundData,
     # for compounds where superclass and/or class but not pathway is NA
     for (i in 1:nrow(npcTable)) {
       if (is.na(npcTable$superclass[i]) && !is.na(npcTable$pathway[i])) {
-        npcTable$superclass[i] <- paste("superclass", npcTable$compound[i], sep = "_")
+        npcTable$superclass[i] <- paste("superclass",
+                                        npcTable$compound[i],
+                                        sep = "_")
       }
       if (is.na(npcTable$class[i]) && !is.na(npcTable$pathway[i])) {
         npcTable$class[i] <- paste("class", npcTable$compound[i], sep = "_")
