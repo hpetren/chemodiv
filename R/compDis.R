@@ -341,6 +341,7 @@ compDis <- function(compoundData,
       # in order to close connections ChemmineR sets up
       cidNoNA <- compoundCID$cid[!is.na(compoundCID$cid)]
       oldw <- getOption("warn")
+      on.exit(options(warn = oldw))
       options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(cidNoNA))
       showConnections()
@@ -375,6 +376,7 @@ compDis <- function(compoundData,
       }
     } else { # If no inchikey NAs
       oldw <- getOption("warn")
+      on.exit(options(warn = oldw))
       options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
       showConnections()
@@ -431,6 +433,7 @@ compDis <- function(compoundData,
     if (any(is.na(compoundCID$cid))) { # If there are inchikey NAs
 
       oldw <- getOption("warn")
+      on.exit(options(warn = oldw))
       options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid[!is.na(compoundCID$cid)]))
       showConnections()
@@ -496,6 +499,7 @@ compDis <- function(compoundData,
     } else { # If no inchikey NAs
 
       oldw <- getOption("warn")
+      on.exit(options(warn = oldw))
       options(warn = -1)
       compoundSDF <- ChemmineR::pubchemCidToSDF(as.numeric(compoundCID$cid))
       showConnections()

@@ -1,6 +1,6 @@
 Package: chemodiv
 Title: Analysing Chemodiversity of Phytochemical Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Hampus", "Petrén", email = "hampus.petren@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6490-4517")),
@@ -8,11 +8,11 @@ Authors@R: c(
     role = c("aut"), comment = c(ORCID = "0000-0002-7037-904X")),
     person("Robert R.", "Junker", email = "robert.junker@uni-marburg.de",
     role = c("aut"), comment = c(ORCID = "0000-0002-7919-9678")))
-Description: Quantify and visualise various measures of chemical diversity and 
-    dissimilarity, for phytochemical compounds and other sets of chemical 
-    composition data. Importantly, these measures can incorporate biosynthetic 
-    and/or structural properties of the chemical compounds, resulting in a more 
-    comprehensive quantification of diversity and dissimilarity. 
+Description: Quantify and visualise various measures of chemical diversity and
+    dissimilarity, for phytochemical compounds and other sets of chemical
+    composition data. Importantly, these measures can incorporate biosynthetic
+    and/or structural properties of the chemical compounds, resulting in a more
+    comprehensive quantification of diversity and dissimilarity.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
