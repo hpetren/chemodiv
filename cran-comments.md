@@ -1,4 +1,13 @@
-## **Re-submission**
+## **Second re-submission**
+
+This is a re-submission. The following changes have been made:
+
+* The use of options(warn=-1) has now been completely removed.
+
+The test environments and check results are identical to the initial submission.
+
+
+## **First re-submission**
 
 This is a re-submission. The following changes have been made:
 
@@ -29,6 +38,7 @@ we have now added an immediate call of on.exit() where applicable, and hope
 that this is an acceptable solution.
 
 The test environments and check results are identical to the initial submission.
+
 
 ## **Initial submission**
 
