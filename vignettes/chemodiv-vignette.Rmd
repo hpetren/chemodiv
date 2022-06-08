@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ^3^ Department of Environment and Biodiversity, University of Salzburg, Salzburg, Austria
 
 ## Introduction
-*chemodiv* is an R package for analysing phytochemical data. It includes
+`chemodiv` is an R package for analysing phytochemical data. It includes
 a number of functions that makes it straightforward to quantify and
 visualize phytochemical diversity and dissimilarity for any type of
 phytochemical samples, such as herbivore defence compounds, volatiles 
@@ -38,15 +38,17 @@ be available in Petrén et al. 2022.
 
 
 ## Setup
-The developmental version of the package can be installed directly from GitHub
-in R using the `install_github()` function from the `devtools` package.
+The current version of the package can be installed from CRAN. Alternatively,
+the developmental version of the package can be installed from GitHub
+using the `install_github()` function from the `devtools` package.
 
 ```{r, eval = FALSE}
-# Install and load devtools package
-install.packages("devtools")
-library("devtools")
+# Install current version
+install.packages("chemodiv")
 
-# Install chemodiv
+# Install developmental version
+install.packages("devtools") # Install devtools if not already installed
+library("devtools")
 install_github("hpetren/chemodiv")
 ```
 
@@ -310,6 +312,7 @@ molNetPlot(sampleData = alpinaSampData,
            npcTable = alpinaNPC,
            plotNames = TRUE)
 ```
+
 Nodes represent individual compounds. They are coloured by their 
 "pathway" classification by NPClassifier. Node size corresponds to the mean
 proportional concentration of the compounds in the samples. Edge widths 
@@ -338,6 +341,7 @@ chemoDivPlot(compDisMat = alpinaCompDis$fingerDisMat,
              sampDisMat = alpinaSampDis$GenUniFrac,
              groupData = alpinaPopData)
 ```
+
 The output consists of the selected plots. The dendrogram visualizes 
 similarities between compounds in a way complementary to the molecular
 network above, with the three terpenoids having a high dissimilarity to 

@@ -6,8 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-*chemodiv* is an R package for analysing the chemodiversity of
-phytochemical data
+`chemodiv` is an R package for analysing chemodiversity of phytochemical
+data
 
 The package can be used to calculate various types of diversities and
 dissimilarities for phytochemical datasets. This includes the use of
@@ -18,27 +18,32 @@ phytochemical diversity.
 
 ## Installation
 
-The developmental version of the package can be installed R using the
-`install_github()` function from the `devtools` package.
+The current version of the package can be installed from CRAN.
+Alternatively, the developmental version of the package can be installed
+from GitHub using the `install_github()` function from the `devtools`
+package.
 
 ``` r
-# Install devtools if not already installed
-install.packages("devtools")
+# Install current version
+install.packages("chemodiv")
 
+# Install developmental version
+install.packages("devtools") # Install devtools if not already installed
 library("devtools")
-
 install_github("hpetren/chemodiv")
 ```
 
 ## Usage
 
 Detailed usage notes can be found with `help(chemodiv)` and in the
-documentation for each function. See the vignette for a worked example.
-In short, two datasets are required. First, a dataset on the relative
-relative abundance/concentration (i.e. proportion) of different
-phytochemical compounds in different samples. Second, a dataset with the
-compound name, SMILES and InChIKey for all the compounds in the first
-dataset. The following functions can then be used:
+documentation for each function. See the
+[vignette](https://cran.r-project.org/web/packages/chemodiv/vignettes/chemodiv-vignette.html)
+for a worked example. In short, two datasets are required. First, a
+dataset on the relative relative abundance/concentration
+(i.e. proportion) of different phytochemical compounds in different
+samples. Second, a dataset with the compound name, SMILES and InChIKey
+for all the compounds in the first dataset. The following functions can
+then be used:
 
 #### Data formatting checks
 
