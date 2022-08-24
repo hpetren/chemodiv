@@ -142,11 +142,19 @@ The function `NPCTable()` classifies compounds with
 is a deep-learning tool that classifies phytochemical compounds into a 
 hierarchical classification of three groups, pathway, superclass and class, 
 largely corresponding to biosynthetic pathways:
-```{r}
+```{r, eval = FALSE}
 alpinaNPC <- NPCTable(compoundData = alpinaCompData)
 
 alpinaNPC[1,] # Classification of the first compound in dataset
 ```
+
+```{r, echo = FALSE}
+data("alpinaNPCTable")
+alpinaNPC <- alpinaNPCTable
+rm(alpinaNPCTable)
+alpinaNPC[1,]
+```
+
 Here, the first compound in the list, *(Z)-beta-Ocimene*, is classified as
 Terpenoids > Monoterpenoids > Acyclic monoterpenoids.
 The classification of the compounds is put into a data frame and can 
@@ -167,12 +175,22 @@ while molecules not having similar substructures/features will have
 a high dissimilarity.
 
 We calculate compound dissimilarities with `type = "PubChemFingerprint"`.
-```{r, message = FALSE}
+```{r, eval = FALSE}
 alpinaCompDis <- compDis(compoundData = alpinaCompData,
                          type = "PubChemFingerprint")
 
 alpinaCompDis$fingerDisMat[1:4, 1:4] # Part of compound dissimilarity matrix
 ```
+
+```{r, echo = FALSE, message = FALSE}
+data("alpinaCompDis")
+alpinaCompDisMat <- alpinaCompDis
+rm(alpinaCompDis)
+alpinaCompDis <- list()
+alpinaCompDis[["fingerDisMat"]] <- alpinaCompDisMat
+alpinaCompDis$fingerDisMat[1:4, 1:4]
+```
+
 The output from the function is a list with one or several compound 
 dissimilarity matrices, depending on which `type` was used as input.
 If multiple `type` are used as input, a matrix with mean values of the other
