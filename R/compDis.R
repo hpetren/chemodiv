@@ -132,8 +132,13 @@ compDis <- function(compoundData,
 
     if (is.null(npcTable)) { # If no table in input
 
+      httr::set_config(httr::config(http_version = 0))
       if(!curl::has_internet()) {
-        stop("The function requires an internet connection to download data.")
+        message("No internet connection available to download compound data.")
+        return(invisible(NULL))
+      } else if (httr::GET("https://npclassifier.ucsd.edu/")$status_code != 200) {
+        message("NPClassifier, https://npclassifier.ucsd.edu/, is unavailable.")
+        return(invisible(NULL))
       }
 
       npcTable <- compoundData
@@ -322,8 +327,10 @@ compDis <- function(compoundData,
 
   if ("PubChemFingerprint" %in% type) { # Dissimilarities from Fingerprints
 
+    httr::set_config(httr::config(http_version = 0))
     if(!curl::has_internet()) {
-      stop("The function requires an internet connection to download data.")
+      message("No internet connection available to download compound data.")
+      return(invisible(NULL))
     }
 
     message("Calculating compound dissimilarity matrix using Fingerprints...")
@@ -409,8 +416,10 @@ compDis <- function(compoundData,
 
   if ("fMCS" %in% type) { # Dissimilarities from fMCS
 
+    httr::set_config(httr::config(http_version = 0))
     if(!curl::has_internet()) {
-      stop("The function requires an internet connection to download data.")
+      message("No internet connection available to download compound data.")
+      return(invisible(NULL))
     }
 
     message("Calculating compound dissimilarity matrix using fMCS...")
