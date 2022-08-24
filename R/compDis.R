@@ -102,12 +102,16 @@
 #'
 #' @examples
 #' data(minimalCompData)
-#' compDis(minimalCompData)
+#' data(minimalNPCTable)
+#' compDis(minimalCompData, type = "NPClassifier",
+#' npcTable = minimalNPCTable) # Dissimilarity based on NPClassifier
+#'
+#' \dontrun{compDis(minimalCompData)} # Dissimilarity based on Fingerprints
 #'
 #' data(alpinaCompData)
 #' data(alpinaNPCTable)
 #' compDis(compoundData = alpinaCompData, type = "NPClassifier",
-#' npcTable = alpinaNPCTable)
+#' npcTable = alpinaNPCTable) # Dissimilarity based on NPClassifier
 compDis <- function(compoundData,
                     type = "PubChemFingerprint",
                     npcTable = NULL,

@@ -110,12 +110,16 @@ dissimilarity value between all known compounds.
 }
 \examples{
 data(minimalCompData)
-compDis(minimalCompData)
+data(minimalNPCTable)
+compDis(minimalCompData, type = "NPClassifier",
+npcTable = minimalNPCTable) # Dissimilarity based on NPClassifier
+
+\dontrun{compDis(minimalCompData)} # Dissimilarity based on Fingerprints
 
 data(alpinaCompData)
 data(alpinaNPCTable)
 compDis(compoundData = alpinaCompData, type = "NPClassifier",
-npcTable = alpinaNPCTable)
+npcTable = alpinaNPCTable) # Dissimilarity based on NPClassifier
 }
 \references{
 Kim HW, Wang M, Leber CA, Nothias L-F, Reher R, Kang KB,

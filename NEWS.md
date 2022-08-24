@@ -1,8 +1,9 @@
 # chemodiv 0.1.2.9000 (developmental version)
 
 * Minor edits to readme.
-* Fixed problems with vignette building and made minor edits to text.
+* Fixed issue with vignette building and made minor edits to text.
 * Removed non-standard character from a dataset.
+* Fixed issue with an example.
 
 # chemodiv 0.1.2
 
