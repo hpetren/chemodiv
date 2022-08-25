@@ -60,7 +60,9 @@ boxes/lines/colours.
 }
 Note that this function can take any combination of the four arguments
 as input, and argument names should always be specified to ensure
-each dataset is correctly plotted.
+each dataset is correctly plotted. If including the function
+argument \code{sampDisMat}, a Nonmetric Multidimensional Scaling (NMDS)
+will be performed, which may take time for larger datasets.
 }
 \examples{
 minimalDiv <- calcDiv(minimalSampData, minimalCompDis, type = "FuncHillDiv")

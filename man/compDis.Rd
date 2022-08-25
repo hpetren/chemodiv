@@ -79,11 +79,11 @@ The fMCS of two compounds is the largest substructure that occurs in both
 compounds allowing for atom and/or bond mismatches (Wang et al 2013).
 As with the fingerprints, compounds are compared based on how
 structurally dissimilar the molecules are. While potentially a very
-accurate similarity measure, fMCS is more computationally demanding than
-the other methods, and will take a significant amount of time for larger
-data sets. Data on molecules is downloaded from PubChem. In association
-with this, there might be a Warning message about closing unused
-connections, which is not important.
+accurate similarity measure, fMCS is much more computationally demanding
+than the other methods, and will take a significant amount of time for
+larger data sets. Data on molecules is downloaded from PubChem.
+In association with this, there might be a Warning message about closing
+unused connections, which is not important.
 }
 
 Dissimilarities using NPClassifier and PubChem Fingerprints
@@ -93,20 +93,21 @@ fingerprint variable (PubChem Fingerprints) as columns. fMCS generates
 dissimilarity values by calculating Jaccard dissimilarities based on the
 number of atoms in the maximum common substructure, allowing for one
 atom and one bond mismatch. Dissimilarities are outputted as
-dissimilarity matrices. If more than one type of dissimilarity
-is calculated, the function will output an additional
-dissimilarity matrix with the mean dissimilarity values from the
-selected methods.
+dissimilarity matrices. If dissimilarities are calculated with more than
+one method, the function will output an additional dissimilarity matrix
+with the mean dissimilarity values from the selected methods.
 
-If there are unknown compounds, which do not
-have a corresponding SMILES or InChIKey, this can be handled in three
+If there are unknown compounds, which do not have a
+corresponding SMILES or InChIKey, this can be handled in three
 different ways. First, these can be completely removed from the list
 of compounds and the sample data set, and hence excluded from all analyses.
 Second, if \code{unknownCompoundsMean = FALSE}, unknown compounds will
 be given a dissimilarity value of 1 to all other compounds. Third, if
 \code{unknownCompoundsMean = TRUE}, unknown compounds will be given
 a dissimilarity value to all other compounds which equals the mean
-dissimilarity value between all known compounds.
+dissimilarity value between all known compounds. See \code{\link{chemodiv}}
+for alternative methods that can be used when most or all compounds
+are unknown.
 }
 \examples{
 data(minimalCompData)
