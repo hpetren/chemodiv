@@ -94,3 +94,10 @@ package.
 Function `quickChemoDiv()` uses many of the other functions in the
 package to in one simple step calculate and visualize chemodiversity for
 users wanting to quickly explore their data using standard parameters.
+
+## References
+
+Petrén H., T.G. Köllner and R.R Junker. 2022. Quantifying chemodiversity
+considering biochemical and structural properties of compounds with the
+R package *chemodiv*. bioRxiv doi:
+[10.1101/2022.06.08.495236](https://www.biorxiv.org/content/10.1101/2022.06.08.495236v1).

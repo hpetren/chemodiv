@@ -1,0 +1,21 @@
+citHeader("To cite chemodiv in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Quantifying chemodiversity considering biochemical and structural properties of compounds with the R package chemodiv",
+  author   = personList(as.person("Hampus Petrén"),
+                   as.person("Tobias G. Köllner"),
+                   as.person("Robert R. Junker")),
+  journal  = "bioRxiv",
+  year     = "2022",
+  volume   = "",
+  number   = "",
+  pages    = "",
+  url      = "https://doi.org/10.1101/2022.06.08.495236",
+
+  textVersion = paste("Hampus Petrén, Tobias G. Köllner, Robert R. Junker (2022).",
+        "Quantifying chemodiversity considering biochemical and structural properties of compounds with the R package chemodiv.",
+        "bioRxiv.",
+        "https://doi.org/10.1101/2022.06.08.495236"
+        )
+)
