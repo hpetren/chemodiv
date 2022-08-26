@@ -36,14 +36,12 @@ install_github("hpetren/chemodiv")
 ## Usage
 
 Detailed usage notes can be found with `help(chemodiv)` and in the
-documentation for each function. See the
-[vignette](https://cran.r-project.org/web/packages/chemodiv/vignettes/chemodiv-vignette.html)
-for a worked example. In short, two datasets are required. First, a
-dataset on the relative relative abundance/concentration
-(i.e. proportion) of different phytochemical compounds in different
-samples. Second, a dataset with the compound name, SMILES and InChIKey
-for all the compounds in the first dataset. The following functions can
-then be used:
+documentation for each function. See the vignette for a worked example.
+In short, two datasets are required. First, a dataset on the relative
+relative abundance/concentration (i.e. proportion) of different
+phytochemical compounds in different samples. Second, a dataset with the
+compound name, SMILES and InChIKey for all the compounds in the first
+dataset. The following functions can then be used:
 
 #### Data formatting checks
 
@@ -99,5 +97,4 @@ users wanting to quickly explore their data using standard parameters.
 
 Petrén H., T.G. Köllner and R.R Junker. 2022. Quantifying chemodiversity
 considering biochemical and structural properties of compounds with the
-R package *chemodiv*. bioRxiv doi:
-[10.1101/2022.06.08.495236](https://www.biorxiv.org/content/10.1101/2022.06.08.495236v1).
+R package *chemodiv*. bioRxiv doi: 10.1101/2022.06.08.495236.
