@@ -384,7 +384,6 @@ effects of phytochemical variation on plants for various ecological
 interactions and evolutionary processes.
 
 
-
 ### Shortcut function
 The function `quickChemoDiv()` uses many of the above functions to in one 
 simple step calculate and visualize chemodiversity for users wanting to 
@@ -397,6 +396,37 @@ quickChemoDiv(compoundData = alpinaCompData,
               outputType = "plots") # Not run
 ```
 
+
+## Solutions to common questions and issues
+
+* **Getting datasets in order.** See `?chemodiv` for a detailed description
+on how to structure datasets, and compile chemical identifiers for compounds.
+* **Data with unidentified compounds.** See `?chemodiv` for a description on
+how datasets with missing data can be handled, and for alternative ways
+to calculate compound dissimilarities when most or all compounds are
+unidentified.
+* **What method should I use to calculate compound dissimilarities?** See
+`?compDis` for details on how compound dissimilarities are calculated using
+the three different methods. See Petrén et al 2022 for a discussion on
+what method is suitable depending on type of data and research
+question addressed.
+* **Long computation times with `compDis()`.** The `compDis()` function can
+calculate compound dissimilarities using `NPClassifier`, `PubChemFingerprint`
+and `fMCS`. For larger datasets, this will take some time as data is
+downloaded and pairwise compound dissimilarities are calculated. Of the three
+methods, `fMCS` is much more computationally intensive than the
+others, and may take a very long time for datasets with a large number
+of structurally complex molecules. In such cases, it is recommended to
+use `PubChemFingerprint` instead.
+* **What kind of phytochemical diversity should I calculate?** See
+`?calcDiv` for a detailed description on how different measures of
+diversity and evenness are calculated. See Petrén et al 2022 for a more
+in depth comparison and discussion of different diversity indices.
+* **Long computation times with `chemoDivPlot()`.** The `chemoDivPlot()`
+function can be used to conveniently create basic plots of chemodiversity.
+If the function argument `sampDisMat` is included, a Nonmetric Multidimensional 
+Scaling (NMDS) will be performed. This might take some time for larger
+datasets, and excluding this argument will make the plotting much quicker.
 
 
 ## References
