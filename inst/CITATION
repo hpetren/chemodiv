@@ -6,16 +6,16 @@ citEntry(
   author   = personList(as.person("Hampus Petrén"),
                    as.person("Tobias G. Köllner"),
                    as.person("Robert R. Junker")),
-  journal  = "bioRxiv",
-  year     = "2022",
+  journal  = "New Phytologist",
+  year     = "2023",
   volume   = "",
   number   = "",
   pages    = "",
-  url      = "https://doi.org/10.1101/2022.06.08.495236",
+  url      = "https://doi.org/10.1111/nph.18685",
 
-  textVersion = paste("Hampus Petrén, Tobias G. Köllner, Robert R. Junker (2022).",
+  textVersion = paste("Hampus Petrén, Tobias G. Köllner, Robert R. Junker (2023).",
         "Quantifying chemodiversity considering biochemical and structural properties of compounds with the R package chemodiv.",
-        "bioRxiv.",
-        "https://doi.org/10.1101/2022.06.08.495236"
+        "New Phytologist.",
+        "https://doi.org/10.1111/nph.18685"
         )
 )

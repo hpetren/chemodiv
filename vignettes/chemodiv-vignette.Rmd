@@ -33,8 +33,8 @@ compounds, resulting in more comprehensive quantifications of
 diversity and dissimilarity.
 
 This introduction serves as a tutorial explaining the main intended use of 
-all the functions in the package. A complete description of the package will
-be available in Petrén et al. 2022.
+all the functions in the package. A complete description of the package is
+available in Petrén et al. 2023.
 
 
 ## Setup
@@ -274,7 +274,7 @@ and values for gamma diversity, mean alpha diversity and beta diversity.
 Calculations of pairwise phytochemical dissimilarities between samples can 
 be made with the function `sampDis()`. This calculates Bray-Curtis 
 dissimilarities and/or Generalized UniFrac dissimilarities 
-(Chen et al 2012, Junker 2018) between samples in the *sample* 
+(Chen et al. 2012, Junker 2018) between samples in the *sample* 
 dataset. Generalized UniFrac dissimilarities utilize the 
 compound dissimilarity matrix from `compDis()`, such that two samples 
 containing more biosynthetically/structurally different compounds have a 
@@ -407,7 +407,7 @@ to calculate compound dissimilarities when most or all compounds are
 unidentified.
 * **What method should I use to calculate compound dissimilarities?** See
 `?compDis` for details on how compound dissimilarities are calculated using
-the three different methods. See Petrén et al 2022 for a discussion on
+the three different methods. See Petrén et al. 2023 for a discussion on
 what method is suitable depending on type of data and research
 question addressed.
 * **Long computation times with `compDis()`.** The `compDis()` function can
@@ -420,7 +420,7 @@ of structurally complex molecules. In such cases, it is recommended to
 use `PubChemFingerprint` instead.
 * **What kind of phytochemical diversity should I calculate?** See
 `?calcDiv` for a detailed description on how different measures of
-diversity and evenness are calculated. See Petrén et al 2022 for a more
+diversity and evenness are calculated. See Petrén et al. 2023 for a more
 in depth comparison and discussion of different diversity indices.
 * **Long computation times with `chemoDivPlot()`.** The `chemoDivPlot()`
 function can be used to conveniently create basic plots of chemodiversity.
@@ -458,6 +458,6 @@ Evolution of floral scent in relation to self-incompatibility and
 capacity for autonomous self-pollination in the perennial herb *Arabis alpina*. 
 Annals of Botany 127:737–747.
 
-Petrén H., T.G. Köllner and R.R Junker. 2022. Quantifying chemodiversity 
+Petrén H., T. G. Köllner and R. R. Junker. 2023. Quantifying chemodiversity 
 considering biochemical and structural properties of compounds with the 
-R package *chemodiv*. bioRxiv doi: 10.1101/2022.06.08.495236.
+R package *chemodiv*. New Phytologist doi: 10.1111/nph.186850.

@@ -13,7 +13,7 @@ Description: Quantify and visualise various measures of chemical diversity and
     composition data. Importantly, these measures can incorporate biosynthetic
     and/or structural properties of the chemical compounds, resulting in a more
     comprehensive quantification of diversity and dissimilarity. For details,
-    see Petrén, Köllner and Junker (2022) <doi:10.1101/2022.06.08.495236>.
+    see Petrén, Köllner and Junker (2023) <doi:10.1111/nph.186850>.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

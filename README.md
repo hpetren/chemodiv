@@ -14,7 +14,8 @@ dissimilarities for phytochemical datasets. This includes the use of
 diversity indices and dissimilarity indices that incorporate the
 biosynthetic and/or structural properties of the phytochemical compounds
 for the calculations, resulting in comprehensive measures of
-phytochemical diversity.
+phytochemical diversity. A complete description of the package is
+available in Petrén et al. 2023.
 
 ## Installation
 
@@ -95,6 +96,7 @@ users wanting to quickly explore their data using standard parameters.
 
 ## References
 
-Petrén H., T.G. Köllner and R.R Junker. 2022. Quantifying chemodiversity
-considering biochemical and structural properties of compounds with the
-R package *chemodiv*. bioRxiv doi: 10.1101/2022.06.08.495236.
+Petrén H., T.G. Köllner and R.R. Junker. 2023. Quantifying
+chemodiversity considering biochemical and structural properties of
+compounds with the R package *chemodiv*. New Phytologist doi:
+10.1111/nph.186850.
