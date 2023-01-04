@@ -193,7 +193,13 @@ chemoDivPlot <- function(compDisMat = NULL,
 
     if (is.null(groupData)) {
       message("No grouping data provided.")
-      groupData <- rep("NoGroup", nrow(sampDisMat))
+
+      if (is.matrix(sampDisMat)) { # If input is a single matrix
+        groupData <- rep("NoGroup", nrow(sampDisMat))
+
+      } else { # If input is a list with multiple matrices
+        groupData <- rep("NoGroup", nrow(sampDisMat[[1]]))
+      }
     }
 
     # If input is a single matrix

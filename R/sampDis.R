@@ -129,8 +129,6 @@ sampDis <- function(sampleData,
                                                     tree = disClustPhylo,
                                                     alpha = alpha))
     sampDisUniFrac <- uniFracs$unifracs[, , paste0("d_", alpha)]
-    colnames(sampDisUniFrac) <- 1:ncol(sampDisUniFrac)
-    rownames(sampDisUniFrac) <- 1:nrow(sampDisUniFrac)
     sampDisMatList[["GenUniFrac"]] <- sampDisUniFrac
   }
   return(sampDisMatList)
