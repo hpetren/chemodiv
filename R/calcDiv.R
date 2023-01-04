@@ -20,11 +20,12 @@
 #' exponential of Shannon's Diversity. For \code{q = 2}, this equals the
 #' Simpson Diversity.
 #' \item \code{FuncHillDiv}. Functional Hill Diversity. Equation 4b/6b in
-#' Chiu & Chao 2014. Requires a compound dissimilarity matrix.
-#' Functional Hill Diversity quantifies the effective
-#' total dissimilarity between compounds in the sample. The parameter *q*
-#' determines the  sensitivity of the measure to the relative frequencies
-#' of compounds (see above for details). For \code{q = 1}, this is a measure
+#' Chiu & Chao 2014, which is the measure called "total functional diversity".
+#' Requires a compound dissimilarity matrix. Functional Hill Diversity
+#' quantifies the effective total dissimilarity between compounds
+#' in the sample. The parameter *q* determines the sensitivity of
+#' the measure to the relative frequencies of compounds
+#' (see above for details). For \code{q = 1}, this is a measure
 #' sensitive to compound richness, evenness and dissimilarity, and is therefore
 #' the most comprehensive measure of diversity. For \code{q = 0}, this is
 #' equal to Functional Attribute Diversity (FAD) which is the sum of all

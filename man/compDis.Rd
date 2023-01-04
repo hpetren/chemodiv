@@ -70,9 +70,12 @@ variables describing the chemical structure of a compound.
 With this method, compounds are therefore compared
 based on how structurally dissimilar the molecules are.
 See \url{https://pubchemdocs.ncbi.nlm.nih.gov/data-specification}
-for more information. Data on molecules is downloaded from PubChem.
-In association with this, there might be a Warning message about closing
-unused connections, which is not important.
+for more information. (There are many other types of fingerprints,
+and ways of calculating compound dissimilarities based on them, see
+e.g. packages \code{fingerprint} and \code{rcdk}). Fingerprint data for
+molecules is downloaded from PubChem. In association with this,
+there might be a Warning message about closing unused connections,
+which is not important.
 \item fMCS, flexible Maximum Common Substructure,
 \code{type = "fMCS"}. This is a pairwise graph matching concept.
 The fMCS of two compounds is the largest substructure that occurs in both
