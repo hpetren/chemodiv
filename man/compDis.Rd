@@ -96,9 +96,23 @@ fingerprint variable (PubChem Fingerprints) as columns. fMCS generates
 dissimilarity values by calculating Jaccard dissimilarities based on the
 number of atoms in the maximum common substructure, allowing for one
 atom and one bond mismatch. Dissimilarities are outputted as
-dissimilarity matrices. If dissimilarities are calculated with more than
-one method, the function will output an additional dissimilarity matrix
-with the mean dissimilarity values from the selected methods.
+dissimilarity matrices.
+
+If dissimilarities are calculated with more than one method,
+the function will output additional dissimilarity matrices.
+This always includes a matrix with the mean dissimilarity values of the
+selected methods. If \code{"NPClassifier"} is included in \code{type},
+a matrix of "mix" values is also calculated. The values in this matrix
+are the dissimilarities from NPClassifier when these are > 0.
+For pairs of compounds where dissimilarities from NPClassifier
+equals 0 (i.e. when the compounds belong to the same pathway, superclass
+and class), values are equal to half of the (mean) value(s) of the
+structural dissimilarity/-ies from PubChem Fingerprints and/or fMCS.
+With this method, compound dissimilarities are primarily based on
+NPClassifier, but instead of compounds with identical classification having
+0 dissimilarity, these have a dissimilarity based on PubChem Fingerprints
+and/or fMCS, scaled to always be less (< 0.5) than compounds being in the
+same pathway and superclass, but different class.
 
 If there are unknown compounds, which do not have a
 corresponding SMILES or InChIKey, this can be handled in three

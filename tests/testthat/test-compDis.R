@@ -24,14 +24,18 @@ testNpcTable <- data.frame(compound = c("limonene",
                            class2 = c("Monocyclic monoterpenoids",NA))
 
 # Skip test that uses internet resources
-test_that("all three types of compDis and their mean works", {
+test_that("all three types of compDis and their mean/mix works", {
   skip_on_cran()
   skip_if_offline()
   expect_output(str(suppressWarnings(compDis(testCompData,
                                              type = c("NPClassifier",
                                                       "PubChemFingerprint",
                                                       "fMCS")))),
-                "List of 4")
+                "List of 5")
+  expect_output(str(suppressWarnings(compDis(testCompData,
+                                             type = c("PubChemFingerprint",
+                                                      "fMCS")))),
+                "List of 3")
 })
 
 test_that("function stops if no type is correct", {

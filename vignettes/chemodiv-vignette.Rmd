@@ -194,10 +194,14 @@ alpinaCompDis$fingerDisMat[1:4, 1:4]
 The output from the function is a list with one or several compound 
 dissimilarity matrices, depending on which `type` was used as input.
 If multiple `type` are used as input, a matrix with mean values of the other
-matrices will also calculated. Importantly, the resulting matrix of 
-compound dissimilarities is used by other functions in the package that 
-quantify phytochemical diversity and dissimilarity, and can be used to 
-visualize how similar sets of compounds are to each other. 
+matrices will also calculated. If `type` includes `"NPClassifier"`, a matrix
+with "mixed" values is also calculated. In this case, values are based on
+NPClassifier when these are *> 0*, and otherwise based the 
+PubChem fingerprints/fMCS values (see manual for details).
+Importantly, a resulting matrix of compound dissimilarities is used by
+other functions in the package that quantify phytochemical diversity
+and dissimilarity, and can be used to visualize how similar sets of
+compounds are to each other.
 
 
 ### Diversity calculations
