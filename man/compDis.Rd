@@ -69,7 +69,7 @@ This is a binary substructure fingerprint with 881 binary
 variables describing the chemical structure of a compound.
 With this method, compounds are therefore compared
 based on how structurally dissimilar the molecules are.
-See \url{https://pubchemdocs.ncbi.nlm.nih.gov/data-specification}
+See \url{https://pubchem.ncbi.nlm.nih.gov/docs/data-specification}
 for more information. (There are many other types of fingerprints,
 and ways of calculating compound dissimilarities based on them, see
 e.g. packages \code{fingerprint} and \code{rcdk}). Fingerprint data for

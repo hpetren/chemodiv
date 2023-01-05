@@ -464,4 +464,4 @@ Annals of Botany 127:737–747.
 
 Petrén H., T. G. Köllner and R. R. Junker. 2023. Quantifying chemodiversity 
 considering biochemical and structural properties of compounds with the 
-R package *chemodiv*. New Phytologist doi: 10.1111/nph.186850.
+R package *chemodiv*. New Phytologist doi: 10.1111/nph.18685.

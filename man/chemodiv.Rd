@@ -120,7 +120,7 @@ same order as they appear in the list below.
 \references{
 Petren H., Koellner T.G., Junker R.R. 2023. Quantifying chemodiversity
 considering biochemical and structural properties of compounds with the
-R package \emph{chemodiv}. New Phytologist doi: 10.1111/nph.186850.
+R package \emph{chemodiv}. New Phytologist doi: 10.1111/nph.18685.
 
 Wang M, Carver JJ, Phelan VV, et al. 2016. Sharing and community
 curation of mass spectrometry data with Global Natural Products
