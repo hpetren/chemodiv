@@ -11,7 +11,22 @@ and updates to documentation.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
+
+Found the following (possibly) invalid URLs:
+  URL: https://doi.org/10.1111/nph.18685
+    From: inst/CITATION
+    Status: 503
+    Message: Service Unavailable
+
+Found the following (possibly) invalid DOIs:
+  DOI: 10.1111/nph.18685
+    From: DESCRIPTION
+    Status: Service Unavailable
+    Message: 503
+    
+The URL and doi are correct and functional. As I understand it, this type of 
+note is not an issue. 
 
 ## Downstream dependencies
 
