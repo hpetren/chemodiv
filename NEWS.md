@@ -1,3 +1,7 @@
+# chemodiv 0.2.0.9000
+
+
+
 # chemodiv 0.2.0
 
 * Updated compDis function to output additional "mix" matrix.
