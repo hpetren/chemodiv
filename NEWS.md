@@ -1,6 +1,9 @@
-# chemodiv 0.1.3.9000
+# chemodiv 0.2.0
 
-
+* Updated compDis function to output additional "mix" matrix.
+* Updated various parts of documentation.
+* Fixed a few very minor bugs.
+* Updated citations/references.
 
 # chemodiv 0.1.3
 
