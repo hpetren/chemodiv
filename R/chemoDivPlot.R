@@ -176,12 +176,12 @@ chemoDivPlot <- function(compDisMat = NULL,
                                       y = .data$Diversity,
                                       group = .data$Individual,
                                       color = .data$Group),
-                         size = 0.5, alpha = 0.15) +
+                         linewidth = 0.5, alpha = 0.15) +
       ggplot2::geom_line(data = divHillLong,
                          ggplot2::aes(x = .data$q,
                                       y = .data$Diversity,
                                       color = .data$Group),
-                         size = 2) +
+                         linewidth = 2) +
       ggplot2::xlab("Diversity order (q)") +
       ggplot2::ylab(divProfData$type) +
       ggplot2::theme(text = ggplot2::element_text(size = 15))
