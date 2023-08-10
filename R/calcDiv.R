@@ -19,11 +19,13 @@
 #' number of compounds in a sample. For \code{q = 1}, this equals the
 #' exponential of Shannon's Diversity. For \code{q = 2}, this equals the
 #' Simpson Diversity.
-#' \item \code{FuncHillDiv}. Functional Hill Diversity. Equation 4b/6b in
-#' Chiu & Chao 2014, which is the measure called "total functional diversity".
-#' Requires a compound dissimilarity matrix. Functional Hill Diversity
-#' quantifies the effective total dissimilarity between compounds
-#' in the sample. The parameter *q* determines the sensitivity of
+#' \item \code{FuncHillDiv}. Functional Hill Diversity. There are
+#' different versions of this. Here, the most common version is calculated.
+#' This is the FD(Q), called "total functional diversity", calculated in
+#' equation 4b/6b in Chiu & Chao 2014. This measure quantifies the
+#' effective total dissimilarity between compounds in the sample.
+#' Calculation of Functional Hill Diversity requires a compound dissimilarity
+#' matrix. The parameter *q* determines the sensitivity of
 #' the measure to the relative frequencies of compounds
 #' (see above for details). For \code{q = 1}, this is a measure
 #' sensitive to compound richness, evenness and dissimilarity, and is therefore
