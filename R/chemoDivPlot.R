@@ -2,6 +2,9 @@
 #'
 #' Function to conveniently create basic plots of the different types of
 #' chemodiversity measurements calculated by functions in the package.
+#' This function exists to provide an easy way to make basic chemodiversity
+#' plots. As functions in the package output data in standard formats,
+#' customized plots are easily created with \code{\link[ggraph]{ggplot2}}.
 #'
 #' The function can create four different types of plots,
 #' (using \code{\link[ggplot2]{ggplot2}}) depending on which input data

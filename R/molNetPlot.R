@@ -7,7 +7,10 @@
 #' their relative concentrations. In the network, nodes are compounds,
 #' with node sizes or node colours representing the relative concentrations
 #' of compounds. Edges connects nodes, with edge widths representing
-#' compound similarity.
+#' compound similarity. This function exists to provide an easy way to
+#' make basic molecular network plots. Customized network plots can be
+#' created with e.g. the \code{\link[ggraph]{ggraph}} package or the
+#' Cytoscape software platform.
 #'
 #' The network object from \code{\link{molNet}} and \code{sampleData} have to
 #' be supplied. In addition, \code{groupData} and/or an \code{\link{NPCTable}}

@@ -435,6 +435,11 @@ function can be used to conveniently create basic plots of chemodiversity.
 If the function argument `sampDisMat` is included, a Nonmetric Multidimensional 
 Scaling (NMDS) will be performed. This might take some time for larger
 datasets, and excluding this argument will make the plotting much quicker.
+* **Can I customize plots created by `chemoDivPlot()` or `molNetPlot()`?**
+These functions exist to provide an easy way to create basic chemodiversity 
+plots and molecular networks, and therefore have limited customization
+options. Customized plots are easily created with the `ggplot2` 
+and/or `ggraph` packages.
 
 
 ## References
