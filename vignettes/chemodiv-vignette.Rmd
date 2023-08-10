@@ -34,7 +34,8 @@ diversity and dissimilarity.
 
 This introduction serves as a tutorial explaining the main intended use of 
 all the functions in the package. A complete description of the package is
-available in Petrén et al. 2023.
+available in Petrén et al. 2023a, while a more in-depth discussion and review
+of phytochemical diversity is available in Petrén et al. 2023b.
 
 
 ## Setup
@@ -411,7 +412,7 @@ to calculate compound dissimilarities when most or all compounds are
 unidentified.
 * **What method should I use to calculate compound dissimilarities?** See
 `?compDis` for details on how compound dissimilarities are calculated using
-the three different methods. See Petrén et al. 2023 for a discussion on
+the three different methods. See Petrén et al. 2023a for a discussion on
 what method is suitable depending on type of data and research
 question addressed.
 * **Long computation times with `compDis()`.** The `compDis()` function can
@@ -424,8 +425,11 @@ of structurally complex molecules. In such cases, it is recommended to
 use `PubChemFingerprint` instead.
 * **What kind of phytochemical diversity should I calculate?** See
 `?calcDiv` for a detailed description on how different measures of
-diversity and evenness are calculated. See Petrén et al. 2023 for a more
-in depth comparison and discussion of different diversity indices.
+diversity and evenness are calculated. See Petrén et al. 2023a for a 
+comparison of different diversity indices, and Petrén et al. 2023b for a 
+more in-depth discussion and review of different components and measures of
+phytochemical diversity in the context of their function, mechanism
+and ecology.
 * **Long computation times with `chemoDivPlot()`.** The `chemoDivPlot()`
 function can be used to conveniently create basic plots of chemodiversity.
 If the function argument `sampDisMat` is included, a Nonmetric Multidimensional 
@@ -462,6 +466,13 @@ Evolution of floral scent in relation to self-incompatibility and
 capacity for autonomous self-pollination in the perennial herb *Arabis alpina*. 
 Annals of Botany 127:737–747.
 
-Petrén H., T. G. Köllner and R. R. Junker. 2023. Quantifying chemodiversity 
+Petrén H., T. G. Köllner and R. R. Junker. 2023a. Quantifying chemodiversity 
 considering biochemical and structural properties of compounds with the 
-R package *chemodiv*. New Phytologist doi: 10.1111/nph.18685.
+R package *chemodiv*. New Phytologist 237: 2478-2492.
+
+Petrén H., R. A. Anaia, K. S. Aragam, A. Bräutigam, S. Eckert, R. Heinen,
+R. Jakobs, L. Ojeda, M. Popp, R. Sasidharan, J-P. Schnitzler, A. Steppuhn,
+F. Thon, S. Tschikin, S. B. Unsicker, N. M. van Dam, W. W. Weisser,
+M. J. Wittmann, S. Yepes, D. Ziaja, C. Müller, R. R. Junker.
+Understanding the phytochemical diversity of plants: Quantification,
+variation and ecological function. bioRxiv doi: 10.1101/2023.03.23.533415.

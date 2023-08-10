@@ -98,5 +98,4 @@ users wanting to quickly explore their data using standard parameters.
 
 Petrén H., T.G. Köllner and R.R. Junker. 2023. Quantifying
 chemodiversity considering biochemical and structural properties of
-compounds with the R package *chemodiv*. New Phytologist doi:
-10.1111/nph.18685.
+compounds with the R package *chemodiv*. New Phytologist 237: 2478-2492.
