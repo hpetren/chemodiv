@@ -60,7 +60,7 @@ chemoDivCheck <- function(sampleData,
             compound, smiles, inchikey.")
     formatProblem <- TRUE
   }
-  if (sum(rowSums(sampleData)) != nrow(sampleData)) {
+  if (round(sum(rowSums(sampleData))) != nrow(sampleData)) {
     message("Not all row sums in sampleData are equal to 1. Dataset may
             consist of absolute rather than relative values.")
     formatProblem <- TRUE
