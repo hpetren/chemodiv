@@ -1,7 +1,15 @@
-testCompData <- data.frame(compound = c("limonene", "unknown", "faulty"),
-                           smiles = c("CC1=CCC(CC1)C(=C)C", NA, "NOTSMILES"),
-                           inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N", NA,
-                                        "NOTINCHIKEY"))
+testCompData <- data.frame(compound = c("limonene",
+                                        "unknown",
+                                        "faulty",
+                                        "empty"),
+                           smiles = c("CC1=CCC(CC1)C(=C)C",
+                                      NA,
+                                      "NOTSMILES",
+                                      ""),
+                           inchikey = c("XMGQYMWWDOXHJM-UHFFFAOYSA-N",
+                                        NA,
+                                        "NOTINCHIKEY",
+                                        ""))
 
 # Skip test that uses internet resources
 test_that("NPC-classification is generated", {
@@ -17,4 +25,5 @@ test_that("warnings and messages work", {
   skip_if_offline()
   expect_error(NPCTable(testCompData[2,]))
   expect_error(NPCTable(testCompData[3,]))
+  expect_error(NPCTable(testCompData[4,]))
 })

@@ -160,6 +160,7 @@ compDis <- function(compoundData,
       }
 
       npcTable <- compoundData
+      npcTable[npcTable == ""] <- NA # Replace any empty cells with NA
 
       npcTable[c("pathway", "pathway2", "pathway3",
                "superclass", "superclass2", "superclass3",

@@ -48,6 +48,7 @@ NPCTable <- function(compoundData) {
 
   colnames(compoundData) <- tolower(colnames(compoundData))
   npcTab <- compoundData
+  npcTab[npcTab == ""] <- NA # Replace any empty cells with NA
 
   # Assuming no compound has >3 belongings pathways/superclasses/classes
   npcTab[c("pathway", "pathway2", "pathway3",
