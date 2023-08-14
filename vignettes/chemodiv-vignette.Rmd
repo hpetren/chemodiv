@@ -440,6 +440,20 @@ These functions exist to provide an easy way to create basic chemodiversity
 plots and molecular networks, and therefore have limited customization
 options. Customized plots are easily created with the `ggplot2` 
 and/or `ggraph` packages.
+* **Installing `chemodiv` gives a warning message.**
+Installing the package using `install.packages("chemodiv")` may result in
+the warning message `Warning in install.packages : dependencies ‘fmcsR’,
+‘ChemmineR’ are not available`, meaning that these package dependencies 
+from Bioconductor have not been installed. It is recommended to install the 
+package using the `install()` function in  the `BiocManager` package instead.
+See the installation instructions in the README file for details.
+* **I get an error about missing packages when trying to run some functions.**
+If you get the error message `Error in loadNamespace(x) : there is no 
+package called ‘ChemmineR’` or `Error in loadNamespace(x) : there is no 
+package called ‘fmcsR’`, it means these package dependencies from Bioconductor 
+have not been installed. Either install these separately, or
+reinstall `chemodiv` using the `install()` function in  the `BiocManager` 
+package. See the installation instructions in the README file for details.
 
 
 ## References
