@@ -127,9 +127,9 @@ R package \emph{chemodiv}. New Phytologist 237: 2478-2492.
 Petren H, Anaia RA, Aragam KS, Braeutigam A, Eckert S, Heinen R,
 Jakobs R, Ojeda L, Popp M, Sasidharan R, Schnitzler J-P, Steppuhn A,
 Thon F, Tschikin S, Unsicker SB, van Dam NM, Weisser WW, Wittmann MJ,
-Yepes S, Ziaja D, Meuller C, Junker RR. Understanding the phytochemical
-diversity of plants: Quantification, variation and ecological function.
-bioRxiv doi: 10.1101/2023.03.23.533415.
+Yepes S, Ziaja D, Meuller C, Junker RR. 2023b. Understanding the
+phytochemical diversity of plants: Quantification, variation and
+ecological function. bioRxiv doi: 10.1101/2023.03.23.533415.
 
 Wang M, Carver JJ, Phelan VV, et al. 2016. Sharing and community
 curation of mass spectrometry data with Global Natural Products

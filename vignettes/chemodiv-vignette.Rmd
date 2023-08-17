@@ -492,6 +492,6 @@ R package *chemodiv*. New Phytologist 237: 2478-2492.
 Petrén H., R. A. Anaia, K. S. Aragam, A. Bräutigam, S. Eckert, R. Heinen,
 R. Jakobs, L. Ojeda, M. Popp, R. Sasidharan, J-P. Schnitzler, A. Steppuhn,
 F. Thon, S. Tschikin, S. B. Unsicker, N. M. van Dam, W. W. Weisser,
-M. J. Wittmann, S. Yepes, D. Ziaja, C. Müller, R. R. Junker.
+M. J. Wittmann, S. Yepes, D. Ziaja, C. Müller, R. R. Junker. 2023b.
 Understanding the phytochemical diversity of plants: Quantification,
 variation and ecological function. bioRxiv doi: 10.1101/2023.03.23.533415.
