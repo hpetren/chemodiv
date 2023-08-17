@@ -15,7 +15,7 @@ compound (column) in every sample (row).}
 Functional Hill Diversity and Rao's Q.}
 
 \item{type}{Type(s) of diversity or evenness to calculate. Any of
-\code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "RaoQ",
+\code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "MPD", "RaoQ",
 "PielouEven", "HillEven"}.}
 
 \item{q}{Diversity order to use for Hill diversity, Functional Hill
@@ -28,13 +28,14 @@ weighed according to their proportion in the sample. For \code{q = 2},
 more weight is put on compounds with high proportions.}
 }
 \value{
-Data frame with calculated diversity/evenness values for each sample.
+Data frame with calculated diversity values for each sample.
 }
 \description{
-Function to calculate different common measures of diversity and evenness.
-This includes Hill diversity, Functional Hill diversity,
-Shannon's diversity, Simpson diversity, Rao's Q, Pielou's evenness and
-Hill evenness.
+Function to calculate different common measures of diversity, and
+components (richness, evenness, disparity) thereof. Types of measures that
+can be calculated includes Hill diversity, Functional Hill diversity,
+Mean Pairwise Dissimilarity (MPD), Shannon's diversity, Simpson diversity,
+Rao's Q, Pielou's evenness and Hill evenness.
 }
 \details{
 The function calculates diversity and/or evenness for each sample
@@ -48,28 +49,30 @@ Also referred to as the Hill number or the effective number of
 species (here compounds). The parameter \emph{q} determines the sensitivity
 of the measure to the relative frequencies of
 compounds (see above for details). For \code{q = 0}, this equals the
-number of compounds in a sample. For \code{q = 1}, this equals the
-exponential of Shannon's Diversity. For \code{q = 2}, this equals the
-Simpson Diversity.
+number of compounds in a sample, i.e. the richness. For \code{q = 1},
+this equals the exponential of Shannon's Diversity. For \code{q = 2},
+this equals the Simpson Diversity.
 \item \code{FuncHillDiv}. Functional Hill Diversity. There are
 different versions of this. Here, the most common version is calculated.
 This is the FD(Q), called "total functional diversity", calculated in
 equation 4b/6b in Chiu & Chao 2014. This measure quantifies the
 effective total dissimilarity between compounds in the sample.
-Calculation of Functional Hill Diversity requires a compound dissimilarity
-matrix. The parameter \emph{q} determines the sensitivity of
+Calculation of Functional Hill Diversity requires a compound
+dissimilarity matrix. The parameter \emph{q} determines the sensitivity of
 the measure to the relative frequencies of compounds
 (see above for details). For \code{q = 1}, this is a measure
 sensitive to compound richness, evenness and dissimilarity, and is therefore
 the most comprehensive measure of diversity. For \code{q = 0}, this is
 equal to Functional Attribute Diversity (FAD) which is the sum of all
-dissimilarities in the dissimilarity matrix. FAD divided by
-\emph{n(n-1)}, where \emph{n} is the number of compounds and hence the number of
-rows/columns in the dissimilarity matrix, is equal to the
-Mean Pairwise Dissimilarity (MPD). This value is the mean of the
-pairwise dissimilarities in the compound dissimilarity matrix (excluding
-the 0 values in the diagonal), and is therefore in contrast to FAD not
-dependent on the number of compounds.
+dissimilarities in the dissimilarity matrix.
+\item \code{MPD}. Mean Pairwise Dissimilarity. As the name suggests, this
+is equal to the mean of the pairwise dissimilarities in the compound
+dissimilarity  matrix (excluding the 0 values in the diagonal). Therefore,
+in contrast to FAD (see above) this measure is not dependent on the
+number of compounds, and hence represents the disparity component
+of diversity. Practically, MPD is calculated as Functional Hill Diversity
+at \code{q = 0}, divided by \emph{n(n-1)}, where \emph{n} is the number of compounds,
+i.e. Hill Diversity at \code{q = 0}.
 \item \code{RaoQ}. Rao's quadratic entropy index Q.
 The perhaps most common measure of functional diversity.
 Requires a compound dissimilarity matrix. Rao's Q represents the
@@ -116,6 +119,17 @@ PLoS ONE 9: e100014.
 
 Hill MO. 1973. Diversity and Evenness: A Unifying Notation
 and Its Consequences. Ecology 54: 427-432.
+
+Petren H, Koellner TG, Junker RR. 2023. Quantifying chemodiversity
+considering biochemical and structural properties of compounds with the
+R package \emph{chemodiv}. New Phytologist 237: 2478-2492.
+
+Petren H, Anaia RA, Aragam KS, Braeutigam A, Eckert S, Heinen R,
+Jakobs R, Ojeda L, Popp M, Sasidharan R, Schnitzler J-P, Steppuhn A,
+Thon F, Tschikin S, Unsicker SB, van Dam NM, Weisser WW, Wittmann MJ,
+Yepes S, Ziaja D, Meuller C, Junker RR. 2023. Understanding the
+phytochemical diversity of plants: Quantification, variation and
+ecological function. bioRxiv doi: 10.1101/2023.03.23.533415.
 
 Tuomisto H. 2012. An updated consumer's guide to evenness
 and related indices. Oikos 121: 1203-1218
