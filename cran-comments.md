@@ -1,12 +1,12 @@
 ## Comments
 
-The chemodiv 0.2.0 release includes minor updates/fixes to functions, 
+The chemodiv 0.3.0 release includes additions and fixes to functions, 
 and updates to documentation.
 
 ## Test environments
 
-* local Windows 10 install, R 4.2.2
-* Ubuntu 22.04 LTS, R 4.2.2
+* local Windows 10 install, R 4.3.1
+* Ubuntu 22.04 LTS, R 4.3.1
 * win-builder (R-devel, R-release, R-oldrelease)
 
 ## R CMD check results
@@ -25,7 +25,7 @@ Found the following (possibly) invalid DOIs:
     Status: Service Unavailable
     Message: 503
     
-The URL and doi are correct and functional. As I understand it, this type of 
+The URL and DOI are correct and functional. As I understand it, this type of 
 note is not an issue. 
 
 ## Downstream dependencies

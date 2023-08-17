@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcDiv.R
 \name{calcDiv}
 \alias{calcDiv}
-\title{Calculate various diversity and evenness measures}
+\title{Calculate various diversity measures}
 \usage{
 calcDiv(sampleData, compDisMat = NULL, type = "HillDiv", q = 1)
 }
@@ -14,9 +14,9 @@ compound (column) in every sample (row).}
 \code{\link{compDis}}. Has to be supplied for calculations of
 Functional Hill Diversity and Rao's Q.}
 
-\item{type}{Type(s) of diversity or evenness to calculate. Any of
-\code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "MPD", "RaoQ",
-"PielouEven", "HillEven"}.}
+\item{type}{Type(s) of diversity or component(s) thereof to calculate.
+Any of \code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "MPD",
+"RaoQ", "PielouEven", "HillEven"}.}
 
 \item{q}{Diversity order to use for Hill diversity, Functional Hill
 Diversity and Hill Evenness. \emph{q} should be equal to or larger than zero.
@@ -38,8 +38,8 @@ Mean Pairwise Dissimilarity (MPD), Shannon's diversity, Simpson diversity,
 Rao's Q, Pielou's evenness and Hill evenness.
 }
 \details{
-The function calculates diversity and/or evenness for each sample
-in \code{sampleData}. It can calculate the following indices:
+The function calculates diversity and/or components thereof for each
+sample in \code{sampleData}. It can calculate the following indices:
 \itemize{
 \item \code{Shannon}. Shannon's Diversity.
 \item \code{Simpson}. Simpson Diversity, often referred to as

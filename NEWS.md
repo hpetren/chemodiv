@@ -1,6 +1,10 @@
-# chemodiv 0.2.0.9000
+# chemodiv 0.3.0
 
-
+* Added Mean Pairwise Dissimilarity (MDP) as a type in calcDiv.
+* Improved some aspects of chemoDivCheck.
+* Improved how NPCTable handles missing data.
+* Edited and clarified documentation for some functions.
+* Made various minor updates/edits to readme, citation and vignette. 
 
 # chemodiv 0.2.0
 

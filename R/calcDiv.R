@@ -1,4 +1,4 @@
-#' Calculate various diversity and evenness measures
+#' Calculate various diversity measures
 #'
 #' Function to calculate different common measures of diversity, and
 #' components (richness, evenness, disparity) thereof. Types of measures that
@@ -6,8 +6,8 @@
 #' Mean Pairwise Dissimilarity (MPD), Shannon's diversity, Simpson diversity,
 #' Rao's Q, Pielou's evenness and Hill evenness.
 #'
-#' The function calculates diversity and/or evenness for each sample
-#' in \code{sampleData}. It can calculate the following indices:
+#' The function calculates diversity and/or components thereof for each
+#' sample in \code{sampleData}. It can calculate the following indices:
 #' \itemize{
 #' \item \code{Shannon}. Shannon's Diversity.
 #' \item \code{Simpson}. Simpson Diversity, often referred to as
@@ -67,9 +67,9 @@
 #' @param compDisMat Compound dissimilarity matrix, as calculated by
 #' \code{\link{compDis}}. Has to be supplied for calculations of
 #' Functional Hill Diversity and Rao's Q.
-#' @param type Type(s) of diversity or evenness to calculate. Any of
-#' \code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "MPD", "RaoQ",
-#' "PielouEven", "HillEven"}.
+#' @param type Type(s) of diversity or component(s) thereof to calculate.
+#' Any of \code{"Shannon", "Simpson", "HillDiv", "FuncHillDiv", "MPD",
+#' "RaoQ", "PielouEven", "HillEven"}.
 #' @param q Diversity order to use for Hill diversity, Functional Hill
 #' Diversity and Hill Evenness. *q* should be equal to or larger than zero.
 #' This parameter determines the sensitivity of the (Functional) Hill Diversity
@@ -129,7 +129,7 @@ calcDiv <- function(sampleData,
 
   if (!(any(c("HillDiv", "FuncHillDiv", "MPD", "Shannon", "Simpson",
               "PielouEven", "HillEven", "RaoQ") %in% type))) {
-    stop("Provide at least one type of diversity/evenness to calculate:
+    stop("Provide at least one type of measure to calculate:
          HillDiv, FuncHillDiv, MPD, Shannon, Simpson, PielouEven, HillEven or RaoQ.")
   }
   if(is.null(compDisMat) && ("FuncHillDiv" %in% type ||
