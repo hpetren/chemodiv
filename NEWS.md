@@ -1,3 +1,7 @@
+# chemodiv 0.3.0.9000
+
+
+
 # chemodiv 0.3.0
 
 * Added Mean Pairwise Dissimilarity (MDP) as a type in calcDiv.
