@@ -121,6 +121,6 @@
 #'
 #' @importFrom rlang .data
 #'
-#' @docType package
-#' @name chemodiv
+#' @keywords internal
+"_PACKAGE"
 NULL

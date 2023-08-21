@@ -1,6 +1,6 @@
 # chemodiv 0.3.0.9000
 
-
+* Fixed roxygen documentation issue.
 
 # chemodiv 0.3.0
 
