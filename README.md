@@ -4,6 +4,7 @@
 # chemodiv
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 `chemodiv` is an R package for analysing chemodiversity of phytochemical
@@ -20,8 +21,7 @@ available in Petrén et al. 2023.
 ## Installation
 
 The current version of the package can be installed from CRAN.
-Alternatively, the developmental version of the package can be installed
-from GitHub. The `chemodiv` package partly depends on packages from
+Importantly, the `chemodiv` package partly depends on packages from
 Bioconductor. Therefore, it is recommended to install the package via
 the `install()` function in the `BiocManager` package, rather than using
 the default `install.packages("chemodiv")`. This will ensure all
@@ -35,7 +35,7 @@ library("BiocManager")
 BiocManager::install("chemodiv")
 ```
 
-**Install the developmental version from GitHub**
+**The package can also be installed from GitHub**
 
 ``` r
 install.packages("devtools") # Install devtools if not already installed

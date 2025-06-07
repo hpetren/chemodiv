@@ -39,18 +39,18 @@ of phytochemical diversity is available in Petrén et al. 2023b.
 
 
 ## Setup
-The current version of the package can be installed from CRAN. Alternatively,
-the developmental version of the package can be installed from GitHub
-using the `install_github()` function from the `devtools` package.
+The current version of the package can be installed from CRAN. 
+Importantly, the `chemodiv` package partly depends on packages from
+Bioconductor. Therefore, it is recommended to install the package via
+the `install()` function in the `BiocManager` package, rather than using
+the default `install.packages("chemodiv")`. This will ensure all
+dependencies are correctly installed as well.
 
 ```{r, eval = FALSE}
-# Install current version
-install.packages("chemodiv")
-
-# Install developmental version
-install.packages("devtools") # Install devtools if not already installed
-library("devtools")
-install_github("hpetren/chemodiv")
+# Install current version, using the install() function in the BiocManager package
+install.packages("BiocManager") # Install BiocManager if not already installed
+library("BiocManager")
+BiocManager::install("chemodiv")
 ```
 
 ```{r}
@@ -139,7 +139,7 @@ Two functions are used to classify and compare phytochemical compounds,
 and are applied to the *compound* dataset.
 
 The function `NPCTable()` classifies compounds with 
-[NPClassifier](https://npclassifier.ucsd.edu/) (Kim et al. 2021). NPClassifier 
+[NPClassifier](https://npclassifier.gnps2.org/) (Kim et al. 2021). NPClassifier 
 is a deep-learning tool that classifies phytochemical compounds into a 
 hierarchical classification of three groups, pathway, superclass and class, 
 largely corresponding to biosynthetic pathways:

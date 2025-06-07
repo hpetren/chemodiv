@@ -30,10 +30,9 @@ A complete description of the package is available in Petrén et al. 2023.
 
 ## Installation
 
-The current version of the package can be installed from CRAN. Alternatively,
-the developmental version of the package can be installed from GitHub.
-The `chemodiv` package partly depends on packages from Bioconductor. Therefore,
-it is recommended to install the package via the `install()` function in 
+The current version of the package can be installed from CRAN. 
+Importantly, the `chemodiv` package partly depends on packages from Bioconductor. 
+Therefore, it is recommended to install the package via the `install()` function in 
 the `BiocManager` package, rather than using the default 
 `install.packages("chemodiv")`. This will ensure all dependencies are
 correctly installed as well.
@@ -45,7 +44,7 @@ library("BiocManager")
 BiocManager::install("chemodiv")
 ```
 
-**Install the developmental version from GitHub**
+**The package can also be installed from GitHub**
 ```{r, eval = FALSE}
 install.packages("devtools") # Install devtools if not already installed
 library("devtools")
