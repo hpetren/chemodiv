@@ -145,9 +145,9 @@ molNet <- function(compDisMat,
   if(!is.null(npcTable)) {
     nNpcPathways <- length(unique(npcTable$pathway[!is.na(npcTable$pathway)]))
 
-    modNet <- igraph::graph.adjacency(compSimMatFull,
-                                      mode = "undirected",
-                                      weighted = TRUE)
+    modNet <- igraph::graph_from_adjacency_matrix(compSimMatFull,
+                                                  mode = "undirected",
+                                                  weighted = TRUE)
     membership <- as.numeric(as.factor(npcTable$pathway))
     # Give NA their own category, otherwise modularity() causes a crash
     membership[is.na(membership)] <- max(membership, na.rm = TRUE) + 1
