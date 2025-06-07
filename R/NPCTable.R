@@ -37,15 +37,6 @@
 #' NPCTable(compoundData = alpinaCompData[1:3,]) # First three compounds only
 NPCTable <- function(compoundData) {
 
-  # httr::set_config(httr::config(http_version = 0))
-  # if(!curl::has_internet()) {
-  #   message("No internet connection available to download compound data.")
-  #   return(invisible(NULL))
-  # } else if (httr::GET("https://npclassifier.ucsd.edu/")$status_code != 200) {
-  #   message("NPClassifier, https://npclassifier.ucsd.edu/, is unavailable.")
-  #   return(invisible(NULL))
-  # }
-
   httr::set_config(httr::config(http_version = 0))
   if (!curl::has_internet()) {
     message("No internet connection available to download compound data.")
@@ -76,7 +67,7 @@ NPCTable <- function(compoundData) {
     if (!is.na(npcTab$smiles[i])) {
 
       # (May produce strange error if run separately)
-      npcClass1 <- httr::GET("https://npclassifier.ucsd.edu/classify",
+      npcClass1 <- httr::GET("https://npclassifier.gnps2.org/classify",
                              query = list(smiles = npcTab$smiles[i]))
 
       npcClass2 <- httr::content(npcClass1, as = "text")
