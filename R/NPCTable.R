@@ -10,7 +10,7 @@
 #' the compounds are produced in. The \code{NPCTable} function
 #' conveniently performs this classification directly in R on the
 #' compounds in \code{compoundData}, by accessing the tool
-#' at \url{https://npclassifier.ucsd.edu/} and downloading the classifications.
+#' at \url{https://npclassifier.gnps2.org/} and downloading the classifications.
 #'
 #' @param compoundData Data frame with the chemical compounds of interest,
 #' usually the compounds found in the sample dataset.
@@ -37,12 +37,27 @@
 #' NPCTable(compoundData = alpinaCompData[1:3,]) # First three compounds only
 NPCTable <- function(compoundData) {
 
+  # httr::set_config(httr::config(http_version = 0))
+  # if(!curl::has_internet()) {
+  #   message("No internet connection available to download compound data.")
+  #   return(invisible(NULL))
+  # } else if (httr::GET("https://npclassifier.ucsd.edu/")$status_code != 200) {
+  #   message("NPClassifier, https://npclassifier.ucsd.edu/, is unavailable.")
+  #   return(invisible(NULL))
+  # }
+
   httr::set_config(httr::config(http_version = 0))
-  if(!curl::has_internet()) {
+  if (!curl::has_internet()) {
     message("No internet connection available to download compound data.")
     return(invisible(NULL))
-  } else if (httr::GET("https://npclassifier.ucsd.edu/")$status_code != 200) {
-    message("NPClassifier, https://npclassifier.ucsd.edu/, is unavailable.")
+  }
+  # Fails gracefully if page can't be reached
+  result <- tryCatch(
+    httr::GET("https://npclassifier.gnps2.org", httr::timeout(10)),
+    error = function(e) return(NULL)
+  )
+  if (is.null(result) || httr::status_code(result) != 200) {
+    message("NPClassifier, https://npclassifier.gnps2.org/, is unavailable.")
     return(invisible(NULL))
   }
 

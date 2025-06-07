@@ -29,7 +29,7 @@ This classification largely corresponds to the biosynthetic groups/pathways
 the compounds are produced in. The \code{NPCTable} function
 conveniently performs this classification directly in R on the
 compounds in \code{compoundData}, by accessing the tool
-at \url{https://npclassifier.ucsd.edu/} and downloading the classifications.
+at \url{https://npclassifier.gnps2.org/} and downloading the classifications.
 }
 \examples{
 data(minimalCompData)
