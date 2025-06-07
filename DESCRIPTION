@@ -1,6 +1,6 @@
 Package: chemodiv
 Title: Analysing Chemodiversity of Phytochemical Data
-Version: 0.3.0.9000
+Version: 0.3.1
 Authors@R: c(
     person("Hampus", "Petrén", email = "hampus.petren@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6490-4517")),

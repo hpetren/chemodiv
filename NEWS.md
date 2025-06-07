@@ -1,6 +1,12 @@
-# chemodiv 0.3.0.9000
+# chemodiv 0.3.1
 
+* Fixed error caused by NPCTable, due to internet resource being
+temporarily unavailable. This was done by ensuring both NPCTable and compDis 
+properly "fail gracefully with an informative message if the resource 
+is not available or has changed".
+* Updated molNet to not use deprecated function.
 * Fixed roxygen documentation issue.
+* Made various minor updates to readme, documentation and vignette. 
 
 # chemodiv 0.3.0
 
