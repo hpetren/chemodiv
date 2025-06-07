@@ -157,7 +157,7 @@ compDis <- function(compoundData,
       }
       # Fails gracefully if page can't be reached
       result <- tryCatch(
-        httr::GET("https://npclassifier.gnps2.org", httr::timeout(10)),
+        httr::GET("https://npclassifier.gnps2.org/", httr::timeout(10)),
         error = function(e) return(NULL)
       )
       if (is.null(result) || httr::status_code(result) != 200) {
