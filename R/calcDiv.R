@@ -102,10 +102,10 @@
 #'
 #' Petren H, Anaia RA, Aragam KS, Braeutigam A, Eckert S, Heinen R,
 #' Jakobs R, Ojeda L, Popp M, Sasidharan R, Schnitzler J-P, Steppuhn A,
-#' Thon F, Tschikin S, Unsicker SB, van Dam NM, Weisser WW, Wittmann MJ,
-#' Yepes S, Ziaja D, Meuller C, Junker RR. 2023. Understanding the
-#' phytochemical diversity of plants: Quantification, variation and
-#' ecological function. bioRxiv doi: 10.1101/2023.03.23.533415.
+#' Thon F, Unsicker SB, van Dam NM, Weisser WW, Wittmann MJ,
+#' Yepes S, Ziaja D, Meuller C, Junker RR. 2024. Understanding the
+#' chemodiversity of plants: Quantification, variation and
+#' ecological function. Ecological Monographs 94: e1635.
 #'
 #' Tuomisto H. 2012. An updated consumer's guide to evenness
 #' and related indices. Oikos 121: 1203-1218
