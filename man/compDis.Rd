@@ -56,7 +56,7 @@ deep-learning tool that automatically classifies natural products
 three levels: pathway, superclass and class. This classification largely
 corresponds to the biosynthetic groups/pathways the compounds
 are produced in. Classifications are downloaded from
-\url{https://npclassifier.ucsd.edu/}. \emph{NPClassifier} does not always
+\url{https://npclassifier.gnps2.org/}. \emph{NPClassifier} does not always
 manage to classify every compound into all three hierarchical levels. In
 such cases, it might be beneficial to first run \code{\link{NPCTable}},
 manually edit the resulting data frame with probable classifications if

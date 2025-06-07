@@ -14,7 +14,7 @@
 #' three levels: pathway, superclass and class. This classification largely
 #' corresponds to the biosynthetic groups/pathways the compounds
 #' are produced in. Classifications are downloaded from
-#' \url{https://npclassifier.ucsd.edu/}. *NPClassifier* does not always
+#' \url{https://npclassifier.gnps2.org/}. *NPClassifier* does not always
 #' manage to classify every compound into all three hierarchical levels. In
 #' such cases, it might be beneficial to first run \code{\link{NPCTable}},
 #' manually edit the resulting data frame with probable classifications if
@@ -151,11 +151,17 @@ compDis <- function(compoundData,
     if (is.null(npcTable)) { # If no table in input
 
       httr::set_config(httr::config(http_version = 0))
-      if(!curl::has_internet()) {
+      if (!curl::has_internet()) {
         message("No internet connection available to download compound data.")
         return(invisible(NULL))
-      } else if (httr::GET("https://npclassifier.ucsd.edu/")$status_code != 200) {
-        message("NPClassifier, https://npclassifier.ucsd.edu/, is unavailable.")
+      }
+      # Fails gracefully if page can't be reached
+      result <- tryCatch(
+        httr::GET("https://npclassifier.gnps2.org", httr::timeout(10)),
+        error = function(e) return(NULL)
+      )
+      if (is.null(result) || httr::status_code(result) != 200) {
+        message("NPClassifier, https://npclassifier.gnps2.org/, is unavailable.")
         return(invisible(NULL))
       }
 
@@ -173,7 +179,7 @@ compDis <- function(compoundData,
         if (!is.na(npcTable$smiles[i])) {
 
           # (May produce strange error if run separately)
-          npcClass1 <- httr::GET("https://npclassifier.ucsd.edu/classify",
+          npcClass1 <- httr::GET("https://npclassifier.gnps2.org/classify",
                                  query = list(smiles = npcTable$smiles[i]))
 
           npcClass2 <- httr::content(npcClass1, as = "text")
