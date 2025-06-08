@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/hpetren/chemodiv/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hpetren/chemodiv/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `chemodiv` is an R package for analysing chemodiversity of phytochemical
