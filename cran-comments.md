@@ -7,11 +7,10 @@ instead of causing an error in such cases.
 
 ## Test environments
 
-* local Windows 10 install, R 4.5.0
-* win-builder (R-devel)
-* ubuntu 24.04.2 (on Github Actions), R 4.4.3, R 4.5.0, R-devel
-* windows-latest (on Github Actions), R 4.5.0
-* macOS-latest (on Github Actions), R 4.5.0
+* local Windows 10 install, R 4.5.1
+* ubuntu 24.04.2 (on Github Actions), R 4.5.0, R 4.5.1, R-devel
+* windows-latest (on Github Actions), R 4.5.1
+* macOS-latest (on Github Actions), R 4.5.1
 
 ## R CMD check results
 
